@@ -15,4 +15,14 @@ class Simpan extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+    
+    public function Buku()
+    {
+        return $this->belongsTo(Buku::class, 'id_buku');
+    }
 }
