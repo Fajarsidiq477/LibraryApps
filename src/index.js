@@ -1,1 +1,1 @@
-console.log('oke');
+import './styles/style.css';
