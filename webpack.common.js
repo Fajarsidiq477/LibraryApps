@@ -25,5 +25,9 @@ module.exports = {
             filename: "auth/login.html",
             template: path.resolve(__dirname, "src/templates/auth/login.html"),
         }),
+        new HtmlWebpackPlugin({
+            filename: "admin/books.html",
+            template: path.resolve(__dirname, "src/templates/admin/books.html"),
+        }),
     ],
 };
