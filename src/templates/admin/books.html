@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sijambu | Login</title>
+        <title>Sijambu | Books</title>
         <!-- Bootstrap CDN-->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
@@ -15,58 +15,57 @@
     </head>
     <body>
         <nav>
-            <div class="navbar navbar-upper bg-secondary py-2">
+            <div class="navbar navbar-upper bg-primary py-2">
                 <div class="container">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand text-light" href="#">Navbar</a>
 
-                    <div class="col-md-6 d-none d-md-block">
-                        <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <div class="input-group">
-                                <button
-                                    class="btn dropdown-toggle btn-dark"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    Kategori
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                            >Action before</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                            >Another action before</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                            >Something else here</a
-                                        >
-                                    </li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                            >Separated link</a
-                                        >
-                                    </li>
-                                </ul>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Text input with 2 dropdown buttons"
-                                />
-                                <button
-                                    class="btn btn-dark"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <i data-feather="search"></i>
-                                </button>
-                            </div>
+                    <div class="col-md-6 d-none d-md-flex">
+                        <div class="input-group p-2">
+                            <button
+                                class="btn dropdown-toggle bg-secondary text-light"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Kategori
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        >Action before</a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        >Another action before</a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        >Something else here</a
+                                    >
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        >Separated link</a
+                                    >
+                                </li>
+                            </ul>
+                            <input
+                                type="text"
+                                class="form-control"
+                                aria-label="Text input with 2 dropdown buttons"
+                                placeholder="Pencarian ...."
+                            />
+                            <button
+                                class="btn bg-secondary text-light"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <i data-feather="search"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -92,46 +91,39 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Akun</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"
-                                    >Another action</a
-                                >
-                            </li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    >Something else here</a
-                                >
+                                <a class="dropdown-item" href="#">Keluar</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="navbar navbar-lower bg-dark">
+            <div class="navbar navbar-lower bg-secondary">
                 <div class="container">
-                    <ul
-                        class="navbar-nav flex-row gap-md-4"
-                        style="margin-left: -18px"
-                    >
+                    <ul class="navbar-nav flex-row">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">
+                            <a
+                                class="nav-link px-md-4"
+                                aria-current="page"
+                                href="#"
+                            >
                                 <i data-feather="home"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link px-md-4 active" href="#">
                                 <i data-feather="book"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">
+                            <a class="nav-link px-md-4" href="#">
                                 <i data-feather="user"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">
+                            <a class="nav-link px-md-4" href="#">
                                 <i data-feather="clock"></i>
                             </a>
                         </li>
@@ -139,9 +131,9 @@
                 </div>
             </div>
 
-            <div class="searchbar-mobile d-flex d-md-none input-group p-2">
+            <div class="searchbar-mobile d-md-none input-group p-2">
                 <button
-                    class="btn dropdown-toggle btn-dark"
+                    class="btn dropdown-toggle bg-secondary text-light"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -171,9 +163,10 @@
                     type="text"
                     class="form-control"
                     aria-label="Text input with 2 dropdown buttons"
+                    placeholder="Pencarian ...."
                 />
                 <button
-                    class="btn btn-dark"
+                    class="btn bg-secondary text-light"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -184,80 +177,255 @@
         </nav>
 
         <main>
-            <div class="container-fluid">
-                <div class="row" style="min-height: 100vh"></div>
+            <div class="container">
+                <div class="row table-responsive">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th class="py-4">
+                                    <input type="checkbox" name="" id="" />
+                                </th>
+                                <th class="py-4">#</th>
+                                <th class="py-4">Kode Buku</th>
+                                <th class="py-4">Judul Buku</th>
+                                <th class="py-4">Penulis Buku</th>
+                                <th class="py-4">Status Buku</th>
+                                <th class="py-4">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>
+                                    <input type="checkbox" name="" id="" />
+                                </td>
+                                <td>
+                                    <img
+                                        src="https://placehold.co/100x150"
+                                        alt="Book cover"
+                                    />
+                                </td>
+                                <td>JDK837JDK837</td>
+                                <td>Negeri Para Bedebah</td>
+                                <td>Tere Liye</td>
+                                <td>Dicuri</td>
+                                <td>
+                                    <a href="#" class="badge bg-success">
+                                        <i data-feather="edit"></i>
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="badge bg-danger"
+                                        onclick="deleteData(1)"
+                                    >
+                                        <i data-feather="trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <!-- Alert query pencarian tidak ada -->
+                        <!-- <tbody>
+                            <tr>
+                                <td colspan="7" class="py-5 text-danger">
+                                    <h4>
+                                        Buku dengan kata kunci "[query]" tidak
+                                        ditemukan!
+                                    </h4>
+                                </td>
+                            </tr>
+                        </tbody> -->
+                    </table>
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </main>
-
-        <!-- Forget Password Modal -->
-        <div
-            class="modal fade"
-            id="forgetPassModal"
-            tabindex="-1"
-            aria-labelledby="forgetPassModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-secondary">
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                        <h1 class="modal-title fs-5" id="forgetPassModalLabel">
-                            Modal title
-                        </h1>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#">
-                            <div class="px-0 px-md-4">
-                                <p>Input your E-Mail!</p>
-                                <input
-                                    type="text"
-                                    class="form-control is-invalid"
-                                />
-                                <div class="invalid-feedback">
-                                    E-Mail tidak terdaftar!
-                                </div>
-
-                                <div class="d-flex justify-content-end mt-3">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-secondary"
-                                    >
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <!-- Script setelah button lupa password dipencet -->
-                        <!-- <div>
-                            <div class="alert alert-dark" role="alert">
-                                <p>
-                                    Recovery password link has been sent to
-                                    [E-Mail]. Please check it out!
-                                </p>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <button
-                                    type="button"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                    class="btn btn-secondary"
-                                >
-                                    Close
-                                </button>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Forget Password Modal -->
 
         <!-- Bootstrap CDN -->
         <script
@@ -268,8 +436,34 @@
 
         <!-- Icons -->
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+        <!-- SweetAlert for deleteconfirmation -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         <script>
+            // icons
             feather.replace();
+
+            //delete confirmation
+            const deleteData = (id) => {
+                swal({
+                    title: "Data akan dihapus, apakah Anda yakin?",
+                    text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Data berhasil dihapus!", {
+                            icon: "success",
+                        });
+
+                        // Script jika data dihapus di bawah sini
+                    } else {
+                        swal("Data tidak dihapus!");
+                    }
+                });
+            };
         </script>
     </body>
 </html>

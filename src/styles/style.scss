@@ -1,6 +1,22 @@
 $bp-tablet: 768px;
 $bp-mobile: 425px;
 
+$primary: #393646;
+$secondary: #4c485c;
+$background: #f6ffde;
+
+.bg-primary {
+    background-color: $primary !important;
+}
+
+.bg-secondary {
+    background-color: $secondary !important;
+}
+
+.bg-background {
+    background-color: $background !important;
+}
+
 .modal-content {
     border-radius: 0;
     border: none;
@@ -46,12 +62,21 @@ $form-select-indicator-color: white;
                 overflow: hidden;
             }
         }
+
+        .dropdown-menu {
+            left: -50px;
+        }
     }
 
     &.navbar-lower {
         .nav-link {
             color: white;
             padding: 1rem;
+
+            &.active,
+            &:hover {
+                background-color: rgba($color: #fff, $alpha: 0.3);
+            }
         }
     }
 
