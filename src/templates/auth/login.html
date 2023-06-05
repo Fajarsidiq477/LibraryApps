@@ -22,34 +22,38 @@
                             <h2 class="mb-4">Masuk</h2>
                             <form>
                                 <div class="mb-3">
-                                    <label
-                                        for="exampleInputEmail1"
-                                        class="form-label"
+                                    <label for="email" class="form-label"
                                         >Email address</label
                                     >
+                                    <!-- Hilangkan class is-invalid untuk menghilangkan merah dan message -->
                                     <input
                                         type="email"
-                                        class="form-control"
-                                        id="exampleInputEmail1"
+                                        class="form-control is-invalid"
+                                        id="email"
                                         aria-describedby="emailHelp"
                                     />
+                                    <div class="invalid-feedback">
+                                        E-Mail atau Password tidak sesuai
+                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label
-                                        for="exampleInputPassword1"
-                                        class="form-label"
+                                    <label for="password" class="form-label"
                                         >Password</label
                                     >
                                     <input
                                         type="password"
                                         class="form-control"
-                                        id="exampleInputPassword1"
+                                        id="password"
                                     />
                                     <div
                                         id="passwordHelp"
                                         class="form-text text-end"
                                     >
-                                        <a href="#" class="link-secondary"
+                                        <a
+                                            href="#"
+                                            class="link-secondary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#forgetPassModal"
                                             >Lupa Password</a
                                         >
                                     </div>
@@ -78,6 +82,70 @@
                 </div>
             </div>
         </main>
+
+        <!-- Forget Password Modal -->
+        <div
+            class="modal fade"
+            id="forgetPassModal"
+            tabindex="-1"
+            aria-labelledby="forgetPassModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary">
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                        <h1 class="modal-title fs-5" id="forgetPassModalLabel">
+                            Modal title
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#">
+                            <div class="px-0 px-md-4">
+                                <p>Input your E-Mail!</p>
+                                <input type="text" class="form-control" />
+
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-secondary"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Script setelah button lupa password dipencet -->
+                        <!-- <div>
+                            <div class="alert alert-dark" role="alert">
+                                <p>
+                                    Recovery password link has been sent to
+                                    [E-Mail]. Please check it out!
+                                </p>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button
+                                    type="button"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                    class="btn btn-secondary"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Forget Password Modal -->
 
         <!-- Bootstrap CDN -->
         <script
