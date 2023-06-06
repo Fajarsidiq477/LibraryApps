@@ -82,6 +82,7 @@
                                     src="https://placehold.co/200"
                                     alt="avatar"
                                     class="img-fluid"
+                                    width="50px"
                                 />
                             </div>
 
@@ -102,78 +103,112 @@
             </div>
             <div class="navbar navbar-lower bg-secondary">
                 <div class="container">
-                    <ul class="navbar-nav flex-row">
-                        <li class="nav-item">
+                    <div
+                        class="d-flex justify-content-between align-items-center"
+                        style="width: 100%"
+                    >
+                        <ul class="navbar-nav flex-row">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link px-md-4"
+                                    aria-current="page"
+                                    href="#"
+                                >
+                                    <i data-feather="home"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-md-4 active" href="#">
+                                    <i data-feather="book"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-md-4" href="#">
+                                    <i data-feather="user"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-md-4" href="#">
+                                    <i data-feather="clock"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div>
                             <a
-                                class="nav-link px-md-4"
-                                aria-current="page"
                                 href="#"
+                                class="badge bg-primary d-none d-md-block"
+                                style="text-decoration: none"
+                                data-bs-toggle="modal"
+                                data-bs-target="#addEditModal"
                             >
-                                <i data-feather="home"></i>
+                                <span>Tambah Buku</span>
+                                <i data-feather="plus"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-md-4 active" href="#">
-                                <i data-feather="book"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-md-4" href="#">
-                                <i data-feather="user"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-md-4" href="#">
-                                <i data-feather="clock"></i>
-                            </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="searchbar-mobile d-md-none input-group p-2">
-                <button
-                    class="btn dropdown-toggle bg-secondary text-light"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
-                    Kategori
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="#">Action before</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#"
-                            >Another action before</a
-                        >
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#"
-                            >Something else here</a
-                        >
-                    </li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </li>
-                </ul>
-                <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Text input with 2 dropdown buttons"
-                    placeholder="Pencarian ...."
-                />
-                <button
-                    class="btn bg-secondary text-light"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
-                    <i data-feather="search"></i>
-                </button>
+            <!-- Mobile appearance -->
+            <div class="container">
+                <div class="searchbar-mobile d-md-none input-group py-2">
+                    <button
+                        class="btn dropdown-toggle bg-secondary text-light"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        Kategori
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="#">Action before</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"
+                                >Another action before</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"
+                                >Something else here</a
+                            >
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </li>
+                    </ul>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Text input with 2 dropdown buttons"
+                        placeholder="Pencarian ...."
+                    />
+                    <button
+                        class="btn bg-secondary text-light"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i data-feather="search"></i>
+                    </button>
+                </div>
+
+                <div class="mt-2">
+                    <a
+                        href="#"
+                        class="badge bg-primary d-block d-md-none py-2"
+                        style="text-decoration: none"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addEditModal"
+                    >
+                        <span>Tambah Buku</span>
+                        <i data-feather="plus"></i>
+                    </a>
+                </div>
             </div>
+            <!-- End mobile appearance -->
         </nav>
 
         <main>
@@ -427,6 +462,201 @@
             </div>
         </main>
 
+        <!-- Add / Edit Modal -->
+        <div
+            class="modal fade"
+            id="addEditModal"
+            tabindex="-1"
+            aria-labelledby="addEditModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+                <div
+                    class="modal-content"
+                    style="border: 3px solid red; min-height: 100vh"
+                >
+                    <div class="modal-header bg-secondary">
+                        <button
+                            type="button"
+                            class="btn-admin-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <i data-feather="chevron-left"></i>
+                        </button>
+                        <h1
+                            class="modal-title fs-5 text-light"
+                            id="forgetPassModalLabel"
+                        >
+                            Tambah Buku
+                        </h1>
+                    </div>
+                    <div class="modal-body py-4 px-2 px-sm-3 px-md-5">
+                        <div class="row">
+                            <div class="col-12 col-md-6 text-center">
+                                <img
+                                    src="http://placehold.co/160x225"
+                                    alt="book cover"
+                                />
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <form action="#" id="form-modal">
+                                    <div class="form-group mb-3">
+                                        <label for="kode" class="mb-2"
+                                            >Kode Buku</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control is-invalid"
+                                            id="kode"
+                                        />
+                                        <div class="invalid-feedback">
+                                            Kode buku harus lebih dari 100
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="judul" class="mb-2"
+                                            >Judul Buku</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="judul"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="penulis" class="mb-2"
+                                            >Penulis</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="penulis"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="kategori" class="mb-2"
+                                            >Kategori</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="kategori"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="penerbit" class="mb-2"
+                                            >Penerbit</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="penerbit"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="editor" class="mb-2"
+                                            >Editor</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="editor"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="penerjemah" class="mb-2"
+                                            >Penerjemah</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="penerjemah"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="bahasa" class="mb-2"
+                                            >Bahasa</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="bahasa"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="tahunTerbit" class="mb-2"
+                                            >Tahun Terbit</label
+                                        >
+                                        <input
+                                            type="number"
+                                            class="form-control custom-form-control"
+                                            id="tahunTerbit"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="jumlahHalaman" class="mb-2"
+                                            >Jumlah Halaman</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="jumlahHalaman"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="volume" class="mb-2"
+                                            >Volume</label
+                                        >
+                                        <input
+                                            type="number"
+                                            class="form-control custom-form-control"
+                                            id="volume"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="jenis" class="mb-2"
+                                            >Jenis</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control custom-form-control"
+                                            id="jenis"
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="status" class="mb-2"
+                                            >Status Buku</label
+                                        >
+                                        <select
+                                            name="status"
+                                            id="status"
+                                            class="form-select custom-form-control"
+                                        >
+                                            <option value="">---</option>
+                                            <option value="">Tersedia</option>
+                                            <option value="">Dipinjam</option>
+                                            <option value="">Hilang</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb-3 text-end">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-dark"
+                                        >
+                                            Selesai
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Add / Edit Modal -->
+
         <!-- Bootstrap CDN -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -447,8 +677,7 @@
             //delete confirmation
             const deleteData = (id) => {
                 swal({
-                    title: "Data akan dihapus, apakah Anda yakin?",
-                    text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali.",
+                    text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali. Apakah Anda yakin?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -464,6 +693,18 @@
                     }
                 });
             };
+
+            // when form-modal on submit
+            const formModal = document.querySelector("#form-modal");
+
+            formModal.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                // Kode add atau edit diolah di sini
+
+                // tutup modal ketika kode add / edit berhasil dieksekusi
+                // Belum bisa kodenya
+            });
         </script>
     </body>
 </html>

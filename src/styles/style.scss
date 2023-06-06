@@ -91,3 +91,16 @@ $form-select-indicator-color: white;
         }
     }
 }
+
+.btn-admin-close {
+    position: absolute;
+    left: 10px;
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+.custom-form-control {
+    background-color: lightgray;
+}
