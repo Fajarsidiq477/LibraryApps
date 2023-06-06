@@ -138,8 +138,7 @@
                                 href="#"
                                 class="badge bg-primary d-none d-md-block"
                                 style="text-decoration: none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#addEditModal"
+                                onclick="actionModal('add')"
                             >
                                 <span>Tambah Buku</span>
                                 <i data-feather="plus"></i>
@@ -200,8 +199,7 @@
                         href="#"
                         class="badge bg-primary d-block d-md-none py-2"
                         style="text-decoration: none"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addEditModal"
+                        onclick="actionModal('add')"
                     >
                         <span>Tambah Buku</span>
                         <i data-feather="plus"></i>
@@ -244,7 +242,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -272,7 +274,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -300,7 +306,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -328,7 +338,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -356,7 +370,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -384,7 +402,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -412,7 +434,11 @@
                                 <td>Tere Liye</td>
                                 <td>Dicuri</td>
                                 <td>
-                                    <a href="#" class="badge bg-success">
+                                    <a
+                                        href="#"
+                                        class="badge bg-success"
+                                        onclick="actionModal('edit', 1)"
+                                    >
                                         <i data-feather="edit"></i>
                                     </a>
 
@@ -486,7 +512,7 @@
                         </button>
                         <h1
                             class="modal-title fs-5 text-light"
-                            id="forgetPassModalLabel"
+                            id="addEditModalLabel"
                         >
                             Tambah Buku
                         </h1>
@@ -696,6 +722,23 @@
 
             // when form-modal on submit
             const formModal = document.querySelector("#form-modal");
+            const addEditModal = new bootstrap.Modal("#addEditModal");
+
+            const actionModal = (mode, id = null) => {
+                formModal.reset();
+
+                if (mode === "add") {
+                    document.querySelector("#addEditModalLabel").innerText =
+                        "Tambah Buku";
+                }
+
+                if (mode === "edit") {
+                    document.querySelector("#addEditModalLabel").innerText =
+                        "Edit Buku";
+                }
+
+                addEditModal.show();
+            };
 
             formModal.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -703,7 +746,7 @@
                 // Kode add atau edit diolah di sini
 
                 // tutup modal ketika kode add / edit berhasil dieksekusi
-                // Belum bisa kodenya
+                addEditModal.hide();
             });
         </script>
     </body>
