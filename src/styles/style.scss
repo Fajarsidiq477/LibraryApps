@@ -104,3 +104,14 @@ $form-select-indicator-color: white;
 .custom-form-control {
     background-color: lightgray;
 }
+
+.book-cover {
+    position: relative;
+    display: inline-block;
+
+    .book-cover-button {
+        position: absolute;
+        right: -15px;
+        bottom: -15px;
+    }
+}

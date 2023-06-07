@@ -518,15 +518,32 @@
                         </h1>
                     </div>
                     <div class="modal-body py-4 px-2 px-sm-3 px-md-5">
-                        <div class="row">
-                            <div class="col-12 col-md-6 text-center">
-                                <img
-                                    src="http://placehold.co/160x225"
-                                    alt="book cover"
-                                />
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <form action="#" id="form-modal">
+                        <form action="#" id="form-modal">
+                            <div class="row">
+                                <div class="col-12 col-md-6 text-center">
+                                    <div class="book-cover">
+                                        <img
+                                            src="http://placehold.co/160x225"
+                                            alt="book cover"
+                                            id="bookCoverInputDisplay"
+                                            style="width: 160px; height: 225px"
+                                        />
+                                        <input
+                                            type="file"
+                                            name=""
+                                            id="bookCoverInput"
+                                            accept="image/*"
+                                            hidden
+                                        />
+                                        <label
+                                            for="bookCoverInput"
+                                            class="btn btn-success rounded-circle book-cover-button"
+                                        >
+                                            <i data-feather="edit"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="kode" class="mb-2"
                                             >Kode Buku</label
@@ -674,9 +691,9 @@
                                             Selesai
                                         </button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -719,6 +736,21 @@
                     }
                 });
             };
+
+            // Ketika input file image menerima uploadan
+            const bookCoverInput = document.querySelector("#bookCoverInput");
+            bookCoverInput.addEventListener("change", function () {
+                const image = this.files[0];
+
+                const reader = new FileReader();
+                reader.readAsDataURL(image);
+                const bookCoverInputDisplay = document.querySelector(
+                    "#bookCoverInputDisplay"
+                );
+                reader.onload = () => {
+                    bookCoverInputDisplay.setAttribute("src", reader.result);
+                };
+            });
 
             // when form-modal on submit
             const formModal = document.querySelector("#form-modal");
