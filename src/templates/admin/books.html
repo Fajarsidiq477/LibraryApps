@@ -144,7 +144,9 @@
                                 href="#"
                                 class="badge bg-primary d-none d-md-block"
                                 style="text-decoration: none"
-                                onclick="actionModal('add')"
+                                data-bs-toggle="modal"
+                                data-bs-target="#myModal"
+                                data-bs-mode="add"
                             >
                                 <span>Tambah Buku</span>
                                 <i data-feather="plus"></i>
@@ -205,7 +207,9 @@
                         href="#"
                         class="badge bg-primary d-block d-md-none py-2"
                         style="text-decoration: none"
-                        onclick="actionModal('add')"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        data-bs-mode="add"
                     >
                         <span>Tambah Buku</span>
                         <i data-feather="plus"></i>
@@ -251,7 +255,10 @@
                                     <a
                                         href="#"
                                         class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#myModal"
+                                        data-bs-mode="edit"
+                                        data-bs-id="1"
                                     >
                                         <i data-feather="edit"></i>
                                     </a>
@@ -283,7 +290,10 @@
                                     <a
                                         href="#"
                                         class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#myModal"
+                                        data-bs-mode="edit"
+                                        data-bs-id="2"
                                     >
                                         <i data-feather="edit"></i>
                                     </a>
@@ -315,135 +325,10 @@
                                     <a
                                         href="#"
                                         class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
-                                    >
-                                        <i data-feather="edit"></i>
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                        class="badge bg-danger"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>
-                                    <img
-                                        src="https://placehold.co/100x150"
-                                        alt="Book cover"
-                                    />
-                                </td>
-                                <td>JDK837JDK837</td>
-                                <td>Negeri Para Bedebah</td>
-                                <td>Tere Liye</td>
-                                <td>Dicuri</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
-                                    >
-                                        <i data-feather="edit"></i>
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                        class="badge bg-danger"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>
-                                    <img
-                                        src="https://placehold.co/100x150"
-                                        alt="Book cover"
-                                    />
-                                </td>
-                                <td>JDK837JDK837</td>
-                                <td>Negeri Para Bedebah</td>
-                                <td>Tere Liye</td>
-                                <td>Dicuri</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
-                                    >
-                                        <i data-feather="edit"></i>
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                        class="badge bg-danger"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>
-                                    <img
-                                        src="https://placehold.co/100x150"
-                                        alt="Book cover"
-                                    />
-                                </td>
-                                <td>JDK837JDK837</td>
-                                <td>Negeri Para Bedebah</td>
-                                <td>Tere Liye</td>
-                                <td>Dicuri</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
-                                    >
-                                        <i data-feather="edit"></i>
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                        class="badge bg-danger"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>
-                                    <img
-                                        src="https://placehold.co/100x150"
-                                        alt="Book cover"
-                                    />
-                                </td>
-                                <td>JDK837JDK837</td>
-                                <td>Negeri Para Bedebah</td>
-                                <td>Tere Liye</td>
-                                <td>Dicuri</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge bg-success"
-                                        onclick="actionModal('edit', 1)"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#myModal"
+                                        data-bs-mode="edit"
+                                        data-bs-id="3"
                                     >
                                         <i data-feather="edit"></i>
                                     </a>
@@ -497,9 +382,9 @@
         <!-- Add / Edit Modal -->
         <div
             class="modal fade"
-            id="addEditModal"
+            id="myModal"
             tabindex="-1"
-            aria-labelledby="addEditModalLabel"
+            aria-labelledby="myModalLabel"
             aria-hidden="true"
         >
             <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
@@ -516,15 +401,13 @@
                         >
                             <i data-feather="chevron-left"></i>
                         </button>
-                        <h1
-                            class="modal-title fs-5 text-light"
-                            id="addEditModalLabel"
-                        >
-                            Tambah Buku
-                        </h1>
+                        <h1 class="modal-title fs-5 text-light"></h1>
                     </div>
                     <div class="modal-body py-4 px-2 px-sm-3 px-md-5">
                         <form action="#" id="form-modal">
+                            <input type="text" id="form-mode" hidden />
+                            <input type="text" id="id" hidden />
+
                             <div class="row">
                                 <div class="col-12 col-md-6 text-center">
                                     <div class="image-cover">
@@ -758,34 +641,55 @@
                 };
             });
 
+            // bs.modal.show triggered
+            const myModal = new bootstrap.Modal("#myModal");
+            const formModal = myModal._element.querySelector("#form-modal");
+            let formMode = formModal.querySelector("#form-mode");
+
+            if (myModal._element) {
+                myModal._element.addEventListener("show.bs.modal", (event) => {
+                    formModal.reset();
+                    imageInputDisplay.src = "http://placehold.co/165x225";
+
+                    // Button that triggered the modal
+                    const button = event.relatedTarget;
+                    // Extract info from data-bs-* attributes
+                    const mode = button.getAttribute("data-bs-mode");
+                    // If necessary, you could initiate an Ajax request here
+                    // and then do the updating in a callback.
+
+                    // Update the modal's content.
+                    const modalTitle =
+                        myModal._element.querySelector(".modal-title");
+
+                    if (mode === "add") {
+                        modalTitle.innerText = "Tambahkan Buku";
+                    }
+
+                    if (mode === "edit") {
+                        modalTitle.innerText = "Edit Buku";
+                        const id = button.getAttribute("data-bs-id");
+
+                        formModal.querySelector("#id").value = id;
+                    }
+
+                    formMode.value = mode;
+                });
+            }
+
             // when form-modal on submit
-            const formModal = document.querySelector("#form-modal");
-            const addEditModal = new bootstrap.Modal("#addEditModal");
-
-            const actionModal = (mode, id = null) => {
-                formModal.reset();
-                imageInputDisplay.src = "http://placehold.co/165x225";
-
-                if (mode === "add") {
-                    document.querySelector("#addEditModalLabel").innerText =
-                        "Tambah Buku";
-                }
-
-                if (mode === "edit") {
-                    document.querySelector("#addEditModalLabel").innerText =
-                        "Edit Buku";
-                }
-
-                addEditModal.show();
-            };
-
             formModal.addEventListener("submit", (e) => {
                 e.preventDefault();
+                let id = null;
 
                 // Kode add atau edit diolah di sini
+                if (formMode.value === "edit") {
+                    id = formModal.querySelector("#id").value;
+                    console.log(id);
+                }
 
                 // tutup modal ketika kode add / edit berhasil dieksekusi
-                addEditModal.hide();
+                document.querySelector(".btn-admin-close").click();
             });
         </script>
     </body>
