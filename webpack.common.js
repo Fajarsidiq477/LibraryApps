@@ -1,12 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "dist"),
-        clean: true,
+        library: "Jar",
     },
     module: {
         rules: [
@@ -17,6 +18,9 @@ module.exports = {
         ],
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [{ from: "src/images", to: "images" }],
+        }),
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: path.resolve(__dirname, "src/templates/index.html"),
@@ -32,6 +36,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: "admin/users.html",
             template: path.resolve(__dirname, "src/templates/admin/users.html"),
+        }),
+        new HtmlWebpackPlugin({
+            filename: "admin/lend-books.html",
+            template: path.resolve(
+                __dirname,
+                "src/templates/admin/lend-books.html"
+            ),
         }),
     ],
 };

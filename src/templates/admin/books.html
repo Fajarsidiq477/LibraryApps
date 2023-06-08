@@ -134,7 +134,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link px-md-4" href="#">
+                                <a
+                                    class="nav-link px-md-4"
+                                    href="/admin/lend-books.html"
+                                >
                                     <i data-feather="clock"></i>
                                 </a>
                             </li>
@@ -145,7 +148,7 @@
                                 class="badge bg-primary d-none d-md-block"
                                 style="text-decoration: none"
                                 data-bs-toggle="modal"
-                                data-bs-target="#myModalEl"
+                                data-bs-target="#myModal"
                                 data-bs-mode="add"
                             >
                                 <span>Tambah Buku</span>
@@ -208,7 +211,7 @@
                         class="badge bg-primary d-block d-md-none py-2"
                         style="text-decoration: none"
                         data-bs-toggle="modal"
-                        data-bs-target="#myModalEl"
+                        data-bs-target="#myModal"
                         data-bs-mode="add"
                     >
                         <span>Tambah Buku</span>
@@ -256,7 +259,7 @@
                                         href="#"
                                         class="badge bg-success"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#myModalEl"
+                                        data-bs-target="#myModal"
                                         data-bs-mode="edit"
                                         data-bs-id="1"
                                     >
@@ -266,10 +269,7 @@
                                     <a
                                         href="#"
                                         class="badge bg-danger"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#myModalEl"
-                                        data-bs-mode="delete"
-                                        data-bs-id="1"
+                                        onclick="deleteData(1)"
                                     >
                                         <i data-feather="trash"></i>
                                     </a>
@@ -294,7 +294,7 @@
                                         href="#"
                                         class="badge bg-success"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#myModalEl"
+                                        data-bs-target="#myModal"
                                         data-bs-mode="edit"
                                         data-bs-id="2"
                                     >
@@ -304,10 +304,7 @@
                                     <a
                                         href="#"
                                         class="badge bg-danger"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#myModalEl"
-                                        data-bs-mode="delete"
-                                        data-bs-id="2"
+                                        onclick="deleteData(1)"
                                     >
                                         <i data-feather="trash"></i>
                                     </a>
@@ -332,7 +329,7 @@
                                         href="#"
                                         class="badge bg-success"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#myModalEl"
+                                        data-bs-target="#myModal"
                                         data-bs-mode="edit"
                                         data-bs-id="3"
                                     >
@@ -342,10 +339,7 @@
                                     <a
                                         href="#"
                                         class="badge bg-danger"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#myModalEl"
-                                        data-bs-mode="delete"
-                                        data-bs-id="3"
+                                        onclick="deleteData(1)"
                                     >
                                         <i data-feather="trash"></i>
                                     </a>
@@ -391,13 +385,13 @@
         <!-- Add / Edit Modal -->
         <div
             class="modal fade"
-            id="myModalEl"
+            id="myModal"
             tabindex="-1"
-            aria-labelledby="myModalElLabel"
+            aria-labelledby="myModalLabel"
             aria-hidden="true"
         >
-            <div class="modal-dialog">
-                <div class="modal-content">
+            <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+                <div class="modal-content" style="min-height: 100vh">
                     <div class="modal-header bg-secondary">
                         <button
                             type="button"
@@ -410,45 +404,18 @@
                         <h1 class="modal-title fs-5 text-light"></h1>
                     </div>
                     <div class="modal-body py-4 px-2 px-sm-3 px-md-5">
-                        <form action="#"></form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Add / Edit Modal -->
+                        <form action="#" id="form-modal">
+                            <input type="text" id="form-mode" hidden />
+                            <input type="text" id="id" hidden />
 
-        <!-- Bootstrap CDN -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"
-        ></script>
-
-        <!-- Icons -->
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
-        <!-- SweetAlert for deleteconfirmation -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script>
-            // icons
-            feather.replace();
-        </script>
-
-        <script>
-            const myModalEl = document.getElementById("myModalEl");
-            const formTemplate = `
-                        <input type="text" id="form-mode" hidden />
-                        <input type="text" id="id" hidden />
-
-                        <div class="row">
+                            <div class="row">
                                 <div class="col-12 col-md-6 text-center">
                                     <div class="image-cover">
                                         <img
                                             src="http://placehold.co/160x225"
                                             alt="book cover"
                                             id="imageInputDisplay"
-                                            style="width: 160px; height: 225px"
+                                            class="img-fluid"
                                         />
                                         <input
                                             type="file"
@@ -615,140 +582,143 @@
                                     </div>
                                 </div>
                             </div>
-                    `;
-            const deleteConfirmationTemplate = `
-                    <input type="text" id="form-mode" hidden />
-                    <input type="text" id="id" hidden />
-
-                    <div class="row">
-                        <p class="text-center">Data akan dihapus selamanya, apakah Anda yakin?</p>
-                        <div class="col d-grid">
-                            <button
-                                type="button"
-                                class="btn btn-success"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                Tidak
-                            </button>
-                        </div>
-                        <div class="col d-grid">
-                            <button
-                                type="submit"
-                                class="btn btn-danger"
-                            >
-                                Ya
-                            </button>
-                        <div class="col">
-
+                        </form>
                     </div>
-            `;
+                </div>
+            </div>
+        </div>
+        <!-- End Add / Edit Modal -->
 
-            const displayImage = (form, image) => {
-                const imageInput = form.querySelector("#imageInput");
-                const imageInputDisplay =
-                    form.querySelector("#imageInputDisplay");
+        <!-- Bootstrap CDN -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"
+        ></script>
 
-                const reader = new FileReader();
-                reader.readAsDataURL(image);
-                reader.onload = () => {
-                    imageInputDisplay.setAttribute("src", reader.result);
-                };
+        <!-- Icons -->
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+        <!-- SweetAlert for deleteconfirmation -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+            // icons
+            feather.replace();
+
+            //delete confirmation
+            const deleteData = (id) => {
+                swal({
+                    text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali. Apakah Anda yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Data berhasil dihapus!", {
+                            icon: "success",
+                        });
+
+                        // Script jika data dihapus di bawah sini
+                    } else {
+                        swal("Data tidak dihapus!");
+                    }
+                });
             };
 
-            // Event ketika modal muncul
-            myModalEl.addEventListener("show.bs.modal", function (e) {
-                const form = this.querySelector("form");
-                form.innerHTML = "";
+            // bs.modal.show triggered
+            const modalEl = document.querySelector("#myModal");
 
-                const button = e.relatedTarget;
-                const id = button.getAttribute("data-bs-id") || null;
-                const mode = button.getAttribute("data-bs-mode");
+            const getFormData = () => {
+                const formModal = modalEl.querySelector("#form-modal");
 
-                if (mode === "add" || mode === "edit") {
-                    this.querySelector(".modal-dialog").classList.add(
-                        "modal-xl",
-                        "modal-fullscreen-lg-down"
-                    );
-                    form.innerHTML += formTemplate;
-                    this.querySelector(".modal-title").innerText = `${
-                        mode === "add" ? "Tambah Buku" : "Edit Buku"
-                    }`;
+                const mode = formModal.querySelector("#form-mode").value;
+                const id = formModal.querySelector("#id").value || null;
 
-                    // Ketika ada perubahan terhadap file upload
-                    imageInput.addEventListener("change", function () {
-                        const image = this.files[0];
+                const kode = formModal.querySelector("#kode").value;
+                const judul = formModal.querySelector("#judul").value;
+                const penulis = formModal.querySelector("#penulis").value;
+                const kategori = formModal.querySelector("#kategori").value;
+                const penerbit = formModal.querySelector("#penerbit").value;
+                const editor = formModal.querySelector("#editor").value;
+                const penerjemah = formModal.querySelector("#penerjemah").value;
+                const bahasa = formModal.querySelector("#bahasa").value;
+                const tahunTerbit =
+                    formModal.querySelector("#tahunTerbit").value;
+                const jumlahHalaman =
+                    formModal.querySelector("#jumlahHalaman").value;
+                const volume = formModal.querySelector("#volume").value;
+                const jenis = formModal.querySelector("#jenis").value;
+                const status = formModal.querySelector("#status").value;
 
-                        displayImage(form, image);
-                    });
+                return (data = {
+                    mode,
+                    id,
+                    kode,
+                    judul,
+                    penulis,
+                    kategori,
+                    penerbit,
+                    editor,
+                    penerjemah,
+                    bahasa,
+                    tahunTerbit,
+                    jumlahHalaman,
+                    volume,
+                    jenis,
+                    status,
+                });
+            };
 
-                    // Edit, get dulu data dari server
-                    const book = id;
-                    // Tempel data ke const form, ke setiap inputan
-                    console.log(id);
-                    form.querySelector("#id").value = id;
-                } else {
-                    // mode === delete
-                    this.querySelector(".modal-dialog").classList.remove(
-                        "modal-xl",
-                        "modal-fullscreen-lg-down"
-                    );
+            const onFormSubmit = (e, modalEl) => {
+                e.preventDefault();
 
-                    form.innerHTML += deleteConfirmationTemplate;
-                    this.querySelector(".modal-title").innerText = `Hapus Buku`;
-                    form.querySelector("#id").value = id;
+                // Get value from input
+                const data = getFormData(modalEl);
+
+                // kirim data di bawah
+                // kirim data di bawah
+                if (data.mode === "add") {
+                    swalOption = {
+                        title: "Buku berhasil dibuat!",
+                        icon: "success",
+                        button: "Oke!",
+                    };
                 }
 
-                // tempel mode ke form juga
-                form.querySelector("#form-mode").value = mode;
+                if (data.mode === "edit") {
+                    swalOption = {
+                        title: "Buku berhasil diedit!",
+                        icon: "success",
+                        button: "Oke!",
+                    };
+                }
+                swal(swalOption);
 
-                // Event ketika form modal disubmit
-                form.addEventListener("submit", (e) => {
-                    e.preventDefault();
-                    formSubmit(mode);
+                // tutup modal ketika kode add / edit berhasil dieksekusi
+                document.querySelector(".btn-admin-close").click();
+            };
+
+            // Event when modal opened
+            modalEl.addEventListener("show.bs.modal", (event) => {
+                window.Jar.whenModalShow(modalEl, "books", event);
+
+                // Ketika input file image menerima uploadan
+                const imageInput = document.querySelector("#imageInput");
+                const imageInputDisplay =
+                    document.querySelector("#imageInputDisplay");
+                // Event when imageinput receive a change
+                imageInput.addEventListener("change", function () {
+                    const image = this.files[0];
+
+                    window.Jar.displayImage(image, imageInputDisplay);
                 });
-
-                feather.replace();
             });
 
-            class ModalCreator {
-                constructor({
-                    myModalEl,
-                    formTemplate,
-                    deleteConfirmationTemplate,
-                    formSubmit,
-                }) {
-                    this.myModalEl = myModalEl;
-                    this.formTemplate = formTemplate;
-                    this.deleteConfirmationTemplate =
-                        deleteConfirmationTemplate;
-                    this.formSubmit = formSubmit;
-                }
-            }
-
-            const formSubmit = () => {
-                let formTargetURL = null;
-
-                // get dan inisiasi semua data dari inputan di sini
-
-                // cek lagi modenya buat nentuin url submit yg dituju
-                switch (mode) {
-                    case "add":
-                        formTargetURL = "admin/books/add";
-                        break;
-                    case "edit":
-                        formTargetURL = `admin/books/edit/${id}`;
-                        break;
-                    case "delete":
-                        formTargetURL = `admin/books/delete/${id}`;
-                        break;
-                }
-
-                // Submit formulir menggunakan asynchronous fetch di sini
-
-                // Jika berhasil, tutup modal dan berikan peringatan berhasil atau gagal
-                this.querySelector(".btn-admin-close").click();
-            };
+            // Event when form-modal on submit
+            modalEl
+                .querySelector("#form-modal")
+                .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
         </script>
     </body>
 </html>
