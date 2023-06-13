@@ -1,10 +1,9 @@
 import "./styles/style.scss";
 import { resetForm, getDataSentByButton } from "./scripts/utils/modal-utils";
-export let stepIndex = 0;
-// Multistep Form
-const steps = modalEl.querySelectorAll(".step");
-const btnStepNext = modalEl.querySelector(".btn-step-next");
 
+export let stepIndex = 0;
+
+// update image preview on modal when image has been uploaded
 export const displayImage = (image, imageInputDisplay) => {
     const reader = new FileReader();
     reader.readAsDataURL(image);
@@ -17,12 +16,17 @@ export const displayImage = (image, imageInputDisplay) => {
         }, 2000);
     };
 };
+// end image preview
 
+// func when modal show has been triggered
 export const whenModalShow = (modalEl, category, event) => {
     const formModal = modalEl.querySelector("#form-modal");
     const formMode = modalEl.querySelector("#form-mode");
     let obj;
+    const steps = modalEl.querySelectorAll(".step");
+    const btnStepNext = modalEl.querySelector(".btn-step-next");
 
+    // for multistep form -> check there multistep is exist?
     if (steps && btnStepNext) {
         stepIndex = 0;
 
@@ -35,6 +39,7 @@ export const whenModalShow = (modalEl, category, event) => {
             btnStepNext.style.display = "block";
         }
     }
+    // end multistep form
 
     resetForm(formModal);
 
@@ -66,26 +71,29 @@ export const whenModalShow = (modalEl, category, event) => {
     }
 
     formMode.value = mode;
+
+    // multistep next funcionality
+    if (btnStepNext) {
+        btnStepNext.addEventListener("click", () => {
+            if (stepIndex < steps.length - 1) {
+                steps[stepIndex].style.display = "none";
+            }
+            ++stepIndex;
+            nextStep(stepIndex, steps);
+        });
+
+        const nextStep = (stepIndex, steps) => {
+            if (stepIndex < steps.length) {
+                steps[stepIndex].style.display = "block";
+            }
+
+            if (stepIndex === steps.length - 1) {
+                btnStepNext.style.display = "none";
+            }
+
+            return false;
+        };
+    }
+    // end multistep next funcionality
 };
-
-if (btnStepNext) {
-    btnStepNext.addEventListener("click", () => {
-        if (stepIndex < steps.length - 1) {
-            steps[stepIndex].style.display = "none";
-        }
-        ++stepIndex;
-        nextStep(stepIndex, steps);
-    });
-
-    const nextStep = (stepIndex, steps) => {
-        if (stepIndex < steps.length) {
-            steps[stepIndex].style.display = "block";
-        }
-
-        if (stepIndex === steps.length - 1) {
-            btnStepNext.style.display = "none";
-        }
-
-        return false;
-    };
-}
+// end func when modal show has been triggered

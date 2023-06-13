@@ -1,8 +1,8 @@
 $bp-tablet: 768px;
 $bp-mobile: 425px;
 
-$primary: #393646;
-$secondary: #4c485c;
+$primary: #f75e5d;
+$secondary: #1c2d5e;
 $background: #f6ffde;
 
 .bg-primary {
@@ -60,6 +60,10 @@ $form-select-indicator-color: white;
                 height: 50px;
                 border-radius: 50%;
                 overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #ddd;
             }
         }
 
@@ -76,6 +80,31 @@ $form-select-indicator-color: white;
             &.active,
             &:hover {
                 background-color: rgba($color: #fff, $alpha: 0.3);
+            }
+        }
+
+        .switch {
+            width: 20px;
+            height: 2px;
+            background-color: white;
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background-color: $primary;
+                position: absolute;
+                left: -5px;
+                top: -2.12px;
+                transition: 0.4s;
+            }
+
+            &.grid {
+                &::before {
+                    left: 16px;
+                }
             }
         }
     }
@@ -123,5 +152,34 @@ $form-select-indicator-color: white;
         position: absolute;
         right: -15px;
         bottom: -15px;
+    }
+}
+
+// User pages
+main {
+    .book-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        @media screen and (max-width: $bp-mobile) {
+            font-size: 1rem;
+        }
+    }
+
+    .book-author {
+        font-size: 1rem;
+        font-style: italic;
+
+        @media screen and (max-width: $bp-mobile) {
+            font-size: 0.9rem;
+        }
+    }
+
+    .bg-book-cover {
+        background-color: #f4ece5;
+
+        @media screen and (max-width: $bp-mobile) {
+            background-color: transparent;
+        }
     }
 }

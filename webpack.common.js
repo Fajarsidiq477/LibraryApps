@@ -44,5 +44,9 @@ module.exports = {
                 "src/templates/admin/lend-books.html"
             ),
         }),
+        new HtmlWebpackPlugin({
+            filename: "users/index.html",
+            template: path.resolve(__dirname, "src/templates/users/index.html"),
+        }),
     ],
 };
