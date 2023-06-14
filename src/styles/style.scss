@@ -1,11 +1,21 @@
-@import "bootstrap/scss/bootstrap.scss";
-
 $bp-tablet: 768px;
 $bp-mobile: 425px;
 
 $primary: #f75e5d;
 $secondary: #1c2d5e;
 $background: #f6ffde;
+
+$pagination-color: #fff;
+$pagination-bg: $secondary;
+$pagination-border-radius: 25px;
+$pagination-border-width: 0px;
+$pagination-border-color: $secondary;
+$pagination-active-bg: #fecb5f;
+$pagination-disabled-color: #fff;
+$pagination-disabled-bg: $secondary;
+$pagination-focus-color: #dfb65d;
+$pagination-focus-bg: $secondary;
+@import "bootstrap/scss/bootstrap.scss";
 
 .bg-primary {
     background-color: $primary !important;
@@ -72,6 +82,12 @@ $form-select-indicator-color: white;
         .dropdown-menu {
             left: -50px;
         }
+    }
+
+    &.navbar-upper {
+        position: sticky;
+        top: 0;
+        z-index: 999;
     }
 
     &.navbar-lower {
@@ -159,6 +175,12 @@ $form-select-indicator-color: white;
 
 // User pages
 main {
+    .book-field {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     .book-title {
         font-size: 1.2rem;
         font-weight: bold;
@@ -183,5 +205,56 @@ main {
         @media screen and (max-width: $bp-mobile) {
             background-color: transparent;
         }
+    }
+
+    .page-prev {
+        padding-right: 2rem;
+    }
+
+    .page-next {
+        padding-left: 2rem;
+    }
+}
+
+.aside-bar {
+    min-width: 300px;
+    right: -400px;
+
+    @media screen and (max-width: $bp-mobile) {
+        min-width: 100%;
+        right: -110%;
+    }
+
+    &.show {
+        right: 0;
+    }
+
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    bottom: 0;
+    top: 4.7rem;
+    transition: 0.4s;
+    background-color: #f4ece5;
+    padding: 1rem;
+
+    .filterCheck {
+        background: rgba($color: #000, $alpha: 1);
+        width: 1rem;
+        height: 1rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .btn-filter-submit {
+        background-color: $secondary;
+        color: white;
+
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

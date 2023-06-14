@@ -27,7 +27,4 @@ module.exports = merge(common, {
         },
         compress: true,
     },
-    // plugins: [
-    //   new CleanWebpackPlugin(),
-    // ]
 });
