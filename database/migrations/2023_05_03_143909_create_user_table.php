@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_user');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('angkatan');
             $table->enum('role_user', ['Super Admin', 'Admin', 'Member']);
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
