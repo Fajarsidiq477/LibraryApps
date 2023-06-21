@@ -68,7 +68,7 @@ class UserController extends Controller
 
         try{
 
-            $validation =User::select('id_user')->where('email', $email)
+            $validation = User::select('id_user')->where('email', $email)
                              ->where('password', $password)->exists();
 
             if ($validation == true) {

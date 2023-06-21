@@ -10,6 +10,7 @@ class Buku extends Model
     protected $table = 'tbl_buku';
     protected $primaryKey = 'id_buku';
     protected $fillable = [
+        'kode_buku',
         'judul_buku',
         'judul_buku_asli',
         'kategori',
@@ -17,9 +18,11 @@ class Buku extends Model
         'editor',
         'penerjemah',
         'bahasa',
+        'penerbit',
         'thn_terbit',
         'jml_hlm',
         'volume',
+        'sinopsis',
         'cover_depan',
         'cover_belakang',
         'kelayakan',

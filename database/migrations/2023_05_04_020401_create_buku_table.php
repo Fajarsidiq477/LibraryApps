@@ -14,18 +14,21 @@ return new class extends Migration
         Schema::dropIfExists('tbl_buku');
         Schema::create('tbl_buku', function (Blueprint $table) {
             $table->id('id_buku');
+            $table->string('kode_buku', 20)->unique();
             $table->string('judul_buku');
             $table->string('judul_buku_asli');
             $table->string('kategori');
-            $table->string('penulis');
-            $table->string('editor');
-            $table->string('penerjemah');
+            $table->string('penulis')->nullable();
+            $table->string('editor')->nullable();
+            $table->string('penerjemah')->nullable();
             $table->string('bahasa');
-            $table->integer('thn_terbit');
+            $table->string('penerbit')->nullable();
+            $table->integer('thn_terbit')->nullable();
             $table->integer('jml_hlm');
-            $table->integer('volume');
-            $table->binary('cover_depan');
-            $table->binary('cover_belakang');
+            $table->integer('volume')->nullable();
+            $table->longtext('sinopsis')->nullable();
+            $table->string('cover_depan');
+            $table->string('cover_belakang');
             $table->enum('kelayakan', ['Layak', 'Tidak Layak']);
             $table->enum('jenis', ['R', 'Non R']);
             $table->enum('status_buku', ['Tersedia', 'Dipinjam']);
