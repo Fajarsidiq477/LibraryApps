@@ -8,6 +8,15 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    public function loginView(){
+        return view('auth/login');
+    }
+
+    public function userView(){
+        return view('users/index');
+    }
+
     public function Register(){
 
         $id_user    = $_POST['id_user'];    $nama_user  = $_POST['nama_user'];
