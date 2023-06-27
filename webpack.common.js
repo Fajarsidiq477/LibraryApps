@@ -50,5 +50,21 @@ module.exports = {
             template: path.resolve(__dirname, "src/templates/users/index.html"),
             minify: false,
         }),
+        new HtmlWebpackPlugin({
+            filename: "users/profile.html",
+            template: path.resolve(
+                __dirname,
+                "src/templates/users/profile.html"
+            ),
+            minify: false,
+        }),
+        new HtmlWebpackPlugin({
+            filename: "users/book-detail.html",
+            template: path.resolve(
+                __dirname,
+                "src/templates/users/book-detail.html"
+            ),
+            minify: false,
+        }),
     ],
 };
