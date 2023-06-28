@@ -17,6 +17,14 @@ class UserController extends Controller
         return view('users/index');
     }
 
+    public function detailBookView() {
+        return view('users/book-detail');
+    }
+
+    public function profile() {
+        return view('users/profile');
+    }
+
     public function Register(){
 
         $id_user    = $_POST['id_user'];    $nama_user  = $_POST['nama_user'];

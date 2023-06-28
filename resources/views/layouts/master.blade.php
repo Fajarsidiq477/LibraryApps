@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sijambu | Books</title>
+        
+        <script defer src="{{ asset('js/vendor.js') }}"></script>
+        <script defer src="{{ asset('js/main.js') }}"></script>
+        <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
+    </head>
+    <body>
+        @yield('header')
+
+        <main>
+            @yield('main')
+        </main>
+
+        @yield('footer')
+
+        <!-- Icons -->
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+        <!-- SweetAlert for deleteconfirmation -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+            // icons
+            feather.replace();
+        </script>
+
+        @yield('script')
+    </body>
+</html>
+

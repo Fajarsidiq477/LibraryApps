@@ -1,108 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sijambu | Login</title>
-        <script defer src="{{ asset('js/vendor.js') }}"></script>
-        <script defer src="{{ asset('js/main.js') }}"></script>
-        <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
-    <body>
-        <main>
-            <div class="container-fluid">
-                <div class="row" style="min-height: 100vh">
-                    <div class="col d-flex align-items-center">
-                        <div class="container col-md-10 col-lg-6">
-                            <div class="d-block d-sm-none text-center col">
-                                <div
-                                    class="row justify-content-center align-items-center"
-                                >
-                                    <img
-                                        src="{{ asset('images/logo UPI.png') }}"
-                                        alt="logo Sijambu"
-                                        class="mb-4"
-                                        style="width: 125px"
-                                    />
-                                    <div class="col-4 text-start fs-2 fw-bold">
-                                        Sijambu IPAI
-                                    </div>
-                                </div>
+@extends('layouts.master')
+
+@section('main')
+    <div class="container-fluid">
+        <div class="row" style="min-height: 100vh">
+            <div class="col d-flex align-items-center">
+                <div class="container col-md-10 col-lg-6">
+                    <div class="d-block d-sm-none text-center col">
+                        <div
+                            class="row justify-content-center align-items-center"
+                        >
+                            <img
+                                src="../../images/logo UPI.png"
+                                alt="logo Sijambu"
+                                class="mb-4"
+                                style="width: 125px"
+                            />
+                            <div class="col-4 text-start fs-2 fw-bold">
+                                Sijambu IPAI
                             </div>
-                            <h2 class="mb-4 text-center text-md-start">
-                                Masuk
-                            </h2>
-                            <form>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label"
-                                        >Email address</label
-                                    >
-                                    <!-- Hilangkan class is-invalid untuk menghilangkan merah dan message -->
-                                    <input
-                                        type="email"
-                                        class="form-control is-invalid"
-                                        id="email"
-                                        aria-describedby="emailHelp"
-                                    />
-                                    <div class="invalid-feedback">
-                                        E-Mail atau Password tidak sesuai
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label"
-                                        >Password</label
-                                    >
-                                    <input
-                                        type="password"
-                                        class="form-control"
-                                        id="password"
-                                    />
-                                    <div
-                                        id="passwordHelp"
-                                        class="form-text text-end"
-                                    >
-                                        <a
-                                            href="#"
-                                            class="link-secondary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#forgetPassModal"
-                                            >Lupa Password</a
-                                        >
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-secondary px-5"
-                                    >
-                                        Login
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                     </div>
-                    <div
-                        class="d-none d-sm-flex flex-column align-items-center justify-content-center col bg-primary"
-                    >
-                        <img
-                            src="../../images/logo UPI.png"
-                            alt="logo Sijambu"
-                            class="col-4 col-lg-3 mb-4"
-                        />
-                        <h2 class="text-light">SIJAMBU IPAI</h2>
-                    </div>
+                    <h2 class="mb-4 text-center text-md-start">
+                        Masuk
+                    </h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"
+                                >Email address</label
+                            >
+                            <!-- Hilangkan class is-invalid untuk menghilangkan merah dan message -->
+                            <input
+                                type="email"
+                                class="form-control is-invalid"
+                                id="email"
+                                aria-describedby="emailHelp"
+                            />
+                            <div class="invalid-feedback">
+                                E-Mail atau Password tidak sesuai
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label"
+                                >Password</label
+                            >
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                            />
+                            <div
+                                id="passwordHelp"
+                                class="form-text text-end"
+                            >
+                                <a
+                                    href="#"
+                                    class="link-secondary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#forgetPassModal"
+                                    >Lupa Password</a
+                                >
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a
+                                {{-- type="submit" --}}
+                                class="btn btn-secondary px-5"
+                                href="{{ url('book-view') }}"
+                            >
+                                Login
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </main>
+            <div
+                class="d-none d-sm-flex flex-column align-items-center justify-content-center col bg-primary"
+            >
+                <img
+                    src="../../images/logo UPI.png"
+                    alt="logo Sijambu"
+                    class="col-4 col-lg-3 mb-4"
+                />
+                <h2 class="text-light">SIJAMBU IPAI</h2>
+            </div>
+        </div>
+    </div>
+@endsection
 
-        <!-- Forget Password Modal -->
+@section('footer')
+    <!-- Forget Password Modal -->
         <div
             class="modal fade"
             id="forgetPassModal"
             tabindex="-1"
             aria-labelledby="forgetPassModalLabel"
-            aria-hidden="true"
-        >
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-secondary">
@@ -164,5 +156,4 @@
             </div>
         </div>
         <!-- End Forget Password Modal -->
-    </body>
-</html>
+@endsection

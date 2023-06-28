@@ -1,752 +1,197 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sijambu | Books</title>
+@extends('layouts.master')
 
-        <!-- Box Icon -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-        />
-        <script defer src="{{ asset('js/vendor.js') }}"></script>
-        <script defer src="{{ asset('js/main.js') }}"></script>
-        <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
-    <body>
-        <div class="navbar navbar-upper bg-primary py-2">
-            <div class="container">
-                <a class="navbar-brand text-light" href="#">SIJAMBU IPAI</a>
+@section('header')
+    @include('partials.navbar-admin')
+@endsection
 
-                <div class="col-md-6 d-none d-md-flex">
-                    <div class="input-group p-2">
-                        <button
-                            class="btn dropdown-toggle bg-secondary text-light"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            Kategori
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    >Action before</a
-                                >
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    >Another action before</a
-                                >
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    >Something else here</a
-                                >
-                            </li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    >Separated link</a
-                                >
-                            </li>
-                        </ul>
-                        <input
-                            type="text"
-                            class="form-control"
-                            aria-label="Text input with 2 dropdown buttons"
-                            placeholder="Pencarian ...."
-                        />
-                        <button
-                            class="btn bg-secondary text-light"
-                            type="button"
-                        >
-                            <i data-feather="search"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="d-flex dropdown px-2">
-                    <a
-                        class="nav-link d-flex justify-content-between align-items-center"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        <div class="avatar">
-                            <!-- <img
-                                src="https://placehold.co/200"
-                                alt="avatar"
-                                class="img-fluid"
-                            /> -->
-                            <i data-feather="user"></i>
-                        </div>
-
-                        <div class="col text-center">
-                            <i data-feather="menu"></i>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="#">Akun</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Keluar</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <nav>
-            <div class="navbar navbar-lower bg-secondary">
-                <div class="container">
-                    <div
-                        class="d-flex justify-content-between align-items-center"
-                        style="width: 100%"
-                    >
-                        <ul class="navbar-nav flex-row">
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link px-md-4"
-                                    aria-current="page"
-                                    href="#"
-                                >
-                                    <i data-feather="home"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link px-md-4"
-                                    href="/admin/books.html"
-                                >
-                                    <i data-feather="book"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link px-md-4"
-                                    href="/admin/users.html"
-                                >
-                                    <i data-feather="user"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link px-md-4 active"
-                                    href="/admin/lend-books.html"
-                                >
-                                    <i data-feather="clock"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <div>
+@section('main')
+    <div class="container">
+        <div class="row table-responsive">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th class="py-4">
+                            <input type="checkbox" name="" id="" />
+                        </th>
+                        <th class="py-4">#</th>
+                        <th class="py-4">Kode Buku</th>
+                        <th class="py-4">Judul Buku</th>
+                        <th class="py-4">Peminjam</th>
+                        <th class="py-4">Tanggal dipinjam</th>
+                        <th class="py-4">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="align-middle">
+                        <td>
+                            <input type="checkbox" name="" id="" />
+                        </td>
+                        <td>
+                            <img
+                                src="https://placehold.co/100x150"
+                                alt="Book cover"
+                            />
+                        </td>
+                        <td>JDK837JDK837</td>
+                        <td>Negeri Para Bedebah</td>
+                        <td>Fajar Sidik Setiawan</td>
+                        <td>4, Januari 2022</td>
+                        <td>
                             <a
                                 href="#"
-                                class="badge bg-primary d-none d-md-flex align-items-center justify-content-center"
-                                style="text-decoration: none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#myModal"
-                                data-bs-mode="add"
+                                class="badge text-dark"
+                                onclick="deleteData(1)"
                             >
-                                <span>Pinjam Buku</span>
-                                <i data-feather="plus"></i>
+                                <i data-feather="trash"></i>
                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </td>
+                    </tr>
+                </tbody>
 
-            <!-- Mobile appearance -->
-            <div class="container">
-                <div class="searchbar-mobile d-md-none input-group py-2">
-                    <button
-                        class="btn dropdown-toggle bg-secondary text-light"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        Kategori
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="#">Action before</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                                >Another action before</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                                >Something else here</a
-                            >
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </li>
-                    </ul>
-                    <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Text input with 2 dropdown buttons"
-                        placeholder="Pencarian ...."
-                    />
-                    <button class="btn bg-secondary text-light" type="button">
-                        <i data-feather="search"></i>
-                    </button>
-                </div>
-
-                <div class="mt-2">
-                    <a
-                        href="#"
-                        class="badge bg-primary d-flex align-items-center d-md-none py-2 justify-content-center"
-                        style="text-decoration: none"
-                        data-bs-toggle="modal"
-                        data-bs-target="#myModal"
-                        data-bs-mode="add"
-                    >
-                        <span>Pinjam Buku</span>
-                        <i data-feather="plus"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- End mobile appearance -->
-        </nav>
-
-        <main>
-            <div class="container">
-                <div class="row table-responsive">
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <th class="py-4">
-                                    <input type="checkbox" name="" id="" />
-                                </th>
-                                <th class="py-4">#</th>
-                                <th class="py-4">Kode Buku</th>
-                                <th class="py-4">Judul Buku</th>
-                                <th class="py-4">Peminjam</th>
-                                <th class="py-4">Tanggal dipinjam</th>
-                                <th class="py-4">#</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>
-                                    <img
-                                        src="https://placehold.co/100x150"
-                                        alt="Book cover"
-                                    />
-                                </td>
-                                <td>JDK837JDK837</td>
-                                <td>Negeri Para Bedebah</td>
-                                <td>Fajar Sidik Setiawan</td>
-                                <td>4, Januari 2022</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge text-dark"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                        <!-- Alert query pencarian tidak ada -->
-                        <!-- <tbody>
-                            <tr>
-                                <td colspan="7" class="py-5 text-danger">
-                                    <h4>
-                                        Buku dengan kata kunci "[query]" tidak
-                                        ditemukan!
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tbody> -->
-                    </table>
-                </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link">Previous</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </main>
-
-        <!-- Add / Edit Modal -->
-        <div
-            class="modal fade"
-            id="myModal"
-            tabindex="-1"
-            aria-labelledby="myModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
-                <div class="modal-content">
-                    <div class="modal-header bg-secondary">
-                        <button
-                            type="button"
-                            class="btn-admin-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <i data-feather="chevron-left"></i>
-                        </button>
-                        <h1 class="modal-title fs-5 text-light"></h1>
-                    </div>
-                    <div class="modal-body py-4 px-2 px-sm-3 px-md-5">
-                        <div class="steps">
-                            <div class="step">
-                                <div class="row justify-content-center">
-                                    <div class="col-6">
-                                        <div
-                                            class="form-group mb-3 text-center"
-                                        >
-                                            <label
-                                                for="kode"
-                                                class="mb-2 fw-bold"
-                                                >Masukan NIM Peminjam</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control mb-2"
-                                                id="nim_peminjam"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="step text-center">
-                                <p class="fw-bold fs-1">Scan barcode buku!</p>
-                                <i
-                                    class="bx bx-barcode"
-                                    style="font-size: 1000%; margin-top: -30px"
-                                ></i>
-                            </div>
-                            <div class="step">
-                                <div class="row">
-                                    <div class="col-12 col-md-6 text-center">
-                                        <p class="fw-bold">Data Buku</p>
-                                        <div class="image-cover">
-                                            <img
-                                                src="http://placehold.co/160x225"
-                                                alt="book cover"
-                                                id="imageInputDisplay"
-                                                class="img-fluid"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="kode" class="mb-2"
-                                                >Kode Buku</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control is-invalid"
-                                                id="kode"
-                                                disabled
-                                            />
-                                            <div class="invalid-feedback">
-                                                Kode buku harus lebih dari 100
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="judul" class="mb-2"
-                                                >Judul Buku</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="judul"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="penulis" class="mb-2"
-                                                >Penulis</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="penulis"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="kategori" class="mb-2"
-                                                >Kategori</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="kategori"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="penerbit" class="mb-2"
-                                                >Penerbit</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="penerbit"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="editor" class="mb-2"
-                                                >Editor</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="editor"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="penerjemah" class="mb-2"
-                                                >Penerjemah</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="penerjemah"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bahasa" class="mb-2"
-                                                >Bahasa</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="bahasa"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                for="tahunTerbit"
-                                                class="mb-2"
-                                                >Tahun Terbit</label
-                                            >
-                                            <input
-                                                type="number"
-                                                class="form-control custom-form-control"
-                                                id="tahunTerbit"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                for="jumlahHalaman"
-                                                class="mb-2"
-                                                >Jumlah Halaman</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="jumlahHalaman"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="volume" class="mb-2"
-                                                >Volume</label
-                                            >
-                                            <input
-                                                type="number"
-                                                class="form-control custom-form-control"
-                                                id="volume"
-                                                disabled
-                                            />
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="jenis" class="mb-2"
-                                                >Jenis</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control custom-form-control"
-                                                id="jenis"
-                                                disabled
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <div class="container" style="max-width: 500px">
-                                    <p class="fw-bold text-center mb-0 fs-4">
-                                        Preview Pinjam Buku
-                                    </p>
-                                    <p class="sub-text text-center">
-                                        Baitul Hikmah Library
-                                    </p>
-
-                                    <p
-                                        class="text-center text-sm-end fst-italic"
-                                    >
-                                        ID Peminjaman: 0284993480
-                                    </p>
-
-                                    <table class="table table-borderless">
-                                        <div class="mb-3">
-                                            <tr>
-                                                <th>Peminjam</th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td class="">NIM/NIP</td>
-                                                <td>2010031</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="">Nama Lengkap</td>
-                                                <td>Fajar Sidik Setiawan</td>
-                                            </tr>
-                                        </div>
-                                        <div class="mb-3">
-                                            <tr>
-                                                <th>Buku</th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td>Kode</td>
-                                                <td>FEWIFHEWIU23</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Judul</td>
-                                                <td>
-                                                    Negeri Para Bedebah -
-                                                    Tereliye
-                                                </td>
-                                            </tr>
-                                        </div>
-                                        <div class="mb-3">
-                                            <tr>
-                                                <th>Tanggal Peminjaman</th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td>Tanggal Pinjam</td>
-                                                <td>Kamis, 8 Juni 2023</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Tanggal Kembali</td>
-                                                <td>Kamis, 15 Juni 2023</td>
-                                            </tr>
-                                        </div>
-                                    </table>
-                                    <p class="text-center text-sm-end">
-                                        Tatang Sutarma
-                                    </p>
-                                    <p
-                                        class="text-center text-sm-end fst-italic"
-                                    >
-                                        Staff Perpustakaan
-                                    </p>
-
-                                    <div class="form">
-                                        <form action="#" id="form-modal">
-                                            <input
-                                                type="text"
-                                                id="form-mode"
-                                                hidden
-                                            />
-
-                                            <input
-                                                type="text"
-                                                id="id_peminjaman"
-                                                hidden
-                                            />
-                                            <input
-                                                type="text"
-                                                id="nim"
-                                                hidden
-                                            />
-                                            <input
-                                                type="text"
-                                                id="id_buku"
-                                                hidden
-                                            />
-                                            <input
-                                                type="text"
-                                                id="tanggal_pinjam"
-                                                hidden
-                                            />
-                                            <input
-                                                type="text"
-                                                id="tanggal_kembali"
-                                                hidden
-                                            />
-
-                                            <button
-                                                type="submit"
-                                                class="btn btn-dark"
-                                            >
-                                                Selesai
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="modal-footer text-center justify-content-center"
-                    >
-                        <button class="btn btn-success btn-step-next">
-                            Next
-                        </button>
-                    </div>
-                </div>
-            </div>
+                <!-- Alert query pencarian tidak ada -->
+                <!-- <tbody>
+                    <tr>
+                        <td colspan="7" class="py-5 text-danger">
+                            <h4>
+                                Buku dengan kata kunci "[query]" tidak
+                                ditemukan!
+                            </h4>
+                        </td>
+                    </tr>
+                </tbody> -->
+            </table>
         </div>
-        <!-- End Add / Edit Modal -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+@endsection
 
-        <!-- Icons -->
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+@section('footer')
+    @include('partials/modal-admin-lend-book')
+@endsection
 
-        <!-- SweetAlert for deleteconfirmation -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script>
-            // icons
-            feather.replace();
-
-            //delete confirmation
-            const deleteData = (id) => {
-                swal({
-                    text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali. Apakah Anda yakin?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        swal("Data berhasil dihapus!", {
-                            icon: "success",
-                        });
-
-                        // Script jika data dihapus di bawah sini
-                    } else {
-                        swal("Data tidak dihapus!");
-                    }
-                });
-            };
-
-            // bs.modal.show triggered
-            const modalEl = document.querySelector("#myModal");
-
-            const getFormData = () => {
-                const formModal = modalEl.querySelector("#form-modal");
-
-                const mode = formModal.querySelector("#form-mode").value;
-                const id_peminjaman =
-                    formModal.querySelector("#id_peminjaman").value || null;
-
-                const nim = formModal.querySelector("#nim").value;
-                const id_buku = formModal.querySelector("#id_buku").value;
-                const tanggal_pinjam =
-                    formModal.querySelector("#tanggal_pinjam").value;
-                const tanggal_kembali =
-                    formModal.querySelector("#tanggal_kembali").value;
-
-                return (data = {
-                    mode,
-                    id_peminjaman,
-                    nim,
-                    id_buku,
-                    tanggal_pinjam,
-                    tanggal_kembali,
-                });
-            };
-
-            const onFormSubmit = (e, modalEl) => {
-                e.preventDefault();
-
-                // Get value from input
-                const data = getFormData(modalEl);
-
-                // kirim data di bawah
-                // kirim data di bawah
-                if (data.mode === "add") {
-                    swalOption = {
-                        title: "Buku berhasil Dipinjam!",
+@section('script')
+    <script>
+        //delete confirmation
+        const deleteData = (id) => {
+            swal({
+                text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali. Apakah Anda yakin?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    swal("Data berhasil dihapus!", {
                         icon: "success",
-                        button: "Oke!",
-                    };
-                }
+                    });
 
-                if (data.mode === "edit") {
-                    swalOption = {
-                        title: "Buku berhasil diedit!",
-                        icon: "success",
-                        button: "Oke!",
-                    };
-                }
-
-                swal(swalOption);
-
-                // tutup modal ketika kode add / edit berhasil dieksekusi
-                document.querySelector(".btn-admin-close").click();
-            };
-
-            // Event when modal opened
-            modalEl.addEventListener("show.bs.modal", (event) => {
-                window.Jar.whenModalShow(modalEl, "lends", event);
-            });
-
-            // Event when form-modal on submit
-            modalEl
-                .querySelector("#form-modal")
-                .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
-
-            // Multisteps form
-            const btnStepNext = modalEl.querySelector(".btn-step-next");
-
-            btnStepNext.addEventListener("click", () => {
-                if (window.Jar.stepIndex + 1 === 1) {
-                    const nim_peminjam =
-                        document.querySelector("#nim_peminjam").value;
-
-                    alert("kamu di halaman barcode, nim mu " + nim_peminjam);
-                }
-                if (window.Jar.stepIndex + 1 === 2) {
-                    alert("kamu di halaman detail buku");
-                }
-                if (window.Jar.stepIndex + 1 === 3) {
-                    alert("kamu di halaman preview");
+                    // Script jika data dihapus di bawah sini
+                } else {
+                    swal("Data tidak dihapus!");
                 }
             });
-        </script>
-    </body>
-</html>
+        };
+
+        // bs.modal.show triggered
+        const modalEl = document.querySelector("#myModal");
+
+        const getFormData = () => {
+            const formModal = modalEl.querySelector("#form-modal");
+
+            const mode = formModal.querySelector("#form-mode").value;
+            const id_peminjaman =
+                formModal.querySelector("#id_peminjaman").value || null;
+
+            const nim = formModal.querySelector("#nim").value;
+            const id_buku = formModal.querySelector("#id_buku").value;
+            const tanggal_pinjam =
+                formModal.querySelector("#tanggal_pinjam").value;
+            const tanggal_kembali =
+                formModal.querySelector("#tanggal_kembali").value;
+
+            return (data = {
+                mode,
+                id_peminjaman,
+                nim,
+                id_buku,
+                tanggal_pinjam,
+                tanggal_kembali,
+            });
+        };
+
+        const onFormSubmit = (e, modalEl) => {
+            e.preventDefault();
+
+            // Get value from input
+            const data = getFormData(modalEl);
+
+            // kirim data di bawah
+            // kirim data di bawah
+            if (data.mode === "add") {
+                swalOption = {
+                    title: "Buku berhasil Dipinjam!",
+                    icon: "success",
+                    button: "Oke!",
+                };
+            }
+
+            if (data.mode === "edit") {
+                swalOption = {
+                    title: "Buku berhasil diedit!",
+                    icon: "success",
+                    button: "Oke!",
+                };
+            }
+
+            swal(swalOption);
+
+            // tutup modal ketika kode add / edit berhasil dieksekusi
+            document.querySelector(".btn-admin-close").click();
+        };
+
+        // Event when modal opened
+        modalEl.addEventListener("show.bs.modal", (event) => {
+            window.Jar.whenModalShow(modalEl, "lends", event);
+        });
+
+        // Event when form-modal on submit
+        modalEl
+            .querySelector("#form-modal")
+            .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
+
+        // Multisteps form
+        const btnStepNext = modalEl.querySelector(".btn-step-next");
+
+        btnStepNext.addEventListener("click", () => {
+            if (window.Jar.stepIndex + 1 === 1) {
+                const nim_peminjam =
+                    document.querySelector("#nim_peminjam").value;
+
+                alert("kamu di halaman barcode, nim mu " + nim_peminjam);
+            }
+            if (window.Jar.stepIndex + 1 === 2) {
+                alert("kamu di halaman detail buku");
+            }
+            if (window.Jar.stepIndex + 1 === 3) {
+                alert("kamu di halaman preview");
+            }
+        });
+    </script>
+@endsection
