@@ -122,7 +122,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#">Akun</a>
+                            <a class="dropdown-item" href="http://localhost:9000/users/">Akun</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Aktivitas</a>

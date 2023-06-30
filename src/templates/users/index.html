@@ -119,7 +119,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#">Akun</a>
+                            <a class="dropdown-item" href="profile.html"
+                                >Akun</a
+                            >
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Aktivitas</a>
@@ -354,6 +356,7 @@
                 asideBar.classList.remove("show");
             });
 
+            // Menambilkan filter sidebar
             const asideButtonShow = document.querySelector(".btn-show");
             asideButtonShow.addEventListener("click", function () {
                 let asideBarEl = this.getAttribute("data-show");
@@ -388,6 +391,7 @@
 
             const asideEl = document.querySelector(".aside-bar");
 
+            // Menambilkan book detail sidebar sesuai id yang diklik
             const bookDetailAside = (id) => {
                 let data = [];
 
@@ -435,7 +439,7 @@
                             </div>
                         </div>
                         <div class="aside-description text-start mt-4">
-                            <h4 class="book-title">${data[id].bookName}</h4>
+                            <h4 class="book-title"><a href="#" class="text-dark">${data[id].bookName}</a></h4>
                             <p class="book-year">${data[id].bookYear}</p>
                             <h5 class="book-author">${data[id].bookAuthor}</h5>
                             <p class="book-publisher fw-bold">${data[id].bookPublisher}</p>
