@@ -5,9 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sijambu | Books</title>
-    <script defer src="{{ asset('js/vendor.js') }}"></script>
-    <script defer src="{{ asset('js/main.js') }}"></script>
-    <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script defer src="{{ asset('js/vendor.js') }}"></script>
+        <script defer src="{{ asset('js/main.js') }}"></script>
+        <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
     <body>
         <div class="navbar navbar-upper bg-primary py-2">
             <div class="container">
@@ -219,10 +220,8 @@
 
         <main>
             <div class="container">
-                <div
-                    class="row gap-3 justify-content-center pt-4"
-                    id="main-content"
-                >
+                <div class="row gap-3 justify-content-center pt-4" id="main-content">
+        
                     <!-- Main content disini, pake javascript -->
                 </div>
                 <nav aria-label="Page navigation example" class="mt-3">
@@ -263,28 +262,32 @@
             // icons
             feather.replace();
 
+            //get data buku
+            const buku = [];
+
             // Grid mode
-            const createGridCard = () => {
+            const createGridCard = (buku, i) => {
                 return `
                     <div class="col-12 col-md-5 p-3 bg-book-cover grid">
-                        <a onclick="bookDetailAside(1)" style="text-decoration:none" class="book-field text-dark">
+                        <a onclick="bookDetailAside(buku, ${i})" style="text-decoration:none" class="book-field text-dark">
                             <div class="row justify-content-center">
                                 <div class="col text-center">
                                     <div>
                                         <img
-                                            src="http://placehold.co/160x225"
+                                            src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
                                             alt="book cover"
                                             class="img-fluid"
+                                            width="100"
                                         />
                                     </div>
 
                                     <div class="book-description mt-2">
                                         <h4 class="book-title">
-                                            Islam Yang Disalahpahami
+                                            ${buku[i].judul_buku}
                                         </h4>
-                                        <p class="book-year">2005</p>
+                                        <p class="book-year">${buku[i].thn_terbit}</p>
                                         <h5 class="book-author">
-                                            M. Quraish Shihab
+                                            ${buku[i].penulis}
                                         </h5>
                                     </div>
                                 </div>
@@ -294,24 +297,26 @@
                 `;
             };
 
-            const createListCard = () => {
+            const createListCard = (buku, i) => {
+                
                 return `
                     <div class="col-12 col-md-5 border-bottom border-3 list">
-                        <a onclick="bookDetailAside(1)" style="text-decoration:none" class="book-field text-dark">
+                        <a onclick="bookDetailAside(buku, ${i})" style="text-decoration:none" class="book-field text-dark">
                             <div class="row mb-2">
                                 <div class="col col-md-5">
                                     <img
-                                        src="http://placehold.co/160x225"
+                                        src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
                                         alt="book cover"
                                         class="img-fluid"
+                                        width="100"
                                     />
                                 </div>
                                 <div class="col col-md-7 pt-2">
                                     <h4 class="book-title">
-                                        Islam Yang Disalahpahami
+                                        ${buku[i].judul_buku}
                                     </h4>
-                                    <h5 class="book-author">M. Quraish Shihab</h5>
-                                    <p class="book-year">2005</p>
+                                    <h5 class="book-author">${buku[i].penulis}</h5>
+                                    <p class="book-year">${buku[i].thn_terbit}</p>
                                 </div>
                             </div>
                         </a>
@@ -322,9 +327,20 @@
             // implementing card to #main-content for example
             const mainContent = document.querySelector("#main-content");
 
-            for (let i = 0; i < 10; i++) {
-                mainContent.innerHTML += createListCard();
-            }
+            $.ajax({
+                url: "/get-buku",
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    for(i=0; i<data.data.length; i++){
+                        buku.push(data.data[i]);
+                    }
+
+                    for (let i = 0; i < buku.length; i++) {
+                        mainContent.innerHTML += createListCard(buku, i);
+                    }
+                }
+            });
 
             // Switch Status
             const switchStatus = document.querySelector(".switch-status");
@@ -333,8 +349,8 @@
                 switchStatus.classList.remove("grid");
                 mainContent.innerHTML = "";
 
-                for (let i = 0; i < 10; i++) {
-                    mainContent.innerHTML += createListCard();
+                for (let i = 0; i < buku.length; i++) {
+                   mainContent.innerHTML += createListCard(buku, i);
                 }
             };
 
@@ -342,8 +358,8 @@
                 switchStatus.classList.add("grid");
                 mainContent.innerHTML = "";
 
-                for (let i = 0; i < 10; i++) {
-                    mainContent.innerHTML += createGridCard();
+                for (let i = 0; i < buku.length; i++) {
+                   mainContent.innerHTML += createGridCard(buku, i);
                 }
             };
 
@@ -390,17 +406,17 @@
 
             const asideEl = document.querySelector(".aside-bar");
 
-            const bookDetailAside = (id) => {
-                let data = [];
+            const bookDetailAside = (buku, i) => {
+                // let data = [];
 
-                data[id] = {
-                    bookName: "Islam Yang Disalahpahami",
-                    bookYear: 2005,
-                    bookGenre: "Aqidah",
-                    bookAuthor: "M. Quraish Shihab",
-                    bookPublisher: "Lentera Hati",
-                    bookStatus: "Tersedia",
-                };
+                // data[id] = {
+                //     bookName: "Islam Yang Disalahpahami",
+                //     bookYear: 2005,
+                //     bookGenre: "Aqidah",
+                //     bookAuthor: "M. Quraish Shihab",
+                //     bookPublisher: "Lentera Hati",
+                //     bookStatus: "Tersedia",
+                // };
 
                 asideEl.querySelector(".aside-content").innerHTML = `
 
@@ -408,12 +424,13 @@
                         <div class="aside-header">
                             <span
                                 class="d-inline-block bg-secondary badge py-2 px-4 rounded text-light mb-2"
-                                >${data[id].bookGenre}</span
+                                >${buku[i].kategori}</span
                             >
                             <img
-                                src="http://placehold.co/160x225"
+                                src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
                                 class="d-block mx-auto img-fluid mb-2"
                                 alt="book-cover"
+                                width="150"
                             />
 
                             <div
@@ -437,13 +454,13 @@
                             </div>
                         </div>
                         <div class="aside-description text-start mt-4">
-                            <h4 class="book-title">${data[id].bookName}</h4>
-                            <p class="book-year">${data[id].bookYear}</p>
-                            <h5 class="book-author">${data[id].bookAuthor}</h5>
-                            <p class="book-publisher fw-bold">${data[id].bookPublisher}</p>
+                            <h4 class="book-title">${buku[i].judul_buku}</h4>
+                            <p class="book-year">${buku[i].thn_terbit}</p>
+                            <h5 class="book-author">${buku[i].penulis}</h5>
+                            <p class="book-publisher fw-bold">${buku[i].penerbit}</p>
                             <p class="book-status">
                                 <span>Status</span>
-                                <span class="badge bg-secondary">${data[id].bookStatus}</span>
+                                <span class="badge bg-secondary">${buku[i].status_buku}</span>
                             </p>
                         </div>
                     </div>
