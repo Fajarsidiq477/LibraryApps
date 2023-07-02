@@ -12,8 +12,13 @@ use App\Models\Buku;
 class Controller extends BaseController
 {
     public function getBuku(){
-
         $buku = Buku::All();
+
+        return $buku;
+    }
+    public function getBukuJson(){
+
+        $buku = app(Controller::class)->getBuku();
 
         try{
             return response()->json(

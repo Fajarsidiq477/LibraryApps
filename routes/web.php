@@ -32,12 +32,12 @@ Route::post('/login',           [UserController::class,'Login']);
 Route::get('/user-view',        [UserController::class,'userView']);
 
 // halaman admin
-Route::get('/book-view',        [AdminController::class,'bookView']);
+Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);
 Route::get('/admin-user-view',  [AdminController::class,'userView']);
 Route::get('/lend-book-view',   [AdminController::class,'lendBookView']);
 
 // data
-Route::get('/get-buku',    [Controller::class,'getBuku']);
+Route::get('/get-buku',    [Controller::class,'getBukuJson']);
 
 // buku
 Route::post('/tambah-buku', [BukuController::class,'tambahBuku']);

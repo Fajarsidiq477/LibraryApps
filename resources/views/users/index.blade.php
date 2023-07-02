@@ -339,6 +339,8 @@
                     for (let i = 0; i < buku.length; i++) {
                         mainContent.innerHTML += createListCard(buku, i);
                     }
+
+                    console.log(data.data[0].kode_buku);
                 }
             });
 
