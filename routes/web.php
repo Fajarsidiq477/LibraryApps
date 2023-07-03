@@ -40,8 +40,9 @@ Route::get('/lend-book-view',   [AdminController::class,'lendBookView']);
 Route::get('/get-buku',    [Controller::class,'getBukuJson']);
 
 // buku
-Route::post('/tambah-buku', [BukuController::class,'tambahBuku']);
-Route::post('/update-buku', [BukuController::class,'updateBuku']);
+Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
+// Route::post('/tambah-buku', [BukuController::class,'tambahBuku']);
+// Route::post('/update-buku', [BukuController::class,'updateBuku']);
 
 
 Route::post('/coba', [BukuController::class,'coba']);

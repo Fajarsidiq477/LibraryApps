@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id('id_buku');
             $table->string('kode_buku', 20)->unique();
             $table->string('judul_buku');
-            $table->string('judul_buku_asli');
+            // $table->string('judul_buku_asli');
             $table->string('kategori');
             $table->string('penulis')->nullable();
             $table->string('editor')->nullable();
@@ -26,10 +26,10 @@ return new class extends Migration
             $table->integer('thn_terbit')->nullable();
             $table->integer('jml_hlm');
             $table->integer('volume')->nullable();
-            $table->longtext('sinopsis')->nullable();
+            // $table->longtext('sinopsis')->nullable();
             $table->string('cover_depan');
-            $table->string('cover_belakang');
-            $table->enum('kelayakan', ['Layak', 'Tidak Layak']);
+            // $table->string('cover_belakang');
+            // $table->enum('kelayakan', ['Layak', 'Tidak Layak']);
             $table->enum('jenis', ['R', 'Non R']);
             $table->enum('status_buku', ['Tersedia', 'Dipinjam']);
             $table->date('updated_at')->nullable();

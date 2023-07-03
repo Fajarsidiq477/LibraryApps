@@ -10,6 +10,11 @@
     <script defer src="{{ asset('js/vendor.js') }}"></script>
     <script defer src="{{ asset('js/main.js') }}"></script>
     <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet">
+    <script>
+        let headers = {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    </script>
 </head>
 </head>
 
@@ -244,8 +249,8 @@
                         <div class="row">
                             <div class="col-12 col-md-6 text-center">
                                 <div class="image-cover">
-                                    <img src="http://placehold.co/160x225" alt="book cover" id="imageInputDisplay" class="img-fluid" width="165"/>
-                                    <input type="file" name="" id="imageInput" accept="image/*" hidden oninput="imageStatus()"/>
+                                    <img src="http://placehold.co/160x225" alt="book cover" name="imageInputDisplay" id="imageInputDisplay" class="img-fluid" width="165"/>
+                                    <input type="file" name="cover_depan" id="imageInput" accept="image/*" hidden oninput="imageStatus()"/>
                                     <label for="imageInput" class="btn btn-success rounded-circle image-cover-button">
                                         <i data-feather="edit"></i>
                                     </label>
@@ -254,58 +259,66 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="kode" class="mb-2">Kode Buku</label>
-                                    <input type="text" class="form-control custom-form-control" id="kode" required />
+                                    <input type="text" class="form-control custom-form-control" name="kode" id="kode" />
                                     <!-- <div class="invalid-feedback">
                                         Kode buku harus lebih dari 100
                                     </div> -->
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="judul" class="mb-2">Judul Buku</label>
-                                    <input type="text" class="form-control custom-form-control" id="judul" required />
+                                    <input type="text" class="form-control custom-form-control" name="judul" id="judul" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="penulis" class="mb-2">Penulis</label>
-                                    <input type="text" class="form-control custom-form-control" id="penulis" required />
+                                    <input type="text" class="form-control custom-form-control" name="penulis" id="penulis" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="kategori" class="mb-2">Kategori</label>
-                                    <input type="text" class="form-control custom-form-control" id="kategori" required />
+                                    <input type="text" class="form-control custom-form-control" name="kategori" id="kategori" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="penerbit" class="mb-2">Penerbit</label>
-                                    <input type="text" class="form-control custom-form-control" id="penerbit" required />
+                                    <input type="text" class="form-control custom-form-control" name="penerbit" id="penerbit" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="editor" class="mb-2">Editor</label>
-                                    <input type="text" class="form-control custom-form-control" id="editor" required />
+                                    <input type="text" class="form-control custom-form-control" name="editor" id="editor" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="penerjemah" class="mb-2">Penerjemah</label>
-                                    <input type="text" class="form-control custom-form-control" id="penerjemah" required />
+                                    <input type="text" class="form-control custom-form-control" name="penerjemah" id="penerjemah" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="bahasa" class="mb-2">Bahasa</label>
-                                    <input type="text" class="form-control custom-form-control" id="bahasa" required />
+                                    <input type="text" class="form-control custom-form-control" name="bahasa" id="bahasa" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tahunTerbit" class="mb-2">Tahun Terbit</label>
-                                    <input type="number" class="form-control custom-form-control" id="tahunTerbit" required />
+                                    <input type="number" class="form-control custom-form-control" name="tahunTerbit" id="tahunTerbit" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="jumlahHalaman" class="mb-2">Jumlah Halaman</label>
-                                    <input type="text" class="form-control custom-form-control" id="jumlahHalaman" required />
+                                    <input type="text" class="form-control custom-form-control" name="jumlahHalaman" id="jumlahHalaman" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="volume" class="mb-2">Volume</label>
-                                    <input type="number" class="form-control custom-form-control" id="volume" required />
+                                    <input type="number" class="form-control custom-form-control" name="volume" id="volume" />
                                 </div>
-                                <div class="form-group mb-3">
+                                <!-- <div class="form-group mb-3">
                                     <label for="jenis" class="mb-2">Jenis</label>
-                                    <input type="text" class="form-control custom-form-control" id="jenis" required />
+                                    <input type="text" class="form-control custom-form-control" name="jenis" id="jenis" />
+                                </div> -->
+                                <div class="form-group mb-3">
+                                    <label for="status" class="mb-2">Jenis Buku</label>
+                                    <select name="jenis" id="jenis" class="form-select custom-form-control">
+                                        <option selected disabled value = "">---</option>
+                                        <option value="R">R</option>
+                                        <option value="Non R">Non R</option>
+                                    </select>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="status" class="mb-2">Status Buku</label>
-                                    <select name="status" id="status" class="form-select custom-form-control" required>
+                                    <select name="status" id="status" class="form-select custom-form-control">
                                         <option selected disabled value = "">---</option>
                                         <option value="Tersedia">Tersedia</option>
                                         <option value="Dipinjam">Dipinjam</option>
@@ -397,67 +410,92 @@
         // bs.modal.show triggered
         const modalEl = document.querySelector("#myModal");
 
-        const getFormData = () => {
-            const formModal     = modalEl.querySelector("#form-modal");
+        // const getFormData = () => {
+        //     const formModal     = modalEl.querySelector("#form-modal");
 
-            const mode          = formModal.querySelector("#form-mode").value;
-            const id            = formModal.querySelector("#id").value || null;
+        //     const mode          = formModal.querySelector("#form-mode").value;
+        //     const id            = formModal.querySelector("#id").value || null;
 
-            let image;
+        //     let image;
+        //     let input;
 
-            if(inputImage == false){
-                //mengambil nama file gambar yang belum diganti
-                if(mode == "add"){
-                    //return false jika gambar kosong di form add
-                    alert("Gambar tidak boleh kosong!");
-                    return;
-                }else{
-                    image       = document.getElementById("imageInputDisplay").src.split("/").pop();
-                }
+        //     if(inputImage == false){
+        //         //mengambil nama file gambar yang belum diganti
+        //         if(mode == "add"){
+        //             //return false jika gambar kosong di form add
+        //             alert("Gambar tidak boleh kosong!");
+        //             return;
+        //         }else{
+        //             image       = document.getElementById("imageInputDisplay").src.split("/").pop();
+        //         }
 
-            }else{
-                //mengambil nama file gambar jika sudah input gambar
-                let input   = document.getElementById('imageInput');
-                image       = input.files[0].name;
-            }
+        //     }else{
+        //         //mengambil nama file gambar jika sudah input gambar
+        //         input   = document.getElementById('imageInput').files[0];
+        //         // image       = input.files[0].name;
+        //         image = "tes.jpg";
+        //     }
 
-            const kode          = formModal.querySelector("#kode").value;
-            const judul         = formModal.querySelector("#judul").value;
-            const penulis       = formModal.querySelector("#penulis").value;
-            const kategori      = formModal.querySelector("#kategori").value;
-            const penerbit      = formModal.querySelector("#penerbit").value;
-            const editor        = formModal.querySelector("#editor").value;
-            const penerjemah    = formModal.querySelector("#penerjemah").value;
-            const bahasa        = formModal.querySelector("#bahasa").value;
-            const tahunTerbit   = formModal.querySelector("#tahunTerbit").value;
-            const jumlahHalaman = formModal.querySelector("#jumlahHalaman").value;
-            const volume        = formModal.querySelector("#volume").value;
-            const jenis         = formModal.querySelector("#jenis").value;
-            const status        = formModal.querySelector("#status").value;
+        //     const kode          = formModal.querySelector("#kode").value;
+        //     const judul         = formModal.querySelector("#judul").value;
+        //     const penulis       = formModal.querySelector("#penulis").value;
+        //     const kategori      = formModal.querySelector("#kategori").value;
+        //     const penerbit      = formModal.querySelector("#penerbit").value;
+        //     const editor        = formModal.querySelector("#editor").value;
+        //     const penerjemah    = formModal.querySelector("#penerjemah").value;
+        //     const bahasa        = formModal.querySelector("#bahasa").value;
+        //     const tahunTerbit   = formModal.querySelector("#tahunTerbit").value;
+        //     const jumlahHalaman = formModal.querySelector("#jumlahHalaman").value;
+        //     const volume        = formModal.querySelector("#volume").value;
+        //     const jenis         = formModal.querySelector("#jenis").value;
+        //     const status        = formModal.querySelector("#status").value;
 
-            return (data = {
-                mode, id, kode, judul, penulis, kategori, penerbit, editor, penerjemah,
-                bahasa, tahunTerbit, jumlahHalaman, volume, jenis, status, image
-            });
-        };
+        //     return (data = {
+        //         mode, id, kode, judul, penulis, kategori, penerbit, editor, penerjemah,
+        //         bahasa, tahunTerbit, jumlahHalaman, volume, jenis, status, image, input
+        //     });
+        // };
 
         const onFormSubmit = (e, modalEl) => {
             e.preventDefault();
 
-            // Get value from input
-            const data = getFormData(modalEl);
+            const formModal     = modalEl.querySelector("#form-modal");
+            const mode          = formModal.querySelector("#form-mode").value;
 
-            if(data == undefined){
-                return;
-            } else{
+            // Get value from input
+            // const data = getFormData(modalEl);
+
+            // if(data == undefined){
+            //     return;
+            // } else{
                 // kirim data di bawah
-                console.log(data.mode,          data.kode,          data.judul,
-                            data.penulis,       data.kategori,      data.penerbit,
-                            data.editor,        data.penerjemah,    data.bahasa,
-                            data.tahunTerbit,   data.jumlahHalaman, data.volume,
-                            data.jenis,         data.status,        data.image);
+                $.ajax({
+                    url: '/coba',
+                    type: "POST",
+                    headers: headers,
+                    data: new FormData(document.getElementById("form-modal")),
+                    dataType:'JSON',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        data = JSON.parse(JSON.stringify(data));
+                        alert((data.message));
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        data = JSON.parse(JSON.stringify(data));
+                        alert((data.message));
+                    },
+                });
+
+                // console.log(data.mode,          data.kode,          data.judul,
+                //             data.penulis,       data.kategori,      data.penerbit,
+                //             data.editor,        data.penerjemah,    data.bahasa,
+                //             data.tahunTerbit,   data.jumlahHalaman, data.volume,
+                //             data.jenis,         data.status,        data.image,
+                //             data.input);
                 
-                if (data.mode === "add") {
+                if (mode === "add") {
                     swalOption = {
                         title: "Buku berhasil dibuat!",
                         icon: "success",
@@ -465,7 +503,7 @@
                     };
                 }
     
-                if (data.mode === "edit") {
+                if (mode === "edit") {
                     swalOption = {
                         title: "Buku berhasil diedit!",
                         icon: "success",
@@ -473,7 +511,7 @@
                     };
                 }
                 swal(swalOption);
-            }
+            // }
 
 
             // tutup modal ketika kode add / edit berhasil dieksekusi

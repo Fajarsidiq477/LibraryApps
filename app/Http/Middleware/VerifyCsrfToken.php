@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         '/login',
         '/tambah-buku',
         '/update-buku',
+        '/update-create-buku',
         '/coba'
     ];
 }
