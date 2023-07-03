@@ -245,7 +245,7 @@
                             <div class="col-12 col-md-6 text-center">
                                 <div class="image-cover">
                                     <img src="http://placehold.co/160x225" alt="book cover" id="imageInputDisplay" class="img-fluid" width="165"/>
-                                    <input type="file" name="" id="imageInput" accept="image/*" hidden />
+                                    <input type="file" name="" id="imageInput" accept="image/*" hidden oninput="imageStatus()"/>
                                     <label for="imageInput" class="btn btn-success rounded-circle image-cover-button">
                                         <i data-feather="edit"></i>
                                     </label>
@@ -254,59 +254,59 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="kode" class="mb-2">Kode Buku</label>
-                                    <input type="text" class="form-control custom-form-control" id="kode" />
+                                    <input type="text" class="form-control custom-form-control" id="kode" required />
                                     <!-- <div class="invalid-feedback">
                                         Kode buku harus lebih dari 100
                                     </div> -->
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="judul" class="mb-2">Judul Buku</label>
-                                    <input type="text" class="form-control custom-form-control" id="judul" />
+                                    <input type="text" class="form-control custom-form-control" id="judul" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="penulis" class="mb-2">Penulis</label>
-                                    <input type="text" class="form-control custom-form-control" id="penulis" />
+                                    <input type="text" class="form-control custom-form-control" id="penulis" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="kategori" class="mb-2">Kategori</label>
-                                    <input type="text" class="form-control custom-form-control" id="kategori" />
+                                    <input type="text" class="form-control custom-form-control" id="kategori" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="penerbit" class="mb-2">Penerbit</label>
-                                    <input type="text" class="form-control custom-form-control" id="penerbit" />
+                                    <input type="text" class="form-control custom-form-control" id="penerbit" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="editor" class="mb-2">Editor</label>
-                                    <input type="text" class="form-control custom-form-control" id="editor" />
+                                    <input type="text" class="form-control custom-form-control" id="editor" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="penerjemah" class="mb-2">Penerjemah</label>
-                                    <input type="text" class="form-control custom-form-control" id="penerjemah" />
+                                    <input type="text" class="form-control custom-form-control" id="penerjemah" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="bahasa" class="mb-2">Bahasa</label>
-                                    <input type="text" class="form-control custom-form-control" id="bahasa" />
+                                    <input type="text" class="form-control custom-form-control" id="bahasa" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tahunTerbit" class="mb-2">Tahun Terbit</label>
-                                    <input type="number" class="form-control custom-form-control" id="tahunTerbit" />
+                                    <input type="number" class="form-control custom-form-control" id="tahunTerbit" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="jumlahHalaman" class="mb-2">Jumlah Halaman</label>
-                                    <input type="text" class="form-control custom-form-control" id="jumlahHalaman" />
+                                    <input type="text" class="form-control custom-form-control" id="jumlahHalaman" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="volume" class="mb-2">Volume</label>
-                                    <input type="number" class="form-control custom-form-control" id="volume" />
+                                    <input type="number" class="form-control custom-form-control" id="volume" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="jenis" class="mb-2">Jenis</label>
-                                    <input type="text" class="form-control custom-form-control" id="jenis" />
+                                    <input type="text" class="form-control custom-form-control" id="jenis" required />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="status" class="mb-2">Status Buku</label>
-                                    <select name="status" id="status" class="form-select custom-form-control">
-                                        <option value="">---</option>
+                                    <select name="status" id="status" class="form-select custom-form-control" required>
+                                        <option selected disabled value = "">---</option>
                                         <option value="Tersedia">Tersedia</option>
                                         <option value="Dipinjam">Dipinjam</option>
                                         <option value="Hilang">Hilang</option>
@@ -337,6 +337,8 @@
         // icons
         feather.replace();
 
+        let inputImage = false;
+
         //delete confirmation
         const deleteData = (id) => {
             swal({
@@ -357,6 +359,11 @@
             });
         };
 
+        //cek apakah gambar sudah diinput (jika di form edit untuk cek apakah gambar diganti)
+        function imageStatus(){
+            inputImage = true;
+        }
+
         //data edit
         function dataEdit(id){
             $.ajax({
@@ -367,20 +374,20 @@
                     for(i=0; i<data.data.length; i++){
                         if(id == data.data[i].kode_buku){
                             const formModal = modalEl.querySelector("#form-modal");
-                            document.getElementById("imageInputDisplay").src          =`cover_images/${data.data[i].cover_depan}`;
-                            formModal.querySelector("#kode").value          = data.data[i].kode_buku;
-                            formModal.querySelector("#judul").value         = data.data[i].judul_buku;
-                            formModal.querySelector("#penulis").value       = data.data[i].penulis;
-                            formModal.querySelector("#kategori").value      = data.data[i].kategori;
-                            formModal.querySelector("#penerbit").value      = data.data[i].penerbit;
-                            formModal.querySelector("#editor").value        = data.data[i].editor;
-                            formModal.querySelector("#penerjemah").value    = data.data[i].penerjemah;
-                            formModal.querySelector("#bahasa").value        = data.data[i].bahasa;
-                            formModal.querySelector("#tahunTerbit").value   = data.data[i].thn_terbit;
-                            formModal.querySelector("#jumlahHalaman").value = data.data[i].jml_hlm;
-                            formModal.querySelector("#volume").value        = data.data[i].volume;
-                            formModal.querySelector("#jenis").value         = data.data[i].jenis;
-                            formModal.querySelector("#status").value        = data.data[i].status_buku;
+                            document.getElementById("imageInputDisplay").src =`cover_images/${data.data[i].cover_depan}`;
+                            formModal.querySelector("#kode").value           = data.data[i].kode_buku;
+                            formModal.querySelector("#judul").value          = data.data[i].judul_buku;
+                            formModal.querySelector("#penulis").value        = data.data[i].penulis;
+                            formModal.querySelector("#kategori").value       = data.data[i].kategori;
+                            formModal.querySelector("#penerbit").value       = data.data[i].penerbit;
+                            formModal.querySelector("#editor").value         = data.data[i].editor;
+                            formModal.querySelector("#penerjemah").value     = data.data[i].penerjemah;
+                            formModal.querySelector("#bahasa").value         = data.data[i].bahasa;
+                            formModal.querySelector("#tahunTerbit").value    = data.data[i].thn_terbit;
+                            formModal.querySelector("#jumlahHalaman").value  = data.data[i].jml_hlm;
+                            formModal.querySelector("#volume").value         = data.data[i].volume;
+                            formModal.querySelector("#jenis").value          = data.data[i].jenis;
+                            formModal.querySelector("#status").value         = data.data[i].status_buku;
                         }
                     }
                 }
@@ -395,6 +402,24 @@
 
             const mode          = formModal.querySelector("#form-mode").value;
             const id            = formModal.querySelector("#id").value || null;
+
+            let image;
+
+            if(inputImage == false){
+                //mengambil nama file gambar yang belum diganti
+                if(mode == "add"){
+                    //return false jika gambar kosong di form add
+                    alert("Gambar tidak boleh kosong!");
+                    return;
+                }else{
+                    image       = document.getElementById("imageInputDisplay").src.split("/").pop();
+                }
+
+            }else{
+                //mengambil nama file gambar jika sudah input gambar
+                let input   = document.getElementById('imageInput');
+                image       = input.files[0].name;
+            }
 
             const kode          = formModal.querySelector("#kode").value;
             const judul         = formModal.querySelector("#judul").value;
@@ -411,21 +436,8 @@
             const status        = formModal.querySelector("#status").value;
 
             return (data = {
-                mode,
-                id,
-                kode,
-                judul,
-                penulis,
-                kategori,
-                penerbit,
-                editor,
-                penerjemah,
-                bahasa,
-                tahunTerbit,
-                jumlahHalaman,
-                volume,
-                jenis,
-                status,
+                mode, id, kode, judul, penulis, kategori, penerbit, editor, penerjemah,
+                bahasa, tahunTerbit, jumlahHalaman, volume, jenis, status, image
             });
         };
 
@@ -435,24 +447,34 @@
             // Get value from input
             const data = getFormData(modalEl);
 
-            // kirim data di bawah
-            // kirim data di bawah
-            if (data.mode === "add") {
-                swalOption = {
-                    title: "Buku berhasil dibuat!",
-                    icon: "success",
-                    button: "Oke!",
-                };
+            if(data == undefined){
+                return;
+            } else{
+                // kirim data di bawah
+                console.log(data.mode,          data.kode,          data.judul,
+                            data.penulis,       data.kategori,      data.penerbit,
+                            data.editor,        data.penerjemah,    data.bahasa,
+                            data.tahunTerbit,   data.jumlahHalaman, data.volume,
+                            data.jenis,         data.status,        data.image);
+                
+                if (data.mode === "add") {
+                    swalOption = {
+                        title: "Buku berhasil dibuat!",
+                        icon: "success",
+                        button: "Oke!",
+                    };
+                }
+    
+                if (data.mode === "edit") {
+                    swalOption = {
+                        title: "Buku berhasil diedit!",
+                        icon: "success",
+                        button: "Oke!",
+                    };
+                }
+                swal(swalOption);
             }
 
-            if (data.mode === "edit") {
-                swalOption = {
-                    title: "Buku berhasil diedit!",
-                    icon: "success",
-                    button: "Oke!",
-                };
-            }
-            swal(swalOption);
 
             // tutup modal ketika kode add / edit berhasil dieksekusi
             document.querySelector(".btn-admin-close").click();
