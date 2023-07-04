@@ -87,6 +87,7 @@ class BukuController extends Controller
 
     public function updateCreateBuku(Request $request){
 
+        $mode             = $request->mode;
         $kode_buku        = $request->kode;
         $judul_buku       = $request->judul;
         // $judul_buku_asli  = $request->judul_buku_asli;
@@ -100,29 +101,45 @@ class BukuController extends Controller
         $jml_hlm          = $request->jumlahHalaman;
         $volume           = $request->volume;
         // $sinopsis         = $request->sinopsis;
-        $cover_depan      = $request->file('cover_depan');
+        $cover            = $request->file('cover1');
         // $cover_belakang   = $request->file('cover_belakang');
         // $kelayakan        = $request->kelayakan;
         $jenis            = $request->jenis;
         $status_buku      = $request->status;
 
 
+        
         try{
+            if($mode == "add"){
+                if(Buku::where('kode_buku', $kode_buku)->exists()){
+                    return response()->json(
+                        [
+                            'error'=>true,
+                            'message'=>"Buku dengan kode tersebut telah ada!"
+                        ]
+                    );
+                }
+            }
+
+            if($cover == null){
+                $cover_depan = $request->cover2;
+            }else{
+                $cover_depan = $cover->getClientOriginalName();
+                
+                $direktori = 'cover_images';
+                $cover->move($direktori, $cover_depan);
+            }
 
             if(Buku::where('kode_buku', $kode_buku)->exists()){
                 
                 $a = Buku::select('cover_depan')->where('kode_buku', $kode_buku)->get();
                 // $b = Buku::select('cover_belakang')->where('kode_buku', $kode_buku)->get();
 
-                if($a[0]->cover_depan != $cover_depan->getClientOriginalName()){
+                if($a[0]->cover_depan != $cover_depan){
                     File::delete('cover_images/'.$a[0]->cover_depan);
-                    // Buku::where('cover_depan', $a[0]->cover_depan)
-                    //     ->update(['cover_depan' => $cover_depan->getClientOriginalName()]);
                 }
                 // else if($b[0]->cover_belakang != $cover_belakang->getClientOriginalName()){
-                //     File::delete('cover_images/'.$b[0]->cover_depan);
-                //     // Buku::where('cover_belakang', $b[0]->cover_belakang)
-                //     //     ->update(['cover_belakang' => $cover_belakang->getClientOriginalName()]);
+                //     File::delete('cover_images/'.$b[0]->cover_belakang);
                 // }
             
             }
@@ -142,17 +159,13 @@ class BukuController extends Controller
                     'jml_hlm' => $jml_hlm,
                     'volume' => $volume,
                     // 'sinopsis' => $sinopsis,
-                    'cover_depan' => $cover_depan->getClientOriginalName(),
+                    'cover_depan' => $cover_depan,
                     // 'cover_belakang' => $cover_belakang->getClientOriginalName(),
                     // 'kelayakan' => $kelayakan,
                     'jenis' => $jenis,
                     'status_buku' => $status_buku,
                 ]
             );
-
-            $direktori = 'cover_images';
-        
-            $cover_depan->move($direktori, $cover_depan->getClientOriginalName());
             // $cover_belakang->move($direktori, $cover_belakang->getClientOriginalName());
 
             return response()->json(
