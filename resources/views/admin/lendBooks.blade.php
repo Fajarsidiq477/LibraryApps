@@ -11,6 +11,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
         />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script defer src="{{ asset('js/vendor.js') }}"></script>
         <script defer src="{{ asset('js/main.js') }}"></script>
         <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
@@ -339,11 +340,24 @@
                                 </div>
                             </div>
                             <div class="step text-center">
-                                <p class="fw-bold fs-1">Scan barcode buku!</p>
-                                <i
-                                    class="bx bx-barcode"
-                                    style="font-size: 1000%; margin-top: -30px"
-                                ></i>
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <div
+                                            class="form-group mb-3 text-center"
+                                        >
+                                            <label
+                                                for="kode"
+                                                class="mb-2 fw-bold"
+                                                >Masukan Kode Buku</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control custom-form-control mb-2"
+                                                id="kode_buku"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="step">
                                 <div class="row">
@@ -524,12 +538,12 @@
                                             </tr>
                                             <tr>
                                                 <td class="">NIM/NIP</td>
-                                                <td>2010031</td>
+                                                <td id="form_nim">-</td>
                                             </tr>
 
                                             <tr>
                                                 <td class="">Nama Lengkap</td>
-                                                <td>Fajar Sidik Setiawan</td>
+                                                <td id="form_nama_peminjam">-</td>
                                             </tr>
                                         </div>
                                         <div class="mb-3">
@@ -539,14 +553,13 @@
                                             </tr>
                                             <tr>
                                                 <td>Kode</td>
-                                                <td>FEWIFHEWIU23</td>
+                                                <td id="form_kode_buku">-</td>
                                             </tr>
 
                                             <tr>
                                                 <td>Judul</td>
-                                                <td>
-                                                    Negeri Para Bedebah -
-                                                    Tereliye
+                                                <td id="form_judul_buku">
+                                                    -
                                                 </td>
                                             </tr>
                                         </div>
@@ -643,6 +656,20 @@
             // icons
             feather.replace();
 
+            //Data Buku
+            const buku = [];
+
+            $.ajax({
+                url: "/get-buku",
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    for(i=0; i<data.data.length; i++){
+                        buku.push(data.data[i]);
+                    }
+                }
+            });
+
             //delete confirmation
             const deleteData = (id) => {
                 swal({
@@ -666,8 +693,9 @@
             // bs.modal.show triggered
             const modalEl = document.querySelector("#myModal");
 
+            const formModal = modalEl.querySelector("#form-modal");
+
             const getFormData = () => {
-                const formModal = modalEl.querySelector("#form-modal");
 
                 const mode = formModal.querySelector("#form-mode").value;
                 const id_peminjaman =
@@ -738,9 +766,18 @@
                     const nim_peminjam =
                         document.querySelector("#nim_peminjam").value;
 
-                    alert("kamu di halaman barcode, nim mu " + nim_peminjam);
+                        formModal.querySelector("#nim").value = nim_peminjam;
+
+                        document.getElementById("form_nim").innerHTML = nim_peminjam;
+
+                    alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
                 }
                 if (window.Jar.stepIndex + 1 === 2) {
+                    const kode_buku =
+                        document.querySelector("#kode_buku").value;
+                        formModal.querySelector("#id_buku").value = kode_buku;
+                        document.getElementById("form_kode_buku").innerHTML = kode_buku;
+
                     alert("kamu di halaman detail buku");
                 }
                 if (window.Jar.stepIndex + 1 === 3) {
