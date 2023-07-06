@@ -38,6 +38,7 @@ Route::get('/lend-book-view',   [AdminController::class,'lendBookView']);
 
 // data
 Route::get('/get-buku',    [Controller::class,'getBukuJson']);
+Route::get('/get-user',    [Controller::class,'getUserJson']);
 
 // buku
 Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);

@@ -331,7 +331,7 @@
                                                 >Masukan NIM Peminjam</label
                                             >
                                             <input
-                                                type="text"
+                                                type="number"
                                                 class="form-control custom-form-control mb-2"
                                                 id="nim_peminjam"
                                             />
@@ -658,6 +658,11 @@
 
             //Data Buku
             const buku = [];
+            const buku_kode = [];
+
+            //Data User
+            const user = [];
+            const user_nim = [];
 
             $.ajax({
                 url: "/get-buku",
@@ -666,9 +671,99 @@
                 success: function(data) {
                     for(i=0; i<data.data.length; i++){
                         buku.push(data.data[i]);
+                        buku_kode.push(data.data[i].kode_buku);
                     }
+                    console.log(buku);
                 }
             });
+            
+            $.ajax({
+                url: "/get-user",
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    for(i=0; i<data.data.length; i++){
+                        user.push(data.data[i]);
+                        user_nim.push(data.data[i].nim);
+                    }
+                    console.log(user);
+                    // console.log(user_nim.includes(2222222));
+                }
+            });
+
+            console.log(getDate());
+
+            // Get Date Function
+            function getDate(){
+                const d = new Date();
+                let date = d.getDate();
+                let day;
+                let month;
+                let year = d.getFullYear();
+
+                switch (d.getDay()) {
+                    case 0:
+                        day = "Ahad";
+                        break;
+                    case 1:
+                        day = "Senin";
+                        break;
+                    case 2:
+                        day = "Selasa";
+                        break;
+                    case 3:
+                        day = "Rabu";
+                        break;
+                    case 4:
+                        day = "Kamis";
+                        break;
+                    case 5:
+                        day = "Jum'at";
+                        break;
+                    case  6:
+                        day = "Sabtu";
+                }
+
+                switch (d.getMonth()) {
+                    case 0:
+                        month = "Januari";
+                        break;
+                    case 1:
+                        month = "Februari";
+                        break;
+                    case 2:
+                        month = "Maret";
+                        break;
+                    case 3:
+                        month = "April";
+                        break;
+                    case 4:
+                        month = "Mei";
+                        break;
+                    case 5:
+                        month = "Juni";
+                        break;
+                    case 6:
+                        month = "Juli";
+                        break;
+                    case 7:
+                        month = "Agustus";
+                        break;
+                    case 8:
+                        month = "September";
+                        break;
+                    case 9:
+                        month = "Oktober";
+                        break;
+                    case 10:
+                        month = "November";
+                        break;
+                    case  11:
+                        month = "Desember";
+                }
+
+                return day + ", " + date + " " + month + " " + year;
+            }
 
             //delete confirmation
             const deleteData = (id) => {
@@ -700,7 +795,7 @@
                 const mode = formModal.querySelector("#form-mode").value;
                 const id_peminjaman =
                     formModal.querySelector("#id_peminjaman").value || null;
-
+                
                 const nim = formModal.querySelector("#nim").value;
                 const id_buku = formModal.querySelector("#id_buku").value;
                 const tanggal_pinjam =
@@ -763,22 +858,43 @@
 
             btnStepNext.addEventListener("click", () => {
                 if (window.Jar.stepIndex + 1 === 1) {
-                    const nim_peminjam =
-                        document.querySelector("#nim_peminjam").value;
+                    const nim_peminjam = document.querySelector("#nim_peminjam").value;
 
+                    // console.log(user_nim.includes(nim_peminjam));
+
+                    if(user_nim.includes(parseInt(nim_peminjam)) == false){
+                        alert("Tidak ada member dengan NIM " + nim_peminjam);
+                    }else{
                         formModal.querySelector("#nim").value = nim_peminjam;
 
                         document.getElementById("form_nim").innerHTML = nim_peminjam;
-
-                    alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
+                        for(i = 0; i<user.length; i++){
+                            if(parseInt(nim_peminjam) == user[i].nim){
+                                document.getElementById("form_nama_peminjam").innerHTML = user[i].nama_user;
+                            }
+                        }
+                        
+                        alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
+                    }
                 }
                 if (window.Jar.stepIndex + 1 === 2) {
-                    const kode_buku =
-                        document.querySelector("#kode_buku").value;
-                        formModal.querySelector("#id_buku").value = kode_buku;
+                    const kode_buku = document.querySelector("#kode_buku").value;
+                    
+                    if(buku_kode.includes(kode_buku) == false){
+                        alert("Tidak ada buku dengan kode " + kode_buku);
+                    }else{
+                        formModal.querySelector("#id_buku").value = kode_buku;    
                         document.getElementById("form_kode_buku").innerHTML = kode_buku;
 
-                    alert("kamu di halaman detail buku");
+                        for(i = 0; i<buku.length; i++){
+                            if(kode_buku == buku[i].kode_buku){
+                                document.getElementById("form_judul_buku").innerHTML = buku[i].judul_buku;
+                            }
+                        }
+
+                        alert("kamu di halaman detail buku");
+                    }
+
                 }
                 if (window.Jar.stepIndex + 1 === 3) {
                     alert("kamu di halaman preview");

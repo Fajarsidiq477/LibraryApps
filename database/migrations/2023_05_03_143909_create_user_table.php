@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::dropIfExists('tbl_user');
         Schema::create('tbl_user', function (Blueprint $table) {
             $table->id('id_user');
+            $table->integer('nim')->unique();
             $table->string('nama_user');
             $table->string('email')->unique();
             $table->string('password');
