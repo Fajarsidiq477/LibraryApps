@@ -30,6 +30,8 @@ Route::post('/login',           [UserController::class,'Login']);
 
 // halaman user
 Route::get('/user-view',        [UserController::class,'userView']);
+Route::get('/user-book-detail', [UserController::class,'userBookDetail']);
+Route::get('/user-profile',     [UserController::class,'userProfile']);
 
 // halaman admin
 Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);

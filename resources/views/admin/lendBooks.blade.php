@@ -570,12 +570,12 @@
                                             </tr>
                                             <tr>
                                                 <td>Tanggal Pinjam</td>
-                                                <td>Kamis, 8 Juni 2023</td>
+                                                <td id="form_tgl_pinjam">-</td>
                                             </tr>
 
                                             <tr>
                                                 <td>Tanggal Kembali</td>
-                                                <td>Kamis, 15 Juni 2023</td>
+                                                <td id="form_tgl_kembali">-</td>
                                             </tr>
                                         </div>
                                     </table>
@@ -690,79 +690,80 @@
                     // console.log(user_nim.includes(2222222));
                 }
             });
-
-            console.log(getDate());
-
+            
             // Get Date Function
             function getDate(){
+                
                 const d = new Date();
-                let date = d.getDate();
-                let day;
-                let month;
-                let year = d.getFullYear();
+                const e = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
 
-                switch (d.getDay()) {
-                    case 0:
-                        day = "Ahad";
-                        break;
-                    case 1:
-                        day = "Senin";
-                        break;
-                    case 2:
-                        day = "Selasa";
-                        break;
-                    case 3:
-                        day = "Rabu";
-                        break;
-                    case 4:
-                        day = "Kamis";
-                        break;
-                    case 5:
-                        day = "Jum'at";
-                        break;
-                    case  6:
-                        day = "Sabtu";
-                }
+                let date   = d.getDate();
+                let date1  = e.getDate();
+                
+                let day, day1;
+                let month, month1;
+                
+                let year  = d.getFullYear();
+                let year1 = e.getFullYear();
 
-                switch (d.getMonth()) {
-                    case 0:
-                        month = "Januari";
-                        break;
-                    case 1:
-                        month = "Februari";
-                        break;
-                    case 2:
-                        month = "Maret";
-                        break;
-                    case 3:
-                        month = "April";
-                        break;
-                    case 4:
-                        month = "Mei";
-                        break;
-                    case 5:
-                        month = "Juni";
-                        break;
-                    case 6:
-                        month = "Juli";
-                        break;
-                    case 7:
-                        month = "Agustus";
-                        break;
-                    case 8:
-                        month = "September";
-                        break;
-                    case 9:
-                        month = "Oktober";
-                        break;
-                    case 10:
-                        month = "November";
-                        break;
-                    case  11:
-                        month = "Desember";
-                }
+                    switch (d.getDay()) {
+                        case 0: day = "Ahad";   break;
+                        case 1: day = "Senin";  break;
+                        case 2: day = "Selasa"; break;
+                        case 3: day = "Rabu";   break;
+                        case 4: day = "Kamis";  break;
+                        case 5: day = "Jum'at"; break;
+                        case 6: day = "Sabtu";
+                    }
 
-                return day + ", " + date + " " + month + " " + year;
+                    switch (e.getDay()) {
+                        case 0: day1 = "Ahad";   break;
+                        case 1: day1 = "Senin";  break;
+                        case 2: day1 = "Selasa"; break;
+                        case 3: day1 = "Rabu";   break;
+                        case 4: day1 = "Kamis";  break;
+                        case 5: day1 = "Jum'at"; break;
+                        case 6: day1 = "Sabtu";
+                    }
+    
+                    switch (d.getMonth()) {
+                        case 0:  month = "Januari"; break;
+                        case 1:  month = "Februari"; break;
+                        case 2:  month = "Maret"; break;
+                        case 3:  month = "April"; break;
+                        case 4:  month = "Mei"; break;
+                        case 5:  month = "Juni"; break;
+                        case 6:  month = "Juli"; break;
+                        case 7:  month = "Agustus"; break;
+                        case 8:  month = "September"; break;
+                        case 9:  month = "Oktober"; break;
+                        case 10: month = "November"; break;
+                        case 11: month = "Desember";
+                    }
+
+                    switch (e.getMonth()) {
+                        case 0:  month1 = "Januari"; break;
+                        case 1:  month1 = "Februari"; break;
+                        case 2:  month1 = "Maret"; break;
+                        case 3:  month1 = "April"; break;
+                        case 4:  month1 = "Mei"; break;
+                        case 5:  month1 = "Juni"; break;
+                        case 6:  month1 = "Juli"; break;
+                        case 7:  month1 = "Agustus"; break;
+                        case 8:  month1 = "September"; break;
+                        case 9:  month1 = "Oktober"; break;
+                        case 10: month1 = "November"; break;
+                        case 11: month1 = "Desember";
+                    }
+
+                // return day + ", " + date + " " + month + " " + year;
+                let tgl_pinjam  = day + ", " + date + " " + month + " " + year;
+                let tgl_kembali = day1 + ", " + date1 + " " + month1 + " " + year1;
+
+                return (data = {
+                    tgl_pinjam,
+                    tgl_kembali,
+                });
             }
 
             //delete confirmation
@@ -868,12 +869,15 @@
                         formModal.querySelector("#nim").value = nim_peminjam;
 
                         document.getElementById("form_nim").innerHTML = nim_peminjam;
+
                         for(i = 0; i<user.length; i++){
                             if(parseInt(nim_peminjam) == user[i].nim){
                                 document.getElementById("form_nama_peminjam").innerHTML = user[i].nama_user;
                             }
                         }
-                        
+                        document.getElementById("form_tgl_pinjam").innerHTML = getDate().tgl_pinjam;
+                        document.getElementById("form_tgl_kembali").innerHTML = getDate().tgl_kembali;
+
                         alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
                     }
                 }
