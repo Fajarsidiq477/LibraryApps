@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sijambu | Books</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script defer src="{{ asset('js/vendor.js') }}"></script>
         <script defer src="{{ asset('js/main.js') }}"></script>
         <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
@@ -229,69 +230,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>1</td>
-                                <td>2010031</td>
-                                <td>Fajar Sidik Setiawan</td>
-                                <td>Anggota</td>
-                                <td>0819-1051-4970</td>
-                                <td>0</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge text-dark"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#myModal"
-                                        data-bs-mode="edit"
-                                        data-bs-id="1"
-                                    >
-                                        <i data-feather="edit"></i>
-                                    </a>
+                            @foreach($user as $item)
+                                <tr class="align-middle">
+                                    <td>
+                                        <input type="checkbox" name="" id="" />
+                                    </td>
+                                    <td>1</td>
+                                    <td>{{ $item->nim }}</td>
+                                    <td>{{ $item->nama_user }}</td>
+                                    <td>{{ $item->role_user }}</td>
+                                    <td>{{ $item->no_hp }}</td>
+                                    <td>0</td>
+                                    <td>
+                                        <a
+                                            href="#"
+                                            class="badge text-dark"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#myModal"
+                                            data-bs-mode="edit"
+                                            data-bs-id="{{ $item->nim }}"
+                                            onclick="putEditData(id='{{$item->nim}}')"
+                                        >
+                                            <i data-feather="edit"></i>
+                                        </a>
 
-                                    <a
-                                        href="#"
-                                        class="badge text-dark"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr class="align-middle">
-                                <td>
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td>2</td>
-                                <td>2010031</td>
-                                <td>Fajar Sidik Setiawan</td>
-                                <td>Anggota</td>
-                                <td>0819-1051-4970</td>
-                                <td>0</td>
-                                <td>
-                                    <a
-                                        href="#"
-                                        class="badge text-dark"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#myModal"
-                                        data-bs-mode="edit"
-                                        data-bs-id="2"
-                                    >
-                                        <i data-feather="edit"></i>
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                        class="badge text-dark"
-                                        onclick="deleteData(1)"
-                                    >
-                                        <i data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                        <a
+                                            href="#"
+                                            class="badge text-dark"
+                                            onclick="deleteData(1)"
+                                        >
+                                            <i data-feather="trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
 
                         <!-- Alert query pencarian tidak ada -->
@@ -437,8 +409,8 @@
                                             id="role"
                                             class="form-select custom-form-control"
                                         >
-                                            <option value="">Anggota</option>
-                                            <option value="">Admin</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Member">Member</option>
                                         </select>
                                     </div>
 
@@ -468,6 +440,41 @@
         <script>
             // icons
             feather.replace();
+
+            //Data User
+            const user = [];
+
+            $.ajax({
+                url: "/get-user",
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    for(i=0; i<data.data.length; i++){
+                        user.push(data.data[i]);
+                    }
+                    console.log(user);
+                }
+            });
+
+            const putEditData = (id) => {
+                
+                const formModal = modalEl.querySelector("#form-modal");
+
+                // nim
+                // namaLengkap
+                // email
+                // handphone
+                // role
+
+                formModal.querySelector("#nim").value           = id;
+                formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).nama_user;
+                formModal.querySelector("#email").value         = user.find(x => x.nim == id).email;
+                formModal.querySelector("#handphone").value     = user.find(x => x.nim == id).no_hp;
+                formModal.querySelector("#role").value          = user.find(x => x.nim == id).role_user;
+                
+                // let nama_user = user.find(x => x.nim == id).nama_user;
+                // console.log(nama_user);
+            }
 
             //delete confirmation
             const deleteData = (id) => {
@@ -518,10 +525,12 @@
 
             const onFormSubmit = (e, modalEl) => {
                 e.preventDefault();
-
+                
                 // Get value from input
                 const data = getFormData(modalEl);
                 let swalOption;
+                
+                console.log(data.id);
 
                 // kirim data di bawah
                 if (data.mode === "add") {

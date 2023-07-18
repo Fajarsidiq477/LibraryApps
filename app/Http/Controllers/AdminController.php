@@ -18,7 +18,10 @@ class AdminController extends Controller
         return view('admin/lendbooks');
     }
 
-    public function userView(){
-        return view('admin/users');
+    public function adminUserView(){
+
+        $user = app(Controller::class)->getUser();
+
+        return view('admin/users')->with('user', $user);
     }
 }
