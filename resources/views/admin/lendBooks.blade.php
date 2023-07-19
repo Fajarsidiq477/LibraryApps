@@ -330,9 +330,11 @@
                                                 >Masukan NIM Peminjam</label
                                             >
                                             <input
-                                                type="text"
+                                                type="number"
+                                                name="nim_peminjam"
                                                 class="form-control custom-form-control mb-2"
                                                 id="nim_peminjam"
+                                                required
                                             />
                                         </div>
                                     </div>
