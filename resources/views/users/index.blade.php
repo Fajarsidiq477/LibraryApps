@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sijambu | Books</title>
+        <title>Sijambu | Indeks</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script defer src="{{ asset('js/vendor.js') }}"></script>
         <script defer src="{{ asset('js/main.js') }}"></script>
@@ -339,8 +339,7 @@
                     for (let i = 0; i < buku.length; i++) {
                         mainContent.innerHTML += createListCard(buku, i);
                     }
-
-                    console.log(data.data[0].kode_buku);
+                    // console.log(data.data[0].kode_buku);
                 }
             });
 

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('thn_terbit')->nullable();
             $table->integer('jml_hlm');
             $table->integer('volume')->nullable();
-            // $table->longtext('sinopsis')->nullable();
+            $table->longtext('sinopsis')->nullable();
             $table->string('cover_depan');
             // $table->string('cover_belakang');
             // $table->enum('kelayakan', ['Layak', 'Tidak Layak']);

@@ -30,14 +30,17 @@ Route::post('/login',           [UserController::class,'Login']);
 
 // halaman user
 Route::get('/user-view',        [UserController::class,'userView']);
+Route::get('/user-book-detail', [UserController::class,'userBookDetail']);
+Route::get('/user-profile',     [UserController::class,'userProfile']);
 
 // halaman admin
 Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);
-Route::get('/admin-user-view',  [AdminController::class,'userView']);
+Route::get('/admin-user-view',  [AdminController::class,'adminUserView']);
 Route::get('/lend-book-view',   [AdminController::class,'lendBookView']);
 
 // data
 Route::get('/get-buku',    [Controller::class,'getBukuJson']);
+Route::get('/get-user',    [Controller::class,'getUserJson']);
 
 // buku
 Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
