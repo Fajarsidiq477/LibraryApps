@@ -10,7 +10,7 @@ class Simpan extends Model
     protected $table = 'tbl_simpan';
     protected $primaryKey = 'id_simpan';
     protected $fillable = [
-        'id_user',
+        'nim',
         'id_buku',
         'updated_at',
         'created_at'
@@ -18,7 +18,7 @@ class Simpan extends Model
 
     public function User()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'nim');
     }
     
     public function Buku()

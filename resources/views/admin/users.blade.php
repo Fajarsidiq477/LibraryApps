@@ -8,6 +8,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script defer src="{{ asset('js/vendor.js') }}"></script>
         <script defer src="{{ asset('js/main.js') }}"></script>
+        <script>
+            let headers = {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        </script>
         <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
     <body>
         <div class="navbar navbar-upper bg-primary py-2">
@@ -237,9 +242,9 @@
                                     </td>
                                     <td>1</td>
                                     <td>{{ $item->nim }}</td>
-                                    <td>{{ $item->nama_user }}</td>
-                                    <td>{{ $item->role_user }}</td>
-                                    <td>{{ $item->no_hp }}</td>
+                                    <td>{{ $item->username }}</td>
+                                    <td>{{ $item->role }}</td>
+                                    <td>{{ $item->number }}</td>
                                     <td>0</td>
                                     <td>
                                         <a
@@ -363,12 +368,10 @@
                                         >
                                         <input
                                             type="text"
-                                            class="form-control custom-form-control is-invalid"
+                                            class="form-control custom-form-control"
                                             id="nim"
+                                            required
                                         />
-                                        <div class="invalid-feedback">
-                                            NIM tidak boleh lebih dari 16
-                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="namaLengkap" class="mb-2"
@@ -378,6 +381,7 @@
                                             type="text"
                                             class="form-control custom-form-control"
                                             id="namaLengkap"
+                                            required
                                         />
                                     </div>
                                     <div class="form-group mb-3">
@@ -388,6 +392,18 @@
                                             type="email"
                                             class="form-control custom-form-control"
                                             id="email"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="password" class="mb-2"
+                                            >Password</label
+                                        >
+                                        <input
+                                            type="password"
+                                            class="form-control custom-form-control"
+                                            id="password"
+                                            required
                                         />
                                     </div>
                                     <div class="form-group mb-3">
@@ -398,19 +414,15 @@
                                             type="number"
                                             class="form-control custom-form-control"
                                             id="handphone"
+                                            required
                                         />
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="role" class="mb-2"
-                                            >Role</label
-                                        >
-                                        <select
-                                            name="role"
-                                            id="role"
-                                            class="form-select custom-form-control"
-                                        >
+                                        <label for="role" class="mb-2">Role</label >
+                                        <select name="role" id="role" class="form-select custom-form-control" required>
+                                        <option value="" selected disabled>...</option>    
+                                        <option value="Member">Member</option>
                                             <option value="Admin">Admin</option>
-                                            <option value="Member">Member</option>
                                         </select>
                                     </div>
 
@@ -460,17 +472,12 @@
                 
                 const formModal = modalEl.querySelector("#form-modal");
 
-                // nim
-                // namaLengkap
-                // email
-                // handphone
-                // role
-
                 formModal.querySelector("#nim").value           = id;
-                formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).nama_user;
+                formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).username;
                 formModal.querySelector("#email").value         = user.find(x => x.nim == id).email;
-                formModal.querySelector("#handphone").value     = user.find(x => x.nim == id).no_hp;
-                formModal.querySelector("#role").value          = user.find(x => x.nim == id).role_user;
+                formModal.querySelector("#password").value      = user.find(x => x.nim == id).password;
+                formModal.querySelector("#handphone").value     = user.find(x => x.nim == id).number;
+                formModal.querySelector("#role").value          = user.find(x => x.nim == id).role;
                 
                 // let nama_user = user.find(x => x.nim == id).nama_user;
                 // console.log(nama_user);
@@ -506,19 +513,20 @@
                 const id = formModal.querySelector("#id").value || null;
 
                 const nim = formModal.querySelector("#nim").value;
-                const namaLengkap =
-                    formModal.querySelector("#namaLengkap").value;
+                const username = formModal.querySelector("#namaLengkap").value;
                 const email = formModal.querySelector("#email").value;
-                const handphone = formModal.querySelector("#handphone").value;
+                const password = formModal.querySelector("#password").value;
+                const number = formModal.querySelector("#handphone").value;
                 const role = formModal.querySelector("#role").value;
 
-                return (data = {
+                return (data_form = {
                     mode,
                     id,
                     nim,
-                    namaLengkap,
+                    username,
                     email,
-                    handphone,
+                    password,
+                    number,
                     role,
                 });
             };
@@ -527,21 +535,44 @@
                 e.preventDefault();
                 
                 // Get value from input
-                const data = getFormData(modalEl);
+                const data_form = getFormData(modalEl);
                 let swalOption;
-                
-                console.log(data.id);
 
                 // kirim data di bawah
-                if (data.mode === "add") {
+                if (data_form.mode === "add") {
+
+                    $.ajax({
+                        url: '/update-create-user',
+                        type: "POST",
+                        headers: headers,
+                        data: {
+                            nim      : data_form.nim,
+                            username : data_form.username,
+                            email    : data_form.email,
+                            password : data_form.password,
+                            number   : data_form.number,
+                            role     : data_form.role,
+                        },
+                        success: function (data) {
+                            data = JSON.parse(JSON.stringify(data));
+                            console.log(data.message);
+                            
+                        },
+                        error: function (data, textStatus, errorThrown) {
+                            data = JSON.parse(JSON.stringify(data));
+                            alert(data.message);
+                            console.log(data.err_message);
+                        },
+                    });
+
                     swalOption = {
-                        title: "Pengguna berhasil dibuat!",
+                        title: "User Berhasil Dibuat",
                         icon: "success",
                         button: "Oke!",
                     };
                 }
 
-                if (data.mode === "edit") {
+                if (data_form.mode === "edit") {
                     swalOption = {
                         title: "Pengguna berhasil diedit!",
                         icon: "success",
@@ -549,6 +580,10 @@
                     };
                 }
                 swal(swalOption);
+
+                $('.swal-button').click(function() {
+                    location.reload();
+                });
 
                 // tutup modal ketika kode add / edit berhasil dieksekusi
                 document.querySelector(".btn-admin-close").click();

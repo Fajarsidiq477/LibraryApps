@@ -11,22 +11,22 @@ class User extends Model
     protected $primaryKey = 'nim';
     protected $fillable = [
         'nim',
-        'nama_user',
+        'username',
         'email',
         'password',
-        'angkatan',
-        'role_user',
+        'number',
+        'role',
         'created_at',
         'updated_at'
     ];
 
     public function Pinjam()
     {
-        return $this->hasMany(Pinjam::class, 'id_user');
+        return $this->hasMany(Pinjam::class, 'nim');
     }
 
     public function Simpan()
     {
-        return $this->hasMany(Simpan::class, 'id_user');
+        return $this->hasMany(Simpan::class, 'nim');
     }
 }

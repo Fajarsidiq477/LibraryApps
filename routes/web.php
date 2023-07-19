@@ -37,6 +37,9 @@ Route::get('/user-profile',     [UserController::class,'userProfile']);
 Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);
 Route::get('/admin-user-view',  [AdminController::class,'adminUserView']);
 Route::get('/lend-book-view',   [AdminController::class,'lendBookView']);
+    
+    // admin user
+    Route::post('/update-create-user',   [AdminController::class,'updateCreateUser']);
 
 // data
 Route::get('/get-buku',    [Controller::class,'getBukuJson']);
