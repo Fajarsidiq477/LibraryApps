@@ -348,10 +348,11 @@
                                         />
                                         <input
                                             type="file"
-                                            name=""
+                                            name="picture1"
                                             id="imageInput"
                                             accept="image/*"
                                             hidden
+                                            oninput="imageStatus()"
                                         />
                                         <label
                                             for="imageInput"
@@ -362,6 +363,10 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
+                                    
+                                    <input type="hidden" class="form-control custom-form-control" name="picture2" id="picture2" />
+                                    <input type="hidden" class="form-control custom-form-control" name="mode" id="mode" />
+                                    
                                     <div class="form-group mb-3">
                                         <label for="nim" class="mb-2"
                                             >NIM/NIP</label
@@ -370,6 +375,7 @@
                                             type="text"
                                             class="form-control custom-form-control"
                                             id="nim"
+                                            name="nim"
                                             required
                                         />
                                     </div>
@@ -381,6 +387,7 @@
                                             type="text"
                                             class="form-control custom-form-control"
                                             id="namaLengkap"
+                                            name="username"
                                             required
                                         />
                                     </div>
@@ -392,6 +399,7 @@
                                             type="email"
                                             class="form-control custom-form-control"
                                             id="email"
+                                            name="email"
                                             required
                                         />
                                     </div>
@@ -403,6 +411,7 @@
                                             type="password"
                                             class="form-control custom-form-control"
                                             id="password"
+                                            name="password"
                                             required
                                         />
                                     </div>
@@ -414,6 +423,7 @@
                                             type="number"
                                             class="form-control custom-form-control"
                                             id="handphone"
+                                            name="number"
                                             required
                                         />
                                     </div>
@@ -453,6 +463,13 @@
             // icons
             feather.replace();
 
+            let inputImage = false;
+
+            //cek apakah gambar sudah diinput (jika di form edit untuk cek apakah gambar diganti)
+            function imageStatus(){
+                inputImage = true;
+            }
+
             //Data User
             const user = [];
 
@@ -471,8 +488,10 @@
             const putEditData = (id) => {
                 
                 const formModal = modalEl.querySelector("#form-modal");
+                document.getElementById("imageInputDisplay").src =`profile_pictures/${user.find(x => x.nim == id).profile_picture}`;
 
                 formModal.querySelector("#nim").value           = id;
+                formModal.querySelector("#picture2").value      = user.find(x => x.nim == id).profile_picture;
                 formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).username;
                 formModal.querySelector("#email").value         = user.find(x => x.nim == id).email;
                 formModal.querySelector("#password").value      = user.find(x => x.nim == id).password;
@@ -506,83 +525,97 @@
             // bs.modal.show triggered
             const modalEl = document.querySelector("#myModal");
 
-            const getFormData = () => {
-                const formModal = modalEl.querySelector("#form-modal");
+            // const getFormData = () => {
+            //     const formModal = modalEl.querySelector("#form-modal");
 
-                const mode = formModal.querySelector("#form-mode").value;
-                const id = formModal.querySelector("#id").value || null;
+            //     const mode = formModal.querySelector("#form-mode").value;
+            //     const id = formModal.querySelector("#id").value || null;
 
-                const nim = formModal.querySelector("#nim").value;
-                const username = formModal.querySelector("#namaLengkap").value;
-                const email = formModal.querySelector("#email").value;
-                const password = formModal.querySelector("#password").value;
-                const number = formModal.querySelector("#handphone").value;
-                const role = formModal.querySelector("#role").value;
+            //     const nim = formModal.querySelector("#nim").value;
+            //     const username = formModal.querySelector("#namaLengkap").value;
+            //     const email = formModal.querySelector("#email").value;
+            //     const password = formModal.querySelector("#password").value;
+            //     const number = formModal.querySelector("#handphone").value;
+            //     const role = formModal.querySelector("#role").value;
 
-                return (data_form = {
-                    mode,
-                    id,
-                    nim,
-                    username,
-                    email,
-                    password,
-                    number,
-                    role,
-                });
-            };
+            //     return (data_form = {
+            //         mode,
+            //         id,
+            //         nim,
+            //         username,
+            //         email,
+            //         password,
+            //         number,
+            //         role,
+            //     });
+            // };
 
             const onFormSubmit = (e, modalEl) => {
                 e.preventDefault();
+
+                const formModal                         = modalEl.querySelector("#form-modal");
+                const mode                              = formModal.querySelector("#form-mode").value;
+                formModal.querySelector("#mode").value  = mode;
+
+                // console.log(formModal.querySelector("#form-mode").value);
+                
+                if(inputImage == false){
+                    //return false jika gambar kosong di form add
+                    if(mode == "add"){
+                        alert("Gambar tidak boleh kosong!");
+                        return;
+                    }
+                }
                 
                 // Get value from input
-                const data_form = getFormData(modalEl);
+                // const data_form = getFormData(modalEl);
                 let swalOption;
 
                 // kirim data di bawah
-                if (data_form.mode === "add") {
+                $.ajax({
+                    url: '/update-create-user',
+                    type: "POST",
+                    headers: headers,
+                    data: new FormData(document.getElementById("form-modal")),
+                    dataType:'JSON',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        data = JSON.parse(JSON.stringify(data));
+                        if(data.error == false){
+                            // alert((data.message));
+                            if (mode === "add") {
+                                swalOption = {
+                                    title: "Pengguna berhasil dibuat!",
+                                    icon: "success",
+                                    button: "Oke!",
+                                };
+                            }
+    
+                            if (mode === "edit") {
+                                swalOption = {
+                                    title: "Pengguna berhasil diedit!",
+                                    icon: "success",
+                                    button: "Oke!",
+                                };
+                            }
+    
+                            swal(swalOption);
 
-                    $.ajax({
-                        url: '/update-create-user',
-                        type: "POST",
-                        headers: headers,
-                        data: {
-                            nim      : data_form.nim,
-                            username : data_form.username,
-                            email    : data_form.email,
-                            password : data_form.password,
-                            number   : data_form.number,
-                            role     : data_form.role,
-                        },
-                        success: function (data) {
-                            data = JSON.parse(JSON.stringify(data));
-                            console.log(data.message);
-                            
-                        },
-                        error: function (data, textStatus, errorThrown) {
-                            data = JSON.parse(JSON.stringify(data));
-                            alert(data.message);
-                            console.log(data.err_message);
-                        },
-                    });
-
-                    swalOption = {
-                        title: "User Berhasil Dibuat",
-                        icon: "success",
-                        button: "Oke!",
-                    };
-                }
-
-                if (data_form.mode === "edit") {
-                    swalOption = {
-                        title: "Pengguna berhasil diedit!",
-                        icon: "success",
-                        button: "Oke!",
-                    };
-                }
-                swal(swalOption);
-
-                $('.swal-button').click(function() {
-                    location.reload();
+                            $('.swal-button').click(function() {
+                                location.reload();
+                            });
+                        } else{
+                            alert(data.message);   
+                            console.log(data.err_message); 
+                        }
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        data = JSON.parse(JSON.stringify(data));
+                        alert(data.message);
+                        console.log(data.err_message);
+                    },
                 });
 
                 // tutup modal ketika kode add / edit berhasil dieksekusi
