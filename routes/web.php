@@ -30,20 +30,27 @@ Route::post('/login',           [UserController::class,'Login']);
 
 // halaman user
 Route::get('/user-view',        [UserController::class,'userView']);
+<<<<<<< HEAD
 Route::get('/detail-book-view',        [UserController::class,'detailBookView']);
 Route::get('/profile',        [UserController::class,'profile']);
+=======
+Route::get('/user-book-detail', [UserController::class,'userBookDetail']);
+Route::get('/user-profile',     [UserController::class,'userProfile']);
+>>>>>>> 2df53c398a2ef5d232ba78b3e13285f90d721768
 
 // halaman admin
-Route::get('/book-view',        [AdminController::class,'bookView']);
+Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);
 Route::get('/admin-user-view',  [AdminController::class,'userView']);
 Route::get('/lend-book-view',   [AdminController::class,'lendBookView']);
 
 // data
-Route::get('/get-buku',    [Controller::class,'getBuku']);
+Route::get('/get-buku',    [Controller::class,'getBukuJson']);
+Route::get('/get-user',    [Controller::class,'getUserJson']);
 
 // buku
-Route::post('/tambah-buku', [BukuController::class,'tambahBuku']);
-Route::post('/update-buku', [BukuController::class,'updateBuku']);
+Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
+// Route::post('/tambah-buku', [BukuController::class,'tambahBuku']);
+// Route::post('/update-buku', [BukuController::class,'updateBuku']);
 
 
 Route::post('/coba', [BukuController::class,'coba']);

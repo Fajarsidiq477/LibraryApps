@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sijambu | Books</title>
-    <script defer src="../vendor.js"></script><script defer src="../main.js"></script><link href="../bundle.51f95bd270c4a20ad5ba.css" rel="stylesheet"></head>
+    </head>
     <body>
         <div class="navbar navbar-upper bg-primary py-2">
             <div class="container">
@@ -119,7 +119,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#">Akun</a>
+                            <a class="dropdown-item" href="profile.html"
+                                >Akun</a
+                            >
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Aktivitas</a>
@@ -131,98 +133,133 @@
                 </div>
             </div>
         </div>
-        <nav>
-            <div class="navbar navbar-lower bg-secondary py-2">
-                <div class="container text-light justify-content-center">
-                    <h3>Detail Buku</h3>
-                </div>
-            </div>
-
-            <!-- Mobile appearance -->
-            <div class="container">
-                <div class="searchbar-mobile d-md-none input-group py-2">
-                    <button
-                        class="btn dropdown-toggle bg-secondary text-light"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        Kategori
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="#">Action before</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                                >Another action before</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                                >Something else here</a
-                            >
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </li>
-                    </ul>
-                    <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Text input with 2 dropdown buttons"
-                        placeholder="Pencarian ...."
-                    />
-                    <button class="btn bg-secondary text-light" type="button">
-                        <i data-feather="search"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- End mobile appearance -->
-        </nav>
 
         <main>
-            <div class="container mt-4 py-4">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-12 col-md-4 text-center">
+            <div class="container main-with-left-bar">
+                <h3 class="text-center my-3">Buku yang Sedang Dipinjam</h3>
+
+                <p class="fw-bold">Jumlah buku: 3</p>
+
+                <div class="row mt-3">
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
                         <img
-                            src="http://placehold.co/160x225"
-                            alt="Book Cover"
-                            class="book-detail-cover"
+                            src="http://placeholder.co/120x150"
+                            alt="book cover"
+                            class=""
                         />
                     </div>
-                    <div class="col-12 col-md-6 mt-4 mt-md-0">
-                        <h3>Islam yang Disalahpahami</h3>
-                        <p class="book-author">M.Quraish Shihab</p>
-
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Facilis voluptatum pariatur repellendus
-                            aperiam ipsa illo beatae ratione earum? Dolorum
-                            exercitationem temporibus, nisi rerum necessitatibus
-                            explicabo quasi eveniet, quisquam animi molestias
-                            consectetur totam tenetur? Aut odit aliquam culpa?
-                            Voluptatum aut in quasi itaque maiores hic
-                            consequuntur illum. Culpa ipsa praesentium
-                            distinctio dignissimos maiores unde iure animi
-                            similique consequatur. Molestiae hic omnis nihil,
-                            animi quod soluta asperiores ex necessitatibus
-                            fugiat explicabo sed nobis consectetur, debitis
-                            sequi similique quae accusamus non minus odit. Sit
-                            fuga animi mollitia quasi repudiandae! Minima cum
-                            quisquam beatae omnis deserunt neque illum
-                            laudantium impedit, asperiores velit veniam nulla!
-                        </p>
-
+                    <div class="col-12 col-sm-6 col-md-4 pl-4 d-flex mt-3">
                         <div>
-                            <a href="#" class="badge bg-secondary">Simpan</a>
-                            <a href="#" class="badge bg-secondary">Sitasi</a>
+                            <h4 class="mb-2">Negeri Para Bedebah</h4>
+                            <p class="fw-bold mb-1">Tere Liye</p>
+                            <p>2012</p>
                         </div>
                     </div>
+                    <div class="col-12 col-sm-6 col-md-5 d-flex mt-3">
+                        <div>
+                            <p>
+                                <span class="fw-bold">Tanggal Pinjam:</span>
+                                <span>4 November, 2023</span>
+                            </p>
+                            <p>
+                                <span class="fw-bold">Tanggal Kembali:</span>
+                                <span>11 November, 2023</span>
+                            </p>
+                            <p>
+                                <span class="fw-bold">Status:</span>
+                                <span class="badge bg-danger">Telat</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="mt-3" />
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
+                        <img
+                            src="http://placeholder.co/120x150"
+                            alt="book cover"
+                            class=""
+                        />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 pl-4 d-flex mt-3">
+                        <div>
+                            <h4 class="mb-2">Negeri Para Bedebah</h4>
+                            <p class="fw-bold mb-1">Tere Liye</p>
+                            <p>2012</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-5 d-flex mt-3">
+                        <div>
+                            <p>
+                                <span class="fw-bold">Tanggal Pinjam:</span>
+                                <span>4 November, 2023</span>
+                            </p>
+                            <p>
+                                <span class="fw-bold">Tanggal Kembali:</span>
+                                <span>11 November, 2023</span>
+                            </p>
+                            <p>
+                                <span class="fw-bold">Status:</span>
+                                <span class="badge bg-danger">Telat</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="mt-3" />
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
+                        <img
+                            src="http://placeholder.co/120x150"
+                            alt="book cover"
+                            class=""
+                        />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 pl-4 d-flex mt-3">
+                        <div>
+                            <h4 class="mb-2">Negeri Para Bedebah</h4>
+                            <p class="fw-bold mb-1">Tere Liye</p>
+                            <p>2012</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-5 d-flex mt-3">
+                        <div>
+                            <p>
+                                <span class="fw-bold">Tanggal Pinjam:</span>
+                                <span>4 November, 2023</span>
+                            </p>
+                            <p>
+                                <span class="fw-bold">Tanggal Kembali:</span>
+                                <span>11 November, 2023</span>
+                            </p>
+                            <p>
+                                <span class="fw-bold">Status:</span>
+                                <span class="badge bg-danger">Telat</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="mt-3" />
                 </div>
             </div>
         </main>
+
+        <aside class="left-bar">
+            <div class="left-bar-content">
+                <a href="#" class="left-bar-link active">
+                    <i data-feather="book"></i>
+                    <span class="d-none d-md-inline-block ml-4">Dipinjam</span>
+                </a>
+                <a href="#" class="left-bar-link">
+                    <i data-feather="clock"></i>
+                    <span class="d-none d-md-inline-block ml-4">Riwayat</span>
+                </a>
+                <a href="#" class="left-bar-link">
+                    <i data-feather="star"></i>
+                    <span class="d-none d-md-inline-block ml-4">Favorit</span>
+                </a>
+            </div>
+        </aside>
 
         <!-- Icons -->
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>

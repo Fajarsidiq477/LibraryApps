@@ -1,182 +1,329 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sijambu | User Profile</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script defer src="{{ asset('js/vendor.js') }}"></script>
+        <script defer src="{{ asset('js/main.js') }}"></script>
+        <link href="{{ asset('css/bundle.f17d4bb1aecc90e8c307.css') }}" rel="stylesheet"></head>
+    <body>
+        <div class="navbar navbar-upper bg-primary py-2">
+            <div class="container">
+                <a class="navbar-brand text-light" href="#">SIJAMBU IPAI</a>
 
-@section('header')
-    @include('partials.navbar')
-@endsection
-
-@section('main')
-    <div class="container">
-        <div class="row mt-5 pb-5 profile-row">
-            <div class="col-12 col-md-6 left">
-                <div class="card p-4 text-center">
-                    <div class="profile-img">
-                        <img
-                            src="http://placehold.co/200x200"
-                            alt="profile-img"
+                <div class="col-md-6 d-none d-md-flex">
+                    <div class="input-group p-2">
+                        <button
+                            class="btn dropdown-toggle bg-secondary text-light"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Kategori
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    >Action before</a
+                                >
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    >Another action before</a
+                                >
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    >Something else here</a
+                                >
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    >Separated link</a
+                                >
+                            </li>
+                        </ul>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="Text input with 2 dropdown buttons"
+                            placeholder="Pencarian ...."
                         />
-                        <button class="btn btn-secondary">
-                            <i data-feather="edit"></i>
+                        <button
+                            class="btn bg-secondary text-light"
+                            type="button"
+                        >
+                            <i data-feather="search"></i>
                         </button>
                     </div>
-                    <h3 class="profile-name mt-3">
-                        Fajar Sidik Setiawan
-                    </h3>
-                    <p class="profile-nim">2010031</p>
                 </div>
-                <div class="d-grid">
-                    <button
-                        class="btn btn-secondary active"
-                        id="btn-profile"
-                        onclick="ProfileTabChange('profile')"
-                    >
-                        Data Profil
-                    </button>
-                </div>
-                <div class="d-grid">
-                    <button
-                        class="btn btn-secondary"
-                        id="btn-password"
-                        onclick="ProfileTabChange('password')"
-                    >
-                        Ganti Kata Sandi
-                    </button>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 mt-3 mt-md-0 right">
-                <div class="card p-4 justify-content-center">
-                    <div id="tab-profile">
-                        <form action="">
-                            <div class="form-group mb-3">
-                                <label for="fullName" class="mb-2"
-                                    >NAMA LENGKAP</label
-                                >
-                                <input
-                                    type="text"
-                                    id="fullName"
-                                    class="form-control"
-                                    value="Fajar Sidik Setiawan"
-                                    disabled
-                                />
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="NIM" class="mb-2"
-                                    >NIM</label
-                                >
-                                <input
-                                    type="text"
-                                    id="NIM"
-                                    class="form-control"
-                                    value="2010031"
-                                    disabled
-                                />
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="email" class="mb-2"
-                                    >E-Mail</label
-                                >
-                                <input
-                                    type="email"
-                                    id="email"
-                                    class="form-control"
-                                    value="fajar@upi.edu"
-                                    disabled
-                                />
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="phone" class="mb-2"
-                                    >No. Handphone</label
-                                >
-                                <input
-                                    type="number"
-                                    id="phone"
-                                    class="form-control"
-                                    value="081910514970"
-                                    disabled
-                                />
-                            </div>
-                        </form>
-                    </div>
 
-                    <div class="d-none" id="tab-change-password">
-                        <form action="">
-                            <div class="form-group mb-3">
-                                <label for="oldPassword" class="mb-2"
-                                    >Kata Sandi Lama</label
+                <div
+                    class="dropdown text-center d-none d-lg-flex"
+                    style="background-color: transparent"
+                >
+                    <a
+                        class="nav-link"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i data-feather="bell"></i>
+                    </a>
+                    <ul
+                        class="dropdown-menu px-3"
+                        style="width: 300px; left: -200px"
+                    >
+                        <li>
+                            <p class="dropdown-item fw-bold">Notifikasi</p>
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <p class="m-0" style="font-size: 0.8rem">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Amet quam illo ad aut rerum
+                                perspiciatis quis praesentium quisquam quia
+                                deserunt numquam cupiditate harum, consequuntur
+                                dolorum aspernatur dolore inventore omnis
+                                officia?
+                                <span class="d-block text-secondary"
+                                    >6 Juli 2023</span
                                 >
-                                <input
-                                    type="text"
-                                    id="oldPassword"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="newPassword" class="mb-2"
-                                    >Kata Sandi Baru</label
-                                >
-                                <input
-                                    type="text"
-                                    id="newPassword"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div class="form-group mb-3">
-                                <label
-                                    for="confirmNewPassword"
-                                    class="mb-2"
-                                    >Konfirmasi Kata Sandi Baru</label
-                                >
-                                <input
-                                    type="confirmNewPassword"
-                                    id="confirmNewPassword"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div
-                                class="form-group d-flex justify-content-end"
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="d-flex dropdown px-2">
+                    <a
+                        class="nav-link d-flex justify-content-between align-items-center"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <div class="avatar">
+                            <!-- <img
+                                src="https://placehold.co/200"
+                                alt="avatar"
+                                class="img-fluid"
+                            /> -->
+                            <i data-feather="user"></i>
+                        </div>
+
+                        <div class="col text-center">
+                            <i data-feather="menu"></i>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="profile.html"
+                                >Akun</a
                             >
-                                <button
-                                    type="submit"
-                                    class="btn btn-secondary"
-                                >
-                                    Ganti
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Aktivitas</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Keluar</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
 
+        <main>
+            <div class="container">
+                <div class="row mt-5 pb-5 profile-row">
+                    <div class="col-12 col-md-6 left">
+                        <div class="card p-4 text-center">
+                            <div class="profile-img">
+                                <img
+                                    src="http://placehold.co/200x200"
+                                    alt="profile-img"
+                                />
+                                <button class="btn btn-secondary">
+                                    <i data-feather="edit"></i>
+                                </button>
+                            </div>
+                            <h3 class="profile-name mt-3">
+                                Fajar Sidik Setiawan
+                            </h3>
+                            <p class="profile-nim">2010031</p>
+                        </div>
+                        <div class="d-grid">
+                            <button
+                                class="btn btn-secondary active"
+                                id="btn-profile"
+                                onclick="ProfileTabChange('profile')"
+                            >
+                                Data Profil
+                            </button>
+                        </div>
+                        <div class="d-grid">
+                            <button
+                                class="btn btn-secondary"
+                                id="btn-password"
+                                onclick="ProfileTabChange('password')"
+                            >
+                                Ganti Kata Sandi
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3 mt-md-0 right">
+                        <div class="card p-4 justify-content-center">
+                            <div id="tab-profile">
+                                <form action="">
+                                    <div class="form-group mb-3">
+                                        <label for="fullName" class="mb-2"
+                                            >NAMA LENGKAP</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="fullName"
+                                            class="form-control"
+                                            value="Fajar Sidik Setiawan"
+                                            disabled
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="NIM" class="mb-2"
+                                            >NIM</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="NIM"
+                                            class="form-control"
+                                            value="2010031"
+                                            disabled
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="email" class="mb-2"
+                                            >E-Mail</label
+                                        >
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            class="form-control"
+                                            value="fajar@upi.edu"
+                                            disabled
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="phone" class="mb-2"
+                                            >No. Handphone</label
+                                        >
+                                        <input
+                                            type="number"
+                                            id="phone"
+                                            class="form-control"
+                                            value="081910514970"
+                                            disabled
+                                        />
+                                    </div>
+                                </form>
+                            </div>
 
-@section('script')
-   <script>
-        const ProfileTabChange = (mode) => {
-            const btnProfile = document.getElementById("btn-profile");
-            const btnPassword = document.getElementById("btn-password");
+                            <div class="d-none" id="tab-change-password">
+                                <form action="">
+                                    <div class="form-group mb-3">
+                                        <label for="oldPassword" class="mb-2"
+                                            >Kata Sandi Lama</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="oldPassword"
+                                            class="form-control"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="newPassword" class="mb-2"
+                                            >Kata Sandi Baru</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="newPassword"
+                                            class="form-control"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label
+                                            for="confirmNewPassword"
+                                            class="mb-2"
+                                            >Konfirmasi Kata Sandi Baru</label
+                                        >
+                                        <input
+                                            type="confirmNewPassword"
+                                            id="confirmNewPassword"
+                                            class="form-control"
+                                            required
+                                        />
+                                    </div>
+                                    <div
+                                        class="form-group d-flex justify-content-end"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="btn btn-secondary"
+                                        >
+                                            Ganti
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-            const tabProfile = document.getElementById("tab-profile");
-            const tabChangePassword = document.getElementById(
-                "tab-change-password"
-            );
+        <aside class="aside-bar overflow-hidden">
+            <button class="btn btn-close" data-dismiss=".aside-bar"></button>
 
-            if (mode === "profile") {
-                btnProfile.classList.add("active");
-                btnPassword.classList.remove("active");
+            <div class="aside-content"></div>
+        </aside>
 
-                tabProfile.classList.remove("d-none");
-                tabChangePassword.classList.add("d-none");
-            } else {
-                btnProfile.classList.remove("active");
-                btnPassword.classList.add("active");
+        <!-- Icons -->
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
-                tabProfile.classList.add("d-none");
-                tabChangePassword.classList.remove("d-none");
-            }
-        };
-    </script>
-@endsection
+        <!-- SweetAlert for deleteconfirmation -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+            // icons
+            feather.replace();
+
+            const ProfileTabChange = (mode) => {
+                const btnProfile = document.getElementById("btn-profile");
+                const btnPassword = document.getElementById("btn-password");
+
+                const tabProfile = document.getElementById("tab-profile");
+                const tabChangePassword = document.getElementById(
+                    "tab-change-password"
+                );
+
+                if (mode === "profile") {
+                    btnProfile.classList.add("active");
+                    btnPassword.classList.remove("active");
+
+                    tabProfile.classList.remove("d-none");
+                    tabChangePassword.classList.add("d-none");
+                } else {
+                    btnProfile.classList.remove("active");
+                    btnPassword.classList.add("active");
+
+                    tabProfile.classList.add("d-none");
+                    tabChangePassword.classList.remove("d-none");
+                }
+            };
+        </script>
+    </body>
+</html>

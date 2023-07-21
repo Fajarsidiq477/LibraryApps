@@ -17,11 +17,19 @@ class UserController extends Controller
         return view('users/index');
     }
 
+<<<<<<< HEAD
     public function detailBookView() {
         return view('users/book-detail');
     }
 
     public function profile() {
+=======
+    public function userBookDetail(){
+        return view('users/book-detail');
+    }
+
+    public function userProfile(){
+>>>>>>> 2df53c398a2ef5d232ba78b3e13285f90d721768
         return view('users/profile');
     }
 

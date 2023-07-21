@@ -66,5 +66,29 @@ module.exports = {
             ),
             minify: false,
         }),
+        new HtmlWebpackPlugin({
+            filename: "users/activity.html",
+            template: path.resolve(
+                __dirname,
+                "src/templates/users/activity.html"
+            ),
+            minify: false,
+        }),
+        new HtmlWebpackPlugin({
+            filename: "users/riwayat-pinjam.html",
+            template: path.resolve(
+                __dirname,
+                "src/templates/users/riwayat-pinjam.html"
+            ),
+            minify: false,
+        }),
+        new HtmlWebpackPlugin({
+            filename: "users/favorit.html",
+            template: path.resolve(
+                __dirname,
+                "src/templates/users/favorit.html"
+            ),
+            minify: false,
+        }),
     ],
 };
