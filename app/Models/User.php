@@ -8,25 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'tbl_user';
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'nim';
     protected $fillable = [
         'nim',
-        'nama_user',
+        'username',
         'email',
         'password',
-        'angkatan',
-        'role_user',
+        'number',
+        'role',
+        'profile_picture',
         'created_at',
         'updated_at'
     ];
 
     public function Pinjam()
     {
-        return $this->hasMany(Pinjam::class, 'id_user');
+        return $this->hasMany(Pinjam::class, 'nim');
     }
 
     public function Simpan()
     {
-        return $this->hasMany(Simpan::class, 'id_user');
+        return $this->hasMany(Simpan::class, 'nim');
     }
 }
