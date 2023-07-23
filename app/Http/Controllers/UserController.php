@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Buku;
 
 class UserController extends Controller
 {
@@ -13,23 +14,20 @@ class UserController extends Controller
         return view('auth/login');
     }
 
-    public function userView(){
+    public function userIndex(){
         return view('users/index');
     }
 
-<<<<<<< HEAD
-    public function detailBookView() {
-        return view('users/book-detail');
-    }
+    public function userBookDetail($bookCode = null){
 
-    public function profile() {
-=======
-    public function userBookDetail(){
-        return view('users/book-detail');
+        if(!$bookCode) return abort(404);
+        
+        $book = Buku::where('kode_buku', $bookCode)->first(); 
+        
+        return view('users/book-detail', ['bookCode' => $bookCode,'book' => $book]);
     }
 
     public function userProfile(){
->>>>>>> 2df53c398a2ef5d232ba78b3e13285f90d721768
         return view('users/profile');
     }
 

@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 
 @section('header')
@@ -5,8 +6,8 @@
 @endsection
 
 @section('main')
-<main>
     <div class="container">
+        
         <div class="row gap-3 justify-content-center pt-4" id="main-content">
 
             <!-- Main content disini, pake javascript -->
@@ -31,7 +32,6 @@
             </ul>
         </nav>
     </div>
-</main>
 @endsection
 
 @section('footer')
@@ -40,8 +40,6 @@
 
 @section('script')
     <script>
-        // icons
-        feather.replace();
 
         //get data buku
         const buku = [];
@@ -64,7 +62,9 @@
 
                                 <div class="book-description mt-2">
                                     <h4 class="book-title">
-                                        ${buku[i].judul_buku}
+                                        <a href="#">
+                                            ${buku[i].judul_buku}
+                                        </a>
                                     </h4>
                                     <p class="book-year">${buku[i].thn_terbit}</p>
                                     <h5 class="book-author">
@@ -132,7 +132,7 @@
             mainContent.innerHTML = "";
 
             for (let i = 0; i < buku.length; i++) {
-                mainContent.innerHTML += createListCard(buku, i);
+            mainContent.innerHTML += createListCard(buku, i);
             }
         };
 
@@ -141,7 +141,7 @@
             mainContent.innerHTML = "";
 
             for (let i = 0; i < buku.length; i++) {
-                mainContent.innerHTML += createGridCard(buku, i);
+            mainContent.innerHTML += createGridCard(buku, i);
             }
         };
 
@@ -236,7 +236,11 @@
                         </div>
                     </div>
                     <div class="aside-description text-start mt-4">
-                        <h4 class="book-title">${buku[i].judul_buku}</h4>
+                        <a href="{{ url('book/${buku[i].kode_buku}') }}">
+                            <h4 class="book-title">${buku[i].judul_buku}</h4>
+                            
+                            </a>
+
                         <p class="book-year">${buku[i].thn_terbit}</p>
                         <h5 class="book-author">${buku[i].penulis}</h5>
                         <p class="book-publisher fw-bold">${buku[i].penerbit}</p>
@@ -253,4 +257,3 @@
         };
     </script>
 @endsection
-        

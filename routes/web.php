@@ -17,9 +17,11 @@ use App\Http\Controllers\BukuController;
 |
 */
 
-Route::get('/', function () {
-    return view('users/index');
-});
+// halaman user
+Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
+Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
+Route::get('/user-profile',     [UserController::class,'userProfile']);
+
 
 // authentication
 Route::get('/login-view',       [UserController::class,'loginView']);
@@ -28,10 +30,6 @@ Route::get('/login-view',       [UserController::class,'loginView']);
 Route::post('/register',        [UserController::class,'Register']);
 Route::post('/login',           [UserController::class,'Login']);
 
-// halaman user
-Route::get('/user-view',        [UserController::class,'userView']);
-Route::get('/user-book-detail', [UserController::class,'userBookDetail']);
-Route::get('/user-profile',     [UserController::class,'userProfile']);
 
 // halaman admin
 Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);
