@@ -20,15 +20,14 @@ use App\Http\Controllers\BukuController;
 // halaman user
 Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
-Route::get('/user-profile',     [UserController::class,'userProfile']);
+Route::get('/user/profile',     [UserController::class,'userProfile'])->name('profile');
 
-
-// authentication
-Route::get('/login-view',       [UserController::class,'loginView']);
 
 // user
+Route::get('/login',           [UserController::class,'loginView'])->name('login');
+Route::post('/login',           [UserController::class,'Login'])->name('auth');
+Route::post('/logout',           [UserController::class,'Logout'])->name('logout');
 Route::post('/register',        [UserController::class,'Register']);
-Route::post('/login',           [UserController::class,'Login']);
 
 
 // halaman admin

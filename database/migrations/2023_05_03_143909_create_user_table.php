@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::dropIfExists('tbl_user');
         Schema::create('tbl_user', function (Blueprint $table) {
             $table->id('nim');
-            $table->string('username');
+            $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('number');
             $table->enum('role', ['Super Admin', 'Admin', 'Member']);
-            $table->string('profile_picture');
+            $table->string('profile_picture')->default('avatar.jpg');
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });

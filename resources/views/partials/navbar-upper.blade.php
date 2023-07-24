@@ -111,15 +111,18 @@
             <ul class="dropdown-menu">
                 @if (Auth::check())
                     <li>
-                        <a class="dropdown-item" href="{{ url('profile') }}"
-                            >Akun</a
+                        <a class="dropdown-item" href="{{ route('profile') }}"
+                            >Profile</a
                         >
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">Aktivitas</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Keluar</a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
                     </li>
                 @else
                     <li>

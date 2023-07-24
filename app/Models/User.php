@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+
+class User extends Authenticatable
 {
     protected $table = 'tbl_user';
     protected $primaryKey = 'nim';
     protected $fillable = [
         'nim',
-        'username',
+        'name',
         'email',
         'password',
         'number',

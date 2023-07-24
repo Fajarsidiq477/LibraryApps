@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Support\Facades\DB;
+
+
 use App\Models\User;
 use App\Models\Buku;
 
@@ -11,6 +16,10 @@ class UserController extends Controller
 {
 
     public function loginView(){
+        if(Auth::check()) {
+            return redirect('profile');
+        }
+
         return view('auth/login');
     }
 
@@ -84,41 +93,69 @@ class UserController extends Controller
          }
     }
 
-    public function Login(){
+    public function Login(Request $request) : RedirectResponse
+    {
 
-        $email      = $_POST['email'];
-        $password   = $_POST['password'];
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        try{
-
-            $validation = User::select('id_user')->where('email', $email)
-                             ->where('password', $password)->exists();
-
-            if ($validation == true) {
-                return response()->json(
-                    [
-                        'error'=>false,
-                        'message'=>'Login Berhasil'
-                    ]
-                );
-             } else{
-                return response()->json(
-                    [
-                        'error'=>true,
-                        'message'=>'Email/Password Salah'
-                    ]
-                );
-             }
-
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('profile');
         }
-        catch(\Exception $e){
-            return response()->json(
-                [
-                    'error'=>true,
-                    'message'=>$e->getMessage()
-                ]
-            );
-         }
 
+        return back()->withErrors([
+            'email' => 'Email atau password tidak salah, coba lagi!',
+        ])->onlyInput('email');
+
+        // $email      = $_POST['email'];
+        // $password   = $_POST['password'];
+
+        // try{
+
+        //     $validation = User::select('id_user')->where('email', $email)
+        //                      ->where('password', $password)->exists();
+
+        //     if ($validation == true) {
+        //         return response()->json(
+        //             [
+        //                 'error'=>false,
+        //                 'message'=>'Login Berhasil'
+        //             ]
+        //         );
+        //      } else{
+        //         return response()->json(
+        //             [
+        //                 'error'=>true,
+        //                 'message'=>'Email/Password Salah'
+        //             ]
+        //         );
+        //      }
+
+        // }
+        // catch(\Exception $e){
+        //     return response()->json(
+        //         [
+        //             'error'=>true,
+        //             'message'=>$e->getMessage()
+        //         ]
+        //     );
+        //  }
+
+    }
+
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
     }
 }
