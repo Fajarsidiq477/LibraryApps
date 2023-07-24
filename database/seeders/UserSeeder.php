@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'nim' => '2010031',
             'name' => 'admin ganteng pisan',
             'email' => 'admin@upi.edu',
-            'password' => bcrypt('123456'),
+            'password' => bcrypt(123456),
             'number' => '081910514970',
             'role' => 'Super Admin' //super admin
         ]);
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'nim' => '2082990',
             'name' => 'staff lumayan ganteng',
             'email' => 'staff@upi.edu',
-            'password' => bcrypt('123456'),
+            'password' => bcrypt(123456),
             'number' => '085222622254',
             'role' => 'Admin' //admin / staff
         ]);
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'nim' => '2000000',
             'name' => 'anggota perpus si kutu buku',
             'email' => 'anggota@upi.edu',
-            'password' => bcrypt('123456'),
+            'password' => bcrypt(123456),
             'number' => '085749875966',
             'role' => 'Member' //anggota
         ]);

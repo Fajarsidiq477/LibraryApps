@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Buku;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -37,7 +39,10 @@ class UserController extends Controller
     }
 
     public function userProfile(){
-        return view('users/profile');
+
+        $user_data = Auth::user();
+
+        return view('users/profile', ['user_data' => $user_data]);
     }
 
     public function Register(){
@@ -104,7 +109,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect()->intended('profile');
+            return redirect()->intended('user/profile');
         }
 
         return back()->withErrors([
@@ -157,5 +162,37 @@ class UserController extends Controller
         $request->session()->regenerateToken();
     
         return redirect('/');
+    }
+
+    public function userChangePassword(Request $request) 
+    {
+
+        // check if old password is same with current password in DB
+        if(!Hash::check($request->oldPassword, Auth::user()->password)) {
+            
+            return Redirect::back()->withErrors(['oldPassword' => 'Password is not match!']);
+        }
+
+        $validations = $request->validate([
+            'oldPassword' => ['required'],
+            'newPassword' => ['required', 'confirmed', 'min:8']
+        ]);
+
+        // update new password
+        $user = User::find(Auth::user()->nim);
+
+        $user->password = bcrypt($validations['newPassword']);
+        
+        $user->save();
+        
+
+        // logout and redirect to login with message
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+
+        return Redirect::route('login')->withErrors(['passwordChanged' => 'Password has been changed. Please login again!']);
     }
 }

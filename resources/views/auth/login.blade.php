@@ -46,6 +46,12 @@
                                     {{ $message }}
                                 </div>
                             @enderror
+
+                            @error('passwordChanged')
+                                <div class="fw-bold">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label"

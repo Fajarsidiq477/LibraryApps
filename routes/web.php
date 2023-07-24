@@ -20,7 +20,10 @@ use App\Http\Controllers\BukuController;
 // halaman user
 Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
-Route::get('/user/profile',     [UserController::class,'userProfile'])->name('profile');
+Route::middleware(['auth'])->group(function() {
+    Route::get('/user/profile',     [UserController::class,'userProfile'])->name('profile');
+    Route::post('/user/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
+});
 
 
 // user

@@ -19,9 +19,9 @@
                         </button>
                     </div>
                     <h3 class="profile-name mt-3">
-                        Fajar Sidik Setiawan
+                        {{ $user_data->name }}
                     </h3>
-                    <p class="profile-nim">2010031</p>
+                    <p class="profile-nim">{{ $user_data->nim }}</p>
                 </div>
                 <div class="d-grid">
                     <button
@@ -54,7 +54,7 @@
                                     type="text"
                                     id="fullName"
                                     class="form-control"
-                                    value="Fajar Sidik Setiawan"
+                                    value="{{ $user_data->name }}"
                                     disabled
                                 />
                             </div>
@@ -66,7 +66,7 @@
                                     type="text"
                                     id="NIM"
                                     class="form-control"
-                                    value="2010031"
+                                    value="{{ $user_data->nim }}"
                                     disabled
                                 />
                             </div>
@@ -78,7 +78,7 @@
                                     type="email"
                                     id="email"
                                     class="form-control"
-                                    value="fajar@upi.edu"
+                                    value="{{ $user_data->email }}"
                                     disabled
                                 />
                             </div>
@@ -90,7 +90,7 @@
                                     type="number"
                                     id="phone"
                                     class="form-control"
-                                    value="081910514970"
+                                    value="{{ $user_data->number }}"
                                     disabled
                                 />
                             </div>
@@ -98,28 +98,44 @@
                     </div>
 
                     <div class="d-none" id="tab-change-password">
-                        <form action="">
+                        <form action="{{ route('userChangePassword') }}" method="POST">
+                            @csrf
                             <div class="form-group mb-3">
                                 <label for="oldPassword" class="mb-2"
                                     >Kata Sandi Lama</label
                                 >
                                 <input
-                                    type="text"
+                                    type="password"
                                     id="oldPassword"
-                                    class="form-control"
+                                    class="form-control @error('oldPassword') is-invalid @enderror"
+                                    name="oldPassword"
                                     required
+                                    autofocus
                                 />
+
+                                @error('oldPassword') 
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="newPassword" class="mb-2"
                                     >Kata Sandi Baru</label
                                 >
                                 <input
-                                    type="text"
+                                    type="password"
                                     id="newPassword"
-                                    class="form-control"
+                                    class="form-control @error('newPassword') is-invalid @enderror"
+                                    name="newPassword"
                                     required
                                 />
+
+                                @error('newPassword') 
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label
@@ -128,9 +144,10 @@
                                     >Konfirmasi Kata Sandi Baru</label
                                 >
                                 <input
-                                    type="confirmNewPassword"
+                                    type="password"
                                     id="confirmNewPassword"
                                     class="form-control"
+                                    name="newPassword_confirmation"
                                     required
                                 />
                             </div>
@@ -154,6 +171,7 @@
 
 @section('script')
     <script>
+
         const ProfileTabChange = (mode) => {
             const btnProfile = document.getElementById("btn-profile");
             const btnPassword = document.getElementById("btn-password");
