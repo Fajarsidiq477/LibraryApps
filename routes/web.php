@@ -17,21 +17,21 @@ use App\Http\Controllers\BukuController;
 |
 */
 
-Route::get('/', function () {
-    return view('users/index');
+// halaman user
+Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
+Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
+Route::middleware(['auth'])->group(function() {
+    Route::get('/user/profile',     [UserController::class,'userProfile'])->name('profile');
+    Route::post('/user/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
 });
 
-// authentication
-Route::get('/login-view',       [UserController::class,'loginView']);
 
 // user
+Route::get('/login',           [UserController::class,'loginView'])->name('login');
+Route::post('/login',           [UserController::class,'Login'])->name('auth');
+Route::post('/logout',           [UserController::class,'Logout'])->name('logout');
 Route::post('/register',        [UserController::class,'Register']);
-Route::post('/login',           [UserController::class,'Login']);
 
-// halaman user
-Route::get('/user-view',        [UserController::class,'userView']);
-Route::get('/detail-book-view',  [UserController::class,'detailBookView']);
-Route::get('/profile',        [UserController::class,'profile']);
 
 // halaman admin
 Route::get('/admin-book-view',  [AdminController::class,'adminBookView']);

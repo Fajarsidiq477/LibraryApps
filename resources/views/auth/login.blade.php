@@ -23,7 +23,9 @@
                     <h2 class="mb-4 text-center text-md-start">
                         Masuk
                     </h2>
-                    <form>
+                    <form action="{{ route('auth') }}" method="POST">
+                        @csrf
+
                         <div class="mb-3">
                             <label for="email" class="form-label"
                                 >Email address</label
@@ -31,13 +33,25 @@
                             <!-- Hilangkan class is-invalid untuk menghilangkan merah dan message -->
                             <input
                                 type="email"
-                                class="form-control is-invalid"
+                                class="form-control @error('email') is-invalid @enderror"
                                 id="email"
-                                aria-describedby="emailHelp"
+                                name="email"
+                                autofocus
+                                required
+                                
                             />
-                            <div class="invalid-feedback">
-                                E-Mail atau Password tidak sesuai
-                            </div>
+
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+                            @error('passwordChanged')
+                                <div class="fw-bold">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label"
@@ -45,9 +59,16 @@
                             >
                             <input
                                 type="password"
-                                class="form-control"
+                                class="form-control @error('password') is-invalid @enderror"
                                 id="password"
+                                name="password"
+                                required
                             />
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div
                                 id="passwordHelp"
                                 class="form-text text-end"
@@ -62,13 +83,12 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a
-                                {{-- type="submit" --}}
+                            <button
+                                type="submit"
                                 class="btn btn-secondary px-5"
-                                href="{{ url('book-view') }}"
                             >
                                 Login
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>

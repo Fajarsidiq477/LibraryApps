@@ -3,26 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Support\Facades\DB;
+
+
 use App\Models\User;
+use App\Models\Buku;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
 
     public function loginView(){
+        if(Auth::check()) {
+            return redirect('profile');
+        }
+
         return view('auth/login');
     }
 
-    public function userView(){
+    public function userIndex(){
         return view('users/index');
     }
 
-    public function detailBookView() {
-        return view('users/book-detail');
+    public function userBookDetail($bookCode = null){
+
+        if(!$bookCode) return abort(404);
+        
+        $book = Buku::where('kode_buku', $bookCode)->first(); 
+        
+        return view('users/book-detail', ['bookCode' => $bookCode,'book' => $book]);
     }
 
-    public function profile() {
-        return view('users/profile');
+    public function userProfile(){
+
+        $user_data = Auth::user();
+
+        return view('users/profile', ['user_data' => $user_data]);
     }
 
     public function Register(){
@@ -78,41 +98,101 @@ class UserController extends Controller
          }
     }
 
-    public function Login(){
+    public function Login(Request $request) : RedirectResponse
+    {
 
-        $email      = $_POST['email'];
-        $password   = $_POST['password'];
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        try{
-
-            $validation = User::select('id_user')->where('email', $email)
-                             ->where('password', $password)->exists();
-
-            if ($validation == true) {
-                return response()->json(
-                    [
-                        'error'=>false,
-                        'message'=>'Login Berhasil'
-                    ]
-                );
-             } else{
-                return response()->json(
-                    [
-                        'error'=>true,
-                        'message'=>'Email/Password Salah'
-                    ]
-                );
-             }
-
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('user/profile');
         }
-        catch(\Exception $e){
-            return response()->json(
-                [
-                    'error'=>true,
-                    'message'=>$e->getMessage()
-                ]
-            );
-         }
 
+        return back()->withErrors([
+            'email' => 'Email atau password tidak salah, coba lagi!',
+        ])->onlyInput('email');
+
+        // $email      = $_POST['email'];
+        // $password   = $_POST['password'];
+
+        // try{
+
+        //     $validation = User::select('id_user')->where('email', $email)
+        //                      ->where('password', $password)->exists();
+
+        //     if ($validation == true) {
+        //         return response()->json(
+        //             [
+        //                 'error'=>false,
+        //                 'message'=>'Login Berhasil'
+        //             ]
+        //         );
+        //      } else{
+        //         return response()->json(
+        //             [
+        //                 'error'=>true,
+        //                 'message'=>'Email/Password Salah'
+        //             ]
+        //         );
+        //      }
+
+        // }
+        // catch(\Exception $e){
+        //     return response()->json(
+        //         [
+        //             'error'=>true,
+        //             'message'=>$e->getMessage()
+        //         ]
+        //     );
+        //  }
+
+    }
+
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
+    }
+
+    public function userChangePassword(Request $request) 
+    {
+
+        // check if old password is same with current password in DB
+        if(!Hash::check($request->oldPassword, Auth::user()->password)) {
+            
+            return Redirect::back()->withErrors(['oldPassword' => 'Password is not match!']);
+        }
+
+        $validations = $request->validate([
+            'oldPassword' => ['required'],
+            'newPassword' => ['required', 'confirmed', 'min:8']
+        ]);
+
+        // update new password
+        $user = User::find(Auth::user()->nim);
+
+        $user->password = bcrypt($validations['newPassword']);
+        
+        $user->save();
+        
+
+        // logout and redirect to login with message
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+
+        return Redirect::route('login')->withErrors(['passwordChanged' => 'Password has been changed. Please login again!']);
     }
 }
