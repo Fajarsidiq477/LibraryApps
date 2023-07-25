@@ -21,8 +21,14 @@ use App\Http\Controllers\BukuController;
 Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
 Route::middleware(['auth'])->group(function() {
-    Route::get('/user/profile',     [UserController::class,'userProfile'])->name('profile');
-    Route::post('/user/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
+    Route::prefix('user')->group(function() {
+        Route::get('/profile',     [UserController::class,'userProfile'])->name('profile');
+        Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
+        Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
+        Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
+        Route::get('/history',     [UserController::class,'userHistory'])->name('history');
+        Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
+    });
 });
 
 

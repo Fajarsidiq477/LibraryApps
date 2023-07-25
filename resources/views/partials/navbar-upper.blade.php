@@ -116,7 +116,7 @@
                         >
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Aktivitas</a>
+                        <a class="dropdown-item" href="{{ route('activity') }}">Aktivitas</a>
                     </li>
                     <li>
                         <form action="{{ route('logout') }}" method="post">

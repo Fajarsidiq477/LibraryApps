@@ -11634,7 +11634,6 @@ main .book-detail-cover {
     .aside-bar {
         min-width: 100%;
         right: -110%;
-        z-index: 99999; 
     }
 }
 .aside-bar.show {
