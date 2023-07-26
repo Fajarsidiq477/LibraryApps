@@ -27,7 +27,7 @@
             </button>
         </div>
 
-        @if (Route::currentRouteName() === 'adminBook')
+        @if (Route::currentRouteName() === 'adminBooks')
             <div class="mt-2">
                 <a href="#" class="badge bg-primary d-flex align-items-center d-md-none py-2 justify-content-center" style="text-decoration: none" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-mode="add">
                     <span>Tambah Buku</span>

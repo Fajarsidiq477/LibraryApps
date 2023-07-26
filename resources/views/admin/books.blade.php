@@ -33,7 +33,7 @@
                             <input type="checkbox" name="" id="" />
                         </td>
                         <td>
-                            <img src="cover_images/{{ $item->cover_depan }}" alt="Book cover" width="100"/>
+                            <img src="{{ asset('cover_images/' . $item->cover_depan) }}" alt="Book cover" width="100"/>
                         </td>
                         <td>{{ $item->kode_buku }}</td>
                         <td>{{ $item->judul_buku }}</td>

@@ -133,7 +133,7 @@
                     </li>
                 @else
                     <li>
-                        <a class="dropdown-item" href="{{ url('login-view') }}"
+                        <a class="dropdown-item" href="{{ route('login') }}"
                             >Login</a
                         >
                     </li>
