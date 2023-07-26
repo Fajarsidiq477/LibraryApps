@@ -23,11 +23,11 @@ Route::middleware(['auth'])->group(function() {
     
     // halaman user
     Route::prefix('user')->group(function() {
-        Route::get('/profile',     [UserController::class,'userProfile'])->name('profile');
+        Route::get('/profile',      [UserController::class,'userProfile'])->name('profile');
         Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
         Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
         Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
-        Route::get('/history',     [UserController::class,'userHistory'])->name('history');
+        Route::get('/history',      [UserController::class,'userHistory'])->name('history');
         Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
     });
 
@@ -56,6 +56,7 @@ Route::post('/register',        [UserController::class,'Register']);
 // data
 Route::get('/get-buku',    [Controller::class,'getBukuJson']);
 Route::get('/get-user',    [Controller::class,'getUserJson']);
+Route::get('/get-pinjam',  [Controller::class,'getPinjamJson']);
 
 // buku
 Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);

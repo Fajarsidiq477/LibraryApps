@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::dropIfExists('tbl_buku');
         Schema::create('tbl_buku', function (Blueprint $table) {
             $table->id('id_buku');
-            $table->string('kode_buku', 20)->unique();
+            $table->string('kode_buku', 10)->unique();
             $table->string('judul_buku');
             // $table->string('judul_buku_asli');
             $table->string('kategori');

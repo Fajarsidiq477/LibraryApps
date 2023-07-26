@@ -23,6 +23,6 @@ class Simpan extends Model
     
     public function Buku()
     {
-        return $this->belongsTo(Buku::class, 'id_buku');
+        return $this->belongsTo(Buku::class, 'kode_buku');
     }
 }

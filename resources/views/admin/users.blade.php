@@ -35,9 +35,9 @@
                             </td>
                             <td>1</td>
                             <td>{{ $item->nim }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->username }}</td>
                             <td>{{ $item->role }}</td>
-                            <td>{{ $item->phone }}</td>
+                            <td>{{ $item->number }}</td>
                             <td>0</td>
                             <td>
                                 <a
@@ -280,10 +280,10 @@
 
             formModal.querySelector("#nim").value           = id;
             formModal.querySelector("#picture2").value      = user.find(x => x.nim == id).profile_picture;
-            formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).name;
+            formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).username;
             formModal.querySelector("#email").value         = user.find(x => x.nim == id).email;
             formModal.querySelector("#password").value      = user.find(x => x.nim == id).password;
-            formModal.querySelector("#handphone").value     = user.find(x => x.nim == id).phone;
+            formModal.querySelector("#handphone").value     = user.find(x => x.nim == id).number;
             formModal.querySelector("#role").value          = user.find(x => x.nim == id).role;
             
             // let nama_user = user.find(x => x.nim == id).nama_user;

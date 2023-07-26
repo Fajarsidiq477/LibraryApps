@@ -321,8 +321,8 @@
 
                                 <p
                                     class="text-center text-sm-end fst-italic"
-                                >
-                                    ID Peminjaman: 0284993480
+                                    id="form_id_peminjaman">
+                                    -
                                 </p>
 
                                 <table class="table table-borderless">
@@ -445,23 +445,20 @@
 @section('script')
     <script>
         //Data Buku
-        const buku = [];
-        const buku_kode = [];
+        let buku = [];
 
         //Data User
-        const user = [];
-        const user_nim = [];
+        let user = [];
+
+        //Data Peminjaman
+        let pinjam = [];
 
         $.ajax({
             url: "/get-buku",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                for(i=0; i<data.data.length; i++){
-                    buku.push(data.data[i]);
-                    buku_kode.push(data.data[i].kode_buku);
-                }
-                console.log(buku);
+                buku = data.data;
             }
         });
         
@@ -470,12 +467,29 @@
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                for(i=0; i<data.data.length; i++){
-                    user.push(data.data[i]);
-                    user_nim.push(data.data[i].nim);
+                user = data.data;
+            }
+        });
+
+        $.ajax({
+            url: "/get-pinjam",
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                pinjam = data.data;
+
+                console.log(pinjam.some(pinjam => pinjam.nim == 2222222));
+                let total_pinjam = 0;
+                
+                if(pinjam.some(pinjam => pinjam.nim == 2222222) == true){
+                    for(i=0; i<pinjam.length; i++){
+                        if(pinjam[i].nim == 2222222){
+                            total_pinjam++;
+                        }        
+                    }
                 }
-                console.log(user);
-                // console.log(user_nim.includes(2222222));
+                console.log(total_pinjam+1);
+            
             }
         });
         
@@ -583,7 +597,7 @@
 
             const mode = formModal.querySelector("#form-mode").value;
             const id_peminjaman =
-                formModal.querySelector("#id_peminjaman").value || null;
+                formModal.querySelector("#id_peminjaman").value;
             
             const nim = formModal.querySelector("#nim").value;
             const id_buku = formModal.querySelector("#id_buku").value;
@@ -607,6 +621,8 @@
 
             // Get value from input
             const data = getFormData(modalEl);
+
+            console.log(data);
 
             // kirim data di bawah
             // kirim data di bawah
@@ -632,92 +648,6 @@
             document.querySelector(".btn-admin-close").click();
         };
 
-        // Event when modal opened
-        modalEl.addEventListener("show.bs.modal", (event) => {
-            window.Jar.whenModalShow(modalEl, "lends", event);
-        });
-
-        // Event when form-modal on submit
-        modalEl
-            .querySelector("#form-modal")
-            .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
-
-        // Multisteps form
-        const btnStepNext = modalEl.querySelector(".btn-step-next");
-
-        btnStepNext.addEventListener("click", () => {
-            if (window.Jar.stepIndex + 1 === 1) {
-                const nim_peminjam = document.querySelector("#nim_peminjam").value;
-
-                // console.log(user_nim.includes(nim_peminjam));
-
-                if(user_nim.includes(parseInt(nim_peminjam)) == false){
-                    alert("Tidak ada member dengan NIM " + nim_peminjam);
-                }else{
-                    formModal.querySelector("#nim").value = nim_peminjam;
-
-                    document.getElementById("form_nim").innerHTML = nim_peminjam;
-
-                    for(i = 0; i<user.length; i++){
-                        if(parseInt(nim_peminjam) == user[i].nim){
-                            document.getElementById("form_nama_peminjam").innerHTML = user[i].nama_user;
-                        }
-                    }
-                    document.getElementById("form_tgl_pinjam").innerHTML = getDate().tgl_pinjam;
-                    document.getElementById("form_tgl_kembali").innerHTML = getDate().tgl_kembali;
-
-                    alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
-                }
-            }
-            if (window.Jar.stepIndex + 1 === 2) {
-                const kode_buku = document.querySelector("#kode_buku").value;
-                
-                if(buku_kode.includes(kode_buku) == false){
-                    alert("Tidak ada buku dengan kode " + kode_buku);
-                }else{
-                    formModal.querySelector("#id_buku").value = kode_buku;    
-                    document.getElementById("form_kode_buku").innerHTML = kode_buku;
-                }
-                return (data = {
-                    mode,
-                    id_peminjaman,
-                    nim,
-                    id_buku,
-                    tanggal_pinjam,
-                    tanggal_kembali,
-                });
-            };
-
-            const onFormSubmit = (e, modalEl) => {
-                e.preventDefault();
-
-                // Get value from input
-                const data = getFormData(modalEl);
-
-                // kirim data di bawah
-                // kirim data di bawah
-                if (data.mode === "add") {
-                    swalOption = {
-                        title: "Buku berhasil Dipinjam!",
-                        icon: "success",
-                        button: "Oke!",
-                    };
-                }
-
-                if (data.mode === "edit") {
-                    swalOption = {
-                        title: "Buku berhasil diedit!",
-                        icon: "success",
-                        button: "Oke!",
-                    };
-                }
-
-                swal(swalOption);
-
-                // tutup modal ketika kode add / edit berhasil dieksekusi
-                document.querySelector(".btn-admin-close").click();
-            };
-
             // Event when modal opened
             modalEl.addEventListener("show.bs.modal", (event) => {
                 window.Jar.whenModalShow(modalEl, "lends", event);
@@ -735,27 +665,48 @@
                 if (window.Jar.stepIndex + 1 === 1) {
                     const nim_peminjam = document.querySelector("#nim_peminjam").value;
 
-                    if(user_nim.includes(parseInt(nim_peminjam)) == false){
+                    if(user.some(user => user.nim == nim_peminjam) == false){
                         
                         alert("Tidak ada member dengan NIM " + nim_peminjam);
                         
                         location.reload();
                     
                     }else{
+
                         formModal.querySelector("#nim").value = nim_peminjam;
                         document.getElementById("form_nim").innerHTML = nim_peminjam;
                         document.getElementById("form_nama_peminjam").innerHTML = user.find(x => x.nim == parseInt(nim_peminjam)).username;
+                        
+                        let total_pinjam = 1;
+                
+                        if(pinjam.some(pinjam => pinjam.nim == nim_peminjam) == true){
+                            for(i=0; i<pinjam.length; i++){
+                                if(pinjam[i].nim == nim_peminjam){
+                                    total_pinjam++;
+                                }        
+                            }
+                        }
+
+                        formModal.querySelector("#id_peminjaman").value = `${nim_peminjam}${total_pinjam}`;
+                        document.getElementById("form_id_peminjaman").innerHTML = `id peminjaman: ${nim_peminjam}${total_pinjam}`;
+                        
+                        formModal.querySelector("#tanggal_pinjam").value = getDate().tgl_pinjam;
                         document.getElementById("form_tgl_pinjam").innerHTML = getDate().tgl_pinjam;
+                        
+                        formModal.querySelector("#tanggal_kembali").value = getDate().tgl_kembali;
                         document.getElementById("form_tgl_kembali").innerHTML = getDate().tgl_kembali;
 
                         alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
+                    
                     }
                 }
                 if (window.Jar.stepIndex + 1 === 2) {
                     const kode_buku = document.querySelector("#kode_buku").value;
-                    if(buku_kode.includes(kode_buku) == false){
+                    if(buku.some(buku => buku.kode_buku == kode_buku) == false){
+
                         alert("Tidak ada buku dengan kode " + kode_buku);
                         location.reload();
+                    
                     }else{
                         formModal.querySelector("#id_buku").value = kode_buku;    
                         document.getElementById("form_kode_buku").innerHTML = kode_buku;
@@ -763,14 +714,10 @@
 
                         alert("kamu di halaman detail buku");
                     }
-
-                    alert("kamu di halaman detail buku");
                 }
-
+                if(window.Jar.stepIndex + 1 === 3) {
+                    alert("kamu di halaman preview");
+                }
             })
-            // if(window.Jar.stepIndex + 1 === 3) {
-            //     alert("kamu di halaman preview");
-            // }
-        });
     </script>
 @endsection

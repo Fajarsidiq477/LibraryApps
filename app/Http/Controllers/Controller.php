@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Buku;
 use App\Models\User;
+use App\Models\Pinjam;
 
 class Controller extends BaseController
 {
@@ -67,4 +68,33 @@ class Controller extends BaseController
             );
          }
     }
+
+    public function getPinjam(){
+        $pinjam = Pinjam::All();
+
+        return $pinjam;
+    }
+
+    public function getPinjamJson(){
+
+        $pinjam = app(Controller::class)->getPinjam();
+
+        try{
+            return response()->json(
+                [
+                    'error'=>'false',
+                    'data'=>$pinjam
+                ]
+            );
+        }
+        catch(\Exception $e){
+            return response()->json(
+                [
+                    'error'=>'true',
+                    'message'=>$e->getMessage()
+                ]
+            );
+         }
+    }
+
 }
