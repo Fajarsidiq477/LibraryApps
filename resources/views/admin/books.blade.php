@@ -33,7 +33,7 @@
                             <input type="checkbox" name="" id="" />
                         </td>
                         <td>
-                            <img src="cover_images/{{ $item->cover_depan }}" alt="Book cover" width="100"/>
+                            <img src="{{ asset('cover_images/' . $item->cover_depan) }}" alt="Book cover" width="100"/>
                         </td>
                         <td>{{ $item->kode_buku }}</td>
                         <td>{{ $item->judul_buku }}</td>
@@ -285,9 +285,11 @@
                 $.ajax({
                     url: '/update-create-buku',
                     type: "POST",
-                    headers: headers,
                     data: new FormData(document.getElementById("form-modal")),
                     dataType:'JSON',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     contentType: false,
                     cache: false,
                     processData: false,
@@ -317,6 +319,7 @@
                         }
                     },
                     error: function (data, textStatus, errorThrown) {
+                        alert('error');
                         data = JSON.parse(JSON.stringify(data));
                         alert((data.message));
                     },

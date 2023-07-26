@@ -22,27 +22,31 @@ Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name(
 Route::middleware(['auth'])->group(function() {
     
     // halaman user
-    Route::prefix('user')->group(function() {
-        Route::get('/profile',      [UserController::class,'userProfile'])->name('profile');
-        Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
-        Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
-        Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
-        Route::get('/history',      [UserController::class,'userHistory'])->name('history');
-        Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
+    Route::middleware(['checkRole:2'])->group(function() {
+        Route::prefix('user')->group(function() {
+            Route::get('/profile',     [UserController::class,'userProfile'])->name('profile');
+            Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
+            Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
+            Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
+            Route::get('/history',     [UserController::class,'userHistory'])->name('history');
+            Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
+        });
     });
 
     // halaman admin
-    Route::prefix('admin')->group(function() {
-        Route::get('/', [AdminController::class, 'index'])->name('adminIndex');
-        Route::get('/books',  [AdminController::class,'adminBookView'])->name('adminBooks');
-        Route::get('/users',  [AdminController::class,'adminUserView'])->name('adminUsers');
-        Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('adminLendBooks');
+    Route::middleware(['checkRole:0|1'])->group(function() {
+        Route::prefix('admin')->group(function() {
+            Route::get('/', [AdminController::class, 'index'])->name('adminIndex');
+            Route::get('/books',  [AdminController::class,'adminBookView'])->name('adminBooks');
+            Route::get('/users',  [AdminController::class,'adminUserView'])->name('adminUsers');
+            Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('adminLendBooks'); 
+        });
     });
 });
 
 
 // user
-Route::get('/login-view',           [UserController::class,'loginView'])->name('login');
+Route::get('/login',           [UserController::class,'loginView'])->name('login');
 Route::post('/login',           [UserController::class,'Login'])->name('auth');
 Route::post('/logout',           [UserController::class,'Logout'])->name('logout');
 Route::post('/register',        [UserController::class,'Register']);

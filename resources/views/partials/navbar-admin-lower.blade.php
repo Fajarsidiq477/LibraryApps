@@ -26,7 +26,7 @@
                 </li>
             </ul>
 
-            @if (Route::currentRouteName() === 'adminBook')
+            @if (Route::currentRouteName() === 'adminBooks')
                 <div>
                     <a href="#" class="badge bg-primary d-none d-md-flex align-items-center justify-content-center" style="text-decoration: none" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-mode="add">
                         <span>Tambah Buku</span>
