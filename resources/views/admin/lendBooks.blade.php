@@ -862,20 +862,16 @@
                 if (window.Jar.stepIndex + 1 === 1) {
                     const nim_peminjam = document.querySelector("#nim_peminjam").value;
 
-                    // console.log(user_nim.includes(nim_peminjam));
-
                     if(user_nim.includes(parseInt(nim_peminjam)) == false){
+                        
                         alert("Tidak ada member dengan NIM " + nim_peminjam);
+                        
+                        location.reload();
+                    
                     }else{
                         formModal.querySelector("#nim").value = nim_peminjam;
-
                         document.getElementById("form_nim").innerHTML = nim_peminjam;
-
-                        for(i = 0; i<user.length; i++){
-                            if(parseInt(nim_peminjam) == user[i].nim){
-                                document.getElementById("form_nama_peminjam").innerHTML = user[i].nama_user;
-                            }
-                        }
+                        document.getElementById("form_nama_peminjam").innerHTML = user.find(x => x.nim == parseInt(nim_peminjam)).username;
                         document.getElementById("form_tgl_pinjam").innerHTML = getDate().tgl_pinjam;
                         document.getElementById("form_tgl_kembali").innerHTML = getDate().tgl_kembali;
 
@@ -884,18 +880,13 @@
                 }
                 if (window.Jar.stepIndex + 1 === 2) {
                     const kode_buku = document.querySelector("#kode_buku").value;
-                    
                     if(buku_kode.includes(kode_buku) == false){
                         alert("Tidak ada buku dengan kode " + kode_buku);
+                        location.reload();
                     }else{
                         formModal.querySelector("#id_buku").value = kode_buku;    
                         document.getElementById("form_kode_buku").innerHTML = kode_buku;
-
-                        for(i = 0; i<buku.length; i++){
-                            if(kode_buku == buku[i].kode_buku){
-                                document.getElementById("form_judul_buku").innerHTML = buku[i].judul_buku;
-                            }
-                        }
+                        document.getElementById("form_judul_buku").innerHTML = buku.find(x => x.kode_buku == kode_buku).judul_buku;
 
                         alert("kamu di halaman detail buku");
                     }

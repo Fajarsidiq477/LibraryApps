@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function loginView(){
         if(Auth::check()) {
-            return redirect('profile');
+            return redirect('userIndex');
         }
 
         return view('auth/login');
@@ -47,7 +47,7 @@ class UserController extends Controller
 
     public function Register(){
 
-        $id_user    = $_POST['id_user'];    $nama_user  = $_POST['nama_user'];
+        $id_user    = $_POST['id_user'];    $username  = $_POST['username'];
         $email      = $_POST['email'];      $password   = $_POST['password'];
         $angkatan   = $_POST['angkatan'];   $role_user  = $_POST['role_user'];
 
@@ -72,7 +72,7 @@ class UserController extends Controller
                 } else{
                     $query = User::create([
                         'id_user'   => $id_user,
-                        'nama_user' => $nama_user,
+                        'username'  => $username,
                         'email'     => $email,
                         'password'  => $password,
                         'angkatan'  => $angkatan,
@@ -109,11 +109,11 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect()->intended('user/profile');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password tidak salah, coba lagi!',
+            'email' => 'Email atau password salah, coba lagi!',
         ])->onlyInput('email');
 
         // $email      = $_POST['email'];

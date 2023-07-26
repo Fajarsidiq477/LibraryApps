@@ -54,7 +54,7 @@
                                     type="text"
                                     id="fullName"
                                     class="form-control"
-                                    value="{{ $user_data->name }}"
+                                    value="{{ $user_data->username }}"
                                     disabled
                                 />
                             </div>
