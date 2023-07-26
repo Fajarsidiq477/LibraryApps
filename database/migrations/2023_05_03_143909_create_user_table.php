@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('number');
-            $table->enum('role', ['Super Admin', 'Admin', 'Member']);
+            $table->string('phone');
+            $table->enum('role', [0, 1, 2]); // 0 = Super admin, 1 = staff perpus, 2 = member
             $table->string('profile_picture')->default('avatar.jpg');
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();

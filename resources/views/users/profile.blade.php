@@ -90,7 +90,7 @@
                                     type="number"
                                     id="phone"
                                     class="form-control"
-                                    value="{{ $user_data->number }}"
+                                    value="{{ $user_data->phone }}"
                                     disabled
                                 />
                             </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Route;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +29,20 @@ class UserController extends Controller
 
     public function userIndex(){
         return view('users/index');
+    }
+
+    public function userActivity() {
+        return view('users/activity');
+    }
+
+    public function userBorrowed() {
+        return view('users/borrowed');
+    }
+    public function userHistory() {
+        return view('users/history');
+    }
+    public function userFavorite() {
+        return view('users/favorite');
     }
 
     public function userBookDetail($bookCode = null){
@@ -106,10 +122,17 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect()->intended('/');
+            // if login success, check role, if role is 2 (member) redirect to /
+            if(Auth::user()->role === '2') {
+                return redirect()->intended('/');
+            }
+
+            // but if role is 0 or 1 (admin / staff), redirect to
+            return redirect()->intended('admin/');
         }
 
         return back()->withErrors([

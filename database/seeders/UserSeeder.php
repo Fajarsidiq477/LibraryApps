@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
             'name' => 'admin ganteng pisan',
             'email' => 'admin@upi.edu',
             'password' => bcrypt(123456),
-            'number' => '081910514970',
-            'role' => 'Super Admin' //super admin
+            'phone' => '081910514970',
+            'role' => '0' //super admin
         ]);
 
         User::create([
@@ -27,8 +27,8 @@ class UserSeeder extends Seeder
             'name' => 'staff lumayan ganteng',
             'email' => 'staff@upi.edu',
             'password' => bcrypt(123456),
-            'number' => '085222622254',
-            'role' => 'Admin' //admin / staff
+            'phone' => '085222622254',
+            'role' => '1' //admin / staff
         ]);
 
         User::create([
@@ -36,8 +36,8 @@ class UserSeeder extends Seeder
             'name' => 'anggota perpus si kutu buku',
             'email' => 'anggota@upi.edu',
             'password' => bcrypt(123456),
-            'number' => '085749875966',
-            'role' => 'Member' //anggota
+            'phone' => '085749875966',
+            'role' => '2' //anggota
         ]);
     }
 }
