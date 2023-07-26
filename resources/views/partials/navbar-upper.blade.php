@@ -50,7 +50,8 @@
             </div>
         </div>
 
-        <div
+        {{-- notifikasi --}}
+        {{-- <div
             class="dropdown text-center d-none d-lg-flex"
             style="background-color: transparent"
         >
@@ -85,7 +86,7 @@
                     </p>
                 </li>
             </ul>
-        </div>
+        </div> --}}
 
         <div class="d-flex dropdown px-2">
             <a
