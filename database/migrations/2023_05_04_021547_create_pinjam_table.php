@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('kode_buku', 10)->unique();
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali')->nullable();
-            $table->enum('status_pinjam', ['Pinjam', 'Selesai', 'Hilang']);
+            $table->enum('status_pinjam', [0, 1, 2]); // status 0 = Pinjam, 1 = Selesai, 2 = Hilang
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });

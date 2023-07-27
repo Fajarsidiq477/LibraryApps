@@ -313,31 +313,6 @@
         // bs.modal.show triggered
         const modalEl = document.querySelector("#myModal");
 
-        // const getFormData = () => {
-        //     const formModal = modalEl.querySelector("#form-modal");
-
-        //     const mode = formModal.querySelector("#form-mode").value;
-        //     const id = formModal.querySelector("#id").value || null;
-
-        //     const nim = formModal.querySelector("#nim").value;
-        //     const name = formModal.querySelector("#namaLengkap").value;
-        //     const email = formModal.querySelector("#email").value;
-        //     const password = formModal.querySelector("#password").value;
-        //     const phone = formModal.querySelector("#handphone").value;
-        //     const role = formModal.querySelector("#role").value;
-
-        //     return (data_form = {
-        //         mode,
-        //         id,
-        //         nim,
-        //         name,
-        //         email,
-        //         password,
-        //         phone,
-        //         role,
-        //     });
-        // };
-
         const onFormSubmit = (e, modalEl) => {
             e.preventDefault();
 

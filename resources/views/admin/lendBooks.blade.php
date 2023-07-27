@@ -403,7 +403,7 @@
                                         />
                                         <input
                                             type="text"
-                                            id="id_buku"
+                                            id="kode_buku"
                                             hidden
                                         />
                                         <input
@@ -477,19 +477,6 @@
             dataType: 'json',
             success: function(data) {
                 pinjam = data.data;
-
-                console.log(pinjam.some(pinjam => pinjam.nim == 2222222));
-                let total_pinjam = 0;
-                
-                if(pinjam.some(pinjam => pinjam.nim == 2222222) == true){
-                    for(i=0; i<pinjam.length; i++){
-                        if(pinjam[i].nim == 2222222){
-                            total_pinjam++;
-                        }        
-                    }
-                }
-                console.log(total_pinjam+1);
-            
             }
         });
         
@@ -499,6 +486,21 @@
             const d = new Date();
             const e = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
 
+            // Get year, month, and day part from the date
+            let tahun   = d.toLocaleString("default", { year    : "numeric" });
+            let bulan   = d.toLocaleString("default", { month   : "2-digit" });
+            let hari    = d.toLocaleString("default", { day     : "2-digit" });
+
+            let tahun1  = e.toLocaleString("default", { year    : "numeric" });
+            let bulan1  = e.toLocaleString("default", { month   : "2-digit" });
+            let hari1   = e.toLocaleString("default", { day     : "2-digit" });
+
+            // Generate yyyy-mm-dd date string
+            let formattedDate   = tahun + "-" + bulan + "-" + hari;
+
+            let formattedDate1  = tahun1 + "-" + bulan1 + "-" + hari1;
+            
+            
             let date   = d.getDate();
             let date1  = e.getDate();
             
@@ -565,6 +567,8 @@
             return (data = {
                 tgl_pinjam,
                 tgl_kembali,
+                formattedDate,
+                formattedDate1
             });
         }
 
@@ -600,7 +604,7 @@
                 formModal.querySelector("#id_peminjaman").value;
             
             const nim = formModal.querySelector("#nim").value;
-            const id_buku = formModal.querySelector("#id_buku").value;
+            const kode_buku = formModal.querySelector("#kode_buku").value;
             const tanggal_pinjam =
                 formModal.querySelector("#tanggal_pinjam").value;
             const tanggal_kembali =
@@ -610,7 +614,7 @@
                 mode,
                 id_peminjaman,
                 nim,
-                id_buku,
+                kode_buku,
                 tanggal_pinjam,
                 tanggal_kembali,
             });
@@ -622,27 +626,64 @@
             // Get value from input
             const data = getFormData(modalEl);
 
-            console.log(data);
-
             // kirim data di bawah
-            // kirim data di bawah
-            if (data.mode === "add") {
-                swalOption = {
-                    title: "Buku berhasil Dipinjam!",
-                    icon: "success",
-                    button: "Oke!",
-                };
-            }
+            $.ajax({
+                    url: '/input-data-pinjam',
+                    type: "POST",
+                    headers: headers,
+                    data: {
+                        id_pinjam   : data.id_peminjaman,
+                        nim         : data.nim,
+                        kode_buku   : data.kode_buku,
+                        tgl_pinjam  : data.tanggal_pinjam,
+                        tgl_kembali : data.tanggal_kembali,
+                    },
+                    success: function (data) {
+                        
+                        data = JSON.parse(JSON.stringify(data));
+                        if(data.error == false){
+                            swalOption = {
+                                title: "Buku berhasil Dipinjam!",
+                                icon: "success",
+                                button: "Oke!",
+                            };
 
-            if (data.mode === "edit") {
-                swalOption = {
-                    title: "Buku berhasil diedit!",
-                    icon: "success",
-                    button: "Oke!",
-                };
-            }
+                            swal(swalOption);
+                            $('.swal-button').click(function() {
+                                location.reload();
+                            });
+                            
+                        }else{
+                            alert(data.message);
+                            console.log(data.err_message);
+                        }
+                    }
+                    // ,
+                    // error: function (data, textStatus, errorThrown) {
+                    //     data = JSON.parse(JSON.stringify(data));
+                    //     alert(data.message);
+                    //     console.log(data.err_message);
+                    // },
+                });
 
-            swal(swalOption);
+
+            // if (data.mode === "add") {
+            //     swalOption = {
+            //         title: "Buku berhasil Dipinjam!",
+            //         icon: "success",
+            //         button: "Oke!",
+            //     };
+            // }
+
+            // if (data.mode === "edit") {
+            //     swalOption = {
+            //         title: "Buku berhasil diedit!",
+            //         icon: "success",
+            //         button: "Oke!",
+            //     };
+            // }
+
+            // swal(swalOption);
 
             // tutup modal ketika kode add / edit berhasil dieksekusi
             document.querySelector(".btn-admin-close").click();
@@ -688,12 +729,12 @@
                         }
 
                         formModal.querySelector("#id_peminjaman").value = `${nim_peminjam}${total_pinjam}`;
-                        document.getElementById("form_id_peminjaman").innerHTML = `id peminjaman: ${nim_peminjam}${total_pinjam}`;
+                        document.getElementById("form_id_peminjaman").innerHTML = `ID peminjaman: ${nim_peminjam}${total_pinjam}`;
                         
-                        formModal.querySelector("#tanggal_pinjam").value = getDate().tgl_pinjam;
+                        formModal.querySelector("#tanggal_pinjam").value = getDate().formattedDate;
                         document.getElementById("form_tgl_pinjam").innerHTML = getDate().tgl_pinjam;
                         
-                        formModal.querySelector("#tanggal_kembali").value = getDate().tgl_kembali;
+                        formModal.querySelector("#tanggal_kembali").value = getDate().formattedDate1;
                         document.getElementById("form_tgl_kembali").innerHTML = getDate().tgl_kembali;
 
                         alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
@@ -708,7 +749,7 @@
                         location.reload();
                     
                     }else{
-                        formModal.querySelector("#id_buku").value = kode_buku;    
+                        formModal.querySelector("#kode_buku").value = kode_buku;    
                         document.getElementById("form_kode_buku").innerHTML = kode_buku;
                         document.getElementById("form_judul_buku").innerHTML = buku.find(x => x.kode_buku == kode_buku).judul_buku;
 

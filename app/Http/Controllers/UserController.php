@@ -139,40 +139,6 @@ class UserController extends Controller
             'email' => 'Email atau password salah, coba lagi!',
         ])->onlyInput('email');
 
-        // $email      = $_POST['email'];
-        // $password   = $_POST['password'];
-
-        // try{
-
-        //     $validation = User::select('id_user')->where('email', $email)
-        //                      ->where('password', $password)->exists();
-
-        //     if ($validation == true) {
-        //         return response()->json(
-        //             [
-        //                 'error'=>false,
-        //                 'message'=>'Login Berhasil'
-        //             ]
-        //         );
-        //      } else{
-        //         return response()->json(
-        //             [
-        //                 'error'=>true,
-        //                 'message'=>'Email/Password Salah'
-        //             ]
-        //         );
-        //      }
-
-        // }
-        // catch(\Exception $e){
-        //     return response()->json(
-        //         [
-        //             'error'=>true,
-        //             'message'=>$e->getMessage()
-        //         ]
-        //     );
-        //  }
-
     }
 
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PinjamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,11 @@ Route::middleware(['auth'])->group(function() {
     // halaman user
     Route::middleware(['checkRole:2'])->group(function() {
         Route::prefix('user')->group(function() {
-            Route::get('/profile',     [UserController::class,'userProfile'])->name('profile');
+            Route::get('/profile',      [UserController::class,'userProfile'])->name('profile');
             Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
             Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
-            Route::get('/history',     [UserController::class,'userHistory'])->name('history');
+            Route::get('/history',      [UserController::class,'userHistory'])->name('history');
             Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
         });
     });
@@ -36,9 +37,9 @@ Route::middleware(['auth'])->group(function() {
     // halaman admin
     Route::middleware(['checkRole:0|1'])->group(function() {
         Route::prefix('admin')->group(function() {
-            Route::get('/', [AdminController::class, 'index'])->name('adminIndex');
-            Route::get('/books',  [AdminController::class,'adminBookView'])->name('adminBooks');
-            Route::get('/users',  [AdminController::class,'adminUserView'])->name('adminUsers');
+            Route::get('/',             [AdminController::class, 'index'])->name('adminIndex');
+            Route::get('/books',        [AdminController::class,'adminBookView'])->name('adminBooks');
+            Route::get('/users',        [AdminController::class,'adminUserView'])->name('adminUsers');
             Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('adminLendBooks'); 
         });
     });
@@ -46,14 +47,11 @@ Route::middleware(['auth'])->group(function() {
 
 
 // user
-Route::get('/login',           [UserController::class,'loginView'])->name('login');
-Route::post('/login',           [UserController::class,'Login'])->name('auth');
-Route::post('/logout',           [UserController::class,'Logout'])->name('logout');
-Route::post('/register',        [UserController::class,'Register']);
+Route::get('/login',       [UserController::class,'loginView'])->name('login');
+Route::post('/login',      [UserController::class,'Login'])->name('auth');
+Route::post('/logout',     [UserController::class,'Logout'])->name('logout');
+Route::post('/register',   [UserController::class,'Register']);
 
-
-
-    
     // admin user
     Route::post('/update-create-user',   [AdminController::class,'updateCreateUser']);
 
@@ -64,8 +62,8 @@ Route::get('/get-pinjam',  [Controller::class,'getPinjamJson']);
 
 // buku
 Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
-// Route::post('/tambah-buku', [BukuController::class,'tambahBuku']);
-// Route::post('/update-buku', [BukuController::class,'updateBuku']);
 
+//Pinjam
+Route::post('/input-data-pinjam', [PinjamController::class,'inputDataPinjam']);
 
 Route::post('/coba', [BukuController::class,'coba']);

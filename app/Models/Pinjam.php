@@ -10,6 +10,7 @@ class Pinjam extends Model
     protected $table = 'tbl_pinjam';
     protected $primaryKey = 'id_pinjam';
     protected $fillable = [
+        'id_pinjam',
         'nim',
         'kode_buku',
         'tgl_pinjam',
