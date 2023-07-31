@@ -60,6 +60,8 @@ Route::get('/get-buku',    [Controller::class,'getBukuJson']);
 Route::get('/get-user',    [Controller::class,'getUserJson']);
 Route::get('/get-pinjam',  [Controller::class,'getPinjamJson']);
 
+Route::get('/get-data-pinjam',  [Controller::class,'getDataPinjam']);
+
 // buku
 Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
 

@@ -75,6 +75,19 @@ class Controller extends BaseController
         return $pinjam;
     }
 
+    public function getDataPinjam(){
+        $data_pinjam = Pinjam::All();
+
+        $user = Pinjam::find()->user;
+
+        return response()->json(
+            [
+                'error'=>'false',
+                'data'=>$user
+            ]
+        );
+    }
+
     public function getPinjamJson(){
 
         $pinjam = app(Controller::class)->getPinjam();
