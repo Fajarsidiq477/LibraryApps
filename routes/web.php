@@ -68,4 +68,4 @@ Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
 //Pinjam
 Route::post('/input-data-pinjam', [PinjamController::class,'inputDataPinjam']);
 
-Route::post('/coba', [BukuController::class,'coba']);
+Route::get('/coba', [BukuController::class,'coba']);

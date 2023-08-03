@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="volume" class="mb-2">Volume</label>
-                                        <input type="number" class="form-control custom-form-control" name="volume" id="volume" required />
+                                        <input type="number" class="form-control custom-form-control" name="volume" id="volume" />
                                     </div>
                                     <!-- <div class="form-group mb-3">
                                         <label for="jenis" class="mb-2">Jenis</label>
@@ -219,6 +219,8 @@
                         icon: "success",
                     });
 
+                    location.reload();
+
                     // Script jika data dihapus di bawah sini
                 } else {
                     swal("Data tidak dihapus!");
@@ -241,7 +243,7 @@
                     for(i=0; i<data.data.length; i++){
                         if(id == data.data[i].kode_buku){
                             const formModal = modalEl.querySelector("#form-modal");
-                            document.getElementById("imageInputDisplay").src =`cover_images/${data.data[i].cover_depan}`;
+                            document.getElementById("imageInputDisplay").src =`http://localhost:8000/cover_images/${data.data[i].cover_depan}`;
                             formModal.querySelector("#cover2").value         = data.data[i].cover_depan;
                             formModal.querySelector("#kode").value           = data.data[i].kode_buku;
                             formModal.querySelector("#judul").value          = data.data[i].judul_buku;
@@ -313,7 +315,10 @@
                                 };
                             }
     
-                            swal(swalOption);
+                            swal(swalOption).then(() => {
+                                // me-reload halaman saat tombol "Oke" diklik
+                                location.reload();
+                            });
                         } else{
                             alert((data.message));    
                         }

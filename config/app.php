@@ -83,6 +83,7 @@ return [
     |
     */
 
+    // diubah ke bahasa indonesia
     'locale' => 'en',
 
     /*

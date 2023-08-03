@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Buku;
 
 class BukuController extends Controller
@@ -187,20 +188,13 @@ class BukuController extends Controller
 
     public function coba(Request $request){
 
-        // $cover_depan    = $request->file('cover_depan');
-        $cover_depan    = $request->imageInputDisplay;
-
-        // if($cover_depan == null){
-        //     $nama_file = "lalieur";
-        // }else{
-        //     $nama_file = $cover_depan->getClientOriginalName();
-        // }
+        $user_data = Auth::user();
         
         try{
             return response()->json(
                 [
                     'error'=>false,
-                    'message'=>$cover_depan
+                    'message'=>$user_data
                 ]
             );
         }
@@ -208,7 +202,7 @@ class BukuController extends Controller
             return response()->json(
                 [
                     'error'=>true,
-                    'message'=>$cover_depan
+                    'message'=>"gagal"
                 ]
             );
         }

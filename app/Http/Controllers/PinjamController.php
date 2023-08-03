@@ -11,7 +11,8 @@ class PinjamController extends Controller
         
         $id_pinjam      = $request->id_pinjam;
         $nim            = $request->nim;
-        $kode_buku      = $request->kode_buku;
+        // $kode_buku      = $request->kode_buku;
+        $id_buku        = $request->id_buku;
         $tgl_pinjam     = $request->tgl_pinjam;
         $tgl_kembali    = $request->tgl_kembali;
 
@@ -20,7 +21,7 @@ class PinjamController extends Controller
             $query = Pinjam::create([
                 'id_pinjam'     => $id_pinjam,
                 'nim'           => $nim,
-                'kode_buku'     => $kode_buku,
+                'id_buku'       => $id_buku,
                 'tgl_pinjam'    => $tgl_pinjam,
                 'tgl_kembali'   => $tgl_kembali,
                 'status_pinjam' => '0',

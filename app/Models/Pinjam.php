@@ -12,7 +12,7 @@ class Pinjam extends Model
     protected $fillable = [
         'id_pinjam',
         'nim',
-        'kode_buku',
+        'id_buku',
         'tgl_pinjam',
         'tgl_kembali',
         'status_pinjam',
@@ -27,7 +27,7 @@ class Pinjam extends Model
 
     public function Buku()
     {
-        return $this->belongsTo(Buku::class, 'kode_buku');
+        return $this->belongsTo(Buku::class, 'id_buku');
     }
 
     public function Denda()

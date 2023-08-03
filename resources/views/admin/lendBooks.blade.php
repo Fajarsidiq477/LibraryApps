@@ -28,7 +28,35 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach ($pinjam as $item)
                     <tr class="align-middle">
+                        <td>
+                            <input type="checkbox" name="" id="" />
+                        </td>
+                        <td>
+                            <img
+                                src="{{ asset('cover_images/' . $item->cover_depan) }}"
+                                alt="Book cover"
+                                style="width: 100px;"
+                            />
+                        </td>
+                        <td>{{ $item->kode_buku }}</td>
+                        <td>{{ $item->judul_buku }}</td>
+                        <td>{{ $item->peminjam }}</td>
+                        <td>{{ $item->tgl_pinjam }}</td>
+                        <td>
+                            <a
+                                href="#"
+                                class="badge text-dark"
+                                onclick="deleteData(1)"
+                            >
+                                <i data-feather="trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+
+                    <!-- <tr class="align-middle">
                         <td>
                             <input type="checkbox" name="" id="" />
                         </td>
@@ -51,7 +79,9 @@
                                 <i data-feather="trash"></i>
                             </a>
                         </td>
-                    </tr>
+                    </tr> -->
+
+
                 </tbody>
 
                 <!-- Alert query pencarian tidak ada -->
@@ -610,11 +640,14 @@
             const tanggal_kembali =
                 formModal.querySelector("#tanggal_kembali").value;
 
+            const id_buku = buku.find(x => x.kode_buku == kode_buku).id_buku;
+
             return (data = {
                 mode,
                 id_peminjaman,
                 nim,
                 kode_buku,
+                id_buku,
                 tanggal_pinjam,
                 tanggal_kembali,
             });
@@ -634,7 +667,8 @@
                     data: {
                         id_pinjam   : data.id_peminjaman,
                         nim         : data.nim,
-                        kode_buku   : data.kode_buku,
+                        // kode_buku   : data.kode_buku,
+                        id_buku     : data.id_buku,
                         tgl_pinjam  : data.tanggal_pinjam,
                         tgl_kembali : data.tanggal_kembali,
                     },
@@ -716,7 +750,7 @@
 
                         formModal.querySelector("#nim").value = nim_peminjam;
                         document.getElementById("form_nim").innerHTML = nim_peminjam;
-                        document.getElementById("form_nama_peminjam").innerHTML = user.find(x => x.nim == parseInt(nim_peminjam)).username;
+                        document.getElementById("form_nama_peminjam").innerHTML = user.find(x => x.nim == parseInt(nim_peminjam)).name;
                         
                         let total_pinjam = 1;
                 

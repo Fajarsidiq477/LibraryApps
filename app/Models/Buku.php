@@ -34,7 +34,7 @@ class Buku extends Model
 
     public function Pinjam()
     {
-        return $this->hasMany(Pinjam::class, 'kode_buku');
+        return $this->hasMany(Pinjam::class, 'id_buku');
     }
 
     public function Simpan()

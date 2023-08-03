@@ -35,9 +35,15 @@
                             </td>
                             <td>1</td>
                             <td>{{ $item->nim }}</td>
-                            <td>{{ $item->username }}</td>
-                            <td>{{ $item->role }}</td>
-                            <td>{{ $item->number }}</td>
+                            <td>{{ $item->name }}</td>
+                            @if($item->role == '0')
+                                <td>Super Admin</td>
+                            @elseif($item->role == '1')
+                                <td>Admin</td>
+                            @elseif($item->role == '2')
+                                <td>Member</td>
+                            @endif
+                            <td>{{ $item->phone }}</td>
                             <td>0</td>
                             <td>
                                 <a
@@ -216,7 +222,7 @@
                                         <input
                                             type="number"
                                             class="form-control custom-form-control"
-                                            id="handphone"
+                                            id="phone"
                                             name="phone"
                                             required
                                         />
@@ -225,8 +231,8 @@
                                         <label for="role" class="mb-2">Role</label >
                                         <select name="role" id="role" class="form-select custom-form-control" required>
                                         <option value="" selected disabled>...</option>    
-                                        <option value="Member">Member</option>
-                                            <option value="Admin">Admin</option>
+                                        <option value="2">Member</option>
+                                            <option value="1">Admin</option>
                                         </select>
                                     </div>
 
@@ -276,15 +282,22 @@
         const putEditData = (id) => {
             
             const formModal = modalEl.querySelector("#form-modal");
-            document.getElementById("imageInputDisplay").src =`profile_pictures/${user.find(x => x.nim == id).profile_picture}`;
+            document.getElementById("imageInputDisplay").src =`http://localhost:8000/profile_pictures/${user.find(x => x.nim == id).profile_picture}`;
 
             formModal.querySelector("#nim").value           = id;
             formModal.querySelector("#picture2").value      = user.find(x => x.nim == id).profile_picture;
-            formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).username;
+            formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).name;
             formModal.querySelector("#email").value         = user.find(x => x.nim == id).email;
             formModal.querySelector("#password").value      = user.find(x => x.nim == id).password;
-            formModal.querySelector("#handphone").value     = user.find(x => x.nim == id).number;
-            formModal.querySelector("#role").value          = user.find(x => x.nim == id).role;
+            formModal.querySelector("#phone").value         = user.find(x => x.nim == id).phone;
+            
+            if(user.find(x => x.nim == id).role == 1){
+                formModal.querySelector("#role").value       = "1";
+            }
+            else if(user.find(x => x.nim == id).role == 2){
+                formModal.querySelector("#role").value       = "2";
+            }
+            
             
             // let nama_user = user.find(x => x.nim == id).nama_user;
             // console.log(nama_user);

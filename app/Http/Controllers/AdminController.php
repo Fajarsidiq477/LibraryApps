@@ -22,7 +22,10 @@ class AdminController extends Controller
     }
 
     public function lendBookView(){
-        return view('admin/lendbooks');
+
+        $pinjam = app(Controller::class)->getDataPinjam();
+
+        return view('admin/lendbooks', ['pinjam' => $pinjam]);
     }
 
     public function adminUserView(){
@@ -38,10 +41,10 @@ class AdminController extends Controller
 
         $nim        = $request->nim;
         $picture    = $request->file('picture1');
-        $username   = $request->username;
+        $name       = $request->name;
         $email      = $request->email;
         $password   = $request->password;
-        $number     = $request->number;
+        $phone      = $request->phone;
         $role       = $request->role;
 
         
@@ -84,12 +87,12 @@ class AdminController extends Controller
             User::updateOrCreate(
                 ['nim' => $nim],
                 [
-                    'username' => $username,
-                    'email' => $email,
-                    'password' => $password,
-                    'number' => $number,
-                    'role' => $role,
-                    'profile_picture' => $profile_picture
+                    'name'              => $name,
+                    'email'             => $email,
+                    'password'          => bcrypt($password),
+                    'phone'             => $phone,
+                    'role'              => $role,
+                    'profile_picture'   => $profile_picture
                 ]
             );
 

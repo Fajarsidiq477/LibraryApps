@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('tbl_pinjam', function (Blueprint $table) {
             $table->id('id_pinjam');
             $table->foreignId('nim');
-            $table->string('kode_buku', 10)->unique();
+            $table->foreignId('id_buku');
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali')->nullable();
             $table->enum('status_pinjam', [0, 1, 2]); // status 0 = Pinjam, 1 = Selesai, 2 = Hilang

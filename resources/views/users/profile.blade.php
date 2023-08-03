@@ -11,7 +11,7 @@
                 <div class="card p-4 text-center">
                     <div class="profile-img">
                         <img
-                            src="http://placehold.co/200x200"
+                            src=" {{ asset('profile_pictures/'. $user_data->profile_picture) }}"
                             alt="profile-img"
                         />
                         <button class="btn btn-secondary">
@@ -20,6 +20,7 @@
                     </div>
                     <h3 class="profile-name mt-3">
                         {{ $user_data->name }}
+                        
                     </h3>
                     <p class="profile-nim">{{ $user_data->nim }}</p>
                 </div>
