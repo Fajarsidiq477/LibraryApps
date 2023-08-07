@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,7 +29,10 @@ class UserController extends Controller
     }
 
     public function userIndex(){
-        return view('users/index');
+        
+        $user_data = Auth::user();
+
+        return view('users/index', ['user_data' => $user_data]);
     }
 
     public function userActivity() {
@@ -36,13 +40,49 @@ class UserController extends Controller
     }
 
     public function userBorrowed() {
-        return view('users/borrowed');
+        
+        $user_data = Auth::user();
+
+        // $pinjam = app(Controller::class)->getPinjam();
+        $pinjam = app(Controller::class)->getDataPinjam();
+
+        $collection = Collection::make($pinjam);
+
+        $data_pinjam = $collection->filter(function ($item) use ($user_data) {
+            return $item['nim'] == $user_data->nim && $item['status_pinjam'] == 0 || $item['status_pinjam'] == 3;
+        });
+
+        return view('users/borrowed', ['user_data' => $user_data, 'data_pinjam' => $data_pinjam]);
+
     }
     public function userHistory() {
-        return view('users/history');
+
+        $user_data = Auth::user();
+
+        // $pinjam = app(Controller::class)->getPinjam();
+        $pinjam = app(Controller::class)->getDataPinjam();
+
+        $collection = Collection::make($pinjam);
+
+        $data_pinjam = $collection->filter(function ($item) use ($user_data) {
+            return $item['nim'] == $user_data->nim && $item['status_pinjam'] == 1 || $item['status_pinjam'] == 2;
+        });
+
+        return view('users/history', ['user_data' => $user_data, 'data_pinjam' => $data_pinjam]);
     }
     public function userFavorite() {
-        return view('users/favorite');
+        
+        $user_data = Auth::user();
+        $simpan = app(Controller::class)->getDataSimpan();
+        
+        $collection = Collection::make($simpan);
+        
+        $data_simpan = $collection->filter(function ($item) use ($user_data) {
+            return $item['nim'] == $user_data->nim;
+        });
+
+        return view('users/favorite', ['user_data' => $user_data, 'data_simpan' => $data_simpan]);
+    
     }
 
     public function userBookDetail($bookCode = null){

@@ -8,7 +8,7 @@
 @section('main')
 <div class="container mt-4 py-4">
 
-    <a href="{{ route('userIndex') }}" class="fw-bold">&lt; Kembali</a>
+    <!-- <a href="{{ route('userIndex') }}" class="fw-bold">&lt; Kembali</a> -->
     
     <div class="mt-3 row justify-content-center align-items-center">
         @if ($book)

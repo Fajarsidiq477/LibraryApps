@@ -31,7 +31,7 @@ return new class extends Migration
             // $table->string('cover_belakang');
             // $table->enum('kelayakan', ['Layak', 'Tidak Layak']);
             $table->enum('jenis', ['R', 'Non R']);
-            $table->enum('status_buku', ['Tersedia', 'Dipinjam']);
+            $table->enum('status_buku', ['Tersedia', 'Dipinjam']);  // 0 = Tersedia, 1 = Dipinjam, 2 = Hilang
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });

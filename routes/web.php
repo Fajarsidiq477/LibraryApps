@@ -20,8 +20,9 @@ use App\Http\Controllers\PinjamController;
 
 Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
+Route::post('/save', [BukuController::class,'bookSave']);
+
 Route::middleware(['auth'])->group(function() {
-    
     // halaman user
     Route::middleware(['checkRole:2'])->group(function() {
         Route::prefix('user')->group(function() {
@@ -31,6 +32,7 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
             Route::get('/history',      [UserController::class,'userHistory'])->name('history');
             Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
+            Route::get('/book/{bookCode?}',[UserController::class,'userBookDetail'])->name('userBookDetail');
         });
     });
 
@@ -68,4 +70,4 @@ Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
 //Pinjam
 Route::post('/input-data-pinjam', [PinjamController::class,'inputDataPinjam']);
 
-Route::get('/coba', [BukuController::class,'coba']);
+Route::get('/coba', [Controller::class,'coba']);

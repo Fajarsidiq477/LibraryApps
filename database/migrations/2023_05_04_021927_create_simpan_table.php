@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::dropIfExists('tbl_simpan');
         Schema::create('tbl_simpan', function (Blueprint $table) {
             $table->id('id_simpan');
-            $table->foreignId('id_user');
+            $table->foreignId('nim');
             $table->foreignId('id_buku');
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();

@@ -44,6 +44,39 @@
         //get data buku
         const buku = [];
 
+        function bookSave(nim, id_buku){
+
+            $.ajax({
+                url: '/save',
+                type: "POST",
+                headers: headers,
+                data: {
+                    nim     : nim,
+                    id_buku : id_buku,
+                },
+                success: function (data) {
+                    data = JSON.parse(JSON.stringify(data));
+                    swalOption = {
+                        title: data.message,
+                        icon: "success",
+                        button: "Oke!",
+                    };
+                    swal(swalOption);                    
+                }
+                ,
+                error: function (data, textStatus, errorThrown) {
+                    data = JSON.parse(JSON.stringify(data));
+                    data = JSON.parse(JSON.stringify(data));
+                    swalOption = {
+                        title: data.message,
+                        icon: "error",
+                        button: "Baik",
+                    };
+                    swal(swalOption); 
+                },
+            });
+        }
+
         // Grid mode
         const createGridCard = (buku, i) => {
             return `
@@ -220,6 +253,7 @@
                         >
                             <a
                                 href="#"
+                                onclick="bookSave(nim='{{ $user_data->nim }}', id_buku = '${buku[i].id_buku}')"
                                 class="badge bg-secondary"
                                 style="text-decoration: none"
                                 >

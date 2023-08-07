@@ -39,6 +39,6 @@ class Buku extends Model
 
     public function Simpan()
     {
-        return $this->hasMany(Simpan::class, 'kode_buku');
+        return $this->hasMany(Simpan::class, 'id_buku');
     }
 }

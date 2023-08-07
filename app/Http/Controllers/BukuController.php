@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Models\Buku;
+use App\Models\Simpan;
 
 class BukuController extends Controller
 {
@@ -186,26 +189,44 @@ class BukuController extends Controller
         }
     }
 
-    public function coba(Request $request){
-
-        $user_data = Auth::user();
+    public function bookSave(Request $request){
+        
+        $nim        = $request->nim;
+        $id_buku    = $request->id_buku;
         
         try{
-            return response()->json(
-                [
-                    'error'=>false,
-                    'message'=>$user_data
-                ]
-            );
-        }
-        catch(\Exception $e){
+
+            if(Simpan::where('nim', $nim)->where('id_buku', $id_buku)->exists()){
+                return response()->json(
+                    [
+                        'error'=>false,
+                        'message'=>'Buku ini telah anda tambahkan ke favorit :)'
+                    ]
+                );
+            }else{
+
+                $query = Simpan::create([
+                    'nim' => $nim,
+                    'id_buku' => $id_buku,
+                ]);
+
+                return response()->json(
+                    [
+                        'error'=>false,
+                        'message'=>'Buku telah ditambahkan ke favorit :D'
+                    ]
+                );
+
+            }
+
+        }catch(\Exception $e){
             return response()->json(
                 [
                     'error'=>true,
-                    'message'=>"gagal"
+                    'message'=>'Gagal',
+                    'err_message'=>$e->getMessage(),
                 ]
             );
         }
-    
     }
 }
