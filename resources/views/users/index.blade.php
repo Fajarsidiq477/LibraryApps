@@ -253,7 +253,7 @@
                         >
                             <a
                                 href="#"
-                                onclick="bookSave(nim='{{ $user_data->nim }}', id_buku = '${buku[i].id_buku}')"
+                                onclick="#"
                                 class="badge bg-secondary"
                                 style="text-decoration: none"
                                 >
