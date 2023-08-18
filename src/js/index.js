@@ -1,5 +1,7 @@
-import "./styles/style.scss";
-import { resetForm, getDataSentByButton } from "./scripts/utils/modal-utils";
+import "../sass/main.scss";
+import { resetForm, getDataSentByButton } from "./utils/modal-utils";
+
+// import * as bootstrap from "bootstrap";
 
 export let stepIndex = 0;
 
@@ -97,3 +99,28 @@ export const whenModalShow = (modalEl, category, event) => {
     // end multistep next funcionality
 };
 // end func when modal show has been triggered
+
+// console.log(dataSource);
+
+import feather from "feather-icons";
+feather.replace();
+
+// LIT Components
+import "./components";
+
+import * as bootstrap from "bootstrap";
+
+// pages
+import UserIndex from "./pages/UserIndex";
+
+const scriptSource = document.querySelector("body").dataset.source;
+const scriptSources = {
+    userIndex: UserIndex,
+};
+
+const detectScriptSources = () => scriptSources[scriptSource];
+
+window.addEventListener("DOMContentLoaded", async () => {
+    const source = detectScriptSources();
+    source.init();
+});

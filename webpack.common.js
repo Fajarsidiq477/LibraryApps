@@ -1,11 +1,13 @@
+"use strict";
+
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
-        vendor: "./src/vendor.js",
-        main: "./src/index.js",
+        vendor: "./src/js/vendor.js",
+        main: "./src/js/index.js",
     },
     output: {
         filename: "[name].js",

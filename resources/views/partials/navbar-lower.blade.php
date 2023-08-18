@@ -6,24 +6,6 @@
                     class="row justify-content-between align-items-center"
                     style="width: 100%"
                 >
-                    <div class="col navbar-mode">
-                        <div class="d-flex align-items-center gap-2">
-                            <button
-                                class="btn text-light p-1"
-                                onclick="selectListMode()"
-                            >
-                                <i data-feather="list"></i>
-                            </button>
-                            <div class="switch-status switch"></div>
-
-                            <button
-                                class="btn text-light p-1"
-                                onclick="selectGridMode()"
-                            >
-                                <i data-feather="grid"></i>
-                            </button>
-                        </div>
-                    </div>
                     <div class="col navbar-filter text-end">
                         <a
                             href="#"

@@ -77,39 +77,6 @@
             });
         }
 
-        // Grid mode
-        const createGridCard = (buku, i) => {
-            return `
-                <div class="col-12 col-md-5 p-3 bg-book-cover grid">
-                    <a onclick="bookDetailAside(buku, ${i})" style="text-decoration:none" class="book-field text-dark">
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                                <div>
-                                    <img
-                                        src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
-                                        alt="book cover"
-                                        class="img-fluid"
-                                        width="100"
-                                    />
-                                </div>
-
-                                <div class="book-description mt-2">
-                                    <h4 class="book-title">
-                                        <a href="#">
-                                            ${buku[i].judul_buku}
-                                        </a>
-                                    </h4>
-                                    <p class="book-year">${buku[i].thn_terbit}</p>
-                                    <h5 class="book-author">
-                                        ${buku[i].penulis}
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            `;
-        };
 
         const createListCard = (buku, i) => {
             

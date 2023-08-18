@@ -4,37 +4,6 @@
 
         <div class="col-md-6 d-none d-md-flex">
             <div class="input-group p-2">
-                <button
-                    class="btn dropdown-toggle bg-secondary text-light"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
-                    Kategori
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="#"
-                            >Action before</a
-                        >
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#"
-                            >Another action before</a
-                        >
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#"
-                            >Something else here</a
-                        >
-                    </li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li>
-                        <a class="dropdown-item" href="#"
-                            >Separated link</a
-                        >
-                    </li>
-                </ul>
                 <input
                     type="text"
                     class="form-control"

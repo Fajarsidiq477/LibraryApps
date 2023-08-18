@@ -3,6 +3,7 @@ const common = require("./webpack.common");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const autoprefixer = require("autoprefixer");
 
 module.exports = merge(common, {
     mode: "production",
@@ -13,9 +14,31 @@ module.exports = merge(common, {
     module: {
         rules: [
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.(scss)$/i,
 
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+                use: [
+                    {
+                        // Adds CSS to the DOM by injecting a `<style>` tag
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    {
+                        // Interprets `@import` and `url()` like `import/require()` and will resolve them
+                        loader: "css-loader",
+                    },
+                    {
+                        // Loader for webpack to process CSS with PostCSS
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [autoprefixer],
+                            },
+                        },
+                    },
+                    {
+                        // Loads a SASS/SCSS file and compiles it to CSS
+                        loader: "sass-loader",
+                    },
+                ],
             },
         ],
     },

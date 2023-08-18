@@ -266,6 +266,10 @@ main {
         left: 50%;
         transform: translateX(-50%);
     }
+
+    option:hover {
+        cursor: pointer;
+    }
 }
 
 .left-bar {
