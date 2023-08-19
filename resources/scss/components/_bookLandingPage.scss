@@ -1,0 +1,39 @@
+.book-field {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    @media screen and (max-width: $bp-mobile) {
+        font-size: 1rem;
+    }
+}
+
+.book-author {
+    font-size: 1rem;
+    font-style: italic;
+
+    @media screen and (max-width: $bp-mobile) {
+        font-size: 0.9rem;
+    }
+}
+
+.bg-book-cover {
+    background-color: #f4ece5;
+
+    @media screen and (max-width: $bp-mobile) {
+        background-color: transparent;
+    }
+}
+
+.book-detail-cover {
+    width: 80%;
+
+    @media screen and (max-width: $bp-tablet) {
+        width: 50%;
+    }
+}

@@ -1,0 +1,55 @@
+.profile-row {
+    min-height: 70vh;
+
+    .left {
+        gap: 1rem;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        align-content: center;
+        flex-wrap: nowrap;
+        align-items: stretch;
+
+        .card {
+            border-radius: 38px;
+            height: 70%;
+
+            .profile-img {
+                min-width: 200px;
+                min-height: 200px;
+                max-width: 200px;
+                max-height: 200px;
+                margin-inline: auto;
+                position: relative;
+
+                img {
+                    border-radius: 100%;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                button {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                }
+            }
+        }
+
+        .d-grid {
+            height: 15%;
+        }
+
+        .active {
+            background-color: $secondary;
+            color: white;
+        }
+    }
+
+    .right {
+        .card {
+            border-radius: 38px;
+            height: 100%;
+        }
+    }
+}

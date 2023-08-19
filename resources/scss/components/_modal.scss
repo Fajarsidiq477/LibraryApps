@@ -1,0 +1,22 @@
+.modal-content {
+    border-radius: 0;
+    border: none;
+
+    .modal-header {
+        display: block;
+        text-align: center;
+        padding-block: 5px;
+        border-radius: 0;
+
+        position: relative;
+
+        .btn-close {
+            position: absolute;
+            left: 10px;
+            top: 75%;
+            // bottom: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+    }
+}

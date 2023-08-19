@@ -86,9 +86,7 @@ class SearchForm extends LitWithoutShadowDom {
         `;
 
         try {
-            if (searchKeyword.length == 0) {
-                resultMessageField.innerHTML = "";
-            }
+            resultMessageField.innerHTML = "";
 
             const response = await axios.post(
                 `${this.searchFrom}`,
@@ -102,9 +100,11 @@ class SearchForm extends LitWithoutShadowDom {
                 }
             );
 
-            resultMessageField.innerHTML = `<span>${response.data.message}</span>`;
+            console.log(response);
 
-            this._populateDataToBody();
+            return (resultMessageField.innerHTML = `<span>${response.data.message}</span>`);
+
+            // this._populateDataToBody();
 
             // throw new Error(
             //     `<span>Buku dengan keyword "${searchKeyword}" tidak ditemukan</span>`

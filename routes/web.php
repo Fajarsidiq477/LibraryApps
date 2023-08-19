@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PinjamController;
 
@@ -71,3 +72,11 @@ Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
 Route::post('/input-data-pinjam', [PinjamController::class,'inputDataPinjam']);
 
 Route::get('/coba', [Controller::class,'coba']);
+
+
+
+// testing
+Route::post('/search-book',    [BookDataController::class,'search'])->name('searchBookData');
+Route::get('/testing', function() {
+    return view('users.nyobaMix');
+});
