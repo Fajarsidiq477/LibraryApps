@@ -92,7 +92,7 @@ class AsideCanvas extends LitWithoutShadowDom {
                             style="border-bottom: 2px solid rgba(0, 0, 0, 0.7)"
                         >
                             <span style="margin-right: 1rem">Filter</span>
-                            <i data-feather="filter"></i>
+                            <i class="bi bi-filter"></i>
                         </div>
                         <div class="container mt-3">
                             <h5>Status</h5>

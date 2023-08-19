@@ -120,10 +120,12 @@
                 bookId: "sip-123",
                 bookName: "Islam Yang Disalahpahami",
                 bookYear: "2005",
-                bookGenre: "Aqidah",
+                bookGenre: "Aqidah, Akhlak",
                 bookAuthor: "M. Quraish Shihab",
                 bookPublisher: "Lentera Hati",
                 bookStatus: "Tersedia",
+                bookDetailUrl: `/users/book-detail.html`,
+                bookFavoriteUrl: `/link/link`,
             };
 
             for (let i = 0; i < 10; i++) {
@@ -137,6 +139,9 @@
                             bookAuthor="${bookData.bookAuthor}"
                             bookPublisher="${bookData.bookPublisher}"
                             bookStatus="${bookData.bookStatus}"
+                            bookDetailUrl="${bookData.bookDetailUrl}"
+                            bookFavoriteUrl=${bookData.Url}
+                            bookFavorite=true
                         >
                         </book-card>
                     </div>

@@ -31,6 +31,14 @@ class BookCard extends LitWithoutShadowDom {
             type: String,
             reflect: true,
         },
+        bookDetailUrl: {
+            type: String,
+            reflect: true,
+        },
+        bookFavorite: {
+            type: Boolean,
+            reflect: true,
+        },
     };
 
     _checkAvailabilityProperty() {
@@ -69,6 +77,16 @@ class BookCard extends LitWithoutShadowDom {
                 `Atribut "bookStatus" harus diterapkan pada elemen ${this.localName}`
             );
         }
+        if (!this.hasAttribute("bookDetailUrl")) {
+            throw new Error(
+                `Atribut "bookDetailUrl" harus diterapkan pada elemen ${this.localName}`
+            );
+        }
+        if (!this.hasAttribute("bookFavorite")) {
+            throw new Error(
+                `Atribut "bookFavorite" harus diterapkan pada elemen ${this.localName}`
+            );
+        }
     }
     constructor() {
         super();
@@ -76,7 +94,8 @@ class BookCard extends LitWithoutShadowDom {
         this._checkAvailabilityProperty();
     }
 
-    _bookDetail() {
+    _bookDetail(e) {
+        e.stopPropagation();
         const offCanvas = document.querySelector(
             "#offcanvasRight #offcanvas-content"
         );
@@ -86,10 +105,7 @@ class BookCard extends LitWithoutShadowDom {
 
             <div class="book-detail text-center px-4">
                 <div class="aside-header">
-                    <span
-                        class="d-inline-block bg-secondary badge py-2 px-4 rounded text-light mb-2"
-                        >${this.bookGenre}</span
-                    >
+                  
                     <img
                         src="http://placehold.co/160x225"
                         class="d-block mx-auto img-fluid mb-2"
@@ -99,7 +115,7 @@ class BookCard extends LitWithoutShadowDom {
                     
                 </div>
                 <div class="aside-description text-start mt-4">
-                    <h4 class="book-title"><a href="#" class="text-dark">${this.bookName}</a></h4>
+                    <a href="${this.bookDetailUrl}" class="text-dark"><h4 class="book-title">${this.bookName}</h4></a>
                     <p class="book-year">${this.bookYear}</p>
                     <h5 class="book-author">${this.bookAuthor}</h5>
                     <p class="book-publisher fw-bold">${this.bookPublisher}</p>
@@ -112,32 +128,77 @@ class BookCard extends LitWithoutShadowDom {
         `;
     }
 
+    _favoriteButton(e) {
+        e.preventDefault();
+        try {
+            this._toggleFavoriteButton(this);
+        } catch (e) {}
+    }
+
+    _toggleFavoriteButton(thiss) {
+        if (thiss.bookFavorite) {
+            thiss.bookFavorite = false;
+            e.srcElement.parentElement.innerHTML = '<i class="bi bi-star"></i>';
+        } else {
+            thiss.bookFavorite = true;
+            e.srcElement.parentElement.innerHTML =
+                '<i class="bi bi-star-fill"></i>';
+        }
+    }
+
     render() {
+        let favoriteButtonIcon = "";
+
+        if (this.bookFavorite) {
+            favoriteButtonIcon = html`<i class="bi bi-star-fill"></i>`;
+        } else {
+            favoriteButtonIcon = html`<i class="bi bi-star"></i>`;
+        }
+
         return html`
             <div>
-                <a
-                    @click=${this._bookDetail}
-                    style="text-decoration:none"
-                    class="book-field text-dark"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    data-bs-source="bookDetail"
-                >
-                    <div class="row mb-2">
-                        <div class="col col-md-5">
+                <div class="row mb-2">
+                    <div class="col col-md-5 text-center ">
+                        <div class="position-relative bg-dark">
                             <img
                                 src="http://placehold.co/160x225"
                                 alt="book cover"
-                                class="img-fluid"
+                                class="img-fluid mx-auto"
+                                style="width:100%; height: 100%"
                             />
+                            <a
+                                href="#"
+                                @click="${this._favoriteButton}"
+                                class="position-absolute favoriteButton"
+                                style="right:5px; font-size: 150%"
+                            >
+                                ${favoriteButtonIcon}
+                            </a>
                         </div>
-                        <div class="col col-md-7 pt-2">
-                            <h4 class="book-title">${this.bookName}</h4>
+                    </div>
+                    <div class="col col-md-7 pt-2 d-flex flex-column">
+                        <div class="col">
+                            <a
+                                @click=${this._bookDetail}
+                                class="book-field text-dark"
+                                data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight"
+                                data-bs-source="bookDetail"
+                            >
+                                <h4 class="book-title">${this.bookName}</h4>
+                            </a>
+
                             <h5 class="book-author">${this.bookAuthor}</h5>
                             <p class="book-year">${this.bookYear}</p>
                         </div>
+                        <div class="col d-flex align-items-end">
+                            <div>
+                                <p class="fw-bold mb-0">Genre</p>
+                                <p class="genre">${this.bookGenre}</p>
+                            </div>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
         `;
     }
