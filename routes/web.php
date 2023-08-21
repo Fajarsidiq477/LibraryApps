@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PinjamController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,10 +51,10 @@ Route::middleware(['auth'])->group(function() {
 
 
 // user
-Route::get('/login',       [UserController::class,'loginView'])->name('login');
-Route::post('/login',      [UserController::class,'Login'])->name('auth');
-Route::post('/logout',     [UserController::class,'Logout'])->name('logout');
-Route::post('/register',   [UserController::class,'Register']);
+Route::get('/login',       [AuthController::class,'loginView'])->name('login');
+Route::post('/login',      [AuthController::class,'Login'])->name('auth');
+Route::post('/logout',     [AuthController::class,'Logout'])->name('logout');
+Route::post('/register',   [AuthController::class,'Register']);
 
     // admin user
     Route::post('/update-create-user',   [AdminController::class,'updateCreateUser']);
