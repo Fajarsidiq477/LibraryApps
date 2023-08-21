@@ -3034,7 +3034,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // pages
 
 
-var scriptSource = document.querySelector("body").dataset.source;
+var scriptSource = document.querySelector("#dataBody").dataset.source;
 var scriptSources = {
   userIndex: _pages_UserIndex__WEBPACK_IMPORTED_MODULE_2__["default"],
   userProfile: _pages_UserProfile__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -3448,8 +3448,13 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
     }
   }, {
     key: "_populateDataToBody",
-    value: function _populateDataToBody() {
-      alert(this.displayTo);
+    value: function _populateDataToBody(data) {
+      var html = data.data.map(function (d) {
+        return "\n                    <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                        <book-card\n                            bookId=\"".concat(d.id_buku, "\"\n                            bookName=\"").concat(d.judul_buku, "\"\n                            bookYear=\"").concat(d.thn_terbit, "\"\n                            bookGenre=\"").concat(d.kategori, "\"\n                            bookAuthor=\"").concat(d.penulis, "\"\n                            bookPublisher=\"").concat(d.penerbit, "\"\n                            bookStatus=\"").concat(d.status_buku, "\"\n                            bookDetailUrl=\"...\"\n                            bookFavoriteUrl=\"...\"\n                            bookFavorite=false\n                            bookCover='cover_images/").concat(d.cover_depan, "'\n\n                        >\n                        </book-card>\n                    </div>\n                    ");
+      });
+      var displayTo = document.querySelector(this.displayTo);
+      displayTo.innerHTML = html;
+      resultMessageField.innerHTML = "<span>".concat(data.message, "</span>");
     }
   }, {
     key: "_search",
@@ -3464,7 +3469,7 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
               resultMessageField = document.querySelector("#resultMessageField");
               resultMessageField.innerHTML = "\n            <span>Mencari ... </span>    \n            <span class=\"spinner-border spinner-border-sm text-primary ms-2\" role=\"status\">\n            </span>\n        ";
               _context.prev = 4;
-              resultMessageField.innerHTML = "";
+              resultMessageField.innerHTML = "\n                <div class=\"spinner-border\" role=\"status\">\n                </div>\n            ";
               _context.next = 8;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("".concat(this.searchFrom), {
                 keyword: searchKeyword
@@ -3475,17 +3480,22 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
               });
             case 8:
               response = _context.sent;
-              console.log(response);
-              return _context.abrupt("return", resultMessageField.innerHTML = "<span>".concat(response.data.message, "</span>"));
-            case 13:
-              _context.prev = 13;
+              this._populateDataToBody(response.data);
+
+              // throw new Error(
+              //     `<span>Buku dengan keyword "${searchKeyword}" tidak ditemukan</span>`
+              // );
+              _context.next = 15;
+              break;
+            case 12:
+              _context.prev = 12;
               _context.t0 = _context["catch"](4);
               resultMessageField.innerHTML = _context.t0.message;
-            case 16:
+            case 15:
             case "end":
               return _context.stop();
           }
-        }, _callee, this, [[4, 13]]);
+        }, _callee, this, [[4, 12]]);
       }));
       function _search(_x) {
         return _search2.apply(this, arguments);

@@ -14,6 +14,16 @@ class BookDataController extends Controller
 
             $data = Book::where('title', 'like', '%' . $request->keyword . '%')->get();
 
+            if($data->count() == 0) {
+                return response()->json(
+                    [
+                        'data' => null,
+                        'error' => 'false',
+                        'message' => 'Tidak ada data di database',
+                    ]
+                );
+            }
+
             if(strlen($request->keyword) == 0) {
                 return response()->json(
                     [
