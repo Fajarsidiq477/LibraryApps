@@ -32,7 +32,7 @@ class UserController extends Controller
         
         $user_data = Auth::user();
 
-        return view('users/test', ['user_data' => $user_data]);
+        return view('users/index', ['user_data' => $user_data]);
     }
 
     public function userActivity() {

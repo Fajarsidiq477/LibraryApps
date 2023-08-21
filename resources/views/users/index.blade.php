@@ -1,260 +1,121 @@
-
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar')
+    @include('partials.test.navbar')
 @endsection
 
 @section('main')
-    <div class="container">
-        
-        <div class="row gap-3 justify-content-center pt-4" id="main-content">
+    <div id="dataBody" data-source="userIndex"></div>
 
-            <!-- Main content disini, pake javascript -->
-        </div>
-        <nav aria-label="Page navigation example" class="mt-3">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link page-prev pr-5"><</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link page-next" href="#">></a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    <div class="container mt-3">
+                <!-- Search and Filter -->
+                <div
+                    class="d-flex justify-content-between align-items-start my-2"
+                >
+                    <div class="col-10 col-md-4">
+                        <search-form
+                            searchFrom="{{ route('searchBookData') }}"
+                            displayTo="#main-content"
+                            token="{{ csrf_token() }}"
+                        ></search-form>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                        <button
+                            class="btn bg-secondary text-white ms-auto"
+                            type="button"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight"
+                            data-source="filter"
+                            aria-controls="offcanvasRight"
+                        >
+                            <i class="bi bi-filter"></i>
+                            <span class="d-none d-sm-inline-block">Filter</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    id="resultMessageField"
+                    class="ms-3 my-2 d-flex align-items-center"
+                ></div>
+
+                <div
+                    class="row row-gap-3 justify-content-between"
+                    id="main-content"
+                >
+                    <!-- Main content disini, pake javascript -->
+                </div>
+
+                <!-- pagination -->
+                <nav aria-label="Page navigation example" class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link page-prev pr-5"><</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link page-next" href="#">></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 @endsection
 
 @section('footer')
-    @include('partials.filter-aside')
-@endsection
+    <aside-canvas
+            class="offcanvas offcanvas-end"
+            tabindex="-1"
+            id="offcanvasRight"
+        ></aside-canvas>
 
-@section('script')
-    <script>
+        <script>
 
-        //get data buku
-        const buku = [];
-
-        function bookSave(nim, id_buku){
+          
 
             $.ajax({
-                url: '/save',
-                type: "POST",
-                headers: headers,
-                data: {
-                    nim     : nim,
-                    id_buku : id_buku,
-                },
-                success: function (data) {
-                    data = JSON.parse(JSON.stringify(data));
-                    swalOption = {
-                        title: data.message,
-                        icon: "success",
-                        button: "Oke!",
-                    };
-                    swal(swalOption);                    
-                }
-                ,
-                error: function (data, textStatus, errorThrown) {
-                    data = JSON.parse(JSON.stringify(data));
-                    data = JSON.parse(JSON.stringify(data));
-                    swalOption = {
-                        title: data.message,
-                        icon: "error",
-                        button: "Baik",
-                    };
-                    swal(swalOption); 
-                },
-            });
-        }
-
-
-        const createListCard = (buku, i) => {
-            
-            return `
-                <div class="col-12 col-md-5 border-bottom border-3 list">
-                    <a onclick="bookDetailAside(buku, ${i})" style="text-decoration:none" class="book-field text-dark">
-                        <div class="row mb-2">
-                            <div class="col col-md-5">
-                                <img
-                                    src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
-                                    alt="book cover"
-                                    class="img-fluid"
-                                    width="100"
-                                />
-                            </div>
-                            <div class="col col-md-7 pt-2">
-                                <h4 class="book-title">
-                                    ${buku[i].judul_buku}
-                                </h4>
-                                <h5 class="book-author">${buku[i].penulis}</h5>
-                                <p class="book-year">${buku[i].thn_terbit}</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            `;
-        };
-
-        // implementing card to #main-content for example
-        const mainContent = document.querySelector("#main-content");
-
-        $.ajax({
             url: "/get-buku",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                for(i=0; i<data.data.length; i++){
-                    buku.push(data.data[i]);
-                }
 
-                for (let i = 0; i < buku.length; i++) {
-                    mainContent.innerHTML += createListCard(buku, i);
-                }
-                // console.log(data.data[0].kode_buku);
-            }
-        });
+                console.log(data);
 
-        // Switch Status
-        const switchStatus = document.querySelector(".switch-status");
 
-        const selectListMode = () => {
-            switchStatus.classList.remove("grid");
-            mainContent.innerHTML = "";
-
-            for (let i = 0; i < buku.length; i++) {
-            mainContent.innerHTML += createListCard(buku, i);
-            }
-        };
-
-        const selectGridMode = () => {
-            switchStatus.classList.add("grid");
-            mainContent.innerHTML = "";
-
-            for (let i = 0; i < buku.length; i++) {
-            mainContent.innerHTML += createGridCard(buku, i);
-            }
-        };
-
-        // Function for close and show aside
-        const asideButtonClose = document.querySelector(".btn-close");
-        asideButtonClose.addEventListener("click", function () {
-            let asideBarEl = this.getAttribute("data-dismiss");
-
-            const asideBar = document.querySelector(asideBarEl);
-            asideBar.classList.remove("show");
-        });
-
-        const asideButtonShow = document.querySelector(".btn-show");
-        asideButtonShow.addEventListener("click", function () {
-            let asideBarEl = this.getAttribute("data-show");
-            const asideBar = document.querySelector(asideBarEl);
-
-            asideBar.querySelector(".aside-content").innerHTML = `
-                    <div
-                        class="d-flex justify-content-center pb-3"
-                        style="border-bottom: 2px solid rgba(0, 0, 0, 0.7)"
-                    >
-                        <span style="margin-right: 1rem">Filter</span>
-                        <i data-feather="filter"></i>
-                    </div>
-
-                    <div class="container mt-3" style="height: 50vh">
-                        <h5>Status</h5>
-                        <div class="d-flex justify-content-between">
-                            <label for="filterStatus">Tersedia</label>
-                            <input
-                                type="checkbox"
-                                id="filterStatus"
-                                class="filterCheck"
-                            />
-                        </div>
-                    </div>
-
-                    <button class="btn btn-filter-submit">Terapkan</button>
-            `;
-
-            asideBar.classList.add("show");
-        });
-
-        const asideEl = document.querySelector(".aside-bar");
-
-        const bookDetailAside = (buku, i) => {
-            // let data = [];
-
-            // data[id] = {
-            //     bookName: "Islam Yang Disalahpahami",
-            //     bookYear: 2005,
-            //     bookGenre: "Aqidah",
-            //     bookAuthor: "M. Quraish Shihab",
-            //     bookPublisher: "Lentera Hati",
-            //     bookStatus: "Tersedia",
-            // };
-
-            asideEl.querySelector(".aside-content").innerHTML = `
-
-                <div class="book-detail text-center px-4">
-                    <div class="aside-header">
-                        <span
-                            class="d-inline-block bg-secondary badge py-2 px-4 rounded text-light mb-2"
-                            >${buku[i].kategori}</span
+                const html = data.data.map((d) => {
+                    return `
+                    <div class="col-12 col-md-5 d-block border-bottom border-3">
+                        <book-card 
+                            bookId="${d.id_buku}"
+                            bookName="${d.judul_buku}"
+                            bookYear="${d.thn_terbit}"
+                            bookGenre="${d.kategori}"
+                            bookAuthor="${d.penulis}"
+                            bookPublisher="${d.penerbit}"
+                            bookStatus="${d.status_buku}"
+                            bookDetailUrl="..."
+                            bookFavoriteUrl="..."
+                            bookFavorite=false
+                            bookCover={{ asset('cover_images/${d.cover_depan}') }}
+            
                         >
-                        <img
-                            src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
-                            class="d-block mx-auto img-fluid mb-2"
-                            alt="book-cover"
-                            width="150"
-                        />
-
-                        <div
-                            class="d-flex justify-content-center align-items-center gap-2"
-                        >
-                            <a
-                                href="#"
-                                onclick="#"
-                                class="badge bg-secondary"
-                                style="text-decoration: none"
-                                >
-                                <i data-feather="bookmark"></i>
-                                <span>Simpan</span>
-                            </a
-                            >
-                            <a
-                                href="#"
-                                class="badge bg-secondary"
-                                style="text-decoration: none"
-                                >Sitasi</a
-                            >
-                        </div>
+                        </book-card>
                     </div>
-                    <div class="aside-description text-start mt-4">
-                        <a href="{{ url('book/${buku[i].kode_buku}') }}">
-                            <h4 class="book-title">${buku[i].judul_buku}</h4>
-                            
-                            </a>
+                    `;
+                })
+            const mainContent = document.querySelector("#main-content");
 
-                        <p class="book-year">${buku[i].thn_terbit}</p>
-                        <h5 class="book-author">${buku[i].penulis}</h5>
-                        <p class="book-publisher fw-bold">${buku[i].penerbit}</p>
-                        <p class="book-status">
-                            <span>Status</span>
-                            <span class="badge bg-secondary">${buku[i].status_buku}</span>
-                        </p>
-                    </div>
-                </div>
-            `;
 
-            asideEl.classList.add("show");
-            return 1;
-        };
-    </script>
+            mainContent.innerHTML = html;
+
+            }
+        });
+        </script>
 @endsection

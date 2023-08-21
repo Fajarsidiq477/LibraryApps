@@ -66,8 +66,34 @@ class SearchForm extends LitWithoutShadowDom {
         `;
     }
 
-    _populateDataToBody() {
-        alert(this.displayTo);
+    _populateDataToBody(data) {
+        const html = data.data.map((d) => {
+            return `
+                    <div class="col-12 col-md-5 d-block border-bottom border-3">
+                        <book-card
+                            bookId="${d.id_buku}"
+                            bookName="${d.judul_buku}"
+                            bookYear="${d.thn_terbit}"
+                            bookGenre="${d.kategori}"
+                            bookAuthor="${d.penulis}"
+                            bookPublisher="${d.penerbit}"
+                            bookStatus="${d.status_buku}"
+                            bookDetailUrl="..."
+                            bookFavoriteUrl="..."
+                            bookFavorite=false
+                            bookCover='cover_images/${d.cover_depan}'
+
+                        >
+                        </book-card>
+                    </div>
+                    `;
+        });
+
+        const displayTo = document.querySelector(this.displayTo);
+
+        displayTo.innerHTML = html;
+
+        resultMessageField.innerHTML = `<span>${data.message}</span>`;
     }
 
     async _search(e) {
@@ -86,7 +112,10 @@ class SearchForm extends LitWithoutShadowDom {
         `;
 
         try {
-            resultMessageField.innerHTML = "";
+            resultMessageField.innerHTML = `
+                <div class="spinner-border" role="status">
+                </div>
+            `;
 
             const response = await axios.post(
                 `${this.searchFrom}`,
@@ -100,11 +129,7 @@ class SearchForm extends LitWithoutShadowDom {
                 }
             );
 
-            console.log(response);
-
-            return (resultMessageField.innerHTML = `<span>${response.data.message}</span>`);
-
-            // this._populateDataToBody();
+            this._populateDataToBody(response.data);
 
             // throw new Error(
             //     `<span>Buku dengan keyword "${searchKeyword}" tidak ditemukan</span>`

@@ -7,7 +7,7 @@ import * as bootstrap from "bootstrap";
 import UserIndex from "./pages/UserIndex";
 import UserProfile from "./pages/UserProfile";
 
-const scriptSource = document.querySelector("body").dataset.source;
+const scriptSource = document.querySelector("#dataBody").dataset.source;
 const scriptSources = {
     userIndex: UserIndex,
     userProfile: UserProfile,
