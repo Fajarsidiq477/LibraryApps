@@ -1,6 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('main')
+    <div id="dataBody" data-source="login"></div>
+
     <div class="container-fluid">
         <div class="row" style="min-height: 100vh">
             <div class="col d-flex align-items-center">
@@ -124,7 +126,7 @@
                             data-bs-dismiss="modal"
                             aria-label="Close"
                         ></button>
-                        <h1 class="modal-title fs-5" id="forgetPassModalLabel">
+                        <h1 class="modal-title fs-5 text-white" id="forgetPassModalLabel">
                             Modal title
                         </h1>
                     </div>

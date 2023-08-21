@@ -2,6 +2,21 @@ import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
 import { html } from "lit";
 
 class ProfileCard extends LitWithoutShadowDom {
+    static properties = {
+        profilePictureWithUrl: {
+            type: String,
+            reflect: true,
+        },
+    };
+
+    _checkAvailabilityProperty() {
+        if (!this.hasAttribute("profilePictureWithUrl")) {
+            throw new Error(
+                `Atribut "profilePictureWithUrl" harus diterapkan pada elemen ${this.localName}`
+            );
+        }
+    }
+
     _profileTabChange = (e) => {
         const btnProfile = this.querySelector("#btn-profile");
         const btnPassword = this.querySelector("#btn-password");
@@ -32,7 +47,10 @@ class ProfileCard extends LitWithoutShadowDom {
         return html`
             <div class="card p-4 text-center">
                 <div class="profile-img">
-                    <img src="http://placehold.co/200x200" alt="profile-img" />
+                    <img
+                        src="${this.profilePictureWithUrl}"
+                        alt="profile-img"
+                    />
                     <button class="btn bg-secondary text-white">
                         <i class="bi bi-pencil"></i>
                     </button>

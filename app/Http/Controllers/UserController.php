@@ -20,13 +20,6 @@ use Illuminate\Support\Facades\Redirect;
 class UserController extends Controller
 {
 
-    public function loginView(){
-        if(Auth::check()) {
-            return redirect('userIndex');
-        }
-
-        return view('auth/login');
-    }
 
     public function userIndex(){
         
@@ -202,32 +195,37 @@ class UserController extends Controller
     public function userChangePassword(Request $request) 
     {
 
+        $oldPassword = $request->oldPassword;
+        $newPassword = $request->newPassword;
+        $confirmNewPassword = $request->confirmNewPassword;
+
         // check if old password is same with current password in DB
         if(!Hash::check($request->oldPassword, Auth::user()->password)) {
-            
-            return Redirect::back()->withErrors(['oldPassword' => 'Password is not match!']);
+            return response()->json([
+                'error' => 'true',
+                'message' => 'Password lama tidak sesuai!'
+            ]);
+
         }
 
-        $validations = $request->validate([
-            'oldPassword' => ['required'],
-            'newPassword' => ['required', 'confirmed', 'min:8']
-        ]);
+        if($newPassword !== $confirmNewPassword) {
+            return response()->json([
+                'error' => 'true',
+                'message' => 'Password konfirmasi tidak cocok!'
+            ]);
+        }
 
         // update new password
         $user = User::find(Auth::user()->nim);
 
-        $user->password = bcrypt($validations['newPassword']);
+        
+        $user->password = bcrypt($newPassword);
         
         $user->save();
         
-
-        // logout and redirect to login with message
-        Auth::logout();
-    
-        $request->session()->invalidate();
-    
-        $request->session()->regenerateToken();
-
-        return Redirect::route('login')->withErrors(['passwordChanged' => 'Password has been changed. Please login again!']);
+        return response()->json([
+            'error' => 'false',
+            'message' => 'Berhasil mengubah password, Harap login kembali'
+        ]);
     }
 }

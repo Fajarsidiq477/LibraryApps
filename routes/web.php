@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LendController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +20,16 @@ use App\Http\Controllers\LendController;
 |
 */
 
+// landingPage
 Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
-Route::post('/save', [BukuController::class,'bookSave']);
+Route::post('/save', [BookController::class,'bookSave']);
 
 Route::middleware(['auth'])->group(function() {
     // halaman user
     Route::middleware(['checkRole:2'])->group(function() {
         Route::prefix('user')->group(function() {
-            Route::get('/profile',      [UserController::class,'userProfile'])->name('profile');
+            Route::get('/profile',      [UserController::class,'userProfile'])->name('user.profile');
             Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
             Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
@@ -50,10 +52,10 @@ Route::middleware(['auth'])->group(function() {
 
 
 // user
-Route::get('/login',       [UserController::class,'loginView'])->name('login');
-Route::post('/login',      [UserController::class,'Login'])->name('auth');
-Route::post('/logout',     [UserController::class,'Logout'])->name('logout');
-Route::post('/register',   [UserController::class,'Register']);
+Route::get('/login',       [AuthController::class,'login'])->name('login');
+Route::post('/login',      [AuthController::class,'auth'])->name('auth');
+Route::post('/logout',     [AuthController::class,'logout'])->name('logout');
+Route::post('/register',   [AuthController::class,'register']);
 
     // admin user
     Route::post('/update-create-user',   [AdminController::class,'updateCreateUser']);
