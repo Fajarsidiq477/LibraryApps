@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('tbl_simpan');
-        Schema::create('tbl_simpan', function (Blueprint $table) {
-            $table->id('id_simpan');
-            $table->foreignId('nim');
-            $table->foreignId('id_buku');
+        Schema::dropIfExists('fine');
+        Schema::create('fine', function (Blueprint $table) {
+            $table->id('id');
+            $table->foreignId('lend_id');
+            $table->float('fine_amount');
+            $table->float('paid_amount');
+            $table->enum('fine_status', [0, 1]); // 0 = Belum, 1 = Lunas
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_simpan');
+        Schema::dropIfExists('fine');
     }
 };

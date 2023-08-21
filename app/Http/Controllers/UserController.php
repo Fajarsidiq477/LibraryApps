@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 
 use App\Models\User;
-use App\Models\Buku;
+use App\Models\Book;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
@@ -32,7 +32,7 @@ class UserController extends Controller
         
         $user_data = Auth::user();
 
-        return view('users/test', ['user_data' => $user_data]);
+        return view('users/index', ['user_data' => $user_data]);
     }
 
     public function userActivity() {
@@ -44,15 +44,16 @@ class UserController extends Controller
         $user_data = Auth::user();
 
         // $pinjam = app(Controller::class)->getPinjam();
-        $pinjam = app(Controller::class)->getDataPinjam();
+        // $lend = app(Controller::class)->getLednData();
 
-        $collection = Collection::make($pinjam);
+        // $collection = Collection::make($lend);
 
-        $data_pinjam = $collection->filter(function ($item) use ($user_data) {
-            return $item['nim'] == $user_data->nim && $item['status_pinjam'] == 0 || $item['status_pinjam'] == 3;
-        });
+        // $lend_data = $collection->filter(function ($item) use ($user_data) {
+        //     return $item['id'] == $user_data->id && $item['lend_status'] == 0 || $item['lend_status'] == 3;
+        // });
 
-        return view('users/borrowed', ['user_data' => $user_data, 'data_pinjam' => $data_pinjam]);
+        // return view('users/borrowed', ['user_data' => $user_data, 'data_pinjam' => $lend_data]);
+        return view('users/borrowed', ['user_data' => $user_data]);
 
     }
     public function userHistory() {
@@ -60,28 +61,30 @@ class UserController extends Controller
         $user_data = Auth::user();
 
         // $pinjam = app(Controller::class)->getPinjam();
-        $pinjam = app(Controller::class)->getDataPinjam();
+        // $lend = app(Controller::class)->getLendData();
 
-        $collection = Collection::make($pinjam);
+        // $collection = Collection::make($lend);
 
-        $data_pinjam = $collection->filter(function ($item) use ($user_data) {
-            return $item['nim'] == $user_data->nim && $item['status_pinjam'] == 1 || $item['status_pinjam'] == 2;
-        });
+        // $lend_data = $collection->filter(function ($item) use ($user_data) {
+        //     return $item['id'] == $user_data->id && $item['lend_status'] == 1 || $item['lend_status'] == 2;
+        // });
 
-        return view('users/history', ['user_data' => $user_data, 'data_pinjam' => $data_pinjam]);
+        // return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
+        return view('users/history', ['user_data' => $user_data]);
     }
     public function userFavorite() {
         
         $user_data = Auth::user();
-        $simpan = app(Controller::class)->getDataSimpan();
+        // $simpan = app(Controller::class)->getDataSimpan();
         
-        $collection = Collection::make($simpan);
+        // $collection = Collection::make($simpan);
         
-        $data_simpan = $collection->filter(function ($item) use ($user_data) {
-            return $item['nim'] == $user_data->nim;
-        });
+        // $data_simpan = $collection->filter(function ($item) use ($user_data) {
+        //     return $item['nim'] == $user_data->nim;
+        // });
 
-        return view('users/favorite', ['user_data' => $user_data, 'data_simpan' => $data_simpan]);
+        // return view('users/favorite', ['user_data' => $user_data, 'data_simpan' => $data_simpan]);
+        return view('users/favorite', ['user_data' => $user_data]);
     
     }
 
@@ -89,7 +92,7 @@ class UserController extends Controller
 
         if(!$bookCode) return abort(404);
         
-        $book = Buku::where('kode_buku', $bookCode)->first(); 
+        $book = Book::where('kode_buku', $bookCode)->first(); 
         
         return view('users/book-detail', ['bookCode' => $bookCode,'book' => $book]);
     }
@@ -103,13 +106,16 @@ class UserController extends Controller
 
     public function Register(){
 
-        $id_user    = $_POST['id_user'];    $username  = $_POST['username'];
-        $email      = $_POST['email'];      $password   = $_POST['password'];
-        $angkatan   = $_POST['angkatan'];   $role_user  = $_POST['role_user'];
+        $id         = $_POST['id'];
+        $name       = $_POST['name'];
+        $email      = $_POST['email'];
+        $password   = $_POST['password'];
+        $phone      = $_POST['phone'];
+        $role  = $_POST['role'];
 
         try{
 
-            if (User::where('id_user', $id_user)->exists()) {
+            if (User::where('id', $id)->exists()) {
                 return response()->json(
                     [
                         'error'=>true,
@@ -127,12 +133,12 @@ class UserController extends Controller
                     );  
                 } else{
                     $query = User::create([
-                        'id_user'   => $id_user,
-                        'username'  => $username,
+                        'id'        => $id,
+                        'name'      => $name,
                         'email'     => $email,
                         'password'  => $password,
-                        'angkatan'  => $angkatan,
-                        'role_user' => $role_user,
+                        'phone'     => $phone,
+                        'role'      => $role,
                     ]);
     
                     return response()->json(

@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'nim' => '2010031',
+            'id' => '2010031',
             'name' => 'admin ganteng pisan',
             'email' => 'admin@upi.edu',
             'password' => bcrypt(123456),
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'nim' => '2082990',
+            'id' => '2082990',
             'name' => 'staff lumayan ganteng',
             'email' => 'staff@upi.edu',
             'password' => bcrypt(123456),
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'nim' => '2000000',
+            'id' => '2000000',
             'name' => 'anggota perpus si kutu buku',
             'email' => 'anggota@upi.edu',
             'password' => bcrypt(123456),

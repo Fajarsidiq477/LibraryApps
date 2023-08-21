@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pinjam;
+use App\Models\Lend;
 
-class PinjamController extends Controller
+class LendController extends Controller
 {
-    public function inputDataPinjam(Request $request){
+    public function inputLendData(Request $request){
         
-        $id_pinjam      = $request->id_pinjam;
-        $nim            = $request->nim;
+        $id             = $request->id;
+        $user_id        = $request->user_id;
         // $kode_buku      = $request->kode_buku;
-        $id_buku        = $request->id_buku;
-        $tgl_pinjam     = $request->tgl_pinjam;
-        $tgl_kembali    = $request->tgl_kembali;
+        $book_id        = $request->book_id;
+        $lend_date      = $request->lend_date;
+        $return_date    = $request->return_date;
 
         try {
 
-            $query = Pinjam::create([
-                'id_pinjam'     => $id_pinjam,
-                'nim'           => $nim,
-                'id_buku'       => $id_buku,
-                'tgl_pinjam'    => $tgl_pinjam,
-                'tgl_kembali'   => $tgl_kembali,
+            $query = Lend::create([
+                'id'            => $id,
+                'user_id'       => $user_id,
+                'book_id'       => $book_id,
+                'lend_date'     => $lend_date,
+                'return_date'   => $return_date,
                 'status_pinjam' => '0',
             ]);
 

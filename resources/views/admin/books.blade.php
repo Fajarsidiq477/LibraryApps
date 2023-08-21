@@ -27,20 +27,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($buku as $item)
+                    @foreach($book as $item)
                     <tr class="align-middle">
                         <td>
                             <input type="checkbox" name="" id="" />
                         </td>
                         <td>
-                            <img src="{{ asset('cover_images/' . $item->cover_depan) }}" alt="Book cover" width="100"/>
+                            <img src="{{ asset('cover_images/' . $item->cover) }}" alt="Book cover" width="100"/>
                         </td>
-                        <td>{{ $item->kode_buku }}</td>
-                        <td>{{ $item->judul_buku }}</td>
-                        <td>{{ $item->penulis }}</td>
-                        <td>{{ $item->status_buku }}</td>
+                        <td>{{ $item->book_code }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->author }}</td>
+                        <td>{{ $item->book_status }}</td>
                         <td>
-                            <a href="#" class="badge text-dark" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-mode="edit" data-bs-id="1" onclick="dataEdit(id = '{{ $item->kode_buku }}')">
+                            <a href="#" class="badge text-dark" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-mode="edit" data-bs-id="1" onclick="dataEdit(id = '{{ $item->book_code }}')">
                                 <i data-feather="edit"></i>
                             </a>
 
@@ -120,26 +120,26 @@
                                     <!-- </div> -->
                                     <div class="form-group mb-3">
                                         <label for="kode" class="mb-2">Kode Buku</label>
-                                        <input type="text" class="form-control custom-form-control" name="kode" id="kode" required />
+                                        <input type="text" class="form-control custom-form-control" name="book_code" id="book_code" required />
                                         <!-- <div class="invalid-feedback">
                                             Kode buku harus lebih dari 100
                                         </div> -->
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="judul" class="mb-2">Judul Buku</label>
-                                        <input type="text" class="form-control custom-form-control" name="judul" id="judul" required />
+                                        <input type="text" class="form-control custom-form-control" name="title" id="title" required />
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="penulis" class="mb-2">Penulis</label>
-                                        <input type="text" class="form-control custom-form-control" name="penulis" id="penulis" required />
+                                        <input type="text" class="form-control custom-form-control" name="author" id="author" required />
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <!-- <div class="form-group mb-3">
                                         <label for="kategori" class="mb-2">Kategori</label>
                                         <input type="text" class="form-control custom-form-control" name="kategori" id="kategori" required />
-                                    </div>
+                                    </div> -->
                                     <div class="form-group mb-3">
                                         <label for="penerbit" class="mb-2">Penerbit</label>
-                                        <input type="text" class="form-control custom-form-control" name="penerbit" id="penerbit" required />
+                                        <input type="text" class="form-control custom-form-control" name="publisher" id="publisher" required />
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="editor" class="mb-2">Editor</label>
@@ -147,19 +147,19 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="penerjemah" class="mb-2">Penerjemah</label>
-                                        <input type="text" class="form-control custom-form-control" name="penerjemah" id="penerjemah" required />
+                                        <input type="text" class="form-control custom-form-control" name="translator" id="translator" required />
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="bahasa" class="mb-2">Bahasa</label>
-                                        <input type="text" class="form-control custom-form-control" name="bahasa" id="bahasa" required />
+                                        <input type="text" class="form-control custom-form-control" name="language" id="language" required />
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="tahunTerbit" class="mb-2">Tahun Terbit</label>
-                                        <input type="number" class="form-control custom-form-control" name="tahunTerbit" id="tahunTerbit" required />
+                                        <input type="number" class="form-control custom-form-control" name="publication_year" id="publication_year" required />
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="jumlahHalaman" class="mb-2">Jumlah Halaman</label>
-                                        <input type="number" class="form-control custom-form-control" name="jumlahHalaman" id="jumlahHalaman" required />
+                                        <input type="number" class="form-control custom-form-control" name="page" id="page" required />
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="volume" class="mb-2">Volume</label>
@@ -171,19 +171,19 @@
                                     </div> -->
                                     <div class="form-group mb-3">
                                         <label for="status" class="mb-2">Jenis Buku</label>
-                                        <select name="jenis" id="jenis" class="form-select custom-form-control" required>
+                                        <select name="type" id="type" class="form-select custom-form-control" required>
                                             <option selected disabled value = "">---</option>
-                                            <option value="R">R</option>
-                                            <option value="Non R">Non R</option>
+                                            <option value="0">R</option>
+                                            <option value="1">Non R</option>
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="status" class="mb-2">Status Buku</label>
-                                        <select name="status" id="status" class="form-select custom-form-control" required>
+                                        <select name="book_status" id="book_status" class="form-select custom-form-control" required>
                                             <option selected disabled value = "">---</option>
-                                            <option value="Tersedia">Tersedia</option>
-                                            <option value="Dipinjam">Dipinjam</option>
-                                            <option value="Hilang">Hilang</option>
+                                            <option value="0">Tersedia</option>
+                                            <option value="1">Dipinjam</option>
+                                            <option value="2">Hilang</option>
                                         </select>
                                     </div>
 
@@ -236,28 +236,28 @@
         //data edit
         function dataEdit(id){
             $.ajax({
-            url: "/get-buku",
+            url: "/get-book",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
                     for(i=0; i<data.data.length; i++){
-                        if(id == data.data[i].kode_buku){
+                        if(id == data.data[i].book_code){
                             const formModal = modalEl.querySelector("#form-modal");
-                            document.getElementById("imageInputDisplay").src =`http://localhost:8000/cover_images/${data.data[i].cover_depan}`;
-                            formModal.querySelector("#cover2").value         = data.data[i].cover_depan;
-                            formModal.querySelector("#kode").value           = data.data[i].kode_buku;
-                            formModal.querySelector("#judul").value          = data.data[i].judul_buku;
-                            formModal.querySelector("#penulis").value        = data.data[i].penulis;
-                            formModal.querySelector("#kategori").value       = data.data[i].kategori;
-                            formModal.querySelector("#penerbit").value       = data.data[i].penerbit;
-                            formModal.querySelector("#editor").value         = data.data[i].editor;
-                            formModal.querySelector("#penerjemah").value     = data.data[i].penerjemah;
-                            formModal.querySelector("#bahasa").value         = data.data[i].bahasa;
-                            formModal.querySelector("#tahunTerbit").value    = data.data[i].thn_terbit;
-                            formModal.querySelector("#jumlahHalaman").value  = data.data[i].jml_hlm;
-                            formModal.querySelector("#volume").value         = data.data[i].volume;
-                            formModal.querySelector("#jenis").value          = data.data[i].jenis;
-                            formModal.querySelector("#status").value         = data.data[i].status_buku;
+                            document.getElementById("imageInputDisplay").src    =`http://localhost:8000/cover_images/${data.data[i].cover}`;
+                            formModal.querySelector("#cover2").value            = data.data[i].cover;
+                            formModal.querySelector("#book_code").value         = data.data[i].book_code;
+                            formModal.querySelector("#title").value             = data.data[i].title;
+                            formModal.querySelector("#author").value            = data.data[i].author;
+                            // formModal.querySelector("#kategori").value       = data.data[i].kategori;
+                            formModal.querySelector("#publisher").value         = data.data[i].publisher;
+                            formModal.querySelector("#editor").value            = data.data[i].editor;
+                            formModal.querySelector("#translator").value        = data.data[i].translator;
+                            formModal.querySelector("#language").value          = data.data[i].language;
+                            formModal.querySelector("#publication_year").value  = data.data[i].publication_year;
+                            formModal.querySelector("#page").value              = data.data[i].page;
+                            formModal.querySelector("#volume").value            = data.data[i].volume;
+                            formModal.querySelector("#type").value              = data.data[i].type;
+                            formModal.querySelector("#book_status").value       = data.data[i].book_status;
                         }
                     }
                 }
@@ -285,7 +285,7 @@
 
                 // kirim data di bawah
                 $.ajax({
-                    url: '/update-create-buku',
+                    url: '/update-create-book',
                     type: "POST",
                     data: new FormData(document.getElementById("form-modal")),
                     dataType:'JSON',
@@ -319,14 +319,15 @@
                                 // me-reload halaman saat tombol "Oke" diklik
                                 location.reload();
                             });
-                        } else{
-                            alert((data.message));    
                         }
+                        // else{
+                        //     alert((data.message));    
+                        // }
                     },
                     error: function (data, textStatus, errorThrown) {
-                        alert('error');
                         data = JSON.parse(JSON.stringify(data));
-                        alert((data.message));
+                        alert(data.message);
+                        console.log(data.err_message);
                     },
                 });
 

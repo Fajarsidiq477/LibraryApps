@@ -34,7 +34,7 @@
                                 <input type="checkbox" name="" id="" />
                             </td>
                             <td>1</td>
-                            <td>{{ $item->nim }}</td>
+                            <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             @if($item->role == '0')
                                 <td>Super Admin</td>
@@ -52,8 +52,8 @@
                                     data-bs-toggle="modal"
                                     data-bs-target="#myModal"
                                     data-bs-mode="edit"
-                                    data-bs-id="{{ $item->nim }}"
-                                    onclick="putEditData(id='{{$item->nim}}')"
+                                    data-bs-id="{{ $item->id }}"
+                                    onclick="putEditData(id='{{$item->id}}')"
                                 >
                                     <i data-feather="edit"></i>
                                 </a>
@@ -136,7 +136,7 @@
                     <div class="modal-body py-4 px-2 px-sm-3 px-md-5">
                         <form action="#" id="form-modal">
                             <input type="text" id="form-mode" hidden />
-                            <input type="text" id="id" hidden />
+                            <!-- <input type="text" id="id" hidden /> -->
                             <div class="row">
                                 <div class="col-12 col-md-6 text-center">
                                     <div class="image-cover">
@@ -174,8 +174,8 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="nim"
-                                            name="nim"
+                                            id="id"
+                                            name="id"
                                             required
                                         />
                                     </div>
@@ -186,7 +186,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="namaLengkap"
+                                            id="name"
                                             name="name"
                                             required
                                         />
@@ -275,26 +275,27 @@
                 for(i=0; i<data.data.length; i++){
                     user.push(data.data[i]);
                 }
-                console.log(user);
+                // console.log(user);
             }
         });
 
         const putEditData = (id) => {
             
             const formModal = modalEl.querySelector("#form-modal");
-            document.getElementById("imageInputDisplay").src =`http://localhost:8000/profile_pictures/${user.find(x => x.nim == id).profile_picture}`;
+            document.getElementById("imageInputDisplay").src =`http://localhost:8000/profile_pictures/${user.find(x => x.id == id).profile_picture}`;
 
-            formModal.querySelector("#nim").value           = id;
-            formModal.querySelector("#picture2").value      = user.find(x => x.nim == id).profile_picture;
-            formModal.querySelector("#namaLengkap").value   = user.find(x => x.nim == id).name;
-            formModal.querySelector("#email").value         = user.find(x => x.nim == id).email;
-            formModal.querySelector("#password").value      = user.find(x => x.nim == id).password;
-            formModal.querySelector("#phone").value         = user.find(x => x.nim == id).phone;
+            formModal.querySelector("#id").value            = id;
+            formModal.querySelector("#picture2").value      = user.find(x => x.id == id).profile_picture;
+            formModal.querySelector("#name").value          = user.find(x => x.id == id).name;
+            formModal.querySelector("#email").value         = user.find(x => x.id == id).email;
+            formModal.querySelector("#password").value      = "Rahasia";
+            formModal.querySelector("#password").disabled   = true;
+            formModal.querySelector("#phone").value         = user.find(x => x.id == id).phone;
             
-            if(user.find(x => x.nim == id).role == 1){
+            if(user.find(x => x.id == id).role == 1){
                 formModal.querySelector("#role").value       = "1";
             }
-            else if(user.find(x => x.nim == id).role == 2){
+            else if(user.find(x => x.id == id).role == 2){
                 formModal.querySelector("#role").value       = "2";
             }
             

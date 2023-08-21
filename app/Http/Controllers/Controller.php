@@ -10,28 +10,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
-use App\Models\Buku;
+use App\Models\Book;
 use App\Models\User;
-use App\Models\Pinjam;
-use App\Models\Simpan;
+use App\Models\Lend;
+use App\Models\Favorite;
 
 class Controller extends BaseController
 {
-    public function getBuku(){
-        $buku = Buku::All();
+    public function getBook(){
+        $book = Book::All();
 
-        return $buku;
+        return $book;
     }
 
-    public function getBukuJson(){
+    public function getBookJson(){
 
-        $buku = app(Controller::class)->getBuku();
+        $book = app(Controller::class)->getBook();
 
         try{
             return response()->json(
                 [
                     'error'=>'false',
-                    'data'=>$buku
+                    'data'=>$book
                 ]
             );
         }
@@ -73,25 +73,25 @@ class Controller extends BaseController
          }
     }
 
-    private function formatPinjam($pinjam){
+    private function LendFormat($pinjam){
 
     }
 
-    public function getPinjam(){
-        $pinjam = Pinjam::All();
+    public function getLend(){
+        $lend = Lend::All();
 
-        return $pinjam;
+        return $lend;
     }
 
-    public function getPinjamJson(){
+    public function getLendJson(){
 
-        $pinjam = app(Controller::class)->getPinjam();
+        $lend = app(Controller::class)->getLend();
 
         try{
             return response()->json(
                 [
                     'error'=>'false',
-                    'data'=>$pinjam
+                    'data'=>$lend
                 ]
             );
         }
@@ -105,34 +105,34 @@ class Controller extends BaseController
          }
     }
 
-    public function getDataPinjam(){
+    public function getLendData(){
 
-        $pinjam = Pinjam::All();
+        $lend = Lend::All();
 
-        for($i = 0; $i < $pinjam->count(); $i++){
+        for($i = 0; $i < $lend->count(); $i++){
 
-            $user = Pinjam::find($pinjam[$i]->id_pinjam)->user;
-            $buku = Pinjam::find($pinjam[$i]->id_pinjam)->buku;
+            $user = Lend::find($lend[$i]->id)->user;
+            $book = Lend::find($lend[$i]->id)->book;
 
-            if($pinjam[$i]->status_pinjam == 0){
-                $pinjam[$i]->status_pinjam = app(Controller::class)->cekTelat($pinjam[$i]->tgl_kembali);
+            if($lend[$i]->lend_status == 0){
+                $lend[$i]->lend_status = app(Controller::class)->lateCheck($lend[$i]->return_date);
             }
 
-            $pinjam[$i]->tgl_pinjam     = app(Controller::class)->getTanggal($pinjam[$i]->tgl_pinjam);
-            $pinjam[$i]->tgl_kembali    = app(Controller::class)->getTanggal($pinjam[$i]->tgl_kembali);
-            $pinjam[$i]->peminjam       = $user->name;
-            $pinjam[$i]->judul_buku     = $buku->judul_buku;
-            $pinjam[$i]->penulis        = $buku->penulis;
-            $pinjam[$i]->thn_terbit     = $buku->thn_terbit;
-            $pinjam[$i]->kode_buku      = $buku->kode_buku;
-            $pinjam[$i]->cover_depan    = $buku->cover_depan;
+            $lend[$i]->lend_date        = app(Controller::class)->getDate($lend[$i]->lend_date);
+            $lend[$i]->return_date      = app(Controller::class)->getDate($lend[$i]->return_date);
+            $lend[$i]->borrower         = $user->name;
+            $lend[$i]->title            = $book->title;
+            $lend[$i]->penulis          = $book->author;
+            $lend[$i]->publication_year = $book->publication_year;
+            $lend[$i]->book_code        = $book->book_code;
+            $lend[$i]->cover            = $book->cover;
 
         }
 
-        return $pinjam;
+        return $lend;
     }
 
-    private function cekTelat($date){
+    private function lateCheck($date){
 
         // Mengubah tanggal dari string menjadi objek Carbon
         $customDate = Carbon::createFromFormat('Y-m-d', $date);
@@ -142,15 +142,15 @@ class Controller extends BaseController
 
         // Membandingkan tanggal hari ini dengan tanggal dari $date
         if ($today->gt($customDate)) {
-            $status_pinjam = 3; // 3 = Telat. tidak ada di database, hanya ada di data yang akan dikirim ke view untuk digunakan saat switch case
-            return $status_pinjam;
+            $lend_status = 3; // 3 = Telat. tidak ada di database, hanya ada di data yang akan dikirim ke view untuk digunakan saat switch case
+            return $lend_status;
         } else {
-            $status_pinjam = 0;
-            return $status_pinjam;
+            $lend_status = 0;
+            return $lend_status;
         }
     }
 
-    private function getTanggal($date){
+    private function getDate($date){
 
         $customDate = Carbon::createFromFormat('Y-m-d', $date);
 
@@ -182,49 +182,49 @@ class Controller extends BaseController
         ];
 
         // Ambil nama hari dan bulan dalam bahasa Indonesia menggunakan mapping di atas
-        $hari = $daysInIndonesian[$customDate->format('l')];
-        $bulan = $monthsInIndonesian[$customDate->format('F')];
+        $day = $daysInIndonesian[$customDate->format('l')];
+        $month = $monthsInIndonesian[$customDate->format('F')];
 
         // Format tanggal menjadi "day, date month year"
-        $tgl = $hari.', '.$customDate->format('d').' '.$bulan.' '.$customDate->format('Y');
+        $tgl = $day.', '.$customDate->format('d').' '.$month.' '.$customDate->format('Y');
 
         return $tgl;
 
     }
 
-    public function getSimpan(){
-        $simpan = Simpan::All();
+    public function getFavorite(){
+        $favorite = Favorite::All();
 
-        return $simpan;
+        return $favorite;
     }
 
-    public function getDataSimpan(){
+    public function getFavoriteData(){
 
-        $simpan = app(Controller::class)->getSimpan();
+        $favorite = app(Controller::class)->getFavorite();
 
-        for($i = 0; $i < $simpan->count(); $i++){
+        for($i = 0; $i < $favorite->count(); $i++){
 
-            $user = Simpan::find($simpan[$i]->id_simpan)->user;
-            $buku = Simpan::find($simpan[$i]->id_simpan)->buku;
+            $user = Favorite::find($favorite[$i]->id)->user;
+            $book = Favorite::find($favorite[$i]->id)->book;
 
-            $simpan[$i]->judul_buku     = $buku->judul_buku;
-            $simpan[$i]->penulis        = $buku->penulis;
-            $simpan[$i]->thn_terbit     = $buku->thn_terbit;
-            $simpan[$i]->kode_buku      = $buku->kode_buku;
-            $simpan[$i]->cover_depan    = $buku->cover_depan;
+            $favorite[$i]->title            = $book->title;
+            $favorite[$i]->author           = $book->author;
+            $favorite[$i]->publication_year = $book->publication_year;
+            $favorite[$i]->book_code        = $book->book_code;
+            $favorite[$i]->cover            = $book->cover;
 
         }
 
-        return $simpan;
+        return $favorite;
 
     }
 
 
-    public function coba(){
+    public function try(){
 
-        $simpan = "Hanya Mencoba";
+        $favorite = "Hanya Mencoba";
 
-        return $simpan;
+        return $favorite;
     
     }
 

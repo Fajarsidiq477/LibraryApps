@@ -10,10 +10,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $table = 'tbl_user';
-    protected $primaryKey = 'nim';
+    protected $table = 'user';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'nim',
+        'id',
         'name',
         'email',
         'password',
@@ -24,13 +24,13 @@ class User extends Authenticatable
         'updated_at'
     ];
 
-    public function Pinjam()
+    public function Lend()
     {
-        return $this->hasMany(Pinjam::class, 'nim');
+        return $this->hasMany(Lend::class);
     }
 
-    public function Simpan()
+    public function Favorite()
     {
-        return $this->hasMany(Simpan::class, 'nim');
+        return $this->hasMany(Favorite::class);
     }
 }

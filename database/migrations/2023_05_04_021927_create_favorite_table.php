@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('tbl_denda');
-        Schema::create('tbl_denda', function (Blueprint $table) {
-            $table->id('id_denda');
-            $table->foreignId('id_pinjam');
-            $table->float('jml_denda');
-            $table->float('jml_bayar');
-            $table->enum('status_denda', ['Belum', 'Lunas']);
+        Schema::dropIfExists('favorite');
+        Schema::create('favorite', function (Blueprint $table) {
+            $table->id('id');
+            $table->foreignId('user_id');
+            $table->foreignId('book_id');
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_denda');
+        Schema::dropIfExists('favorite');
     }
 };

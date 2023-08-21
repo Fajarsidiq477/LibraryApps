@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Buku;
+use App\Models\Book;
 
 
 class BookDataController extends Controller
@@ -12,7 +12,7 @@ class BookDataController extends Controller
     public function search(Request $request) {
         try{
 
-            $data = Buku::where('judul_buku', 'like', '%' . $request->keyword . '%')->get();
+            $data = Book::where('title', 'like', '%' . $request->keyword . '%')->get();
 
             if(strlen($request->keyword) == 0) {
                 return response()->json(

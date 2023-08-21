@@ -42,7 +42,7 @@
     <script>
 
         //get data buku
-        const buku = [];
+        const book = [];
 
         function bookSave(nim, id_buku){
 
@@ -78,15 +78,15 @@
         }
 
 
-        const createListCard = (buku, i) => {
+        const createListCard = (book, i) => {
             
             return `
                 <div class="col-12 col-md-5 border-bottom border-3 list">
-                    <a onclick="bookDetailAside(buku, ${i})" style="text-decoration:none" class="book-field text-dark">
+                    <a onclick="bookDetailAside(book, ${i})" style="text-decoration:none" class="book-field text-dark">
                         <div class="row mb-2">
                             <div class="col col-md-5">
                                 <img
-                                    src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
+                                    src="{{ asset('cover_images/${book[i].cover}') }}"
                                     alt="book cover"
                                     class="img-fluid"
                                     width="100"
@@ -94,10 +94,10 @@
                             </div>
                             <div class="col col-md-7 pt-2">
                                 <h4 class="book-title">
-                                    ${buku[i].judul_buku}
+                                    ${book[i].title}
                                 </h4>
-                                <h5 class="book-author">${buku[i].penulis}</h5>
-                                <p class="book-year">${buku[i].thn_terbit}</p>
+                                <h5 class="book-author">${book[i].author}</h5>
+                                <p class="book-year">${book[i].publication_year}</p>
                             </div>
                         </div>
                     </a>
@@ -109,16 +109,16 @@
         const mainContent = document.querySelector("#main-content");
 
         $.ajax({
-            url: "/get-buku",
+            url: "/get-book",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
                 for(i=0; i<data.data.length; i++){
-                    buku.push(data.data[i]);
+                    book.push(data.data[i]);
                 }
 
-                for (let i = 0; i < buku.length; i++) {
-                    mainContent.innerHTML += createListCard(buku, i);
+                for (let i = 0; i < book.length; i++) {
+                    mainContent.innerHTML += createListCard(book, i);
                 }
                 // console.log(data.data[0].kode_buku);
             }
@@ -131,8 +131,8 @@
             switchStatus.classList.remove("grid");
             mainContent.innerHTML = "";
 
-            for (let i = 0; i < buku.length; i++) {
-            mainContent.innerHTML += createListCard(buku, i);
+            for (let i = 0; i < book.length; i++) {
+            mainContent.innerHTML += createListCard(book, i);
             }
         };
 
@@ -140,8 +140,8 @@
             switchStatus.classList.add("grid");
             mainContent.innerHTML = "";
 
-            for (let i = 0; i < buku.length; i++) {
-            mainContent.innerHTML += createGridCard(buku, i);
+            for (let i = 0; i < book.length; i++) {
+            mainContent.innerHTML += createGridCard(book, i);
             }
         };
 
@@ -188,17 +188,7 @@
 
         const asideEl = document.querySelector(".aside-bar");
 
-        const bookDetailAside = (buku, i) => {
-            // let data = [];
-
-            // data[id] = {
-            //     bookName: "Islam Yang Disalahpahami",
-            //     bookYear: 2005,
-            //     bookGenre: "Aqidah",
-            //     bookAuthor: "M. Quraish Shihab",
-            //     bookPublisher: "Lentera Hati",
-            //     bookStatus: "Tersedia",
-            // };
+        const bookDetailAside = (book, i) => {
 
             asideEl.querySelector(".aside-content").innerHTML = `
 
@@ -206,10 +196,10 @@
                     <div class="aside-header">
                         <span
                             class="d-inline-block bg-secondary badge py-2 px-4 rounded text-light mb-2"
-                            >${buku[i].kategori}</span
+                            >Kategori</span
                         >
                         <img
-                            src="{{ asset('cover_images/${buku[i].cover_depan}') }}"
+                            src="{{ asset('cover_images/${book[i].cover}') }}"
                             class="d-block mx-auto img-fluid mb-2"
                             alt="book-cover"
                             width="150"
@@ -237,17 +227,17 @@
                         </div>
                     </div>
                     <div class="aside-description text-start mt-4">
-                        <a href="{{ url('book/${buku[i].kode_buku}') }}">
-                            <h4 class="book-title">${buku[i].judul_buku}</h4>
+                        <a href="{{ url('book/${book[i].book_code}') }}">
+                            <h4 class="book-title">${book[i].title}</h4>
                             
                             </a>
 
-                        <p class="book-year">${buku[i].thn_terbit}</p>
-                        <h5 class="book-author">${buku[i].penulis}</h5>
-                        <p class="book-publisher fw-bold">${buku[i].penerbit}</p>
+                        <p class="book-year">${book[i].publication_year}</p>
+                        <h5 class="book-author">${book[i].author}</h5>
+                        <p class="book-publisher fw-bold">${book[i].publisher}</p>
                         <p class="book-status">
                             <span>Status</span>
-                            <span class="badge bg-secondary">${buku[i].status_buku}</span>
+                            <span class="badge bg-secondary">${book[i].book_status}</span>
                         </p>
                     </div>
                 </div>

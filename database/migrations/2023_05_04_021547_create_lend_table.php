@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('user');
-        Schema::create('user', function (Blueprint $table) {
+        Schema::dropIfExists('lend');
+        Schema::create('lend', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('phone');
-            $table->enum('role', [0, 1, 2]); // 0 = Super admin, 1 = staff perpus, 2 = member
-            $table->string('profile_picture')->default('avatar.jpg');
+            $table->foreignId('user_id');
+            $table->foreignId('book_id');
+            $table->date('lend_date');
+            $table->date('return_date')->nullable();
+            $table->enum('lend_status', [0, 1, 2]); // status 0 = Pinjam, 1 = Selesai, 2 = Hilang
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('tbl_pinjam');
     }
 };

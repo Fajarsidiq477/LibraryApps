@@ -15,17 +15,17 @@ class AdminController extends Controller
 
     public function adminBookView(){
 
-        $buku = app(Controller::class)->getBuku();
+        $book = app(Controller::class)->getBook();
         
-        return view('admin/books')->with('buku', $buku);
+        return view('admin/books')->with('book', $book);
     
     }
 
     public function lendBookView(){
 
-        $pinjam = app(Controller::class)->getDataPinjam();
+        $lend = app(Controller::class)->getLendData();
 
-        return view('admin/lendbooks', ['pinjam' => $pinjam]);
+        return view('admin/lendbooks', ['lend' => $lend]);
     }
 
     public function adminUserView(){
@@ -39,7 +39,7 @@ class AdminController extends Controller
 
         $mode       = $request->mode;
 
-        $nim        = $request->nim;
+        $id         = $request->id;
         $picture    = $request->file('picture1');
         $name       = $request->name;
         $email      = $request->email;
@@ -50,7 +50,7 @@ class AdminController extends Controller
         
         try{
             if($mode == "add"){
-                if(User::where('nim', $nim)->exists()){
+                if(User::where('id', $id)->exists()){
                     return response()->json(
                         [
                             'error'=>true,
@@ -70,31 +70,40 @@ class AdminController extends Controller
                 $picture->move($direktori, $profile_picture);
             }
 
-            if(User::where('nim', $nim)->exists()){
+            if(User::where('id', $id)->exists()){
                 
-                $a = User::select('profile_picture')->where('nim', $nim)->get();
-                // $b = Buku::select('cover_belakang')->where('kode_buku', $kode_buku)->get();
+                $a = User::select('profile_picture')->where('id', $id)->get();
 
                 if($a[0]->profile_picture != $profile_picture){
                     File::delete('profile_pictures/'.$a[0]->profile_picture);
                 }
-                // else if($b[0]->cover_belakang != $cover_belakang->getClientOriginalName()){
-                //     File::delete('cover_images/'.$b[0]->cover_belakang);
-                // }
             
             }
 
-            User::updateOrCreate(
-                ['nim' => $nim],
-                [
-                    'name'              => $name,
-                    'email'             => $email,
-                    'password'          => bcrypt($password),
-                    'phone'             => $phone,
-                    'role'              => $role,
-                    'profile_picture'   => $profile_picture
-                ]
-            );
+            if($mode == "add"){
+                User::updateOrCreate(
+                    ['id' => $id],
+                    [
+                        'name'              => $name,
+                        'email'             => $email,
+                        'password'          => bcrypt($password),
+                        'phone'             => $phone,
+                        'role'              => $role,
+                        'profile_picture'   => $profile_picture
+                    ]
+                );
+            }else{
+                User::updateOrCreate(
+                    ['id' => $id],
+                    [
+                        'name'              => $name,
+                        'email'             => $email,
+                        'phone'             => $phone,
+                        'role'              => $role,
+                        'profile_picture'   => $profile_picture
+                    ]
+                );
+            }
 
             return response()->json(
                 [

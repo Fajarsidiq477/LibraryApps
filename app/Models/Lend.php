@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Lend extends Model
+{
+    protected $table = 'lend';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'id',
+        'user_id',
+        'book_id',
+        'lend_date',
+        'return_date',
+        'lend_status',
+        'updated_at',
+        'created_at'
+    ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function Book()
+    {
+        return $this->belongsTo(Book::class, 'book_id');
+    }
+
+    public function Fine()
+    {
+        return $this->hasMany(Fine::class);
+    }
+
+}

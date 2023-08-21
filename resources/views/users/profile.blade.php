@@ -67,7 +67,7 @@
                                     type="text"
                                     id="NIM"
                                     class="form-control"
-                                    value="{{ $user_data->nim }}"
+                                    value="{{ $user_data->id }}"
                                     disabled
                                 />
                             </div>

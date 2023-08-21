@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookDataController;
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\PinjamController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\LendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,21 +59,18 @@ Route::post('/register',   [UserController::class,'Register']);
     Route::post('/update-create-user',   [AdminController::class,'updateCreateUser']);
 
 // data
-Route::get('/get-buku',    [Controller::class,'getBukuJson']);
+Route::get('/get-book',    [Controller::class,'getBookJson']);
 Route::get('/get-user',    [Controller::class,'getUserJson']);
-Route::get('/get-pinjam',  [Controller::class,'getPinjamJson']);
+Route::get('/get-lend',  [Controller::class,'getLendJson']);
 
-Route::get('/get-data-pinjam',  [Controller::class,'getDataPinjam']);
+Route::get('/get-lend-data',  [Controller::class,'getLendData']);
 
 // buku
-Route::post('/update-create-buku', [BukuController::class,'updateCreateBuku']);
+Route::post('/update-create-book', [BookController::class,'updateCreateBook']);
 
 //Pinjam
-Route::post('/input-data-pinjam', [PinjamController::class,'inputDataPinjam']);
-
+Route::post('/input-lend-data', [LendController::class,'inputLendData']);
 Route::get('/coba', [Controller::class,'coba']);
-
-
 
 // testing
 Route::post('/search-book',    [BookDataController::class,'search'])->name('searchBookData');

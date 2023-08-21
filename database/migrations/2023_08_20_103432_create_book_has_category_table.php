@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('user');
-        Schema::create('user', function (Blueprint $table) {
+        Schema::dropIfExists('book_has_category');
+        Schema::create('book_has_category', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('phone');
-            $table->enum('role', [0, 1, 2]); // 0 = Super admin, 1 = staff perpus, 2 = member
-            $table->string('profile_picture')->default('avatar.jpg');
+            $table->foreignId('book_id');
+            $table->foreignId('category_id');
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('book_has_category');
     }
 };
