@@ -37,7 +37,7 @@
                                             type="text"
                                             id="NIM"
                                             class="form-control"
-                                            value="{{ Auth::user()->nim }}"
+                                            value="{{ Auth::user()->id }}"
                                             disabled
                                         />
                                     </div>
