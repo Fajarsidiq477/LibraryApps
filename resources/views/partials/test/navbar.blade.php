@@ -22,7 +22,7 @@
                 @if (Auth::check())
                     
                 <li>
-                    <a class="dropdown-item" href="profile.html"
+                    <a class="dropdown-item" href="{{ route('user.profile') }}"
                     >Akun</a
                     >
                 </li>

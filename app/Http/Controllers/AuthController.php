@@ -10,7 +10,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function loginView(){
+    public function login(){
         if(Auth::check()) {
             return redirect('userIndex');
         }
@@ -18,7 +18,7 @@ class AuthController extends Controller
         return view('auth/login');
     }
 
-    public function Register(){
+    public function register(){
 
         $id_user    = $_POST['id_user'];    $username  = $_POST['username'];
         $email      = $_POST['email'];      $password   = $_POST['password'];
@@ -71,7 +71,7 @@ class AuthController extends Controller
          }
     }
 
-    public function Login(Request $request) : RedirectResponse
+    public function auth(Request $request) : RedirectResponse
     {
 
         $credentials = $request->validate([

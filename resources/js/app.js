@@ -9,6 +9,7 @@ import UserProfile from "./pages/UserProfile";
 import Login from "./pages/auth/Login";
 
 const scriptSource = document.querySelector("#dataBody").dataset.source;
+
 const scriptSources = {
     userIndex: UserIndex,
     login: Login,

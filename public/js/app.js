@@ -3377,13 +3377,26 @@ var ProfileCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
     return _this;
   }
   _createClass(ProfileCard, [{
+    key: "_checkAvailabilityProperty",
+    value: function _checkAvailabilityProperty() {
+      if (!this.hasAttribute("profilePictureWithUrl")) {
+        throw new Error("Atribut \"profilePictureWithUrl\" harus diterapkan pada elemen ".concat(this.localName));
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_1__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <div class=\"card p-4 text-center\">\n                <div class=\"profile-img\">\n                    <img src=\"http://placehold.co/200x200\" alt=\"profile-img\" />\n                    <button class=\"btn bg-secondary text-white\">\n                        <i class=\"bi bi-pencil\"></i>\n                    </button>\n                </div>\n                <h3 class=\"profile-name mt-3\">Fajar Sidik Setiawan</h3>\n                <p class=\"profile-nim\">2010031</p>\n            </div>\n            <div class=\"d-grid my-2 rounded \">\n                <button\n                    class=\"btn border active\"\n                    id=\"btn-profile\"\n                    @click=\"", "\"\n                >\n                    Data Profil\n                </button>\n            </div>\n            <div class=\"d-grid rounded\">\n                <button\n                    class=\"btn border\"\n                    id=\"btn-password\"\n                    @click=\"", "\"\n                >\n                    Ubah Kata Sandi\n                </button>\n            </div>\n        "])), this._profileTabChange, this._profileTabChange);
+      return (0,lit__WEBPACK_IMPORTED_MODULE_1__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <div class=\"card p-4 text-center\">\n                <div class=\"profile-img\">\n                    <img\n                        src=\"", "\"\n                        alt=\"profile-img\"\n                    />\n                    <button class=\"btn bg-secondary text-white\">\n                        <i class=\"bi bi-pencil\"></i>\n                    </button>\n                </div>\n                <h3 class=\"profile-name mt-3\">Fajar Sidik Setiawan</h3>\n                <p class=\"profile-nim\">2010031</p>\n            </div>\n            <div class=\"d-grid my-2 rounded \">\n                <button\n                    class=\"btn border active\"\n                    id=\"btn-profile\"\n                    @click=\"", "\"\n                >\n                    Data Profil\n                </button>\n            </div>\n            <div class=\"d-grid rounded\">\n                <button\n                    class=\"btn border\"\n                    id=\"btn-password\"\n                    @click=\"", "\"\n                >\n                    Ubah Kata Sandi\n                </button>\n            </div>\n        "])), this.profilePictureWithUrl, this._profileTabChange, this._profileTabChange);
     }
   }]);
   return ProfileCard;
 }(_base_LitWithoutShadowDom__WEBPACK_IMPORTED_MODULE_0__["default"]);
+_defineProperty(ProfileCard, "properties", {
+  profilePictureWithUrl: {
+    type: String,
+    reflect: true
+  }
+});
 customElements.define("profile-card", ProfileCard);
 
 /***/ }),

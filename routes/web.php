@@ -20,6 +20,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+// landingPage
 Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
 Route::post('/save', [BukuController::class,'bookSave']);
@@ -28,7 +29,7 @@ Route::middleware(['auth'])->group(function() {
     // halaman user
     Route::middleware(['checkRole:2'])->group(function() {
         Route::prefix('user')->group(function() {
-            Route::get('/profile',      [UserController::class,'userProfile'])->name('profile');
+            Route::get('/profile',      [UserController::class,'userProfile'])->name('user.profile');
             Route::post('/profile',     [UserController::class,'userChangePassword'])->name('userChangePassword');
             Route::get('/activity',     [UserController::class,'userActivity'])->name('activity');
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('borrowed');
@@ -51,10 +52,10 @@ Route::middleware(['auth'])->group(function() {
 
 
 // user
-Route::get('/login',       [AuthController::class,'loginView'])->name('login');
-Route::post('/login',      [AuthController::class,'Login'])->name('auth');
-Route::post('/logout',     [AuthController::class,'Logout'])->name('logout');
-Route::post('/register',   [AuthController::class,'Register']);
+Route::get('/login',       [AuthController::class,'login'])->name('login');
+Route::post('/login',      [AuthController::class,'auth'])->name('auth');
+Route::post('/logout',     [AuthController::class,'logout'])->name('logout');
+Route::post('/register',   [AuthController::class,'register']);
 
     // admin user
     Route::post('/update-create-user',   [AdminController::class,'updateCreateUser']);
