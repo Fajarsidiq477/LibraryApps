@@ -71,17 +71,17 @@ class SearchForm extends LitWithoutShadowDom {
             return `
                     <div class="col-12 col-md-5 d-block border-bottom border-3">
                         <book-card
-                            bookId="${d.id_buku}"
-                            bookName="${d.judul_buku}"
-                            bookYear="${d.thn_terbit}"
+                            bookId="${d.id}"
+                            bookName="${d.title}"
+                            bookYear="${d.publication_year}"
                             bookGenre="${d.kategori}"
-                            bookAuthor="${d.penulis}"
-                            bookPublisher="${d.penerbit}"
-                            bookStatus="${d.status_buku}"
+                            bookAuthor="${d.author}"
+                            bookPublisher="${d.publisher}"
+                            bookStatus="${d.book_status}"
                             bookDetailUrl="..."
                             bookFavoriteUrl="..."
                             bookFavorite=false
-                            bookCover='cover_images/${d.cover_depan}'
+                            bookCover='cover_images/${d.cover}'
 
                         >
                         </book-card>
@@ -130,10 +130,6 @@ class SearchForm extends LitWithoutShadowDom {
             );
 
             this._populateDataToBody(response.data);
-
-            // throw new Error(
-            //     `<span>Buku dengan keyword "${searchKeyword}" tidak ditemukan</span>`
-            // );
         } catch (err) {
             resultMessageField.innerHTML = err.message;
         }

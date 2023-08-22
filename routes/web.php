@@ -74,6 +74,9 @@ Route::post('/update-create-book', [BookController::class,'updateCreateBook']);
 Route::post('/input-lend-data', [LendController::class,'inputLendData']);
 Route::get('/coba', [Controller::class,'coba']);
 
+
+
+
 // testing
 Route::post('/search-book',    [BookDataController::class,'search'])->name('searchBookData');
 Route::get('/testing', function() {

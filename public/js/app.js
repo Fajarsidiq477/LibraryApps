@@ -3466,7 +3466,7 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
     key: "_populateDataToBody",
     value: function _populateDataToBody(data) {
       var html = data.data.map(function (d) {
-        return "\n                    <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                        <book-card\n                            bookId=\"".concat(d.id_buku, "\"\n                            bookName=\"").concat(d.judul_buku, "\"\n                            bookYear=\"").concat(d.thn_terbit, "\"\n                            bookGenre=\"").concat(d.kategori, "\"\n                            bookAuthor=\"").concat(d.penulis, "\"\n                            bookPublisher=\"").concat(d.penerbit, "\"\n                            bookStatus=\"").concat(d.status_buku, "\"\n                            bookDetailUrl=\"...\"\n                            bookFavoriteUrl=\"...\"\n                            bookFavorite=false\n                            bookCover='cover_images/").concat(d.cover_depan, "'\n\n                        >\n                        </book-card>\n                    </div>\n                    ");
+        return "\n                    <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                        <book-card\n                            bookId=\"".concat(d.id, "\"\n                            bookName=\"").concat(d.title, "\"\n                            bookYear=\"").concat(d.publication_year, "\"\n                            bookGenre=\"").concat(d.kategori, "\"\n                            bookAuthor=\"").concat(d.author, "\"\n                            bookPublisher=\"").concat(d.publisher, "\"\n                            bookStatus=\"").concat(d.book_status, "\"\n                            bookDetailUrl=\"...\"\n                            bookFavoriteUrl=\"...\"\n                            bookFavorite=false\n                            bookCover='cover_images/").concat(d.cover, "'\n\n                        >\n                        </book-card>\n                    </div>\n                    ");
       });
       var displayTo = document.querySelector(this.displayTo);
       displayTo.innerHTML = html;
@@ -3497,10 +3497,6 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
             case 8:
               response = _context.sent;
               this._populateDataToBody(response.data);
-
-              // throw new Error(
-              //     `<span>Buku dengan keyword "${searchKeyword}" tidak ditemukan</span>`
-              // );
               _context.next = 15;
               break;
             case 12:
@@ -3615,7 +3611,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var UserIndex = {
-  init: function init() {}
+  init: function init() {
+    alert("sip");
+  }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserIndex);
 
