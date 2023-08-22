@@ -13,14 +13,6 @@ class AdminController extends Controller
         return view('admin/index');
     }
 
-    public function adminBookView(){
-
-        $book = app(Controller::class)->getBook();
-        
-        return view('admin/books')->with('book', $book);
-    
-    }
-
     public function lendBookView(){
 
         $lend = app(Controller::class)->getLendData();

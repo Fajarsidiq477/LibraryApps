@@ -1,16 +1,16 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar-upper')
-
-    <nav>
-        @include('partials.navbar-admin-lower')
-        @include('partials.navbar-upper-mobile')
-    </nav>
+    @include('partials.test.navbar')
+    @include('partials.test.navbar-admin')
 @endsection
 
 @section('main')
-    <div class="container">
+    <div class="container mt-3">
+        <a href="#" class="btn btn-primary">
+            <span>Tambah Buku</span>
+            <i class="bi bi-plus-square-fill"></i>
+        </a>
         <div class="row table-responsive">
             <table class="table text-center">
                 <thead>
@@ -65,25 +65,6 @@
                     </tbody> -->
             </table>
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 @endsection
 
