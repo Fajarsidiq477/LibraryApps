@@ -27,10 +27,13 @@
                     >
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">Aktivitas</a>
+                    <a class="dropdown-item" href="{{ route('user.activity') }}">Aktivitas</a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">Keluar</a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
                 </li>
                 @else 
                 <li>

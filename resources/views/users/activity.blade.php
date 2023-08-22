@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar-upper')
+    @include('partials.test.navbar')
 @endsection
 
 @section('main')

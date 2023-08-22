@@ -145,7 +145,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/user/profile',
+                    url: '{{ route("user.change.password") }}',
                     type: "POST",
                     data: new FormData(formChangePassword),
                     dataType:'JSON',
