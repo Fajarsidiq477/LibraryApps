@@ -29,7 +29,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return dd($request);
     }
 
     /**
@@ -53,7 +53,10 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $book = Book::find($id);
+
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
