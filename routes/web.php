@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/profile',     [UserController::class,'userChangePassword'])->name('user.change.password');
             Route::get('/activity',     [UserController::class,'userActivity'])->name('user.activity');
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('user.borrowed');
-            Route::get('/history',      [UserController::class,'userHistory'])->name('history');
+            Route::get('/history',      [UserController::class,'userHistory'])->name('user.history');
             Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
             Route::get('/book/{bookCode?}',[UserController::class,'userBookDetail'])->name('userBookDetail');
         });
