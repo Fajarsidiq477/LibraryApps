@@ -1,14 +1,14 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar-upper')
+    @include('partials.test.navbar')
 @endsection
 
 @section('main')
     <div class="container main-with-left-bar">
         <h3 class="text-center my-3">Riwayat Peminjaman Buku</h3>
 
-        <p class="fw-bold">Jumlah buku: {{ $data_pinjam->count() }}</p>
+        {{-- <p class="fw-bold">Jumlah buku: {{ $data_pinjam->count() }}</p>
 
         @foreach($data_pinjam as $item)
         <div class="row mt-3">
@@ -52,7 +52,7 @@
             </div>
             <hr class="mt-3" />
         </div>
-        @endforeach
+        @endforeach --}}
     </div>
 @endsection
 
