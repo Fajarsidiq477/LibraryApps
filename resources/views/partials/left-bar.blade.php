@@ -12,7 +12,7 @@
             <i class="bi bi-clock-fill"></i>
             <span class="d-none d-md-inline-block ml-4">Riwayat</span>
         </a>
-        <a href="{{ route('favorite') }}" class="left-bar-link @if( Route::currentRouteName() === 'favorite' ) active @endif">
+        <a href="{{ route('user.favorite') }}" class="left-bar-link @if( Route::currentRouteName() === 'favorite' ) active @endif">
             <i class="bi bi-star-fill"></i>
             <span class="d-none d-md-inline-block ml-4">Favorit</span>
         </a>

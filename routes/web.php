@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/activity',     [UserController::class,'userActivity'])->name('user.activity');
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('user.borrowed');
             Route::get('/history',      [UserController::class,'userHistory'])->name('user.history');
-            Route::get('/favorite',     [UserController::class,'userFavorite'])->name('favorite');
+            Route::get('/favorite',     [UserController::class,'userFavorite'])->name('user.favorite');
             Route::get('/book/{bookCode?}',[UserController::class,'userBookDetail'])->name('userBookDetail');
         });
     });
