@@ -70,6 +70,8 @@
 
                             <div class="d-none" id="tab-change-password">
                                 <form action="" id="form-change-password">
+                                    <div id="message"></div>
+
                                     <div class="form-group mb-3">
                                         <label for="oldPassword" class="mb-2"
                                             >Kata Sandi Lama</label
@@ -81,9 +83,7 @@
                                             class="form-control"
                                             required
                                         />
-                                        <div class="invalid-feedback">
-                                            Kata sandi salah
-                                        </div>
+                                        
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="newPassword" class="mb-2"
@@ -96,10 +96,6 @@
                                             class="form-control"
                                             required
                                         />
-                                        <div class="invalid-feedback">
-                                            Konfirmasi kata sandi salah atau
-                                            tidak cocok
-                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label
@@ -124,7 +120,13 @@
                                         >
                                             Simpan
                                         </button>
+
+                                        
                                     </div>
+                                </form>
+                                <form action="{{ route('logout') }}" method="post" id="changePasswordLogout" class="d-none">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
                             </div>
                         </div>
@@ -154,7 +156,28 @@
                     cache: false,
                     processData: false,
                     success: (data) => {
-                        console.log(data);
+                        const display = formChangePassword.querySelector('#message');
+
+                        if(data.error == 'true') {
+                            display.innerHTML = `
+                                <div class="alert alert-danger" role="alert">
+                                    ${data.message}    
+                                </div>
+                            `;
+                        } else {
+                            display.innerHTML = `
+                                <div class="alert alert-success" role="alert">
+                                    ${data.message}
+                                    <p>Anda akan logout sebentar lagi!</p>
+                                </div>
+                            `;
+
+                            setTimeout(() => {
+                                const formLogout = document.querySelector('#changePasswordLogout');
+                                formLogout.submit();
+                            }, 1000);
+                            
+                        }
                     }
                 });
 

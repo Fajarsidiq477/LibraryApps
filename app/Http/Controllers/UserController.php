@@ -199,6 +199,13 @@ class UserController extends Controller
         $newPassword = $request->newPassword;
         $confirmNewPassword = $request->confirmNewPassword;
 
+        if($oldPassword == null || $newPassword == null) {
+            return response()->json([
+                'error' => 'true',
+                'message' => 'data password lama dan baru dibutuhkan!'
+            ]);
+        }
+
         // check if old password is same with current password in DB
         if(!Hash::check($request->oldPassword, Auth::user()->password)) {
             return response()->json([
@@ -208,6 +215,13 @@ class UserController extends Controller
 
         }
 
+        if(strlen($newPassword) <8) {
+            return response()->json([
+                'error' => 'true',
+                'message' => 'Password baru minimal 8 digit!'
+            ]);
+        }
+
         if($newPassword !== $confirmNewPassword) {
             return response()->json([
                 'error' => 'true',
@@ -215,17 +229,22 @@ class UserController extends Controller
             ]);
         }
 
-        // update new password
-        $user = User::find(Auth::user()->nim);
 
+
+        
+        // update new password
+        $user = User::find(Auth::user()->id);
         
         $user->password = bcrypt($newPassword);
         
-        $user->save();
+        $x = $user->update();
+
+
         
         return response()->json([
             'error' => 'false',
-            'message' => 'Berhasil mengubah password, Harap login kembali'
+            'message' => 'Berhasil mengubah password, Harap login kembali',
+            'data' => $x
         ]);
     }
 }

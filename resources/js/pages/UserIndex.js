@@ -1,7 +1,5 @@
 const UserIndex = {
-    init() {
-        alert("sip");
-    },
+    init() {},
 };
 
 export default UserIndex;
