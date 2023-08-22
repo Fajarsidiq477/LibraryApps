@@ -5,6 +5,7 @@
 @endsection
 
 @section('main')
+    
     <div class="container main-with-left-bar">
         <h3 class="text-center my-3">Buku yang Sedang Dipinjam</h3>
 
