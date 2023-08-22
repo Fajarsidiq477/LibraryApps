@@ -1,8 +1,8 @@
 
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar')
+    @include('partials.test.navbar')
 @endsection
         
 @section('main')
@@ -15,23 +15,18 @@
                 {{-- {{dd($book)}} --}}
                     <div class="col-12 col-md-4 text-center">
                         <img
-                            src="{{ asset('cover_images/'. $book->cover_depan) }}"
+                            src="{{ asset('cover_images/'. $book->cover) }}"
                             alt="Book Cover"
                             class="book-detail-cover"
                         />
                     </div>
                     <div class="col-12 col-md-6 mt-4 mt-md-0">
-                        <h3>{{$book->judul_buku}}</h3>
-                        <p class="book-author">{{$book->penulis}}</p>
+                        <h3>{{$book->title}}</h3>
+                        <p class="book-author">{{$book->author}}</p>
 
                         <p>
-                            {{$book->sinopsis}}
+                            {{$book->synopsis}}
                         </p>
-
-                        <div>
-                            <a href="#" class="badge bg-secondary">Simpan</a>
-                            <a href="#" class="badge bg-secondary">Sitasi</a>
-                        </div>
                     </div>
                 @else
                 <h3>Data buku tidak ditemukan</h3>

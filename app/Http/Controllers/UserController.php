@@ -85,8 +85,8 @@ class UserController extends Controller
 
         if(!$bookCode) return abort(404);
         
-        $book = Book::where('kode_buku', $bookCode)->first(); 
-        
+        $book = Book::where('book_code', $bookCode)->first(); 
+
         return view('users/book-detail', ['bookCode' => $bookCode,'book' => $book]);
     }
 

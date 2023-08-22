@@ -116,7 +116,7 @@ class BookCard extends LitWithoutShadowDom {
                 <div class="aside-header">
                   
                     <img
-                        src="http://placehold.co/160x225"
+                        src="${this.bookCover}"
                         class="d-block mx-auto img-fluid mb-2"
                         alt="book-cover"
                     />
