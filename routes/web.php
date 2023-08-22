@@ -21,7 +21,7 @@ use App\Http\Controllers\AuthController;
 */
 
 // landingPage
-Route::get('/',        [UserController::class,'userIndex'])->name('userIndex');
+Route::get('/',        [UserController::class,'userIndex'])->name('user.index');
 Route::get('/book/{bookCode?}', [UserController::class,'userBookDetail'])->name('bookDetail');
 Route::post('/save', [BookController::class,'bookSave']);
 
@@ -42,10 +42,10 @@ Route::middleware(['auth'])->group(function() {
     // halaman admin
     Route::middleware(['checkRole:0|1'])->group(function() {
         Route::prefix('admin')->group(function() {
-            Route::get('/',             [AdminController::class, 'index'])->name('adminIndex');
-            Route::get('/books',        [AdminController::class,'adminBookView'])->name('adminBooks');
-            Route::get('/users',        [AdminController::class,'adminUserView'])->name('adminUsers');
-            Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('adminLendBooks'); 
+            Route::get('/',             [AdminController::class, 'index'])->name('admin.index');
+            Route::resources(['/books' => BookController::class]);
+            Route::get('/users',        [AdminController::class,'adminUserView'])->name('admin.users');
+            Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('admin.lend.books'); 
         });
     });
 });
@@ -82,3 +82,4 @@ Route::post('/search-book',    [BookDataController::class,'search'])->name('sear
 Route::get('/testing', function() {
     return view('users.nyobaMix');
 });
+

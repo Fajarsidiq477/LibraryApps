@@ -1,12 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar-upper')
-
-    <nav>
-        @include('partials.navbar-admin-lower')
-        @include('partials.navbar-upper-mobile')
-    </nav>
+    @include('partials.test.navbar')
+    @include('partials.test.navbar-admin')
 @endsection
 
 @section('main')
