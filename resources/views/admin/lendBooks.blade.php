@@ -28,22 +28,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($pinjam as $item)
+                @foreach ($lend as $item)
                     <tr class="align-middle">
                         <td>
                             <input type="checkbox" name="" id="" />
                         </td>
                         <td>
                             <img
-                                src="{{ asset('cover_images/' . $item->cover_depan) }}"
+                                src="{{ asset('cover_images/' . $item->cover) }}"
                                 alt="Book cover"
                                 style="width: 100px;"
                             />
                         </td>
-                        <td>{{ $item->kode_buku }}</td>
-                        <td>{{ $item->judul_buku }}</td>
-                        <td>{{ $item->peminjam }}</td>
-                        <td>{{ $item->tgl_pinjam }}</td>
+                        <td>{{ $item->book_code }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->lend_date }}</td>
                         <td>
                             <a
                                 href="#"
@@ -55,46 +55,7 @@
                         </td>
                     </tr>
                 @endforeach
-
-                    <!-- <tr class="align-middle">
-                        <td>
-                            <input type="checkbox" name="" id="" />
-                        </td>
-                        <td>
-                            <img
-                                src="https://placehold.co/100x150"
-                                alt="Book cover"
-                            />
-                        </td>
-                        <td>JDK837JDK837</td>
-                        <td>Negeri Para Bedebah</td>
-                        <td>Fajar Sidik Setiawan</td>
-                        <td>4, Januari 2022</td>
-                        <td>
-                            <a
-                                href="#"
-                                class="badge text-dark"
-                                onclick="deleteData(1)"
-                            >
-                                <i data-feather="trash"></i>
-                            </a>
-                        </td>
-                    </tr> -->
-
-
                 </tbody>
-
-                <!-- Alert query pencarian tidak ada -->
-                <!-- <tbody>
-                    <tr>
-                        <td colspan="7" class="py-5 text-danger">
-                            <h4>
-                                Buku dengan kata kunci "[query]" tidak
-                                ditemukan!
-                            </h4>
-                        </td>
-                    </tr>
-                </tbody> -->
             </table>
         </div>
         <nav aria-label="Page navigation example">
@@ -157,7 +118,7 @@
                                         <input
                                             type="number"
                                             class="form-control custom-form-control mb-2"
-                                            id="nim_peminjam"
+                                            id="user_id"
                                             required
                                         />
                                     </div>
@@ -178,7 +139,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control mb-2"
-                                            id="kode_buku"
+                                            id="book_code"
                                         />
                                     </div>
                                 </div>
@@ -205,12 +166,12 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control is-invalid"
-                                            id="kode"
+                                            id="book_code_detail"
                                             disabled
                                         />
-                                        <div class="invalid-feedback">
+                                        <!-- <div class="invalid-feedback">
                                             Kode buku harus lebih dari 100
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="judul" class="mb-2"
@@ -219,7 +180,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="judul"
+                                            id="title_detail"
                                             disabled
                                         />
                                     </div>
@@ -230,18 +191,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="penulis"
-                                            disabled
-                                        />
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="kategori" class="mb-2"
-                                            >Kategori</label
-                                        >
-                                        <input
-                                            type="text"
-                                            class="form-control custom-form-control"
-                                            id="kategori"
+                                            id="author_detail"
                                             disabled
                                         />
                                     </div>
@@ -252,7 +202,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="penerbit"
+                                            id="publisher_detail"
                                             disabled
                                         />
                                     </div>
@@ -263,7 +213,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="editor"
+                                            id="editor_detail"
                                             disabled
                                         />
                                     </div>
@@ -274,7 +224,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="penerjemah"
+                                            id="translator_detail"
                                             disabled
                                         />
                                     </div>
@@ -285,7 +235,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="bahasa"
+                                            id="language_detail"
                                             disabled
                                         />
                                     </div>
@@ -298,7 +248,7 @@
                                         <input
                                             type="number"
                                             class="form-control custom-form-control"
-                                            id="tahunTerbit"
+                                            id="publication_year_detail"
                                             disabled
                                         />
                                     </div>
@@ -311,7 +261,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="jumlahHalaman"
+                                            id="page_detail"
                                             disabled
                                         />
                                     </div>
@@ -322,7 +272,7 @@
                                         <input
                                             type="number"
                                             class="form-control custom-form-control"
-                                            id="volume"
+                                            id="volume_detail"
                                             disabled
                                         />
                                     </div>
@@ -333,7 +283,7 @@
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="jenis"
+                                            id="type_detail"
                                             disabled
                                         />
                                     </div>
@@ -351,7 +301,7 @@
 
                                 <p
                                     class="text-center text-sm-end fst-italic"
-                                    id="form_id_peminjaman">
+                                    id="id_preview">
                                     -
                                 </p>
 
@@ -363,12 +313,12 @@
                                         </tr>
                                         <tr>
                                             <td class="">NIM/NIP</td>
-                                            <td id="form_nim">-</td>
+                                            <td id="user_id_preview">-</td>
                                         </tr>
 
                                         <tr>
                                             <td class="">Nama Lengkap</td>
-                                            <td id="form_nama_peminjam">-</td>
+                                            <td id="name_preview">-</td>
                                         </tr>
                                     </div>
                                     <div class="mb-3">
@@ -378,12 +328,12 @@
                                         </tr>
                                         <tr>
                                             <td>Kode</td>
-                                            <td id="form_kode_buku">-</td>
+                                            <td id="book_code_preview">-</td>
                                         </tr>
 
                                         <tr>
                                             <td>Judul</td>
-                                            <td id="form_judul_buku">
+                                            <td id="title_preview">
                                                 -
                                             </td>
                                         </tr>
@@ -395,12 +345,12 @@
                                         </tr>
                                         <tr>
                                             <td>Tanggal Pinjam</td>
-                                            <td id="form_tgl_pinjam">-</td>
+                                            <td id="lend_date_preview">-</td>
                                         </tr>
 
                                         <tr>
                                             <td>Tanggal Kembali</td>
-                                            <td id="form_tgl_kembali">-</td>
+                                            <td id="return_date_preview">-</td>
                                         </tr>
                                     </div>
                                 </table>
@@ -423,27 +373,27 @@
 
                                         <input
                                             type="text"
-                                            id="id_peminjaman"
+                                            id="id_hidden"
                                             hidden
                                         />
                                         <input
                                             type="text"
-                                            id="nim"
+                                            id="user_id_hidden"
                                             hidden
                                         />
                                         <input
                                             type="text"
-                                            id="kode_buku"
+                                            id="book_code_hidden"
                                             hidden
                                         />
                                         <input
                                             type="text"
-                                            id="tanggal_pinjam"
+                                            id="lend_date_hidden"
                                             hidden
                                         />
                                         <input
                                             type="text"
-                                            id="tanggal_kembali"
+                                            id="return_date_hidden"
                                             hidden
                                         />
 
@@ -475,20 +425,20 @@
 @section('script')
     <script>
         //Data Buku
-        let buku = [];
+        let book = [];
 
         //Data User
         let user = [];
 
         //Data Peminjaman
-        let pinjam = [];
+        let lend = [];
 
         $.ajax({
-            url: "/get-buku",
+            url: "/get-book",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                buku = data.data;
+                book = data.data;
             }
         });
         
@@ -502,11 +452,11 @@
         });
 
         $.ajax({
-            url: "/get-pinjam",
+            url: "/get-lend",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                pinjam = data.data;
+                lend = data.data;
             }
         });
         
@@ -591,12 +541,12 @@
                 }
 
             // return day + ", " + date + " " + month + " " + year;
-            let tgl_pinjam  = day + ", " + date + " " + month + " " + year;
-            let tgl_kembali = day1 + ", " + date1 + " " + month1 + " " + year1;
+            let lend_date  = day + ", " + date + " " + month + " " + year;
+            let return_date = day1 + ", " + date1 + " " + month1 + " " + year1;
 
             return (data = {
-                tgl_pinjam,
-                tgl_kembali,
+                lend_date,
+                return_date,
                 formattedDate,
                 formattedDate1
             });
@@ -629,27 +579,18 @@
 
         const getFormData = () => {
 
-            const mode = formModal.querySelector("#form-mode").value;
-            const id_peminjaman =
-                formModal.querySelector("#id_peminjaman").value;
+            const mode          = formModal.querySelector("#form-mode").value;
+            const id       = formModal.querySelector("#id_hidden").value;
             
-            const nim = formModal.querySelector("#nim").value;
-            const kode_buku = formModal.querySelector("#kode_buku").value;
-            const tanggal_pinjam =
-                formModal.querySelector("#tanggal_pinjam").value;
-            const tanggal_kembali =
-                formModal.querySelector("#tanggal_kembali").value;
+            const user_id       = formModal.querySelector("#user_id_hidden").value;
+            const book_code     = formModal.querySelector("#book_code_hidden").value;
+            const lend_date     = formModal.querySelector("#lend_date_hidden").value;
+            const return_date   = formModal.querySelector("#return_date_hidden").value;
 
-            const id_buku = buku.find(x => x.kode_buku == kode_buku).id_buku;
+            const book_id = book.find(x => x.book_code == book_code).id;
 
             return (data = {
-                mode,
-                id_peminjaman,
-                nim,
-                kode_buku,
-                id_buku,
-                tanggal_pinjam,
-                tanggal_kembali,
+                mode, id, user_id, book_code, book_id, lend_date, return_date,
             });
         };
 
@@ -661,16 +602,16 @@
 
             // kirim data di bawah
             $.ajax({
-                    url: '/input-data-pinjam',
+                    url: '/input-lend-data',
                     type: "POST",
                     headers: headers,
                     data: {
-                        id_pinjam   : data.id_peminjaman,
-                        nim         : data.nim,
+                        id   : data.id,
+                        user_id         : data.user_id,
                         // kode_buku   : data.kode_buku,
-                        id_buku     : data.id_buku,
-                        tgl_pinjam  : data.tanggal_pinjam,
-                        tgl_kembali : data.tanggal_kembali,
+                        book_id     : data.book_id,
+                        lend_date  : data.lend_date,
+                        return_date : data.return_date,
                     },
                     success: function (data) {
                         
@@ -692,32 +633,8 @@
                             console.log(data.err_message);
                         }
                     }
-                    // ,
-                    // error: function (data, textStatus, errorThrown) {
-                    //     data = JSON.parse(JSON.stringify(data));
-                    //     alert(data.message);
-                    //     console.log(data.err_message);
-                    // },
                 });
 
-
-            // if (data.mode === "add") {
-            //     swalOption = {
-            //         title: "Buku berhasil Dipinjam!",
-            //         icon: "success",
-            //         button: "Oke!",
-            //     };
-            // }
-
-            // if (data.mode === "edit") {
-            //     swalOption = {
-            //         title: "Buku berhasil diedit!",
-            //         icon: "success",
-            //         button: "Oke!",
-            //     };
-            // }
-
-            // swal(swalOption);
 
             // tutup modal ketika kode add / edit berhasil dieksekusi
             document.querySelector(".btn-admin-close").click();
@@ -738,54 +655,55 @@
 
             btnStepNext.addEventListener("click", () => {
                 if (window.Jar.stepIndex + 1 === 1) {
-                    const nim_peminjam = document.querySelector("#nim_peminjam").value;
+                    const user_id = document.querySelector("#user_id").value;
 
-                    if(user.some(user => user.nim == nim_peminjam) == false){
+                    if(user.some(user => user.id == user_id) == false){
                         
-                        alert("Tidak ada member dengan NIM " + nim_peminjam);
+                        alert("Tidak ada member dengan NIM " + user_id);
                         
                         location.reload();
                     
                     }else{
 
-                        formModal.querySelector("#nim").value = nim_peminjam;
-                        document.getElementById("form_nim").innerHTML = nim_peminjam;
-                        document.getElementById("form_nama_peminjam").innerHTML = user.find(x => x.nim == parseInt(nim_peminjam)).name;
+                        formModal.querySelector("#user_id_hidden").value = user_id;
+                        document.getElementById("user_id_preview").innerHTML = user_id;
+
+                        document.getElementById("name_preview").innerHTML = user.find(x => x.id == parseInt(user_id)).name;
                         
-                        let total_pinjam = 1;
+                        let total_lend = 1;
                 
-                        if(pinjam.some(pinjam => pinjam.nim == nim_peminjam) == true){
-                            for(i=0; i<pinjam.length; i++){
-                                if(pinjam[i].nim == nim_peminjam){
-                                    total_pinjam++;
+                        if(lend.some(lend => lend.user_id == user_id) == true){
+                            for(i=0; i<lend.length; i++){
+                                if(lend[i].user_id == user_id){
+                                    total_lend++;
                                 }        
                             }
                         }
 
-                        formModal.querySelector("#id_peminjaman").value = `${nim_peminjam}${total_pinjam}`;
-                        document.getElementById("form_id_peminjaman").innerHTML = `ID peminjaman: ${nim_peminjam}${total_pinjam}`;
+                        formModal.querySelector("#id_hidden").value = `${user_id}${total_lend}`;
+                        document.getElementById("id_preview").innerHTML = `ID peminjaman: ${user_id}${total_lend}`;
                         
-                        formModal.querySelector("#tanggal_pinjam").value = getDate().formattedDate;
-                        document.getElementById("form_tgl_pinjam").innerHTML = getDate().tgl_pinjam;
+                        formModal.querySelector("#lend_date_hidden").value = getDate().formattedDate;
+                        document.getElementById("lend_date_preview").innerHTML = getDate().lend_date;
                         
-                        formModal.querySelector("#tanggal_kembali").value = getDate().formattedDate1;
-                        document.getElementById("form_tgl_kembali").innerHTML = getDate().tgl_kembali;
+                        formModal.querySelector("#return_date_hidden").value = getDate().formattedDate1;
+                        document.getElementById("return_date_preview").innerHTML = getDate().return_date;
 
-                        alert("kamu di halaman kode buku, NIM anda " + nim_peminjam);
+                        alert("kamu di halaman kode buku, NIM anda " + user_id);
                     
                     }
                 }
                 if (window.Jar.stepIndex + 1 === 2) {
-                    const kode_buku = document.querySelector("#kode_buku").value;
-                    if(buku.some(buku => buku.kode_buku == kode_buku) == false){
+                    const book_code = document.querySelector("#book_code").value;
+                    if(book.some(book => book.book_code == book_code) == false){
 
-                        alert("Tidak ada buku dengan kode " + kode_buku);
+                        alert("Tidak ada buku dengan kode " + book_code);
                         location.reload();
                     
                     }else{
-                        formModal.querySelector("#kode_buku").value = kode_buku;    
-                        document.getElementById("form_kode_buku").innerHTML = kode_buku;
-                        document.getElementById("form_judul_buku").innerHTML = buku.find(x => x.kode_buku == kode_buku).judul_buku;
+                        formModal.querySelector("#book_code_hidden").value = book_code;    
+                        document.getElementById("book_code_preview").innerHTML = book_code;
+                        document.getElementById("title_preview").innerHTML = book.find(x => x.book_code == book_code).title;
 
                         alert("kamu di halaman detail buku");
                     }

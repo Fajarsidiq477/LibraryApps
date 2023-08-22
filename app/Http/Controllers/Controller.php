@@ -120,7 +120,7 @@ class Controller extends BaseController
 
             $lend[$i]->lend_date        = app(Controller::class)->getDate($lend[$i]->lend_date);
             $lend[$i]->return_date      = app(Controller::class)->getDate($lend[$i]->return_date);
-            $lend[$i]->borrower         = $user->name;
+            $lend[$i]->name             = $user->name;
             $lend[$i]->title            = $book->title;
             $lend[$i]->penulis          = $book->author;
             $lend[$i]->publication_year = $book->publication_year;
