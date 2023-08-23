@@ -15,24 +15,19 @@ class BookLendSeeder extends Seeder
     public function run(): void
     {
         Lend::create([
-            'user_id' => 1,
+            'id' => 20000001,
+            'user_id' => 2000000,
             'book_id' => 1,
             'lend_date' => Carbon::createFromDate('2023', '08', '10')->toDateTimeString(),
             'lend_status' => '0'
         ]);
 
         Lend::create([
-            'user_id' => 2,
-            'book_id' => 1,
-            'lend_date' => Carbon::createFromDate('2023', '08', '17')->toDateTimeString(),
-            'lend_status' => '1'
-        ]);
-
-        Lend::create([
-            'user_id' => 1,
+            'id' => 20000002,
+            'user_id' => 2000000,
             'book_id' => 2,
             'lend_date' => Carbon::createFromDate('2023', '08', '17')->toDateTimeString(),
-            'lend_status' => '0'
+            'lend_status' => '1'
         ]);
 
     }
