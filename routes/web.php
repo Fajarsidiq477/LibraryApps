@@ -43,9 +43,9 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware(['checkRole:0|1'])->group(function() {
         Route::prefix('admin')->group(function() {
             Route::get('/',             [AdminController::class, 'index'])->name('admin.index');
-            Route::resources(['/books' => BookController::class]);
             Route::get('/users',        [AdminController::class,'adminUserView'])->name('admin.users');
             Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('admin.lend.books'); 
+            Route::resources(['/books' => BookController::class]);
         });
     });
 });
@@ -82,4 +82,3 @@ Route::post('/search-book',    [BookDataController::class,'search'])->name('sear
 Route::get('/testing', function() {
     return view('users.nyobaMix');
 });
-

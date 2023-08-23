@@ -18,11 +18,14 @@
 @endsection
 
 @section('main')
-    <div class="container mt-3">
-        <form action="{{ route('books.store') }}" method="POST" id="form-modal">
+    <div id="dataBody" data-source="adminEditBook"></div>
 
-            
-            {{ csrf_field() }}
+    <div class="container mt-3">
+        <form action="{{ route('books.update', $book->id) }}" method="POST" id="form-book-edit">
+
+            @csrf
+            <!-- {{ csrf_field() }} -->
+            @method('PUT')
             <div class="row">
                 <div class="col-12 col-md-6 text-center">
                     <div class="image-cover">
@@ -35,7 +38,10 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group mb-3">
-                        <input type="hidden" class="form-control custom-form-control" name="cover2" id="cover2" />
+                        <input type="hidden" class="form-control custom-form-control" name="id" id="id" value="{{ $book->id }}"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="hidden" class="form-control custom-form-control" name="cover2" id="cover2" value="{{ $book->cover }}"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="kode" class="mb-2">Kode Buku</label>

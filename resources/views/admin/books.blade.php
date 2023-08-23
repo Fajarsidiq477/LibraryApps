@@ -44,7 +44,7 @@
                                 <i class="bi bi-pencil"></i>
                             </a>
 
-                            <a href="#" class="btn btn-danger" onclick="deleteData({{ $item->id }})">
+                            <a href="#" class="btn btn-danger" onclick="deleteData('{{ $item->id }}')">
                                 <i class="bi bi-trash"></i>
                             </a>
                         </td>
@@ -58,8 +58,6 @@
 
 @section('footer')
     <script>
-
-
         //delete confirmation
         const deleteData = (id) => {
             const confirm = window.confirm('Apakah yakin ingin menghapus data?')

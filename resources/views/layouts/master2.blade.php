@@ -10,7 +10,11 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+        <script>
+            let headers = {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        </script>
     </head>
     <body>
         
@@ -18,6 +22,7 @@
      
 
         <main>
+            @include('sweetalert::alert')
             @yield('main')
         </main>
 
