@@ -115,14 +115,11 @@ class Controller extends BaseController
             $book = Lend::find($lend[$i]->id)->book;
 
             if($lend[$i]->lend_status == 0){
-                // $lend[$i]->lend_status = app(Controller::class)->lateCheck($lend[$i]->return_date);
-                $lend[$i]->lend_status = "3";
+                $lend[$i]->lend_status = app(Controller::class)->lateCheck($lend[$i]->return_date);
             }
 
-            // $lend[$i]->lend_date        = app(Controller::class)->getDate($lend[$i]->lend_date);
-            $lend[$i]->lend_date        = "2023-8-23";
-            // $lend[$i]->return_date      = app(Controller::class)->getDate($lend[$i]->return_date);
-            $lend[$i]->return_date      = "2023-8-23";
+            $lend[$i]->lend_date        = app(Controller::class)->getDate($lend[$i]->lend_date);
+            $lend[$i]->return_date      = app(Controller::class)->getDate($lend[$i]->return_date);
             $lend[$i]->name             = $user->name;
             $lend[$i]->title            = $book->title;
             $lend[$i]->penulis          = $book->author;
