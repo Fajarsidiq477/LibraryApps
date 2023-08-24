@@ -30,7 +30,7 @@
                 <div class="col-12 col-md-6 text-center">
                     <div class="image-cover">
                         <img src="{{ asset('cover_images/'. $book->cover) }}" alt="book cover" name="imageInputDisplay" id="imageInputDisplay" class="img-fluid" width="165"/>
-                        <input type="file" name="cover1" id="imageInput" accept="image/*" hidden oninput="imageStatus()"/>
+                        <input type="file" name="cover1" id="imageInput" accept="image/*" hidden/>
                         <label for="imageInput" class="btn btn-success rounded-circle image-cover-button">
                             <i class="bi bi-pencil"></i>
                         </label>
