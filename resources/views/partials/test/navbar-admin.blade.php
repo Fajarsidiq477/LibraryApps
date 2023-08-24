@@ -20,7 +20,7 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'admin.lend.books') active @endif" href="{{ route('admin.lend.books') }}">
+                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'lend-books.index') active @endif" href="{{ route('lend-books.index') }}">
                         <i class="bi bi-clock-fill"></i>
                     </a>
                 </li>

@@ -7,7 +7,11 @@
 
         
 @section('main')
-    <div class="container">
+    <div class="container mt-3">
+        <a href="{{ route('lend-books.create') }}" class="btn btn-primary">
+            <span>Tambah Pinjam Buku</span>
+            <i class="bi bi-plus-square-fill"></i>
+        </a>
         <div class="row table-responsive">
             <table class="table text-center">
                 <thead>
@@ -24,29 +28,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($lend as $item)
+                @foreach ($lends as $lend)
                     <tr class="align-middle">
                         <td>
                             <input type="checkbox" name="" id="" />
                         </td>
                         <td>
                             <img
-                                src="{{ asset('cover_images/' . $item->cover) }}"
+                                src="{{ asset('cover_images/' . $lend->book->cover) }}"
                                 alt="Book cover"
                                 style="width: 100px;"
                             />
                         </td>
-                        <td>{{ $item->book_code }}</td>
-                        <td>{{ $item->title }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->lend_date }}</td>
+                        <td>{{ $lend->book->book_code }}</td>
+                        <td>{{ $lend->book->title }}</td>
+                        <td>{{ $lend->user->name }}</td>
+                        <td>{{ $lend->lend_date }}</td>
                         <td>
                             <a
                                 href="#"
-                                class="badge text-dark"
+                                class="btn btn-danger"
                                 onclick="deleteData(1)"
                             >
-                                <i data-feather="trash"></i>
+                                <i class="bi bi-trash"></i>
                             </a>
                         </td>
                     </tr>
@@ -54,25 +58,7 @@
                 </tbody>
             </table>
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+      
     </div>
 @endsection
 
@@ -416,10 +402,9 @@
         </div>
     </div>
 <!-- End Add / Edit Modal -->
-@endsection
 
-@section('script')
-    <script>
+
+<script>
         //Data Buku
         let book = [];
 
@@ -550,22 +535,11 @@
 
         //delete confirmation
         const deleteData = (id) => {
-            swal({
-                text: "Setelah data dihapus, Anda tidak akan bisa melihatnya kembali. Apakah Anda yakin?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    swal("Data berhasil dihapus!", {
-                        icon: "success",
-                    });
+            const confirm = window.confirm('Apakah yakin ingin menghapus data?')
 
-                    // Script jika data dihapus di bawah sini
-                } else {
-                    swal("Data tidak dihapus!");
-                }
-            });
+            if(confirm) {
+                return alert('data dihapus');
+            }
         };
 
         // bs.modal.show triggered

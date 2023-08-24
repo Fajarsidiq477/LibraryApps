@@ -15,9 +15,9 @@ class AdminController extends Controller
 
     public function lendBookView(){
 
-        $lend = app(Controller::class)->getLendData();
+        // $lend = app(Controller::class)->getLendData();
 
-        return view('admin/lendbooks', ['lend' => $lend]);
+        return view('admin/lendbooks');
     }
 
     public function adminUserView(){

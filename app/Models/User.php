@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
@@ -13,7 +13,6 @@ class User extends Authenticatable
     protected $table = 'user';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id',
         'name',
         'email',
         'password',
@@ -24,7 +23,7 @@ class User extends Authenticatable
         'updated_at'
     ];
 
-    public function Lend()
+    public function lends(): HasMany
     {
         return $this->hasMany(Lend::class);
     }

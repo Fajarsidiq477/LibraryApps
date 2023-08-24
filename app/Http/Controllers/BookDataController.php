@@ -64,4 +64,45 @@ class BookDataController extends Controller
          }
 
     }
+
+    public function getBookByBookCode(Request $request) {
+
+
+
+        $books = [];
+
+        for ($i=1; $i <= count($request->input()); $i++) { 
+            $identifier = 'bookCodeInput' . $i;
+            $books[] = Book::where('book_code', $request->$identifier)->first(); 
+        }
+
+        return response()->json($books);
+
+
+
+
+        
+        
+        if(!$request->bookCode) return abort(404);
+        
+        $book = Book::where('book_code', $request->bookCode)->get(); 
+
+        
+        
+        if($book->count() > 0) {
+            return response()->json([
+                'error' => 'false',
+                'data' => $book,
+                'message' => ''
+            ]);
+        }
+
+        return response()->json([
+            'error' => 'true',
+            'data' => '',
+            'message' => 'Tidak ada data yang ditemukan'
+        ]);
+    }
+
+    
 }

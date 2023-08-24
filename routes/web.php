@@ -8,6 +8,7 @@ use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LendController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LendBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,11 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/',             [AdminController::class, 'index'])->name('admin.index');
             Route::resources(['/books' => BookController::class]);
             Route::get('/users',        [AdminController::class,'adminUserView'])->name('admin.users');
-            Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('admin.lend.books'); 
+            // Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('admin.lend.books'); 
+           
+            Route::post('/lend-books/create/1', [LendBookController::class, 'create1'])->name('lend-books.create.1'); 
+            Route::post('/lend-books/create/2', [LendBookController::class, 'create2'])->name('lend-books.create.2'); 
+            Route::resources(['/lend-books'  => LendBookController::class]); 
         });
     });
 });
@@ -79,6 +84,7 @@ Route::get('/coba', [Controller::class,'coba']);
 
 // testing
 Route::post('/search-book',    [BookDataController::class,'search'])->name('searchBookData');
+Route::post('/get-book-by-book-code', [BookDataController::class, 'getBookByBookCode'])->name('data.get-book-by-book-code');
 Route::get('/testing', function() {
     return view('users.nyobaMix');
 });
