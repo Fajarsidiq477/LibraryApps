@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Favorite;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BookController extends Controller
 {
@@ -64,7 +65,57 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try{
+            if($request->file('cover1') == null){
+                $cover = $request->cover2;
+            }else{
+                $cover = $request->file('cover1')->getClientOriginalName();
+                    
+                $directory = 'cover_images';
+                $request->file('cover1')->move($directory, $cover);
+            }
+
+            // Menghapus cover buku lama jika file gambar yang dimasukan memiliki nama file yang sama
+            if(Book::where('id', $id)->exists()){   
+                $a = Book::select('cover')->where('id', $id)->get();
+                if($a[0]->cover != $cover){
+                    File::delete('cover_images/'.$a[0]->cover);
+                }
+            }
+
+            $query = Book::where('id', $id)->update([
+                'book_code'         => $request->book_code,
+                'title'             => $request->title,
+                'author'            => $request->author,
+                'editor'            => $request->editor,
+                'translator'        => $request->translator,
+                'language'          => $request->language,
+                'publisher'         => $request->publisher,
+                'publication_year'  => $request->publication_year,
+                'page'              => $request->page,
+                'volume'            => $request->volume,
+                // 'synopsis'          => $synopsis,
+                'cover'             => $cover,
+                'type'              => $request->type,
+                'book_status'       => $request->book_status,
+            ]);
+
+            // $book = Book::find($id);
+            
+            // return redirect()->back()->with('success', 'Update successfully!');
+            // Alert::success(session('success'));
+            Alert::success('Congrats', 'Update successfully!');
+            return back();
+
+        }catch(\Exception $e){
+            // return response()->json(
+            //     [
+            //         'error'=>true,
+            //         'message'=>"Gagal",
+            //         'err_message'=>$e->getMessage()
+            //     ]
+            // );
+        }
     }
 
     /**

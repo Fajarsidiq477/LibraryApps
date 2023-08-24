@@ -1,6 +1,6 @@
 <div class="navbar navbar-upper bg-primary py-2">
     <div class="container">
-        <a class="navbar-brand text-light" href="{{ route('userIndex') }}">SIJAMBU IPAI</a>
+        <a class="navbar-brand text-light" href="{{ route('user.index') }}">SIJAMBU IPAI</a>
 
         <div class="col-md-6 d-none d-md-flex">
             <div class="input-group p-2">
@@ -91,7 +91,7 @@
                         </li>
                     @elseif(Auth::user()->role == 0 || Auth::user()->role == 1)
                         <li>
-                            <a class="dropdown-item" href="{{ route('adminIndex') }}">Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard</a>
                         </li>
                     @endif
                     <li>

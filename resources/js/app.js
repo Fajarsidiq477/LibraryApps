@@ -9,6 +9,7 @@ import UserProfile from "./pages/UserProfile";
 import Login from "./pages/auth/Login";
 import UserBorrowed from "./pages/UserBorrowed.js";
 import Create1 from "./pages/LendBooks/create1";
+import AdminEditBook from "./pages/admin/book/AdminEditBook.js";
 
 const scriptSources = {
     userIndex: UserIndex,
@@ -16,6 +17,7 @@ const scriptSources = {
     userProfile: UserProfile,
     userBorrowed: UserBorrowed,
     LendBooksCreate1: Create1,
+    adminEditBook: AdminEditBook,
 };
 
 const scriptSource = document.querySelector("#dataBody").dataset.source;
@@ -26,5 +28,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     if (source) {
         source.init();
+    }
+});
+
+$(".btn").on("click", function (e) {
+    if ($(this).hasClass("disable")) {
+        e.preventDefault();
     }
 });

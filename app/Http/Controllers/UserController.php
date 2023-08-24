@@ -36,34 +36,30 @@ class UserController extends Controller
         
         $user_data = Auth::user();
 
-        // $pinjam = app(Controller::class)->getPinjam();
-        // $lend = app(Controller::class)->getLednData();
+        $lend = app(Controller::class)->getLendData();
 
-        // $collection = Collection::make($lend);
+        $collection = Collection::make($lend);
 
-        // $lend_data = $collection->filter(function ($item) use ($user_data) {
-        //     return $item['id'] == $user_data->id && $item['lend_status'] == 0 || $item['lend_status'] == 3;
-        // });
+        $lend_data = $collection->filter(function ($item) use ($user_data) {
+            return $item['user_id'] == $user_data->id && $item['lend_status'] == 0 || $item['lend_status'] == 3;
+        });
 
-        // return view('users/borrowed', ['user_data' => $user_data, 'data_pinjam' => $lend_data]);
-        return view('users/borrowed', ['user_data' => $user_data]);
+        return view('users/borrowed', ['user_data' => $user_data, 'lend_data' => $lend_data]);
 
     }
     public function userHistory() {
 
         $user_data = Auth::user();
 
-        // $pinjam = app(Controller::class)->getPinjam();
-        // $lend = app(Controller::class)->getLendData();
+        $lend = app(Controller::class)->getLendData();
 
-        // $collection = Collection::make($lend);
+        $collection = Collection::make($lend);
 
-        // $lend_data = $collection->filter(function ($item) use ($user_data) {
-        //     return $item['id'] == $user_data->id && $item['lend_status'] == 1 || $item['lend_status'] == 2;
-        // });
+        $lend_data = $collection->filter(function ($item) use ($user_data) {
+            return $item['user_id'] == $user_data->id && $item['lend_status'] == 1 || $item['lend_status'] == 2;
+        });
 
-        // return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
-        return view('users/history', ['user_data' => $user_data]);
+        return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
     }
     public function userFavorite() {
         

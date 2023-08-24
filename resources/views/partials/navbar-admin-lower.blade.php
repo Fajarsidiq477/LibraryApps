@@ -3,24 +3,24 @@
         <div class="d-flex justify-content-between align-items-center" style="width: 100%">
             <ul class="navbar-nav flex-row">
                 <li class="nav-item">
-                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'adminIndex') active @endif" aria-current="page" href="{{ route('adminIndex') }}">
+                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'admin.index') active @endif" aria-current="page" href="{{ route('admin.index') }}">
                         <i data-feather="home"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'adminBooks') active @endif" href="{{ route('adminBooks') }}">
+                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'books.index') active @endif" href="{{ route('books.index') }}">
                         <i data-feather="book"></i>
                     </a>
                 </li>
                 @if (Auth::user()->role != 1)
                     <li class="nav-item">
-                        <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'adminUsers') active @endif" href="{{ route('adminUsers') }}">
+                        <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'admin.users') active @endif" href="{{ route('admin.users') }}">
                             <i data-feather="user"></i>
                         </a>
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'adminLendBooks') active @endif" href="{{ route('adminLendBooks') }}">
+                    <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'admin.lend.books') active @endif" href="{{ route('admin.lend.books') }}">
                         <i data-feather="clock"></i>
                     </a>
                 </li>
