@@ -113,5 +113,33 @@
 @endsection
 
 @section('footer')
-    
+    <script>
+        const imageInput = document.querySelector('#imageInput');
+        
+        imageInput.addEventListener('input', (e) => {
+            e.preventDefault();
+            const image = e.srcElement.files[0];
+            const imageInputDisplay = e.srcElement.parentElement.querySelector('img');
+            var reader = new FileReader();      
+
+            imageInputDisplay.src = "{{ asset('images/spinner.gif') }}";
+
+            
+
+            if(image.size > 6000000) {
+                alert('gambar tidak boleh lebih dari 6 mb');
+                return false;
+            }
+
+
+            reader.addEventListener("load", () => {
+                imageInputDisplay.src = reader.result;
+            }, false, );
+
+            if (image) {
+                reader.readAsDataURL(image);
+            }
+
+        });
+    </script>
 @endsection
