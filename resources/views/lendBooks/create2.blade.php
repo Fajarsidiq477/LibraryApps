@@ -23,7 +23,9 @@
     <div class="container my-3">
         <form action="{{ route('lend-books.store') }}" method="POST">
 
-            <input type="hidden" name="id" id="id" value="">
+            <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
+            <input type="hidden" name="total" id="total" value="{{ $books->count() }}">
+
             {{ csrf_field() }}
             <div class="row justify-content-center" id="form-content"> 
                 <p class="fw-bold text-center">Detail Peminjaman Buku</p>    
@@ -38,7 +40,8 @@
 
                         <div class="text-end">
                             <p class="fw-bold mb-1">Tanggal Pinjam</p>
-                            <p>{{ $carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('dddd, D MMMM Y H.mm z') }}</p>
+                            <p>{{ $carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('dddd, D MMMM Y') }}</p>
+                            <input type="hidden" name="lend_date" value="{{ $carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('Y-MM-DD') }}">
                         </div>
                     </div>
 
@@ -55,9 +58,14 @@
                             @foreach ($books as $i => $book)
                                 <tr>
                                     <td>{{ $i + 1 }}</td>
-                                    <td>{{ $book->book_code . ' - ' . $book->title }}</td>
+                                    <td>{{ $book->book_code . ' - ' . $book->title}}</td>
+                                    <input type="hidden" name="bookid{{$i}}" value="{{ $book->id }}">
                                 </tr>
                             @endforeach
+                            <tr>
+                                <th>Jumlah Buku:</th>
+                                <td>{{ $books->count() }}</td>
+                            </tr>
                         </table>
                     </div>
 
@@ -71,6 +79,7 @@
                         <div class="text-end">
                             <p class="fw-bold mb-1">Tenggat Kembali</p>
                             <p>{{ $carbon::now()->addWeeks(1)->timezone('Asia/Jakarta')->locale('id')->isoFormat('dddd, D MMMM Y') }}</p>
+                            <input type="hidden" name="return_date" value="{{ $carbon::now()->addWeeks(1)->timezone('Asia/Jakarta')->locale('id')->isoFormat('Y-MM-DD') }}">
                         </div>
                     </div>
                     

@@ -6,6 +6,7 @@ use App\Models\Lend;
 use App\Models\User;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use Carbon\Carbon;
 
@@ -31,10 +32,15 @@ class LendBookController extends Controller
 
     public function create1(Request $request) {
 
-        
         $user = User::find($request->id);
 
-        return view('lendBooks.create1', ['id' => $request->id]);
+        if($user){
+            return view('lendBooks.create1', ['id' => $request->id]);
+        }else{
+            Alert::error('Haha Error', 'Tidak Ada Member Dengan NIM '. $request->id.'!');
+            return redirect()->action([LendBookController::class, 'create']);
+        }
+
     }
 
     public function create2(Request $request) {
@@ -43,11 +49,15 @@ class LendBookController extends Controller
         $booksCode = [$request->bookCodeInput1, $request->bookCodeInput2, $request->bookCodeInput3, $request->bookCodeInput4, $request->bookCodeInput5 ];
         $carbon = Carbon::class;
 
-
         $user = User::find($request->id);
         $books = Book::whereIn('book_code', [$request->bookCodeInput1, $request->bookCodeInput2, $request->bookCodeInput3, $request->bookCodeInput4, $request->bookCodeInput5 ])->get();
 
-        return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon]);
+        if($books->count() != 0){
+            return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
+        }else{
+            Alert::error('Haha Error', 'Tidak Ada Kode Buku Yang Valid');
+            return $this->create1($request , $request->id);
+        }
     }
 
     public function getBookById(Request $request) {
@@ -59,7 +69,22 @@ class LendBookController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
+        $lends = Lend::All();
+
+        for($i=0; $i<$request->total; $i++){
+            $lend = Lend::create([
+                'user_id'     => $request->user_id,
+                'book_id'     => $request->input('bookid'.$i),
+                'lend_date'   => $request->lend_date,
+                'return_date' => $request->return_date,
+                'lend_status' => '0',
+            ]);
+        }
+
+        Alert::success('Alhamdulillah', 'Buku Berhasil Dipinjam :D');
+        return redirect()->action([LendBookController::class, 'index']);
+
     }
 
     /**
