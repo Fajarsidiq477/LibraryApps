@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Lend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
 
     public function index() {
-        return view('admin/index');
+
+        $books = Book::all();
+        $transactions = Lend::class;
+        $carbon = Carbon::class;
+
+        $members = User::where('role', 2)->get();
+
+        return view('admin/index', ['books' => $books, 'transactions' => $transactions, 'members' => $members, 'carbon' => $carbon]);
     }
 
     public function lendBookView(){
