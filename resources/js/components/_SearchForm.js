@@ -67,27 +67,31 @@ class SearchForm extends LitWithoutShadowDom {
     }
 
     _populateDataToBody(data) {
-        const html = data.data.map((d) => {
-            return `
-                    <div class="col-12 col-md-5 d-block border-bottom border-3">
-                        <book-card
-                            bookId="${d.id}"
-                            bookName="${d.title}"
-                            bookYear="${d.publication_year}"
-                            bookGenre="${d.kategori}"
-                            bookAuthor="${d.author}"
-                            bookPublisher="${d.publisher}"
-                            bookStatus="${d.book_status}"
-                            bookDetailUrl="..."
-                            bookFavoriteUrl="..."
-                            bookFavorite=false
-                            bookCover='cover_images/${d.cover}'
+        let html = "";
 
-                        >
-                        </book-card>
-                    </div>
-                    `;
-        });
+        if (data.data != null) {
+            html = data.data.map((d) => {
+                return `
+                        <div class="col-12 col-md-5 d-block border-bottom border-3">
+                            <book-card
+                                bookId="${d.id}"
+                                bookName="${d.title}"
+                                bookYear="${d.publication_year}"
+                                bookGenre="${d.kategori}"
+                                bookAuthor="${d.author}"
+                                bookPublisher="${d.publisher}"
+                                bookStatus="${d.book_status}"
+                                bookDetailUrl="..."
+                                bookFavoriteUrl="..."
+                                bookFavorite=false
+                                bookCover='cover_images/${d.cover}'
+    
+                            >
+                            </book-card>
+                        </div>
+                        `;
+            });
+        }
 
         const displayTo = document.querySelector(this.displayTo);
 

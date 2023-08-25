@@ -7,6 +7,7 @@
 
         
 @section('main')
+<div id="dataBody" data-source="lendBooks"></div>
     <div class="container mt-3">
         <a href="{{ route('lend-books.create') }}" class="btn btn-primary">
             <span>Tambah Pinjam Buku</span>
@@ -47,10 +48,10 @@
                         <td>
                             <a
                                 href="#"
-                                class="btn btn-danger"
-                                onclick="deleteData(1)"
+                                class="btn btn-success finish-lend"
+                                id="{{$lend->id}}"
                             >
-                                <i class="bi bi-trash"></i>
+                                <i class="bi bi-check-square-fill"></i>
                             </a>
                         </td>
                     </tr>
@@ -60,6 +61,7 @@
         </div>
       
     </div>
+</div>
 @endsection
 
 @section('footer')

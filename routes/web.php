@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function() {
            
             Route::post('/lend-books/create/1', [LendBookController::class, 'create1'])->name('lend-books.create.1'); 
             Route::post('/lend-books/create/2', [LendBookController::class, 'create2'])->name('lend-books.create.2'); 
+            Route::post('/finish-lend', [LendBookController::class, 'finishLend'])->name('finishLend'); 
             Route::resources(['/lend-books'  => LendBookController::class]); 
         });
     });

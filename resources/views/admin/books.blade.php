@@ -38,7 +38,19 @@
                         <td>{{ $item->book_code }}</td>
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->author }}</td>
-                        <td>{{ $item->book_status }}</td>
+                        @switch($item->book_status)
+                            @case(0)
+                                <td>Tersedia</td>
+                                @break
+                            @case(1)
+                                <td>Dipinjam</td>
+                                @break
+                            @case(2)
+                                <td>Hilang</td>
+                                @break
+                            @default
+                                <span>Something went wrong, please try again</span>
+                        @endswitch
                         <td>
                             <a href="{{ route('books.edit', $item->id) }}" class="btn btn-success">
                                 <i class="bi bi-pencil"></i>

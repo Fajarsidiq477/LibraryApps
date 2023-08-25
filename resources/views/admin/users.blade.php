@@ -11,6 +11,16 @@
             <span>Tambah User</span>
             <i class="bi bi-plus-square-fill"></i>
         </a>
+        @if (session('success'))
+            <div class="alert alert-success mt-2">
+                {{ session('success.message') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger mt-2">
+                {{ session('error.message') }}
+            </div>
+        @endif
         <div class="row table-responsive">
             <table class="table text-center">
                 <thead>

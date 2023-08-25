@@ -18,40 +18,42 @@
 @endsection
 
 @section('main')
-<div id="dataBody" data-source="adminAddBook"></div>
+<div id="dataBody" data-source=""></div>
+
 
     <div class="container mt-3">
-        <form action="{{ route('users.store') }}" method="POST" id="form-modal">
+        <form action="{{ route('users.store') }}" method="POST" id="form-modal" enctype="multipart/form-data">
 
             {{ csrf_field() }}
-            <input type="text" id="form-mode" hidden />
-            <!-- <input type="text" id="id" hidden /> -->
             <div class="row">
                 <div class="col-12 col-md-6 text-center">
                     <div class="image-cover">
                         <img
-                            src="http://placehold.co/160x225"
+                            src=""
                             alt="book cover"
-                            id="imageInputDisplay"
-                            class="img-fluid"
+                            id="photoInputDisplay"
+                            class="img-fluid invisible"
                         />
                         <input
                             type="file"
-                            name="picture1"
-                            id="imageInput"
+                            name="photo"
+                            id="photoInput"
                             accept="image/*"
+                            value="{{ old('photo') }}"
                             hidden
                         />
                         <label
-                            for="imageInput"
+                            for="photoInput"
                             class="btn btn-success rounded-circle image-cover-button"
                         >
                             <i class="bi bi-pencil-fill"></i>
                         </label>
                     </div>
+                    @error('photo')
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-12 col-md-6">
-                    
                     
                     <div class="form-group mb-3">
                         <label for="nim" class="mb-2"
@@ -59,11 +61,15 @@
                         >
                         <input
                             type="text"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('id') is-invalid @enderror"
                             id="id"
                             name="id"
+                            value="{{ old('id') }}"
                             required
                         />
+                        @error('id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="namaLengkap" class="mb-2"
@@ -71,11 +77,15 @@
                         >
                         <input
                             type="text"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('name') is-invalid @enderror"
                             id="name"
                             name="name"
+                            value="{{ old('name') }}"
                             required
                         />
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="email" class="mb-2"
@@ -83,11 +93,15 @@
                         >
                         <input
                             type="email"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('email') is-invalid @enderror"
                             id="email"
                             name="email"
+                            value="{{ old('email') }}"
                             required
                         />
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="password" class="mb-2"
@@ -95,11 +109,27 @@
                         >
                         <input
                             type="password"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('password') is-invalid @enderror"
                             id="password"
                             name="password"
-                            required
                         />
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password_confirmation" class="mb-2"
+                            >Konfirmasi Password</label
+                        >
+                        <input
+                            type="password"
+                            class="form-control custom-form-control @error('password_confirmation') is-invalid @enderror"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                        />
+                        @error('password_confirmation')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="handphone" class="mb-2"
@@ -107,19 +137,26 @@
                         </label>
                         <input
                             type="number"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('phone') is-invalid @enderror"
                             id="phone"
                             name="phone"
+                            value="{{ old('phone') }}"
                             required
                         />
+                        @error('phone')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="role" class="mb-2">Role</label >
-                        <select name="role" id="role" class="form-select custom-form-control" required>
-                            <option value="" selected disabled>...</option>    
-                            <option value="2">Member</option>
-                            <option value="1">Staff</option>
+                        <select name="role" id="role" class="form-select custom-form-control @error('role') is-invalid @enderror" required>
+                            <option value="">...</option>    
+                            <option value="2" @if(old('role') == 2) selected @endif>Member</option>
+                            <option value="1" @if(old('role') == 1) selected @endif>Staff</option>
                         </select>
+                        @error('role')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group mb-3 text-end">
@@ -138,15 +175,16 @@
 
 @section('footer')
     <script>
-        const imageInput = document.querySelector('#imageInput');
+        const photoInput = document.querySelector('#photoInput');
         
-        imageInput.addEventListener('input', (e) => {
+        photoInput.addEventListener('input', (e) => {
             e.preventDefault();
             const image = e.srcElement.files[0];
-            const imageInputDisplay = e.srcElement.parentElement.querySelector('img');
+            const photoInputDisplay = e.srcElement.parentElement.querySelector('img');
             var reader = new FileReader();      
 
-            imageInputDisplay.src = "{{ asset('images/spinner.gif') }}";
+            photoInputDisplay.classList.remove('invisible');
+            photoInputDisplay.src = "{{ asset('images/spinner.gif') }}";
 
             
 
@@ -157,7 +195,7 @@
 
 
             reader.addEventListener("load", () => {
-                imageInputDisplay.src = reader.result;
+                photoInputDisplay.src = reader.result;
             }, false, );
 
             if (image) {

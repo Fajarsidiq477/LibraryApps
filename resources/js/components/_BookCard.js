@@ -166,6 +166,16 @@ class BookCard extends LitWithoutShadowDom {
             favoriteButtonIcon = html`<i class="bi bi-star"></i>`;
         }
 
+        // favorite button
+        //  <a
+        //                         href="#"
+        //                         @click="${this._favoriteButton}"
+        //                         class="position-absolute favoriteButton"
+        //                         style="right:5px; font-size: 150%"
+        //                     >
+        //                         ${favoriteButtonIcon}
+        //                     </a>
+
         return html`
             <div>
                 <div class="row mb-2">
@@ -177,14 +187,6 @@ class BookCard extends LitWithoutShadowDom {
                                 class="img-fluid mx-auto"
                                 style="width:100%; height: 100%"
                             />
-                            <a
-                                href="#"
-                                @click="${this._favoriteButton}"
-                                class="position-absolute favoriteButton"
-                                style="right:5px; font-size: 150%"
-                            >
-                                ${favoriteButtonIcon}
-                            </a>
                         </div>
                     </div>
                     <div class="col col-md-7 pt-2 d-flex flex-column">

@@ -10,6 +10,8 @@ import Login from "./pages/auth/Login";
 import UserBorrowed from "./pages/UserBorrowed.js";
 import Create1 from "./pages/LendBooks/create1";
 import AdminEditBook from "./pages/admin/book/AdminEditBook.js";
+import AdminAddBook from "./pages/admin/book/AdminAddBook.js";
+import LendBooks from "./pages/admin/lend/LendBooks.js";
 
 const scriptSources = {
     userIndex: UserIndex,
@@ -18,6 +20,8 @@ const scriptSources = {
     userBorrowed: UserBorrowed,
     LendBooksCreate1: Create1,
     adminEditBook: AdminEditBook,
+    adminAddBook: AdminAddBook,
+    lendBooks: LendBooks,
 };
 
 const scriptSource = document.querySelector("#dataBody").dataset.source;
@@ -31,8 +35,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-$(".btn").on("click", function (e) {
-    if ($(this).hasClass("disable")) {
+$('.btn').on('click', function(e) {
+    if ($(this).hasClass('disable')) {
         e.preventDefault();
     }
 });
