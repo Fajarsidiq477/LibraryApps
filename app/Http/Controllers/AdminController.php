@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
 
     public function index() {
-
+        
         $books = Book::all();
         $transactions = Lend::class;
         $carbon = Carbon::class;
