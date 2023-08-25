@@ -45,27 +45,6 @@
                 >
                     <!-- Main content disini, pake javascript -->
                 </div>
-
-                <!-- pagination -->
-                <nav aria-label="Page navigation example" class="mt-3">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link page-prev pr-5"><</a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link page-next" href="#">></a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
 @endsection
 
@@ -97,7 +76,7 @@
                             bookAuthor="${d.author}"
                             bookPublisher="${d.publisher}"
                             bookStatus="${d.book_status}"
-                            bookDetailUrl="..."
+                            bookDetailUrl="{{ url('/book/${d.book_code}') }}"
                             bookFavoriteUrl="..."
                             bookFavorite=false
                             bookCover={{ asset('cover_images/${d.cover}') }}

@@ -1,6 +1,6 @@
 <div class="navbar navbar-upper bg-primary py-2">
     <div class="container">
-        <a class="navbar-brand text-light" href="#">SIJAMBU IPAI</a>
+        <a class="navbar-brand text-light" href="{{ url('/') }}">SIJAMBU IPAI</a>
 
         <div class="d-flex dropdown px-2">
             <a

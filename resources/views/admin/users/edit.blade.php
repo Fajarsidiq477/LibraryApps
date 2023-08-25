@@ -21,11 +21,10 @@
 <div id="dataBody" data-source="adminAddBook"></div>
 
     <div class="container mt-3">
-        <form action="{{ route('users.update', $user->id) }}" method="POST" id="form-modal">
+        <form action="{{ route('users.update', $user->id) }}" method="POST" id="form-modal" enctype="multipart/form-data">
+
             @method('PUT')
             {{ csrf_field() }}
-            <input type="text" id="form-mode" hidden />
-            <!-- <input type="text" id="id" hidden /> -->
             <div class="row">
                 <div class="col-12 col-md-6 text-center">
                     <div class="image-cover">
@@ -40,6 +39,7 @@
                             name="picture1"
                             id="imageInput"
                             accept="image/*"
+                            value="{{ old('picture1', $user->profile_picture) }}"
                             hidden
                         />
                         <label
@@ -49,9 +49,11 @@
                             <i class="bi bi-pencil-fill"></i>
                         </label>
                     </div>
+                    @error('picture1')
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-12 col-md-6">
-                    
                     
                     <div class="form-group mb-3">
                         <label for="nim" class="mb-2"
@@ -59,12 +61,15 @@
                         >
                         <input
                             type="text"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('id') is-invalid @enderror"
                             id="id"
                             name="id"
-                            value="{{ $user->id }}"
+                            value="{{ old('id', $user) }}"
                             required
                         />
+                        @error('id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="namaLengkap" class="mb-2"
@@ -72,12 +77,15 @@
                         >
                         <input
                             type="text"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('name') is-invalid @enderror"
                             id="name"
                             name="name"
-                            value="{{ $user->name }}"
+                            value="{{ old('name', $user) }}"
                             required
                         />
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="email" class="mb-2"
@@ -85,12 +93,15 @@
                         >
                         <input
                             type="email"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('email') is-invalid @enderror"
                             id="email"
                             name="email"
-                            value="{{ $user->email }}"
+                            value="{{ old('email', $user) }}"
                             required
                         />
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="password" class="mb-2"
@@ -98,10 +109,27 @@
                         >
                         <input
                             type="password"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('password') is-invalid @enderror"
                             id="password"
                             name="password"
                         />
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password_confirmation" class="mb-2"
+                            >Konfirmasi Password</label
+                        >
+                        <input
+                            type="password"
+                            class="form-control custom-form-control @error('password_confirmation') is-invalid @enderror"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                        />
+                        @error('password_confirmation')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="handphone" class="mb-2"
@@ -109,20 +137,26 @@
                         </label>
                         <input
                             type="number"
-                            class="form-control custom-form-control"
+                            class="form-control custom-form-control @error('phone') is-invalid @enderror"
                             id="phone"
                             name="phone"
-                            value="{{ $user->phone }}"
+                            value="{{ old('phone', $user) }}"
                             required
                         />
+                        @error('phone')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="role" class="mb-2">Role</label >
-                        <select name="role" id="role" class="form-select custom-form-control" required>
-                        <option value="" disabled>...</option>    
-                        <option value="2" @if($user->role == 2) selected @endif >Member</option>
-                            <option value="1" @if($user->role == 1) selected @endif>staff</option>
+                        <select name="role" id="role" class="form-select custom-form-control @error('role') is-invalid @enderror" required>
+                            <option value="">...</option>    
+                            <option value="2" @if(old('role',$user) == 2) selected @endif>Member</option>
+                            <option value="1" @if(old('role',$user) == 1) selected @endif>Staff</option>
                         </select>
+                        @error('role')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group mb-3 text-end">

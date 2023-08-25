@@ -19,7 +19,7 @@ class BookDataController extends Controller
                     [
                         'data' => null,
                         'error' => 'false',
-                        'message' => 'Tidak ada data di database',
+                        'message' => 'Buku dengan keyword \'' . $request->keyword . '\' tidak ditemukan',
                     ]
                 );
             }
