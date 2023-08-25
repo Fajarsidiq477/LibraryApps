@@ -80,6 +80,11 @@ class LendBookController extends Controller
                 'return_date' => $request->return_date,
                 'lend_status' => '0',
             ]);
+
+            $book = Book::where('id', $request->input('bookid'.$i))
+                        ->update([
+                                'book_status' => '1'
+                        ]);
         }
 
         Alert::success('Alhamdulillah', 'Buku Berhasil Dipinjam :D');
@@ -118,4 +123,27 @@ class LendBookController extends Controller
     {
         //
     }
+
+    public function finishLend(Request $request){
+        
+        $id = $request->id;
+
+        $lend = Lend::where('id', $id)
+                    ->update([
+                        'lend_status' => '1'
+                    ]);
+    
+        $book = Book::where('id', Lend::find($id)->book->id)
+                    ->update([
+                        'book_status' => '0'
+                    ]);
+
+        return response()->json([
+            'error' => false,
+            'message' => 'Buku Dikembalikan!',
+            'data' => Lend::find($id)->book->id,
+        ]);
+        
+    }
+
 }
