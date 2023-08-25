@@ -64,7 +64,7 @@
 
 @section('footer')
 <!-- Add / Edit Modal -->
-    <div
+   <!--  <div
         class="modal fade"
         id="myModal"
         tabindex="-1"
@@ -151,9 +151,9 @@
                                             id="book_code_detail"
                                             disabled
                                         />
-                                        <!-- <div class="invalid-feedback">
+                                        <div class="invalid-feedback">
                                             Kode buku harus lebih dari 100
-                                        </div> -->
+                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="judul" class="mb-2"
@@ -400,287 +400,287 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 <!-- End Add / Edit Modal -->
 
 
 <script>
-        //Data Buku
-        let book = [];
+        // //Data Buku
+        // let book = [];
 
-        //Data User
-        let user = [];
+        // //Data User
+        // let user = [];
 
-        //Data Peminjaman
-        let lend = [];
+        // //Data Peminjaman
+        // let lend = [];
 
-        $.ajax({
-            url: "/get-book",
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                book = data.data;
-            }
-        });
+        // $.ajax({
+        //     url: "/get-book",
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         book = data.data;
+        //     }
+        // });
         
-        $.ajax({
-            url: "/get-user",
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                user = data.data;
-            }
-        });
+        // $.ajax({
+        //     url: "/get-user",
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         user = data.data;
+        //     }
+        // });
 
-        $.ajax({
-            url: "/get-lend",
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                lend = data.data;
-            }
-        });
+        // $.ajax({
+        //     url: "/get-lend",
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         lend = data.data;
+        //     }
+        // });
         
-        // Get Date Function
-        function getDate(){
+        // // Get Date Function
+        // function getDate(){
             
-            const d = new Date();
-            const e = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
+        //     const d = new Date();
+        //     const e = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
 
-            // Get year, month, and day part from the date
-            let tahun   = d.toLocaleString("default", { year    : "numeric" });
-            let bulan   = d.toLocaleString("default", { month   : "2-digit" });
-            let hari    = d.toLocaleString("default", { day     : "2-digit" });
+        //     // Get year, month, and day part from the date
+        //     let tahun   = d.toLocaleString("default", { year    : "numeric" });
+        //     let bulan   = d.toLocaleString("default", { month   : "2-digit" });
+        //     let hari    = d.toLocaleString("default", { day     : "2-digit" });
 
-            let tahun1  = e.toLocaleString("default", { year    : "numeric" });
-            let bulan1  = e.toLocaleString("default", { month   : "2-digit" });
-            let hari1   = e.toLocaleString("default", { day     : "2-digit" });
+        //     let tahun1  = e.toLocaleString("default", { year    : "numeric" });
+        //     let bulan1  = e.toLocaleString("default", { month   : "2-digit" });
+        //     let hari1   = e.toLocaleString("default", { day     : "2-digit" });
 
-            // Generate yyyy-mm-dd date string
-            let formattedDate   = tahun + "-" + bulan + "-" + hari;
+        //     // Generate yyyy-mm-dd date string
+        //     let formattedDate   = tahun + "-" + bulan + "-" + hari;
 
-            let formattedDate1  = tahun1 + "-" + bulan1 + "-" + hari1;
+        //     let formattedDate1  = tahun1 + "-" + bulan1 + "-" + hari1;
             
             
-            let date   = d.getDate();
-            let date1  = e.getDate();
+        //     let date   = d.getDate();
+        //     let date1  = e.getDate();
             
-            let day, day1;
-            let month, month1;
+        //     let day, day1;
+        //     let month, month1;
             
-            let year  = d.getFullYear();
-            let year1 = e.getFullYear();
+        //     let year  = d.getFullYear();
+        //     let year1 = e.getFullYear();
 
-                switch (d.getDay()) {
-                    case 0: day = "Ahad";   break;
-                    case 1: day = "Senin";  break;
-                    case 2: day = "Selasa"; break;
-                    case 3: day = "Rabu";   break;
-                    case 4: day = "Kamis";  break;
-                    case 5: day = "Jum'at"; break;
-                    case 6: day = "Sabtu";
-                }
+        //         switch (d.getDay()) {
+        //             case 0: day = "Ahad";   break;
+        //             case 1: day = "Senin";  break;
+        //             case 2: day = "Selasa"; break;
+        //             case 3: day = "Rabu";   break;
+        //             case 4: day = "Kamis";  break;
+        //             case 5: day = "Jum'at"; break;
+        //             case 6: day = "Sabtu";
+        //         }
 
-                switch (e.getDay()) {
-                    case 0: day1 = "Ahad";   break;
-                    case 1: day1 = "Senin";  break;
-                    case 2: day1 = "Selasa"; break;
-                    case 3: day1 = "Rabu";   break;
-                    case 4: day1 = "Kamis";  break;
-                    case 5: day1 = "Jum'at"; break;
-                    case 6: day1 = "Sabtu";
-                }
+        //         switch (e.getDay()) {
+        //             case 0: day1 = "Ahad";   break;
+        //             case 1: day1 = "Senin";  break;
+        //             case 2: day1 = "Selasa"; break;
+        //             case 3: day1 = "Rabu";   break;
+        //             case 4: day1 = "Kamis";  break;
+        //             case 5: day1 = "Jum'at"; break;
+        //             case 6: day1 = "Sabtu";
+        //         }
 
-                switch (d.getMonth()) {
-                    case 0:  month = "Januari"; break;
-                    case 1:  month = "Februari"; break;
-                    case 2:  month = "Maret"; break;
-                    case 3:  month = "April"; break;
-                    case 4:  month = "Mei"; break;
-                    case 5:  month = "Juni"; break;
-                    case 6:  month = "Juli"; break;
-                    case 7:  month = "Agustus"; break;
-                    case 8:  month = "September"; break;
-                    case 9:  month = "Oktober"; break;
-                    case 10: month = "November"; break;
-                    case 11: month = "Desember";
-                }
+        //         switch (d.getMonth()) {
+        //             case 0:  month = "Januari"; break;
+        //             case 1:  month = "Februari"; break;
+        //             case 2:  month = "Maret"; break;
+        //             case 3:  month = "April"; break;
+        //             case 4:  month = "Mei"; break;
+        //             case 5:  month = "Juni"; break;
+        //             case 6:  month = "Juli"; break;
+        //             case 7:  month = "Agustus"; break;
+        //             case 8:  month = "September"; break;
+        //             case 9:  month = "Oktober"; break;
+        //             case 10: month = "November"; break;
+        //             case 11: month = "Desember";
+        //         }
 
-                switch (e.getMonth()) {
-                    case 0:  month1 = "Januari"; break;
-                    case 1:  month1 = "Februari"; break;
-                    case 2:  month1 = "Maret"; break;
-                    case 3:  month1 = "April"; break;
-                    case 4:  month1 = "Mei"; break;
-                    case 5:  month1 = "Juni"; break;
-                    case 6:  month1 = "Juli"; break;
-                    case 7:  month1 = "Agustus"; break;
-                    case 8:  month1 = "September"; break;
-                    case 9:  month1 = "Oktober"; break;
-                    case 10: month1 = "November"; break;
-                    case 11: month1 = "Desember";
-                }
+        //         switch (e.getMonth()) {
+        //             case 0:  month1 = "Januari"; break;
+        //             case 1:  month1 = "Februari"; break;
+        //             case 2:  month1 = "Maret"; break;
+        //             case 3:  month1 = "April"; break;
+        //             case 4:  month1 = "Mei"; break;
+        //             case 5:  month1 = "Juni"; break;
+        //             case 6:  month1 = "Juli"; break;
+        //             case 7:  month1 = "Agustus"; break;
+        //             case 8:  month1 = "September"; break;
+        //             case 9:  month1 = "Oktober"; break;
+        //             case 10: month1 = "November"; break;
+        //             case 11: month1 = "Desember";
+        //         }
 
-            // return day + ", " + date + " " + month + " " + year;
-            let lend_date  = day + ", " + date + " " + month + " " + year;
-            let return_date = day1 + ", " + date1 + " " + month1 + " " + year1;
+        //     // return day + ", " + date + " " + month + " " + year;
+        //     let lend_date  = day + ", " + date + " " + month + " " + year;
+        //     let return_date = day1 + ", " + date1 + " " + month1 + " " + year1;
 
-            return (data = {
-                lend_date,
-                return_date,
-                formattedDate,
-                formattedDate1
-            });
-        }
+        //     return (data = {
+        //         lend_date,
+        //         return_date,
+        //         formattedDate,
+        //         formattedDate1
+        //     });
+        // }
 
-        //delete confirmation
-        const deleteData = (id) => {
-            const confirm = window.confirm('Apakah yakin ingin menghapus data?')
+        // //delete confirmation
+        // const deleteData = (id) => {
+        //     const confirm = window.confirm('Apakah yakin ingin menghapus data?')
 
-            if(confirm) {
-                return alert('data dihapus');
-            }
-        };
+        //     if(confirm) {
+        //         return alert('data dihapus');
+        //     }
+        // };
 
-        // bs.modal.show triggered
-        const modalEl = document.querySelector("#myModal");
+        // // bs.modal.show triggered
+        // const modalEl = document.querySelector("#myModal");
 
-        const formModal = modalEl.querySelector("#form-modal");
+        // const formModal = modalEl.querySelector("#form-modal");
 
-        const getFormData = () => {
+        // const getFormData = () => {
 
-            const mode          = formModal.querySelector("#form-mode").value;
-            const id       = formModal.querySelector("#id_hidden").value;
+        //     const mode          = formModal.querySelector("#form-mode").value;
+        //     const id       = formModal.querySelector("#id_hidden").value;
             
-            const user_id       = formModal.querySelector("#user_id_hidden").value;
-            const book_code     = formModal.querySelector("#book_code_hidden").value;
-            const lend_date     = formModal.querySelector("#lend_date_hidden").value;
-            const return_date   = formModal.querySelector("#return_date_hidden").value;
+        //     const user_id       = formModal.querySelector("#user_id_hidden").value;
+        //     const book_code     = formModal.querySelector("#book_code_hidden").value;
+        //     const lend_date     = formModal.querySelector("#lend_date_hidden").value;
+        //     const return_date   = formModal.querySelector("#return_date_hidden").value;
 
-            const book_id = book.find(x => x.book_code == book_code).id;
+        //     const book_id = book.find(x => x.book_code == book_code).id;
 
-            return (data = {
-                mode, id, user_id, book_code, book_id, lend_date, return_date,
-            });
-        };
+        //     return (data = {
+        //         mode, id, user_id, book_code, book_id, lend_date, return_date,
+        //     });
+        // };
 
-        const onFormSubmit = (e, modalEl) => {
-            e.preventDefault();
+        // const onFormSubmit = (e, modalEl) => {
+        //     e.preventDefault();
 
-            // Get value from input
-            const data = getFormData(modalEl);
+        //     // Get value from input
+        //     const data = getFormData(modalEl);
 
-            // kirim data di bawah
-            $.ajax({
-                    url: '/input-lend-data',
-                    type: "POST",
-                    headers: headers,
-                    data: {
-                        id   : data.id,
-                        user_id         : data.user_id,
-                        // kode_buku   : data.kode_buku,
-                        book_id     : data.book_id,
-                        lend_date  : data.lend_date,
-                        return_date : data.return_date,
-                    },
-                    success: function (data) {
+        //     // kirim data di bawah
+        //     $.ajax({
+        //             url: '/input-lend-data',
+        //             type: "POST",
+        //             headers: headers,
+        //             data: {
+        //                 id   : data.id,
+        //                 user_id         : data.user_id,
+        //                 // kode_buku   : data.kode_buku,
+        //                 book_id     : data.book_id,
+        //                 lend_date  : data.lend_date,
+        //                 return_date : data.return_date,
+        //             },
+        //             success: function (data) {
                         
-                        data = JSON.parse(JSON.stringify(data));
-                        if(data.error == false){
-                            swalOption = {
-                                title: "Buku berhasil Dipinjam!",
-                                icon: "success",
-                                button: "Oke!",
-                            };
+        //                 data = JSON.parse(JSON.stringify(data));
+        //                 if(data.error == false){
+        //                     swalOption = {
+        //                         title: "Buku berhasil Dipinjam!",
+        //                         icon: "success",
+        //                         button: "Oke!",
+        //                     };
 
-                            swal(swalOption);
-                            $('.swal-button').click(function() {
-                                location.reload();
-                            });
+        //                     swal(swalOption);
+        //                     $('.swal-button').click(function() {
+        //                         location.reload();
+        //                     });
                             
-                        }else{
-                            alert(data.message);
-                            console.log(data.err_message);
-                        }
-                    }
-                });
+        //                 }else{
+        //                     alert(data.message);
+        //                     console.log(data.err_message);
+        //                 }
+        //             }
+        //         });
 
 
-            // tutup modal ketika kode add / edit berhasil dieksekusi
-            document.querySelector(".btn-admin-close").click();
-        };
+        //     // tutup modal ketika kode add / edit berhasil dieksekusi
+        //     document.querySelector(".btn-admin-close").click();
+        // };
 
-            // Event when modal opened
-            modalEl.addEventListener("show.bs.modal", (event) => {
-                window.Jar.whenModalShow(modalEl, "lends", event);
-            });
+        //     // Event when modal opened
+        //     modalEl.addEventListener("show.bs.modal", (event) => {
+        //         window.Jar.whenModalShow(modalEl, "lends", event);
+        //     });
 
-            // Event when form-modal on submit
-            modalEl
-                .querySelector("#form-modal")
-                .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
+        //     // Event when form-modal on submit
+        //     modalEl
+        //         .querySelector("#form-modal")
+        //         .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
 
-            // Multisteps form
-            const btnStepNext = modalEl.querySelector(".btn-step-next");
+        //     // Multisteps form
+        //     const btnStepNext = modalEl.querySelector(".btn-step-next");
 
-            btnStepNext.addEventListener("click", () => {
-                if (window.Jar.stepIndex + 1 === 1) {
-                    const user_id = document.querySelector("#user_id").value;
+        //     btnStepNext.addEventListener("click", () => {
+        //         if (window.Jar.stepIndex + 1 === 1) {
+        //             const user_id = document.querySelector("#user_id").value;
 
-                    if(user.some(user => user.id == user_id) == false){
+        //             if(user.some(user => user.id == user_id) == false){
                         
-                        alert("Tidak ada member dengan NIM " + user_id);
+        //                 alert("Tidak ada member dengan NIM " + user_id);
                         
-                        location.reload();
+        //                 location.reload();
                     
-                    }else{
+        //             }else{
 
-                        formModal.querySelector("#user_id_hidden").value = user_id;
-                        document.getElementById("user_id_preview").innerHTML = user_id;
+        //                 formModal.querySelector("#user_id_hidden").value = user_id;
+        //                 document.getElementById("user_id_preview").innerHTML = user_id;
 
-                        document.getElementById("name_preview").innerHTML = user.find(x => x.id == parseInt(user_id)).name;
+        //                 document.getElementById("name_preview").innerHTML = user.find(x => x.id == parseInt(user_id)).name;
                         
-                        let total_lend = 1;
+        //                 let total_lend = 1;
                 
-                        if(lend.some(lend => lend.user_id == user_id) == true){
-                            for(i=0; i<lend.length; i++){
-                                if(lend[i].user_id == user_id){
-                                    total_lend++;
-                                }        
-                            }
-                        }
+        //                 if(lend.some(lend => lend.user_id == user_id) == true){
+        //                     for(i=0; i<lend.length; i++){
+        //                         if(lend[i].user_id == user_id){
+        //                             total_lend++;
+        //                         }        
+        //                     }
+        //                 }
 
-                        formModal.querySelector("#id_hidden").value = `${user_id}${total_lend}`;
-                        document.getElementById("id_preview").innerHTML = `ID peminjaman: ${user_id}${total_lend}`;
+        //                 formModal.querySelector("#id_hidden").value = `${user_id}${total_lend}`;
+        //                 document.getElementById("id_preview").innerHTML = `ID peminjaman: ${user_id}${total_lend}`;
                         
-                        formModal.querySelector("#lend_date_hidden").value = getDate().formattedDate;
-                        document.getElementById("lend_date_preview").innerHTML = getDate().lend_date;
+        //                 formModal.querySelector("#lend_date_hidden").value = getDate().formattedDate;
+        //                 document.getElementById("lend_date_preview").innerHTML = getDate().lend_date;
                         
-                        formModal.querySelector("#return_date_hidden").value = getDate().formattedDate1;
-                        document.getElementById("return_date_preview").innerHTML = getDate().return_date;
+        //                 formModal.querySelector("#return_date_hidden").value = getDate().formattedDate1;
+        //                 document.getElementById("return_date_preview").innerHTML = getDate().return_date;
 
-                        alert("kamu di halaman kode buku, NIM anda " + user_id);
+        //                 alert("kamu di halaman kode buku, NIM anda " + user_id);
                     
-                    }
-                }
-                if (window.Jar.stepIndex + 1 === 2) {
-                    const book_code = document.querySelector("#book_code").value;
-                    if(book.some(book => book.book_code == book_code) == false){
+        //             }
+        //         }
+        //         if (window.Jar.stepIndex + 1 === 2) {
+        //             const book_code = document.querySelector("#book_code").value;
+        //             if(book.some(book => book.book_code == book_code) == false){
 
-                        alert("Tidak ada buku dengan kode " + book_code);
-                        location.reload();
+        //                 alert("Tidak ada buku dengan kode " + book_code);
+        //                 location.reload();
                     
-                    }else{
-                        formModal.querySelector("#book_code_hidden").value = book_code;    
-                        document.getElementById("book_code_preview").innerHTML = book_code;
-                        document.getElementById("title_preview").innerHTML = book.find(x => x.book_code == book_code).title;
+        //             }else{
+        //                 formModal.querySelector("#book_code_hidden").value = book_code;    
+        //                 document.getElementById("book_code_preview").innerHTML = book_code;
+        //                 document.getElementById("title_preview").innerHTML = book.find(x => x.book_code == book_code).title;
 
-                        alert("kamu di halaman detail buku");
-                    }
-                }
-                if(window.Jar.stepIndex + 1 === 3) {
-                    alert("kamu di halaman preview");
-                }
-            })
+        //                 alert("kamu di halaman detail buku");
+        //             }
+        //         }
+        //         if(window.Jar.stepIndex + 1 === 3) {
+        //             alert("kamu di halaman preview");
+        //         }
+        //     })
     </script>
 @endsection

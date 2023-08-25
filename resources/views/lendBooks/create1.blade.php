@@ -37,7 +37,6 @@
                                     class="form-control mb-2 input-book bookCodeInputs"
                                     name="bookCodeInput1"
                                     id="bookCodeInput1"
-                                    value="FKWI123"
                                     required
                                 />
                         </div>

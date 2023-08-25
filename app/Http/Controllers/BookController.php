@@ -99,13 +99,10 @@ class BookController extends Controller
                 'type'              => $request->type,
                 'book_status'       => $request->book_status,
             ]);
-
-            // $book = Book::find($id);
             
             // return redirect()->back()->with('success', 'Update successfully!');
-            // Alert::success(session('success'));
             Alert::success('Congrats', 'Update successfully!');
-            return back();
+            return redirect()->action([BookController::class, 'index']);
 
         }catch(\Exception $e){
             // return response()->json(
