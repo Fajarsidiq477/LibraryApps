@@ -22,7 +22,7 @@
      
 
         <main>
-            @include('sweetalert::alert')
+            {{-- @include('sweetalert::alert') --}}
             @yield('main')
         </main>
 

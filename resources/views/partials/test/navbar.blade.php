@@ -20,15 +20,25 @@
             </a>
             <ul class="dropdown-menu">
                 @if (Auth::check())
+
+
                     
-                <li>
-                    <a class="dropdown-item" href="{{ route('user.profile') }}"
-                    >Akun</a
-                    >
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{{ route('user.activity') }}">Aktivitas</a>
-                </li>
+                @if (Auth::user()->role == 2)
+                    <li>
+                        <a class="dropdown-item" href="{{ route('user.profile') }}"
+                        >Akun</a
+                        >
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('user.activity') }}">Aktivitas</a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->role == 0 || Auth::user()->role == 1 )
+                    <li>
+                        <a class="dropdown-item" href="{{ route('admin.index') }}">Admin Dashboard</a>
+                    </li>
+                @endif
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf

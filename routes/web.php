@@ -9,6 +9,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LendController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LendBookController;
+use App\Http\Controllers\UserAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware(['checkRole:0|1'])->group(function() {
         Route::prefix('admin')->group(function() {
             Route::get('/',             [AdminController::class, 'index'])->name('admin.index');
-            Route::get('/users',        [AdminController::class,'adminUserView'])->name('admin.users');
+            Route::resources(['/users' => UserAdminController::class]);
             // Route::get('/lend-books',   [AdminController::class,'lendBookView'])->name('admin.lend.books'); 
             Route::resources(['/books' => BookController::class]);
            

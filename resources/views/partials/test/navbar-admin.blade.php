@@ -12,9 +12,9 @@
                         <i class="bi bi-book-fill"></i>
                     </a>
                 </li>
-                @if (Auth::user()->role != 1)
+                @if (Auth::user()->role == 0)
                     <li class="nav-item">
-                        <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'admin.users') active @endif" href="{{ route('admin.users') }}">
+                        <a class="nav-link px-md-4 @if(Route::currentRouteName() === 'users.index') active @endif" href="{{ route('users.index') }}">
                             <i class="bi bi-person-fill"></i>
                         </a>
                     </li>

@@ -1,16 +1,16 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('header')
-    @include('partials.navbar-upper')
-
-    <nav>
-        @include('partials.navbar-admin-lower')
-        @include('partials.navbar-upper-mobile')
-    </nav>
+    @include('partials.test.navbar')
+    @include('partials.test.navbar-admin')
 @endsection
 
 @section('main')
-    <div class="container">
+    <div class="container my-3">
+        <a href="{{ route('users.create') }}" class="btn btn-primary">
+            <span>Tambah User</span>
+            <i class="bi bi-plus-square-fill"></i>
+        </a>
         <div class="row table-responsive">
             <table class="table text-center">
                 <thead>
@@ -23,90 +23,69 @@
                         <th class="py-4">Nama Lengkap</th>
                         <th class="py-4">Role</th>
                         <th class="py-4">Nomor HP</th>
-                        <th class="py-4">Denda</th>
                         <th class="py-4">#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($user as $item)
+                    @foreach($users as $i => $user)
                         <tr class="align-middle">
                             <td>
                                 <input type="checkbox" name="" id="" />
                             </td>
-                            <td>1</td>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            @if($item->role == '0')
+                            <td>{{ $i + 1 }}</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            @if($user->role == '0')
                                 <td>Super Admin</td>
-                            @elseif($item->role == '1')
+                            @elseif($user->role == '1')
                                 <td>Admin</td>
-                            @elseif($item->role == '2')
+                            @elseif($user->role == '2')
                                 <td>Member</td>
                             @endif
-                            <td>{{ $item->phone }}</td>
-                            <td>0</td>
+                            <td>{{ $user->phone }}</td>
                             <td>
                                 <a
-                                    href="#"
-                                    class="badge text-dark"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#myModal"
-                                    data-bs-mode="edit"
-                                    data-bs-id="{{ $item->id }}"
-                                    onclick="putEditData(id='{{$item->id}}')"
+                                    href="{{ route('users.edit', $user->id) }}"
+                                    class="badge text-dark btn btn-warning text-white"                                  
                                 >
-                                    <i data-feather="edit"></i>
+                                    <i class="bi bi-pencil"></i>
                                 </a>
 
                                 <a
                                     href="#"
-                                    class="badge text-dark"
-                                    onclick="deleteData(1)"
+                                    class="badge text-dark btn btn-danger text-white"
+                                    onclick="deleteData('{{ $user->id }}')"
                                 >
-                                    <i data-feather="trash"></i>
+                                    <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
 
-                <!-- Alert query pencarian tidak ada -->
-                <!-- <tbody>
-                    <tr>
-                        <td colspan="7" class="py-5 text-danger">
-                            <h4>
-                                Buku dengan kata kunci "[query]" tidak
-                                ditemukan!
-                            </h4>
-                        </td>
-                    </tr>
-                </tbody> -->
             </table>
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 @endsection
 
 @section('footer')
-    <!-- Add / Edit Modal -->
+    <script>
+        //delete confirmation
+            const deleteData = (id) => {
+                const confirm = window.confirm('Apakah yakin ingin menghapus data?')
+
+                if(confirm) {
+                    return alert('data dihapus');
+                }
+
+                return alert('batal menghapus');
+            };
+    </script>
+
+
+
+
+    {{-- <!-- Add / Edit Modal -->
         <div
             class="modal fade"
             id="myModal"
@@ -251,18 +230,13 @@
                 </div>
             </div>
         </div>
-    <!-- End Add / Edit Modal -->
+    <!-- End Add / Edit Modal --> --}}
 @endsection
-
+{{-- 
 @section('script')
     <script>
 
-        let inputImage = false;
-
-        //cek apakah gambar sudah diinput (jika di form edit untuk cek apakah gambar diganti)
-        function imageStatus(){
-            inputImage = true;
-        }
+    
 
         //Data User
         const user = [];
@@ -399,25 +373,5 @@
             document.querySelector(".btn-admin-close").click();
         };
 
-        // Event when modal opened
-        modalEl.addEventListener("show.bs.modal", (event) => {
-            window.Jar.whenModalShow(modalEl, "users", event);
-
-            // Ketika input file image menerima uploadan
-            const imageInput = document.querySelector("#imageInput");
-            const imageInputDisplay =
-                document.querySelector("#imageInputDisplay");
-            // Event when imageinput receive a change
-            imageInput.addEventListener("change", function () {
-                const image = this.files[0];
-
-                window.Jar.displayImage(image, imageInputDisplay);
-            });
-        });
-
-        // Event when form-modal on submit
-        modalEl
-            .querySelector("#form-modal")
-            .addEventListener("submit", (e) => onFormSubmit(e, modalEl));
     </script>
-@endsection 
+@endsection  --}}
