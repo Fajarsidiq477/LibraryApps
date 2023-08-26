@@ -11,7 +11,7 @@
                 aria-expanded="false"
             >
                 <div class="avatar">
-                    <i class="bi bi-person"></i>
+                    <img src="{{ asset('storage/avatars/'.Auth::user()->profile_picture) }}" class="img-fluid rounded-circle" alt="">
                 </div>
 
                 <div class="col text-center">

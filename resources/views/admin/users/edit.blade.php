@@ -29,27 +29,27 @@
                 <div class="col-12 col-md-6 text-center">
                     <div class="image-cover">
                         <img
-                            src="{{ asset('profile_pictures/' . $user->profile_picture) }}"
+                            src="{{ $avatar }}"
                             alt="book cover"
-                            id="imageInputDisplay"
+                            id="photoDisplay"
                             class="img-fluid"
                         />
                         <input
                             type="file"
-                            name="picture1"
-                            id="imageInput"
+                            name="photo"
+                            id="photo"
                             accept="image/*"
-                            value="{{ old('picture1', $user->profile_picture) }}"
+                            value="{{ old('photo', $user->profile_picture) }}"
                             hidden
                         />
                         <label
-                            for="imageInput"
+                            for="photo"
                             class="btn btn-success rounded-circle image-cover-button"
                         >
                             <i class="bi bi-pencil-fill"></i>
                         </label>
                     </div>
-                    @error('picture1')
+                    @error('photo')
                         <div class="alert alert-danger mt-3">{{ $message }}</div>
                     @enderror
                 </div>
@@ -175,15 +175,15 @@
 
 @section('footer')
     <script>
-        const imageInput = document.querySelector('#imageInput');
+        const photo = document.querySelector('#photo');
         
-        imageInput.addEventListener('input', (e) => {
+        photo.addEventListener('input', (e) => {
             e.preventDefault();
             const image = e.srcElement.files[0];
-            const imageInputDisplay = e.srcElement.parentElement.querySelector('img');
+            const photoDisplay = e.srcElement.parentElement.querySelector('img');
             var reader = new FileReader();      
 
-            imageInputDisplay.src = "{{ asset('images/spinner.gif') }}";
+            photoDisplay.src = "{{ asset('images/spinner.gif') }}";
 
             
 
@@ -194,7 +194,7 @@
 
 
             reader.addEventListener("load", () => {
-                imageInputDisplay.src = reader.result;
+                photoDisplay.src = reader.result;
             }, false, );
 
             if (image) {
