@@ -21,7 +21,7 @@
     <div id="dataBody" data-source="adminEditBook"></div>
 
     <div class="container mt-3">
-        <form action="{{ route('books.update', $book->id) }}" method="POST" id="form-book-edit">
+        <form action="{{ route('books.update', $book->id) }}" method="POST" id="form-book-edit" enctype="multipart/form-data">
 
             @csrf
             <!-- {{ csrf_field() }} -->

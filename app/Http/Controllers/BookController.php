@@ -38,7 +38,45 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        return dd($request);
+        // return dd($request);
+        $file = $request->file('cover');
+
+        // if($file == null){
+        //     $cover = "http://placehold.co/160x225";
+        // }else{
+            $cover = $file->getClientOriginalName();
+            
+            $directory = 'cover_images';
+            $file->move($directory, $cover);
+        // }
+
+        if (Book::where('book_code', $request->book_code)->exists()) {
+
+            Alert::error('Yah Error', 'Buku Dengan Kode Tersebut Telah Ada!');
+            return redirect()->action([BookController::class, 'create']);
+            
+        } else{
+            $query = Book::create([
+                'book_code'         => $request->book_code,
+                'title'             => $request->title,
+                'author'            => $request->author,
+                'editor'            => $request->editor,
+                'translator'        => $request->translator,
+                'language'          => $request->language,
+                'publisher'         => $request->publisher,
+                'publication_year'  => $request->publication_year,
+                'page'              => $request->page,
+                'volume'            => $request->volume,
+                // 'synopsis'          => $request->synopsis,
+                'cover'             => $cover,
+                'type'              => $request->type,
+                'book_status'       => $request->book_status,
+            ]);
+            
+            Alert::success('Alhamdulillah', 'Buku Telah Ditambahkan :D');
+            return redirect()->action([BookController::class, 'index']);
+        }
+
     }
 
     /**
@@ -99,19 +137,12 @@ class BookController extends Controller
                 'type'              => $request->type,
                 'book_status'       => $request->book_status,
             ]);
-            
-            // return redirect()->back()->with('success', 'Update successfully!');
-            Alert::success('Congrats', 'Update successfully!');
+
+            Alert::success('Alhamdulillah', 'Buku Telah Diupdate :D');
             return redirect()->action([BookController::class, 'index']);
 
         }catch(\Exception $e){
-            // return response()->json(
-            //     [
-            //         'error'=>true,
-            //         'message'=>"Gagal",
-            //         'err_message'=>$e->getMessage()
-            //     ]
-            // );
+            // untuk mencari error ketika debugging
         }
     }
 

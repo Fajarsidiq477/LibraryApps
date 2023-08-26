@@ -3987,36 +3987,27 @@ var LendBooks = {
     }
   },
   sendData: function sendData(id) {
-    console.log(id);
-    $.ajax({
-      url: '/admin/finish-lend',
-      type: "POST",
-      headers: headers,
-      data: {
-        id: id
-      },
-      success: function success(data) {
-        data = JSON.parse(JSON.stringify(data));
-        alert("Sukses");
-
-        // swalOption = {
-        //     title: "Buku Telah Dikembalikan!",
-        //     icon: "success",
-        //     button: "Oke!",
-        // };
-
-        // swal(swalOption);
-        // $('.swal-button').click(function() {
-        //     location.reload();
-        // });
-      },
-
-      error: function error(data, textStatus, errorThrown) {
-        data = JSON.parse(JSON.stringify(data));
-        alert("gagal");
-        // console.log(data.err_message);
-      }
-    });
+    var confirm = window.confirm('Apakah benar buku sudah dikembalikan?');
+    if (confirm) {
+      $.ajax({
+        url: '/admin/finish-lend',
+        type: "POST",
+        headers: headers,
+        data: {
+          id: id
+        },
+        success: function success(data) {
+          data = JSON.parse(JSON.stringify(data));
+          alert("Sukses");
+          location.reload();
+        },
+        error: function error(data, textStatus, errorThrown) {
+          data = JSON.parse(JSON.stringify(data));
+          alert("gagal");
+          // console.log(data.err_message);
+        }
+      });
+    }
   }
 };
 

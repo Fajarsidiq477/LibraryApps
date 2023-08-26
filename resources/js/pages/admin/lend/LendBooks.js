@@ -1,11 +1,9 @@
 const LendBooks = {
     init() {
-
         this._initialListener();
     },
 
     _initialListener() {
-        
         this._lendOnInput();
     },
 
@@ -20,37 +18,31 @@ const LendBooks = {
     },
 
     sendData(id){
-        console.log(id);
-        $.ajax({
-            url: '/admin/finish-lend',
-            type: "POST",
-            headers: headers,
-            data: {
-                id : id,
-            },
-            success: function (data) {
-                data = JSON.parse(JSON.stringify(data));
-                
-                alert("Sukses");
-                
-                // swalOption = {
-                //     title: "Buku Telah Dikembalikan!",
-                //     icon: "success",
-                //     button: "Oke!",
-                // };
+        const confirm = window.confirm('Apakah benar buku sudah dikembalikan?')
 
-                // swal(swalOption);
-                // $('.swal-button').click(function() {
-                //     location.reload();
-                // });
-
-            },
-            error: function (data, textStatus, errorThrown) {
-                data = JSON.parse(JSON.stringify(data));
-                alert("gagal");
-                // console.log(data.err_message);
-            },
-        });
+        if(confirm) {
+            $.ajax({
+                url: '/admin/finish-lend',
+                type: "POST",
+                headers: headers,
+                data: {
+                    id : id,
+                },
+                success: function (data) {
+                    data = JSON.parse(JSON.stringify(data));
+                    
+                    alert("Sukses");
+                    
+                    location.reload();
+    
+                },
+                error: function (data, textStatus, errorThrown) {
+                    data = JSON.parse(JSON.stringify(data));
+                    alert("gagal");
+                    // console.log(data.err_message);
+                },
+            });
+        }
     }
 };
 
