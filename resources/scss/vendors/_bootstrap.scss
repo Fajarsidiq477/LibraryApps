@@ -14,9 +14,12 @@
 $primary: #f75e5d;
 $secondary: #1c2d5e;
 
-$theme-colors: (
-    "primary": $primary,
-    "secondary": $secondary,
+$theme-colors: map-merge(
+    $theme-colors,
+    (
+        "primary": $primary,
+        "secondary": $secondary,
+    )
 );
 
 // 5. Include remainder of required parts
