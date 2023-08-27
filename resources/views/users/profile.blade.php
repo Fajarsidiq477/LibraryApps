@@ -175,7 +175,7 @@
                             setTimeout(() => {
                                 const formLogout = document.querySelector('#changePasswordLogout');
                                 formLogout.submit();
-                            }, 1000);
+                            }, 3000);
                             
                         }
                     }

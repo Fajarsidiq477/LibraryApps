@@ -18,12 +18,9 @@
         padding: 1rem;
         text-decoration: none;
 
-        &.active {
-            background-color: #fed4af;
-        }
-
+        &.active,
         &:hover {
-            background-color: #fed4af;
+            background-color: rgba($color: #fff, $alpha: 0.6);
         }
 
         span {
