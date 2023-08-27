@@ -3255,14 +3255,32 @@ var BookCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
       e.stopPropagation();
       var offCanvas = document.querySelector("#offcanvasRight #offcanvas-content");
       offCanvas.querySelector(".aside-form").classList.add("d-none");
-      offCanvas.querySelector(".book").innerHTML = "\n\n            <div class=\"book-detail text-center px-4\">\n                <div class=\"aside-header\">\n                  \n                    <img\n                        src=\"".concat(this.bookCover, "\"\n                        class=\"d-block mx-auto img-fluid mb-2\"\n                        alt=\"book-cover\"\n                    />\n\n                    \n                </div>\n                <div class=\"aside-description text-start mt-4\">\n                    <a href=\"").concat(this.bookDetailUrl, "\" class=\"text-dark\"><h4 class=\"book-title\">").concat(this.bookName, "</h4></a>\n                    <p class=\"book-year\">").concat(this.bookYear, "</p>\n                    <h5 class=\"book-author\">").concat(this.bookAuthor, "</h5>\n                    <p class=\"book-publisher fw-bold\">").concat(this.bookPublisher, "</p>\n                    <p class=\"book-status\">\n                        <span>Status</span>\n                        <span class=\"badge text-white bg-secondary p-1\">").concat(this.bookStatus, "</span>\n                    </p>\n                </div>\n            </div>\n        ");
+      var bookStatus;
+      switch (this.bookStatus) {
+        case '0':
+          bookStatus = "<span class='badge text-white bg-success p-1'>Tersedia</span>";
+          break;
+        case '1':
+          bookStatus = "<span class='badge text-white bg-danger p-1'>Dipinjam</span>";
+          break;
+        case '2':
+          bookStatus = "<span class='badge text-white bg-dark p-1'>Hilang</span>";
+          break;
+      }
+      offCanvas.querySelector(".book").innerHTML = "\n\n            <div class=\"book-detail text-center px-4\">\n                <div class=\"aside-header\">\n                    <img\n                        src=\"".concat(this.bookCover, "\"\n                        class=\"d-block mx-auto img-fluid mb-2\"\n                        alt=\"book-cover\"\n                    />\n                </div>\n                <div class=\"aside-description text-start mt-4 favorite-bar\">\n\n                </div>\n                <div class=\"aside-description text-start mt-4\">\n                    <a href=\"").concat(this.bookDetailUrl, "\" class=\"text-dark\"><h4 class=\"book-title\">").concat(this.bookName, "</h4></a>\n                    <p class=\"book-year\">").concat(this.bookYear, "</p>\n                    <h5 class=\"book-author\">").concat(this.bookAuthor, "</h5>\n                    <p class=\"book-publisher fw-bold\">").concat(this.bookPublisher, "</p>\n                    <p class=\"book-status\">\n                        <span>Status</span>\n                        ").concat(bookStatus, "\n                    </p>\n                </div>\n            </div>\n        ");
+      document.querySelector(".favorite-bar").innerHTML = "\n                <span id=\"favorite\" class=\"bi bi-star favorite-icon\" style=\"font-size:1.5rem; color:#ffc107!important\"></span>\n          ";
     }
+
+    // buat favorite icon
+    // <span id="boot-icon" class="bi bi-star" style="font-size:1.5rem; color:#ffc107!important"></span>
+    // <span id="boot-icon" class="bi bi-star-fill" style="font-size:1.5rem; color:#ffc107!important"></span>
   }, {
     key: "_favoriteButton",
     value: function _favoriteButton(e) {
       e.preventDefault();
       try {
         this._toggleFavoriteButton(this);
+        console.log(this);
       } catch (e) {
         console.log(e.message);
       }

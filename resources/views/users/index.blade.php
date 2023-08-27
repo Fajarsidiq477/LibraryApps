@@ -63,8 +63,6 @@
             dataType: 'json',
             success: function(data) {
 
-                console.log(data);
-
                 const html = data.data.map((d) => {
                     return `
                     <div class="col-12 col-md-5 d-block border-bottom border-3">

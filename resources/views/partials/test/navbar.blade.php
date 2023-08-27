@@ -11,7 +11,11 @@
                 aria-expanded="false"
             >
                 <div class="avatar">
+                @if (Auth::check())
                     <img src="{{ asset('storage/avatars/'.Auth::user()->profile_picture) }}" class="img-fluid rounded-circle" alt="">
+                @else 
+                    <img src="{{ asset('images/chopper.png') }}" class="img-fluid rounded-circle" alt="" height="50">
+                @endif
                 </div>
 
                 <div class="col text-center">

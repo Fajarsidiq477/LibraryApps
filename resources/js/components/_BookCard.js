@@ -110,18 +110,32 @@ class BookCard extends LitWithoutShadowDom {
         );
         offCanvas.querySelector(".aside-form").classList.add("d-none");
 
+        let bookStatus;
+
+        switch(this.bookStatus) {
+            case '0':
+                bookStatus = "<span class='badge text-white bg-success p-1'>Tersedia</span>";
+              break;
+            case '1':
+                bookStatus = "<span class='badge text-white bg-danger p-1'>Dipinjam</span>";
+              break;
+            case '2':
+                bookStatus = "<span class='badge text-white bg-dark p-1'>Hilang</span>";
+              break;
+          }
+
         offCanvas.querySelector(".book").innerHTML = `
 
             <div class="book-detail text-center px-4">
                 <div class="aside-header">
-                  
                     <img
                         src="${this.bookCover}"
                         class="d-block mx-auto img-fluid mb-2"
                         alt="book-cover"
                     />
+                </div>
+                <div class="aside-description text-start mt-4 favorite-bar">
 
-                    
                 </div>
                 <div class="aside-description text-start mt-4">
                     <a href="${this.bookDetailUrl}" class="text-dark"><h4 class="book-title">${this.bookName}</h4></a>
@@ -130,17 +144,26 @@ class BookCard extends LitWithoutShadowDom {
                     <p class="book-publisher fw-bold">${this.bookPublisher}</p>
                     <p class="book-status">
                         <span>Status</span>
-                        <span class="badge text-white bg-secondary p-1">${this.bookStatus}</span>
+                        ${bookStatus}
                     </p>
                 </div>
             </div>
         `;
+    
+        document.querySelector(".favorite-bar").innerHTML = `
+                <span id="favorite" class="bi bi-star favorite-icon" style="font-size:1.5rem; color:#ffc107!important"></span>
+          `;
     }
 
+    // buat favorite icon
+    // <span id="boot-icon" class="bi bi-star" style="font-size:1.5rem; color:#ffc107!important"></span>
+    // <span id="boot-icon" class="bi bi-star-fill" style="font-size:1.5rem; color:#ffc107!important"></span>
+    
     _favoriteButton(e) {
         e.preventDefault();
         try {
             this._toggleFavoriteButton(this);
+            console.log(this);
         } catch (e) {
             console.log(e.message);
         }
