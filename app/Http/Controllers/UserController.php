@@ -47,7 +47,7 @@ class UserController extends Controller
 
         // return view('users/borrowed', ['user_data' => $user_data, 'lend_data' => $lend_data]);
 
-        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '0' || 'lend_status', '=', '3')->get();
+        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '0')->orWhere('lend_status', '=', '3')->get();
 
         return view('users/activity/borrowed', ['lends' => $lends]);
 
@@ -68,7 +68,7 @@ class UserController extends Controller
         // return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
 
 
-        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '1' || 'lend_status', '=', '2')->get();
+        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '1')->orWhere('lend_status', '=', '2')->get();
 
         return view('users/activity/history', ['lends' => $lends]);
 
