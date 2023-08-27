@@ -29,7 +29,10 @@ class UserController extends Controller
     }
 
     public function userActivity() {
-        return view('users/activity');
+
+        $lends = (User::find(Auth::user()->id))->lends->all();
+
+        return view('users/activity', ['lends' => $lends]);
     }
 
     public function userBorrowed() {

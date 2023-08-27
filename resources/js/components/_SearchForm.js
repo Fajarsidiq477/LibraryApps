@@ -55,7 +55,7 @@ class SearchForm extends LitWithoutShadowDom {
                         placeholder="Pencarian ...."
                     />
                     <button
-                        class="btn bg-secondary text-light"
+                        class="btn bg-secondary text-white"
                         type="submit"
                         id="search"
                     >

@@ -30,10 +30,10 @@ Route::post('/save', [BookController::class,'bookSave']);
 Route::middleware(['auth'])->group(function() {
     // halaman user
     Route::middleware(['checkRole:2|1|0'])->group(function() {
-        Route::prefix('user')->group(function() {
-            Route::get('/profile',      [UserController::class,'userProfile'])->name('user.profile');
-            Route::post('/profile',     [UserController::class,'userChangePassword'])->name('user.change.password');
-            Route::get('/activity',     [UserController::class,'userActivity'])->name('user.activity');
+        Route::get('/profile',      [UserController::class,'userProfile'])->name('user.profile');
+        Route::post('/profile',     [UserController::class,'userChangePassword'])->name('user.change.password');
+        Route::prefix('/activity')->group(function() {
+            Route::get('/',     [UserController::class,'userActivity'])->name('user.activity');
             Route::get('/borrowed',     [UserController::class,'userBorrowed'])->name('user.borrowed');
             Route::get('/history',      [UserController::class,'userHistory'])->name('user.history');
             Route::get('/favorite',     [UserController::class,'userFavorite'])->name('user.favorite');

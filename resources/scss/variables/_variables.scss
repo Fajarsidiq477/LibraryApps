@@ -2,21 +2,6 @@ $bp-tablet: 768px;
 $bp-mobile: 425px;
 $bp-sm: 575px;
 
-$primary: #f75e5d;
-$secondary: #1c2d5e;
+// $primary: #f75e5d;
+// $secondary: #1c2d5e;
 $background: #f6ffde;
-
-$pagination-color: #fff;
-$pagination-bg: $secondary;
-$pagination-border-radius: 25px;
-$pagination-border-width: 0px;
-$pagination-border-color: $secondary;
-$pagination-active-bg: #fecb5f;
-$pagination-disabled-color: #fff;
-$pagination-disabled-bg: $secondary;
-$pagination-focus-color: #dfb65d;
-$pagination-focus-bg: $secondary;
-
-.text-secondary {
-    color: $secondary;
-}
