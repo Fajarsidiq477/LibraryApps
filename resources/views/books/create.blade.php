@@ -28,7 +28,7 @@
                 <div class="col-12 col-md-6 text-center">
                     <div class="image-cover">
                         <img src="http://placehold.co/160x225" alt="book cover" name="imageInputDisplay" id="imageInputDisplay" class="img-fluid" width="165"/>
-                        <input type="file" name="cover" id="imageInput" accept="image/*" required  hidden/>
+                        <input type="file" name="cover" id="imageInput" accept="image/*"  hidden/>
                         <label for="imageInput" class="btn btn-success rounded-circle image-cover-button">
                             <i class="bi bi-pencil"></i>
                         </label>
@@ -102,6 +102,32 @@
             </div>
         </form>
     </div>
+
+    {{-- Message --}}
+    @if (Session::has('success'))
+        <!-- <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            <strong>Success !</strong> {{ session('success') }}
+        </div> -->
+        <script>
+            alert("Gambar Tidak Boleh Kosong!");
+        </script>
+    @endif
+
+    @if (Session::has('error'))
+        <!-- <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            <strong>Error !</strong> {{ session('error') }}
+        </div> -->
+        <script>
+            alert("Gambar Tidak Boleh Kosong!");
+        </script>
+    @endif
+
 @endsection
 
 @section('footer')

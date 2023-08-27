@@ -41,14 +41,16 @@ class BookController extends Controller
         // return dd($request);
         $file = $request->file('cover');
 
-        // if($file == null){
-        //     $cover = "http://placehold.co/160x225";
-        // }else{
+        if($file == null){
+            // Alert::error('Error!', 'Gambar Tidak Boleh Kosong!');
+            // return redirect()->action([BookController::class, 'create']);
+            return redirect()->back()->with('error', 'Gamber Tidak Boleh Kosong!');
+        }else{
             $cover = $file->getClientOriginalName();
             
             $directory = 'cover_images';
             $file->move($directory, $cover);
-        // }
+        }
 
         if (Book::where('book_code', $request->book_code)->exists()) {
 
