@@ -6,6 +6,7 @@
 @endsection
 
 @section('main')
+<div id="dataBody" data-source="adminBook"></div>
     <div class="container mt-3">
         <a href="{{ route('books.create') }}" class="btn btn-primary">
             <span>Tambah Buku</span>
@@ -66,6 +67,7 @@
             </table>
         </div>
     </div>
+</div>
 @endsection
 
 @section('footer')
@@ -73,9 +75,26 @@
         //delete confirmation
         const deleteData = (id) => {
             const confirm = window.confirm('Apakah yakin ingin menghapus data?')
-
             if(confirm) {
-                return alert('data dihapus');
+
+                $.ajax({
+                    url: "/admin/books"+ '/' + id,
+                    type: "DELETE",
+                    headers: headers,
+                    data: {
+                        id : id,
+                    },
+                    success: function (data) {
+                        data = JSON.parse(JSON.stringify(data));
+                        return alert('data dihapus');
+                        location.reload();
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        data = JSON.parse(JSON.stringify(data));
+                        return alert('gagal');
+                        // console.log(data.err_message);
+                    },
+                });
             }
         };
     </script>

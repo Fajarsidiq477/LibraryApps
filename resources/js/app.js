@@ -9,6 +9,7 @@ import UserProfile from "./pages/UserProfile";
 import Login from "./pages/auth/Login";
 import UserBorrowed from "./pages/UserBorrowed.js";
 import Create1 from "./pages/LendBooks/create1";
+import AdminBook from "./pages/admin/book/AdminBook.js";
 import AdminEditBook from "./pages/admin/book/AdminEditBook.js";
 import AdminAddBook from "./pages/admin/book/AdminAddBook.js";
 import LendBooks from "./pages/admin/lend/LendBooks.js";
@@ -19,6 +20,7 @@ const scriptSources = {
     userProfile: UserProfile,
     userBorrowed: UserBorrowed,
     LendBooksCreate1: Create1,
+    adminBook: AdminBook,
     adminEditBook: AdminEditBook,
     adminAddBook: AdminAddBook,
     lendBooks: LendBooks,
