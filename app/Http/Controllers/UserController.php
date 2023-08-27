@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-
-
     public function userIndex(){
         
         $user_data = Auth::user();
@@ -30,39 +28,50 @@ class UserController extends Controller
 
     public function userActivity() {
 
-        $lends = (User::find(Auth::user()->id))->lends->all();
+        $lends = User::find(Auth::user()->id)->lends->all();
 
-        return view('users/activity', ['lends' => $lends]);
+        return view('users/activity/index', ['lends' => $lends]);
     }
 
     public function userBorrowed() {
         
-        $user_data = Auth::user();
+        // $user_data = Auth::user();
 
-        $lend = app(Controller::class)->getLendData();
+        // $lend = app(Controller::class)->getLendData();
 
-        $collection = Collection::make($lend);
+        // $collection = Collection::make($lend);
 
-        $lend_data = $collection->filter(function ($item) use ($user_data) {
-            return $item['user_id'] == $user_data->id && $item['lend_status'] == 0 || $item['lend_status'] == 3;
-        });
+        // $lend_data = $collection->filter(function ($item) use ($user_data) {
+        //     return $item['user_id'] == $user_data->id && $item['lend_status'] == 0 || $item['lend_status'] == 3;
+        // });
 
-        return view('users/borrowed', ['user_data' => $user_data, 'lend_data' => $lend_data]);
+        // return view('users/borrowed', ['user_data' => $user_data, 'lend_data' => $lend_data]);
+
+        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '0')->get();
+
+        return view('users/activity/borrowed', ['lends' => $lends]);
 
     }
     public function userHistory() {
 
-        $user_data = Auth::user();
+        // $user_data = Auth::user();
 
-        $lend = app(Controller::class)->getLendData();
+        // $lend = app(Controller::class)->getLendData();
 
-        $collection = Collection::make($lend);
+        // $collection = Collection::make($lend);
 
-        $lend_data = $collection->filter(function ($item) use ($user_data) {
-            return $item['user_id'] == $user_data->id && $item['lend_status'] == 1 || $item['lend_status'] == 2;
-        });
+        // $lend_data = $collection->filter(function ($item) use ($user_data) {
+        //     return $item['user_id'] == $user_data->id && $item['lend_status'] == 1 || $item['lend_status'] == 2;
+        // });
+        
 
-        return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
+        // return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
+
+
+        $lends = User::find(Auth::user()->id)->lends->all();
+
+        return view('users/activity/history', ['lends' => $lends]);
+
     }
     public function userFavorite() {
         

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('book_id');
             $table->date('lend_date');
             $table->date('return_date')->nullable();
-            $table->enum('lend_status', [0, 1, 2]); // status 0 = Pinjam, 1 = Selesai, 2 = Hilang
+            $table->enum('lend_status', [0, 1, 2]); // status 0 = Pinjam, 1 = Dikembalikan, 2 = Hilang
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });
