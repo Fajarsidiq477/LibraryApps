@@ -21,6 +21,16 @@
     <div class="container mt-3">
 
         <div class="row">
+            @if (session('success'))
+                    <div class="alert alert-success mt-2">
+                        {{ session('success.message') }}
+                    </div>
+                @endif
+            @if (session('error'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('error.message') }}
+                </div>
+            @endif
             <div class="col-md-8 mx-auto">
                 <form action="{{ route('lend-books.create.1') }}" method="POST" id="form-modal">
         
