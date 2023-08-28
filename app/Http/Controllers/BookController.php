@@ -94,7 +94,9 @@ class BookController extends Controller
         // $file = $request->file('cover');
 
         // if($file == null){
-        //     $cover = "http://placehold.co/160x225";
+            // Alert::error('Error!', 'Gambar Tidak Boleh Kosong!');
+            // return redirect()->action([BookController::class, 'create']);
+            // return redirect()->back()->with('error', 'Gamber Tidak Boleh Kosong!');
         // }else{
             // $cover = $file->getClientOriginalName();
             
@@ -254,168 +256,174 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        $book = Book::find($id);
-        
-        if($book->cover !== 'default_cover.jpg') {
-            Storage::delete('book_covers/'.$book->cover);
-        }
-        $book->delete();
-
-        return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil dihapus!']);
+        //
     }
 
      public function addBook(Request $request){
         
-        $book_code          = $request->book_code;
-        $title              = $request->title;
-        $author             = $request->author;
-        $editor             = $request->editor;
-        $translator         = $request->translator;
-        $language           = $request->language;
-        $publisher          = $request->publisher;
-        $publication_year   = $request->publication_year;
-        $page               = $request->page;
-        $volume             = $request->volume;
-        $synopsis           = $request->synopsis;
-        $cover              = $request->file('cover');
-        $type               = $request->type;
-        $book_status        = $request->book_status;
+        Book::find($id)->delete();
 
-        try{
+        return response()->json(
+            [
+                'error'=>false,
+                'message'=>'Data Telah Dihapus'
+            ]
+        );
 
-            if (Book::where('book_code', $book_code)->exists()) {
-                return response()->json(
-                    [
-                        'error'=>true,
-                        'message'=>'buku sudah ada'
-                    ]
-                );
-            } else{
-                $query = Book::create([
-                    'book_code'         => $book_code,
-                    'title'             => $title,
-                    'author'            => $author,
-                    'editor'            => $editor,
-                    'translator'        => $translator,
-                    'language'          => $language,
-                    'publisher'         => $publisher,
-                    'publication_year'  => $publication_year,
-                    'page'              => $page,
-                    'volume'            => $volume,
-                    'synopsis'          => $synopsis,
-                    'cover'             => $cover->getClientOriginalName(),
-                    'type'              => $type,
-                    'book_status'       => $book_status,
-                ]);
-
-                $directory = 'cover_images';
-    
-                $cover->move($directory, $cover->getClientOriginalName());
-
-                return response()->json(
-                    [
-                        'error'=>false,
-                        'message'=>'Data Telah Ditambahkan'
-                    ]
-                );
-
-            }
-        }
-        catch(\Exception $e){
-            return response()->json(
-                [
-                    'error'=>true,
-                    'message'=>$e->getMessage()
-                ]
-            );
-        }
     }
 
-    public function updateCreateBook(Request $request){
+    //  public function addBook(Request $request){
+        
+    //     $book_code          = $request->book_code;
+    //     $title              = $request->title;
+    //     $author             = $request->author;
+    //     $editor             = $request->editor;
+    //     $translator         = $request->translator;
+    //     $language           = $request->language;
+    //     $publisher          = $request->publisher;
+    //     $publication_year   = $request->publication_year;
+    //     $page               = $request->page;
+    //     $volume             = $request->volume;
+    //     $synopsis           = $request->synopsis;
+    //     $cover              = $request->file('cover');
+    //     $type               = $request->type;
+    //     $book_status        = $request->book_status;
 
-        $mode               = $request->mode;
-        $book_code          = $request->book_code;
-        $title              = $request->title;
-        $author             = $request->author;
-        $editor             = $request->editor;
-        $translator         = $request->translator;
-        $language           = $request->language;
-        $publisher          = $request->publisher;
-        $publication_year   = $request->publication_year;
-        $page               = $request->page;
-        $volume             = $request->volume;
-        // $sinopsis         = $request->sinopsis;
-        $cover1             = $request->file('cover1');
-        $type               = $request->type;
-        $book_status        = $request->book_status;
+    //     try{
+
+    //         if (Book::where('book_code', $book_code)->exists()) {
+    //             return response()->json(
+    //                 [
+    //                     'error'=>true,
+    //                     'message'=>'buku sudah ada'
+    //                 ]
+    //             );
+    //         } else{
+    //             $query = Book::create([
+    //                 'book_code'         => $book_code,
+    //                 'title'             => $title,
+    //                 'author'            => $author,
+    //                 'editor'            => $editor,
+    //                 'translator'        => $translator,
+    //                 'language'          => $language,
+    //                 'publisher'         => $publisher,
+    //                 'publication_year'  => $publication_year,
+    //                 'page'              => $page,
+    //                 'volume'            => $volume,
+    //                 'synopsis'          => $synopsis,
+    //                 'cover'             => $cover->getClientOriginalName(),
+    //                 'type'              => $type,
+    //                 'book_status'       => $book_status,
+    //             ]);
+
+    //             $directory = 'cover_images';
+    
+    //             $cover->move($directory, $cover->getClientOriginalName());
+
+    //             return response()->json(
+    //                 [
+    //                     'error'=>false,
+    //                     'message'=>'Data Telah Ditambahkan'
+    //                 ]
+    //             );
+
+    //         }
+    //     }
+    //     catch(\Exception $e){
+    //         return response()->json(
+    //             [
+    //                 'error'=>true,
+    //                 'message'=>$e->getMessage()
+    //             ]
+    //         );
+    //     }
+    // }
+
+    // public function updateCreateBook(Request $request){
+
+    //     $mode               = $request->mode;
+    //     $book_code          = $request->book_code;
+    //     $title              = $request->title;
+    //     $author             = $request->author;
+    //     $editor             = $request->editor;
+    //     $translator         = $request->translator;
+    //     $language           = $request->language;
+    //     $publisher          = $request->publisher;
+    //     $publication_year   = $request->publication_year;
+    //     $page               = $request->page;
+    //     $volume             = $request->volume;
+    //     // $sinopsis         = $request->sinopsis;
+    //     $cover1             = $request->file('cover1');
+    //     $type               = $request->type;
+    //     $book_status        = $request->book_status;
 
 
         
-        try{
-            if($mode == "add"){
-                if(Book::where('book_code', $book_code)->exists()){
-                    return response()->json(
-                        [
-                            'error'=>true,
-                            'message'=>"Buku dengan kode tersebut telah ada!"
-                        ]
-                    );
-                }
-            }
+    //     try{
+    //         if($mode == "add"){
+    //             if(Book::where('book_code', $book_code)->exists()){
+    //                 return response()->json(
+    //                     [
+    //                         'error'=>true,
+    //                         'message'=>"Buku dengan kode tersebut telah ada!"
+    //                     ]
+    //                 );
+    //             }
+    //         }
 
-            if($cover1 == null){
-                $cover = $request->cover2;
-            }else{
-                $cover = $cover1->getClientOriginalName();
+    //         if($cover1 == null){
+    //             $cover = $request->cover2;
+    //         }else{
+    //             $cover = $cover1->getClientOriginalName();
                 
-                $directory = 'cover_images';
-                $cover1->move($directory, $cover);
-            }
+    //             $directory = 'cover_images';
+    //             $cover1->move($directory, $cover);
+    //         }
 
-            // Menghapus cover buku lama jika file gambar yang dimasukan memiliki nama file yang sama
-            if(Book::where('book_code', $book_code)->exists()){   
-                $a = Book::select('cover')->where('book_code', $book_code)->get();
-                if($a[0]->cover != $cover){
-                    File::delete('cover_images/'.$a[0]->cover);
-                }
-            }
+    //         // Menghapus cover buku lama jika file gambar yang dimasukan memiliki nama file yang sama
+    //         if(Book::where('book_code', $book_code)->exists()){   
+    //             $a = Book::select('cover')->where('book_code', $book_code)->get();
+    //             if($a[0]->cover != $cover){
+    //                 File::delete('cover_images/'.$a[0]->cover);
+    //             }
+    //         }
 
-            $book = Book::updateOrCreate(
-                ['book_code' => $book_code],
-                [
-                    'title'             => $title,
-                    'author'            => $author,
-                    'editor'            => $editor,
-                    'translator'        => $translator,
-                    'language'          => $language,
-                    'publisher'         => $publisher,
-                    'publication_year'  => $publication_year,
-                    'page'              => $page,
-                    'volume'            => $volume,
-                    // 'sinopsis'          => $sinopsis,
-                    'cover'             => $cover,
-                    'type'              => $type,
-                    'book_status'       => $book_status,
-                ]
-            );
+    //         $book = Book::updateOrCreate(
+    //             ['book_code' => $book_code],
+    //             [
+    //                 'title'             => $title,
+    //                 'author'            => $author,
+    //                 'editor'            => $editor,
+    //                 'translator'        => $translator,
+    //                 'language'          => $language,
+    //                 'publisher'         => $publisher,
+    //                 'publication_year'  => $publication_year,
+    //                 'page'              => $page,
+    //                 'volume'            => $volume,
+    //                 // 'sinopsis'          => $sinopsis,
+    //                 'cover'             => $cover,
+    //                 'type'              => $type,
+    //                 'book_status'       => $book_status,
+    //             ]
+    //         );
 
-            return response()->json(
-                [
-                    'error'=>false,
-                    'message'=>'Data Telah Dimasukan ke Database'
-                ]
-            );
-        }
-        catch(\Exception $e){
-            return response()->json(
-                [
-                    'error'=>true,
-                    'message'=>'Data Telah Dimasukan ke Database',
-                    'err_message'=>$e->getMessage()
-                ]
-            );
-        }
-    }
+    //         return response()->json(
+    //             [
+    //                 'error'=>false,
+    //                 'message'=>'Data Telah Dimasukan ke Database'
+    //             ]
+    //         );
+    //     }
+    //     catch(\Exception $e){
+    //         return response()->json(
+    //             [
+    //                 'error'=>true,
+    //                 'message'=>'Data Telah Dimasukan ke Database',
+    //                 'err_message'=>$e->getMessage()
+    //             ]
+    //         );
+    //     }
+    // }
 
     public function bookSave(Request $request){
         

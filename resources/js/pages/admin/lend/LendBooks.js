@@ -30,11 +30,8 @@ const LendBooks = {
                 },
                 success: function (data) {
                     data = JSON.parse(JSON.stringify(data));
-                    
                     alert("Sukses");
-                    
                     location.reload();
-    
                 },
                 error: function (data, textStatus, errorThrown) {
                     data = JSON.parse(JSON.stringify(data));
