@@ -67,16 +67,22 @@ class LendBookController extends Controller
             for($i=0; $i < $books->count(); $i++){
                 //jika buku sedang dipinjam maka return error
                 if(Book::find($books[$i]->id)->lend->whereIn('lend_status', '0')->count() != 0){
+                
                     return redirect('/admin/lend-books/create')
                     ->with('error', ['message' => 'Buku dengan kode '.Book::find($books[$i]->id)->book_code.' sedang dipinjam user lain!']);
+                
                 }else{
                     if($i == $books->count() - 1){
                         //sort kode R
                         if(Book::find($books[$i]->id)->type != 0){
+                        
                             return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
+                        
                         } else{
+                            
                             return redirect('/admin/lend-books/create')
                             ->with('error', ['message' => 'Buku dengan kode '.Book::find($books[$i]->id)->book_code.' memiliki kode R! (Tidak dapat dipinjam)']);
+                        
                         }
                     }
                 }
