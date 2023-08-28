@@ -157,7 +157,9 @@ class UserAdminController extends Controller
     {
 
         $user = User::find($id);
-        Storage::delete('avatars/'.$user->profile_picture);
+        if($user->profile_picture !== 'avatar.jpg') {
+            Storage::delete('avatars/'.$user->profile_picture);
+        }
         $user->delete();
 
         return redirect('/admin/users')->with('success', ['message' => 'Data user berhasil dihapus!']);

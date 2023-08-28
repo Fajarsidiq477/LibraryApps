@@ -7,9 +7,9 @@
 
 @section('main')
     <div class="container my-3">
-        <a href="{{ route('users.create') }}" class="btn btn-primary">
+        <a href="{{ route('users.create') }}" class="btn btn-primary text-white">
             <span>Tambah User</span>
-            <i class="bi bi-plus-square-fill"></i>
+            <i class="bi bi-plus-square"></i>
         </a>
 
         {{-- form delete hidden --}}

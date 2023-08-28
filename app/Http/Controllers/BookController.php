@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Favorite;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
@@ -20,9 +22,11 @@ class BookController extends Controller
     public function index()
     {
 
-        $book = app(Controller::class)->getBook();
+        // $book = app(Controller::class)->getBook();
+
+        $books = Book::all();
         
-        return view('admin/books')->with('book', $book);
+        return view('admin.books.index', ['books' => $books]);
     }
 
     /**
@@ -30,7 +34,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        return view('admin.books.create');
     }
 
     /**
@@ -38,44 +42,92 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
+        // note 
+        // 1. Book code must generated automatically based on something. Something still unknown
+        // 2. Add a synopsis, but is not required
+
+        $validate = $request->validate([
+            'book_code' => 'required',
+            'title' => 'required',
+            'author' => 'required',
+            'publication_year' => 'required',
+            'type' => 'required',
+            'book_status' => 'required'
+        ], [
+            'required' => ':attribute dibutuhkan',
+        ]);
+
+
+        
+        $book = new Book();
+        
+        if ($request->hasFile('cover')) {
+            $extension = $request->cover->extension();
+
+            $filename = str_replace(' ', '_', $request->title) . '_' . uniqid() .'.' .  $extension;
+
+            $path = $request->cover->storeAs('book_covers', $filename);
+
+            $book->cover = $filename;
+        }
+
+        $book->book_code = $request->book_code;
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->publication_year = $request->publication_year;
+        $book->type = $request->type;
+        $book->book_status = $request->book_status;
+        $book->editor = $request->editor;
+        $book->translator = $request->translator;
+        $book->language = $request->language;
+        $book->publisher = $request->publisher;
+        $book->page = $request->page;
+        $book->volume = $request->volume;
+        $book->synopsis = $request->synopsis;
+
+        $book->save();
+
+        return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil ditambahkan!']);
+
         // return dd($request);
-        $file = $request->file('cover');
+        // $file = $request->file('cover');
 
         // if($file == null){
         //     $cover = "http://placehold.co/160x225";
         // }else{
-            $cover = $file->getClientOriginalName();
+            // $cover = $file->getClientOriginalName();
             
-            $directory = 'cover_images';
-            $file->move($directory, $cover);
+            // $directory = 'cover_images';
+            // $file->move($directory, $cover);
         // }
 
-        if (Book::where('book_code', $request->book_code)->exists()) {
+        // if (Book::where('book_code', $request->book_code)->exists()) {
 
-            Alert::error('Yah Error', 'Buku Dengan Kode Tersebut Telah Ada!');
-            return redirect()->action([BookController::class, 'create']);
+        //     Alert::error('Yah Error', 'Buku Dengan Kode Tersebut Telah Ada!');
+        //     return redirect()->action([BookController::class, 'create']);
             
-        } else{
-            $query = Book::create([
-                'book_code'         => $request->book_code,
-                'title'             => $request->title,
-                'author'            => $request->author,
-                'editor'            => $request->editor,
-                'translator'        => $request->translator,
-                'language'          => $request->language,
-                'publisher'         => $request->publisher,
-                'publication_year'  => $request->publication_year,
-                'page'              => $request->page,
-                'volume'            => $request->volume,
-                // 'synopsis'          => $request->synopsis,
-                'cover'             => $cover,
-                'type'              => $request->type,
-                'book_status'       => $request->book_status,
-            ]);
+        // } else{
+        //     $query = Book::create([
+        //         'book_code'         => $request->book_code,
+        //         'title'             => $request->title,
+        //         'author'            => $request->author,
+        //         'editor'            => $request->editor,
+        //         'translator'        => $request->translator,
+        //         'language'          => $request->language,
+        //         'publisher'         => $request->publisher,
+        //         'publication_year'  => $request->publication_year,
+        //         'page'              => $request->page,
+        //         'volume'            => $request->volume,
+        //         // 'synopsis'          => $request->synopsis,
+        //         'cover'             => $cover,
+        //         'type'              => $request->type,
+        //         'book_status'       => $request->book_status,
+        //     ]);
             
-            Alert::success('Alhamdulillah', 'Buku Telah Ditambahkan :D');
-            return redirect()->action([BookController::class, 'index']);
-        }
+        //     Alert::success('Alhamdulillah', 'Buku Telah Ditambahkan :D');
+        //     return redirect()->action([BookController::class, 'index']);
+        // }
 
     }
 
@@ -95,7 +147,7 @@ class BookController extends Controller
 
         $book = Book::find($id);
 
-        return view('books.edit', ['book' => $book]);
+        return view('admin.books.edit', ['book' => $book]);
     }
 
     /**
@@ -103,47 +155,98 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try{
-            if($request->file('cover1') == null){
-                $cover = $request->cover2;
-            }else{
-                $cover = $request->file('cover1')->getClientOriginalName();
-                    
-                $directory = 'cover_images';
-                $request->file('cover1')->move($directory, $cover);
+
+        $book = Book::find($id);
+
+        $validate = $request->validate([
+            'book_code' => ['required', Rule::unique('book')->ignore($request->book_code)],
+            'title' => 'required',
+            'author' => 'required',
+            'publication_year' => 'required',
+            'type' => 'required',
+            'book_status' => 'required'
+        ], [
+            'required' => ':attribute dibutuhkan',
+        ]);
+
+        $book->book_code = $request->book_code;
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->publication_year = $request->publication_year;
+        $book->type = $request->type;
+        $book->book_status = $request->book_status;
+        $book->editor = $request->editor;
+        $book->translator = $request->translator;
+        $book->language = $request->language;
+        $book->publisher = $request->publisher;
+        $book->page = $request->page;
+        $book->volume = $request->volume;
+        $book->synopsis = $request->synopsis;
+
+        if ($request->hasFile('cover')) {
+ 
+            $extension = $request->cover->extension();
+        
+            $filename = str_replace(' ', '_', $request->title) . '_' . uniqid() .'.' .  $extension;
+
+            // delete old cover
+            if($book->cover !== 'default_cover.jpg') {
+                Storage::delete('book_covers/'.$book->cover);
             }
 
-            // Menghapus cover buku lama jika file gambar yang dimasukan memiliki nama file yang sama
-            if(Book::where('id', $id)->exists()){   
-                $a = Book::select('cover')->where('id', $id)->get();
-                if($a[0]->cover != $cover){
-                    File::delete('cover_images/'.$a[0]->cover);
-                }
-            }
+            $path = Storage::putFileAs(
+                'book_covers/', $request->file('cover'), $filename
+            );
 
-            $query = Book::where('id', $id)->update([
-                'book_code'         => $request->book_code,
-                'title'             => $request->title,
-                'author'            => $request->author,
-                'editor'            => $request->editor,
-                'translator'        => $request->translator,
-                'language'          => $request->language,
-                'publisher'         => $request->publisher,
-                'publication_year'  => $request->publication_year,
-                'page'              => $request->page,
-                'volume'            => $request->volume,
-                // 'synopsis'          => $synopsis,
-                'cover'             => $cover,
-                'type'              => $request->type,
-                'book_status'       => $request->book_status,
-            ]);
-
-            Alert::success('Alhamdulillah', 'Buku Telah Diupdate :D');
-            return redirect()->action([BookController::class, 'index']);
-
-        }catch(\Exception $e){
-            // untuk mencari error ketika debugging
+            $book->cover = $filename;
         }
+
+        $book->update();
+
+        return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil diedit!']);
+
+
+        // try{
+        //     if($request->file('cover1') == null){
+        //         $cover = $request->cover2;
+        //     }else{
+        //         $cover = $request->file('cover1')->getClientOriginalName();
+                    
+        //         $directory = 'cover_images';
+        //         $request->file('cover1')->move($directory, $cover);
+        //     }
+
+        //     // Menghapus cover buku lama jika file gambar yang dimasukan memiliki nama file yang sama
+        //     if(Book::where('id', $id)->exists()){   
+        //         $a = Book::select('cover')->where('id', $id)->get();
+        //         if($a[0]->cover != $cover){
+        //             File::delete('cover_images/'.$a[0]->cover);
+        //         }
+        //     }
+
+        //     $query = Book::where('id', $id)->update([
+        //         'book_code'         => $request->book_code,
+        //         'title'             => $request->title,
+        //         'author'            => $request->author,
+        //         'editor'            => $request->editor,
+        //         'translator'        => $request->translator,
+        //         'language'          => $request->language,
+        //         'publisher'         => $request->publisher,
+        //         'publication_year'  => $request->publication_year,
+        //         'page'              => $request->page,
+        //         'volume'            => $request->volume,
+        //         // 'synopsis'          => $synopsis,
+        //         'cover'             => $cover,
+        //         'type'              => $request->type,
+        //         'book_status'       => $request->book_status,
+        //     ]);
+
+        //     Alert::success('Alhamdulillah', 'Buku Telah Diupdate :D');
+        //     return redirect()->action([BookController::class, 'index']);
+
+        // }catch(\Exception $e){
+        //     // untuk mencari error ketika debugging
+        // }
     }
 
     /**
@@ -151,7 +254,14 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::find($id);
+        
+        if($book->cover !== 'default_cover.jpg') {
+            Storage::delete('book_covers/'.$book->cover);
+        }
+        $book->delete();
+
+        return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil dihapus!']);
     }
 
      public function addBook(Request $request){

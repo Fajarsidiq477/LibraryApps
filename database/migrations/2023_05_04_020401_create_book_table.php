@@ -16,18 +16,18 @@ return new class extends Migration
             $table->id('id');
             $table->string('book_code', 10)->unique();
             $table->string('title');
-            $table->string('author')->nullable();
+            $table->string('author');
+            $table->integer('publication_year');
+            $table->enum('type', [0, 1]); // 0 = R, 1 = Non R
+            $table->enum('book_status', [0, 1, 2]);  // 0 = Tersedia, 1 = Dipinjam, 2 = Hilang
             $table->string('editor')->nullable();
             $table->string('translator')->nullable();
             $table->string('language')->nullable();
             $table->string('publisher')->nullable();
-            $table->integer('publication_year')->nullable();
             $table->integer('page')->nullable();
             $table->integer('volume')->nullable();
             $table->longtext('synopsis')->nullable();
             $table->string('cover')->nullable();
-            $table->enum('type', [0, 1]); // 0 = R, 1 = Non R
-            $table->enum('book_status', [0, 1, 2]);  // 0 = Tersedia, 1 = Dipinjam, 2 = Hilang
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });
