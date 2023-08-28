@@ -71,6 +71,7 @@ class LendBookController extends Controller
                     ->with('error', ['message' => 'Buku dengan kode '.Book::find($books[$i]->id)->book_code.' sedang dipinjam user lain!']);
                 }else{
                     if($i == $books->count() - 1){
+                        //sort kode R
                         if(Book::find($books[$i]->id)->type != 0){
                             return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
                         } else{
