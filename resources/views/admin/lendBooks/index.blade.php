@@ -30,6 +30,16 @@
             class="ms-3 my-2 d-flex align-items-center"
         ></div>
         <div class="row table-responsive">
+            @if (session('success'))
+                <div class="alert alert-success mt-2">
+                    {{ session('success.message') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('error.message') }}
+                </div>
+            @endif
             <table class="table text-center">
                 <thead>
                     <tr>
@@ -47,6 +57,7 @@
                 </thead>
                 <tbody id="main-table">
                 @foreach ($lends as $lend)
+                    @if($lend->lend_status == '0' || $lend->lend_status == '3')
                     <tr class="align-middle">
                         <td>
                             <input type="checkbox" name="" id="" />
@@ -64,15 +75,17 @@
                         <td>{{ $lend->lend_date }}</td>
                         <td>{{ ($lend->lend_status  == '0') ? 'dipinjam' : 'dikembalikan' }}</td>
                         <td>
-                            <a
-                                href="#"
-                                class="btn btn-success finish-lend"
-                                id="{{$lend->id}}"
-                            >
-                                <i class="bi bi-check-square-fill"></i>
-                            </a>
+                            <form action="{{ route('lend-books.destroy', $lend->id)}}" method="POST">
+                                <input name="_method" type="hidden" value="DELETE">
+                                {{ csrf_field() }}
+
+                                <button type="submit" class="btn btn-success" id="{{$lend->id}}" >
+                                    <i class="bi bi-check-square-fill"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>

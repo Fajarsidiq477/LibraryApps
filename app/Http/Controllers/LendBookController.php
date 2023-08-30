@@ -17,6 +17,7 @@ class LendBookController extends Controller
     public function index()
     {
         $lends = Lend::All();
+
         return view('admin.lendBooks.index', ['lends' => $lends]);
     }
 
@@ -74,7 +75,7 @@ class LendBookController extends Controller
                         //sort kode R
                         if(Book::find($books[$i]->id)->type != 0){
                         
-                            return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
+                            return view('admin.lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
                         
                         } else{
                             
@@ -153,12 +154,6 @@ class LendBookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
-
-    public function finishLend(Request $request){
-        
-        $id = $request->id;
 
         $lend = Lend::where('id', $id)
                     ->update([
@@ -169,12 +164,35 @@ class LendBookController extends Controller
                     ->update([
                         'book_status' => '0'
                     ]);
+        
+        // return redirect()->action([LendBookController::class, 'index']);
+        $lends = Lend::All();
 
-        return response()->json([
-            'error' => false,
-            'message' => 'Buku Dikembalikan!',
-            'data' => Lend::find($id)->book->id,
-        ]);
+        return redirect('/admin/lend-books')->with('success', [
+            'message' => 'Buku berhasil dikembalikan!',
+            'lends' => $lends]);
+
+    }
+
+    public function finishLend(Request $request){
+        
+        // $id = $request->id;
+
+        // $lend = Lend::where('id', $id)
+        //             ->update([
+        //                 'lend_status' => '1'
+        //             ]);
+    
+        // $book = Book::where('id', Lend::find($id)->book->id)
+        //             ->update([
+        //                 'book_status' => '0'
+        //             ]);
+
+        // return response()->json([
+        //     'error' => false,
+        //     'message' => 'Buku Dikembalikan!',
+        //     'data' => Lend::find($id)->book->id,
+        // ]);
         
     }
 

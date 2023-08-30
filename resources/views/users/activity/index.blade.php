@@ -35,12 +35,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-center fs-4 gap-3">
                             <i class="bi bi-book"></i>
-                            <span>{{count($returned)}}</span>
+                            <span>0</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 @endsection
