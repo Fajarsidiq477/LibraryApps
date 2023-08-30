@@ -29,8 +29,14 @@ class UserController extends Controller
     public function userActivity() {
 
         $lends = User::find(Auth::user()->id)->lends->all();
+        $borrow = User::find(Auth::user()->id)->lends->where('lend_status', '0');
+        $returned = User::find(Auth::user()->id)->lends->where('lend_status', '1');
 
-        return view('users/activity/index', ['lends' => $lends]);
+        return view('users/activity/index', [
+            'lends' => $lends,
+            'borrow' => $borrow,
+            'returned' => $returned,
+        ]);
     }
 
     public function userBorrowed() {
