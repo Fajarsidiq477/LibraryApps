@@ -77,7 +77,8 @@
                             bookDetailUrl="{{ url('/book/${d.book_code}') }}"
                             bookFavoriteUrl="..."
                             bookFavorite=false
-                            bookCover={{ asset('cover_images/${d.cover}') }}
+                            bookCover={{ asset('storage/book_covers/${d.cover}') }}
+                            
             
                         >
                         </book-card>
