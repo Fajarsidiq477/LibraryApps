@@ -14,7 +14,7 @@
         <div class="row mt-3">
             <div class="col-12 col-md-3 d-flex justify-content-center">
                 <img
-                    src="{{ asset('cover_images/' . $lend->book->cover) }}"
+                    src="{{ asset('storage/book_covers/' . $lend->book->cover) }}"
                     alt="book cover"
                     class=""
                     style="width:120px;"

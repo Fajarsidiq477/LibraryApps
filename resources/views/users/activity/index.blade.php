@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-center fs-4 gap-3">
                             <i class="bi bi-book"></i>
-                            <span>{{ count($lends) }}</span>
+                            <span>{{count($lends)}}</span>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-center fs-4 gap-3">
                             <i class="bi bi-book"></i>
-                            <span>0</span>
+                            <span>{{count($borrow)}}</span>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-center fs-4 gap-3">
                             <i class="bi bi-book"></i>
-                            <span>0</span>
+                            <span>{{count($returned)}}</span>
                         </div>
                     </div>
                 </div>
