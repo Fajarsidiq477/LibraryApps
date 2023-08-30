@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('publication_year');
             $table->enum('type', [0, 1]); // 0 = R, 1 = Non R
             $table->enum('book_status', [0, 1, 2]);  // 0 = Tersedia, 1 = Dipinjam, 2 = Hilang
+            $table->string('cover')->default('cover_default.jpg');
             $table->string('editor')->nullable();
             $table->string('translator')->nullable();
             $table->string('language')->nullable();
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->integer('page')->nullable();
             $table->integer('volume')->nullable();
             $table->longtext('synopsis')->nullable();
-            $table->string('cover')->nullable();
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();
         });

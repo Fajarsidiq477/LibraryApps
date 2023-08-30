@@ -9,9 +9,9 @@
 @section('main')
 <div id="dataBody" data-source="lendBooks"></div>
     <div class="container mt-3">
-        <a href="{{ route('lend-books.create') }}" class="btn btn-primary">
+        <a href="{{ route('lend-books.create') }}" class="btn btn-primary text-white">
             <span>Tambah Pinjam Buku</span>
-            <i class="bi bi-plus-square-fill"></i>
+            <i class="bi bi-plus-square"></i>
         </a>
         <div class="row table-responsive">
             <table class="table text-center">

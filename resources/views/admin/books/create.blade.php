@@ -37,28 +37,28 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group mb-3">
                         <label for="kode" class="mb-2">Kode Buku</label>
-                        <input type="text" class="form-control custom-form-control @error('book_code') is-invalid @enderror" name="book_code" id="book_code" required value="{{ old('book_code') }}" />
+                        <input type="text" class="form-control custom-form-control @error('book_code') is-invalid @enderror" name="book_code" id="book_code" required value="{{ old('book_code') }}" maxlength="10"/>
                         @error('book_code')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="judul" class="mb-2">Judul Buku</label>
-                        <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="title" id="title" required value="{{ old('title') }}" />
+                        <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="title" id="title" required value="{{ old('title') }}" maxlength="50"/>
                         @error('title')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                            <div class="alert alert-danger mt-3" >{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="penulis" class="mb-2">Penulis</label>
-                        <input type="text" class="form-control custom-form-control @error('author') is-invalid @enderror" name="author" id="author" required value="{{ old('author') }}" />
+                        <input type="text" class="form-control custom-form-control @error('author') is-invalid @enderror" name="author" id="author" required value="{{ old('author') }}" maxlength="30"/>
                         @error('author')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="tahunTerbit" class="mb-2">Tahun Terbit</label>
-                        <input type="number" class="form-control custom-form-control @error('publication_year') is-invalid @enderror" name="publication_year" id="publication_year" required  value="{{ old('publication_year') }}"/>
+                        <input type="number" class="form-control custom-form-control @error('publication_year') is-invalid @enderror" name="publication_year" id="publication_year" required  value="{{ old('publication_year') }}" max="{{ date('Y') }}"/>
                         @error('publication_year')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
@@ -67,8 +67,8 @@
                         <label for="status" class="mb-2">Jenis Buku</label>
                         <select name="type" id="type" class="form-select custom-form-control @error('type') is-invalid @enderror" required>
                             <option selected disabled value="">---</option>
-                            <option value="0" @if(old('type') == 0) selected @endif>R</option>
-                            <option value="1" @if(old('type') == 1) selected @endif>Non R</option>
+                            <option value="0" @if(old('type') == '0') selected @endif>R</option>
+                            <option value="1" @if(old('type') == '1') selected @endif>Non R</option>
                         </select>
                         @error('type')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
@@ -78,9 +78,9 @@
                         <label for="status" class="mb-2">Status Buku</label>
                         <select name="book_status" id="book_status" class="form-select custom-form-control @error('book_status') is-invalid @enderror" required>
                             <option selected disabled value = "">---</option>
-                            <option value="0" @if(old('book_status') == 0) selected @endif>Tersedia</option>
-                            <option value="1" @if(old('book_status') == 1) selected @endif>Dipinjam</option>
-                            <option value="2" @if(old('book_status') == 2) selected @endif>Hilang</option>
+                            <option value="0" @if(old('book_status') == '0') selected @endif>Tersedia</option>
+                            <option value="1" @if(old('book_status') == '1') selected @endif>Dipinjam</option>
+                            <option value="2" @if(old('book_status') == '2') selected @endif>Hilang</option>
                         </select>
                         @error('book_status')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
@@ -88,19 +88,19 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="penerbit" class="mb-2">Penerbit</label>
-                        <input type="text" class="form-control custom-form-control" name="publisher" id="publisher" value="{{ old('publisher') }}" />
+                        <input type="text" class="form-control custom-form-control" name="publisher" id="publisher" value="{{ old('publisher') }}" maxlength="30" />
                     </div>
                     <div class="form-group mb-3">
                         <label for="editor" class="mb-2">Editor</label>
-                        <input type="text" class="form-control custom-form-control" name="editor" id="editor" value="{{ old('editor') }}" />
+                        <input type="text" class="form-control custom-form-control" name="editor" id="editor" value="{{ old('editor') }}" maxlength="30"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="penerjemah" class="mb-2">Penerjemah</label>
-                        <input type="text" class="form-control custom-form-control" name="translator" id="translator" value="{{ old('translator') }}" />
+                        <input type="text" class="form-control custom-form-control" name="translator" id="translator" value="{{ old('translator') }}" maxlength="30"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="language" class="mb-2">Bahasa</label>
-                        <input type="text" class="form-control custom-form-control" name="language" id="language"  value="{{ old('language') }}"/>
+                        <input type="text" class="form-control custom-form-control" name="language" id="language"  value="{{ old('language') }}" maxlength="30"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="synopsis" class="mb-2">Sinopsis</label>
@@ -108,11 +108,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="jumlahHalaman" class="mb-2">Jumlah Halaman</label>
-                        <input type="number" class="form-control custom-form-control" name="page" id="page" value="{{ old('page') }}"/>
+                        <input type="number" class="form-control custom-form-control" name="page" id="page" value="{{ old('page') }}" max="1500"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="volume" class="mb-2">Volume</label>
-                        <input type="number" class="form-control custom-form-control" name="volume" id="volume"  value="{{ old('volume') }}"/>
+                        <input type="number" class="form-control custom-form-control" name="volume" id="volume"  value="{{ old('volume') }}" max="10"/>
                     </div>
                     
 

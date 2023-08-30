@@ -34,7 +34,7 @@ class AdminController extends Controller
 
         $user = app(Controller::class)->getUser();
 
-        return view('admin/users')->with('user', $user);
+        return view('admin.users.index')->with('user', $user);
     }
 
     public function updateCreateUser(Request $request){

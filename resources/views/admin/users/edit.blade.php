@@ -65,6 +65,7 @@
                             id="id"
                             name="id"
                             value="{{ old('id', $user) }}"
+                            maxlength="15"
                             required
                         />
                         @error('id')
@@ -81,6 +82,7 @@
                             id="name"
                             name="name"
                             value="{{ old('name', $user) }}"
+                            maxlength="35"
                             required
                         />
                         @error('name')
@@ -97,6 +99,7 @@
                             id="email"
                             name="email"
                             value="{{ old('email', $user) }}"
+                            maxlength="30"
                             required
                         />
                         @error('email')
@@ -112,6 +115,8 @@
                             class="form-control custom-form-control @error('password') is-invalid @enderror"
                             id="password"
                             name="password"
+                            minlength="8"
+                            maxlength="20"
                         />
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -126,6 +131,8 @@
                             class="form-control custom-form-control @error('password_confirmation') is-invalid @enderror"
                             id="password_confirmation"
                             name="password_confirmation"
+                            minlength="8"
+                            maxlength="20"
                         />
                         @error('password_confirmation')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -141,6 +148,7 @@
                             id="phone"
                             name="phone"
                             value="{{ old('phone', $user) }}"
+                            maxlength="20"
                             required
                         />
                         @error('phone')

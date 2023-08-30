@@ -6,8 +6,7 @@ use App\Models\Lend;
 use App\Models\User;
 use App\Models\Book;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
-
+use Alert;
 use Carbon\Carbon;
 
 class LendBookController extends Controller
@@ -19,7 +18,7 @@ class LendBookController extends Controller
     {
         $lends = Lend::All();
 
-        return view('admin.lendBooks', ['lends' => $lends]);
+        return view('admin.lendBooks.index', ['lends' => $lends]);
     }
 
     /**
@@ -27,7 +26,7 @@ class LendBookController extends Controller
      */
     public function create()
     {
-        return view('lendBooks.create');
+        return view('admin.lendBooks.create');
     }
 
     public function create1(Request $request) {
@@ -35,10 +34,10 @@ class LendBookController extends Controller
         $user = User::find($request->id);
 
         if($user){
-            return view('lendBooks.create1', ['id' => $request->id]);
+            return view('admin.lendBooks.create1', ['id' => $request->id]);
         }else{
             Alert::error('Haha Error', 'Tidak Ada Member Dengan NIM '. $request->id.'!');
-            return redirect()->action([LendBookController::class, 'create']);
+            return redirect()->back();
         }
 
     }
@@ -53,7 +52,7 @@ class LendBookController extends Controller
         $books = Book::whereIn('book_code', [$request->bookCodeInput1, $request->bookCodeInput2, $request->bookCodeInput3, $request->bookCodeInput4, $request->bookCodeInput5 ])->get();
 
         if($books->count() != 0){
-            return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
+            return view('admin.lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
         }else{
             Alert::error('Haha Error', 'Tidak Ada Kode Buku Yang Valid');
             return $this->create1($request , $request->id);

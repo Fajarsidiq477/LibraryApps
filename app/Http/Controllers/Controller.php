@@ -14,9 +14,11 @@ use App\Models\Book;
 use App\Models\User;
 use App\Models\Lend;
 use App\Models\Favorite;
+use Alert;
 
 class Controller extends BaseController
 {
+
     public function getBook(){
         $book = Book::All();
 

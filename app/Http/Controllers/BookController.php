@@ -192,7 +192,7 @@ class BookController extends Controller
             $filename = str_replace(' ', '_', $request->title) . '_' . uniqid() .'.' .  $extension;
 
             // delete old cover
-            if($book->cover !== 'default_cover.jpg') {
+            if($book->cover !== 'cover_default.jpg') {
                 Storage::delete('book_covers/'.$book->cover);
             }
 
@@ -256,12 +256,18 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::find($id);
+        if($book->cover !== 'cover_default.jpg') {
+            Storage::delete('book_covers/'.$book->cover);
+        }
+        $book->delete();
+
+        return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil dihapus!']);
     }
 
      public function addBook(Request $request){
         
-        Book::find($id)->delete();
+        // Book::find($id)->delete();
 
         return response()->json(
             [
