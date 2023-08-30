@@ -12,6 +12,10 @@ class SearchForm extends LitWithoutShadowDom {
             type: String,
             reflect: true,
         },
+        displayMode: {
+            type: String,
+            reflect: true,
+        },
         token: {
             type: String,
             reflect: true,
@@ -33,6 +37,11 @@ class SearchForm extends LitWithoutShadowDom {
         if (!this.hasAttribute("displayTo")) {
             throw new Error(
                 `Atribut "displayTo" harus diterapkan pada elemen ${this.localName}`
+            );
+        }
+        if (!this.hasAttribute("displayMode")) {
+            throw new Error(
+                `Atribut "displayMode" harus diterapkan pada elemen ${this.localName}`
             );
         }
         if (!this.hasAttribute("token")) {
@@ -66,7 +75,51 @@ class SearchForm extends LitWithoutShadowDom {
         `;
     }
 
-    _populateDataToBody(data) {
+    _populateDataToAdminBody(data) {
+        let html = "";
+
+        if (data.data != null) {
+            html = data.data.map((d) => {
+                return `
+                    <tr class="align-middle">
+                        <td>
+                            <input type="checkbox" name="" id="" />
+                        </td>
+                        <td>
+                            <img
+                                src="/storage/book_covers/${d.lend_book_cover}"
+                                alt="Book cover"
+                                style="width: 100px;"
+                            />
+                        </td>
+                        <td>${d.lend_book_code}</td>
+                        <td>${d.lend_book_title}</td>
+                        <td>${d.lend_user_name}</td>
+                        <td>${d.lend_date}</td>
+                        <td>${
+                            d.lend_status == "0" ? "dipinjam" : "dikembalikan"
+                        }</td>
+                        <td>
+                            <a
+                                href="#"
+                                class="btn btn-success finish-lend"
+                                id="${d.lend_id}"
+                            >
+                                <i class="bi bi-check-square-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        const displayTo = document.querySelector(this.displayTo);
+
+        displayTo.innerHTML = html;
+
+        resultMessageField.innerHTML = `<span>${data.message}</span>`;
+    }
+    _populateDataToUserBody(data) {
         let html = "";
 
         if (data.data != null) {
@@ -81,10 +134,10 @@ class SearchForm extends LitWithoutShadowDom {
                                 bookAuthor="${d.author}"
                                 bookPublisher="${d.publisher}"
                                 bookStatus="${d.book_status}"
-                                bookDetailUrl="..."
+                                bookDetailUrl="/book/${d.book_code}"
                                 bookFavoriteUrl="..."
                                 bookFavorite=false
-                                bookCover='cover_images/${d.cover}'
+                                bookCover='storage/book_covers/${d.cover}'
     
                             >
                             </book-card>
@@ -133,7 +186,11 @@ class SearchForm extends LitWithoutShadowDom {
                 }
             );
 
-            this._populateDataToBody(response.data);
+            if (this.displayMode == "user") {
+                return this._populateDataToUserBody(response.data);
+            } else {
+                return this._populateDataToAdminBody(response.data);
+            }
         } catch (err) {
             resultMessageField.innerHTML = err.message;
         }

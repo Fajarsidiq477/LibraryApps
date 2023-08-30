@@ -35,7 +35,7 @@ class BookCard extends LitWithoutShadowDom {
             type: String,
             reflect: true,
         },
-        bookDetailUrl: {
+        bookDetailURL: {
             type: String,
             reflect: true,
         },
@@ -51,6 +51,7 @@ class BookCard extends LitWithoutShadowDom {
                 `Atribut "bookId" harus diterapkan pada elemen ${this.localName}`
             );
         }
+
         if (!this.hasAttribute("bookCover")) {
             throw new Error(
                 `Atribut "bookCover" harus diterapkan pada elemen ${this.localName}`
@@ -86,9 +87,9 @@ class BookCard extends LitWithoutShadowDom {
                 `Atribut "bookStatus" harus diterapkan pada elemen ${this.localName}`
             );
         }
-        if (!this.hasAttribute("bookDetailUrl")) {
+        if (!this.hasAttribute("bookDetailURL")) {
             throw new Error(
-                `Atribut "bookDetailUrl" harus diterapkan pada elemen ${this.localName}`
+                `Atribut "bookDetailURL" harus diterapkan pada elemen ${this.localName}`
             );
         }
         if (!this.hasAttribute("bookFavorite")) {
@@ -112,17 +113,20 @@ class BookCard extends LitWithoutShadowDom {
 
         let bookStatus;
 
-        switch(this.bookStatus) {
-            case '0':
-                bookStatus = "<span class='badge text-white bg-success p-1'>Tersedia</span>";
-              break;
-            case '1':
-                bookStatus = "<span class='badge text-white bg-danger p-1'>Dipinjam</span>";
-              break;
-            case '2':
-                bookStatus = "<span class='badge text-white bg-dark p-1'>Hilang</span>";
-              break;
-          }
+        switch (this.bookStatus) {
+            case "0":
+                bookStatus =
+                    "<span class='badge text-white bg-success p-1'>Tersedia</span>";
+                break;
+            case "1":
+                bookStatus =
+                    "<span class='badge text-white bg-danger p-1'>Dipinjam</span>";
+                break;
+            case "2":
+                bookStatus =
+                    "<span class='badge text-white bg-dark p-1'>Hilang</span>";
+                break;
+        }
 
         offCanvas.querySelector(".book").innerHTML = `
 
@@ -138,7 +142,7 @@ class BookCard extends LitWithoutShadowDom {
 
                 </div>
                 <div class="aside-description text-start mt-4">
-                    <a href="${this.bookDetailUrl}" class="text-dark"><h4 class="book-title">${this.bookName}</h4></a>
+                    <a href="${this.bookDetailURL}" class="text-dark"><h4 class="book-title">${this.bookName}</h4></a>
                     <p class="book-year">${this.bookYear}</p>
                     <h5 class="book-author">${this.bookAuthor}</h5>
                     <p class="book-publisher fw-bold">${this.bookPublisher}</p>
@@ -149,7 +153,7 @@ class BookCard extends LitWithoutShadowDom {
                 </div>
             </div>
         `;
-    
+
         document.querySelector(".favorite-bar").innerHTML = `
                 <span id="favorite" class="bi bi-star favorite-icon" style="font-size:1.5rem; color:#ffc107!important"></span>
           `;
@@ -158,7 +162,7 @@ class BookCard extends LitWithoutShadowDom {
     // buat favorite icon
     // <span id="boot-icon" class="bi bi-star" style="font-size:1.5rem; color:#ffc107!important"></span>
     // <span id="boot-icon" class="bi bi-star-fill" style="font-size:1.5rem; color:#ffc107!important"></span>
-    
+
     _favoriteButton(e) {
         e.preventDefault();
         try {

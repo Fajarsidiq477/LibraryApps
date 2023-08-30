@@ -16,8 +16,10 @@
                         <search-form
                             searchFrom="{{ route('searchBookData') }}"
                             displayTo="#main-content"
+                            displayMode="user"
                             token="{{ csrf_token() }}"
                         ></search-form>
+
                     </div>
                     <div class="col-2 d-flex justify-content-end">
                         <button
@@ -63,6 +65,8 @@
             dataType: 'json',
             success: function(data) {
 
+                console.log(data);
+
                 const html = data.data.map((d) => {
                     return `
                     <div class="col-12 col-md-5 d-block border-bottom border-3">
@@ -74,16 +78,16 @@
                             bookAuthor="${d.author}"
                             bookPublisher="${d.publisher}"
                             bookStatus="${d.book_status}"
-                            bookDetailUrl="{{ url('/book/${d.book_code}') }}"
+                            bookDetailURL="{{ route('bookDetail') }}/${d.book_code}"
                             bookFavoriteUrl="..."
                             bookFavorite=false
-                            bookCover={{ asset('cover_images/${d.cover}') }}
+                            bookCover={{ asset('storage/book_covers/${d.cover}') }}
             
                         >
                         </book-card>
                     </div>
                     `;
-                })
+                });
             const mainContent = document.querySelector("#main-content");
 
 

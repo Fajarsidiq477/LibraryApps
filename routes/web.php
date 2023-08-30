@@ -86,6 +86,7 @@ Route::get('/coba', [Controller::class,'coba']);
 
 // testing
 Route::post('/search-book',    [BookDataController::class,'search'])->name('searchBookData');
+Route::post('/search-lend-book',    [LendBookController::class,'search'])->name('searchLendBookData');
 Route::post('/get-book-by-book-code', [BookDataController::class, 'getBookByBookCode'])->name('data.get-book-by-book-code');
 Route::get('/testing', function() {
     return view('users.nyobaMix');

@@ -16,7 +16,7 @@
                 {{-- {{dd($book)}} --}}
                     <div class="col-12 col-md-4 text-center">
                         <img
-                            src="{{ asset('cover_images/'. $book->cover) }}"
+                            src="{{ asset('storage/book_covers/'. $book->cover) }}"
                             alt="Book Cover"
                             class="book-detail-cover"
                         />

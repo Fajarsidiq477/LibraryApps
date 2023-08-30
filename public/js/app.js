@@ -3245,8 +3245,8 @@ var BookCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (!this.hasAttribute("bookStatus")) {
         throw new Error("Atribut \"bookStatus\" harus diterapkan pada elemen ".concat(this.localName));
       }
-      if (!this.hasAttribute("bookDetailUrl")) {
-        throw new Error("Atribut \"bookDetailUrl\" harus diterapkan pada elemen ".concat(this.localName));
+      if (!this.hasAttribute("bookDetailURL")) {
+        throw new Error("Atribut \"bookDetailURL\" harus diterapkan pada elemen ".concat(this.localName));
       }
       if (!this.hasAttribute("bookFavorite")) {
         throw new Error("Atribut \"bookFavorite\" harus diterapkan pada elemen ".concat(this.localName));
@@ -3260,17 +3260,17 @@ var BookCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
       offCanvas.querySelector(".aside-form").classList.add("d-none");
       var bookStatus;
       switch (this.bookStatus) {
-        case '0':
+        case "0":
           bookStatus = "<span class='badge text-white bg-success p-1'>Tersedia</span>";
           break;
-        case '1':
+        case "1":
           bookStatus = "<span class='badge text-white bg-danger p-1'>Dipinjam</span>";
           break;
-        case '2':
+        case "2":
           bookStatus = "<span class='badge text-white bg-dark p-1'>Hilang</span>";
           break;
       }
-      offCanvas.querySelector(".book").innerHTML = "\n\n            <div class=\"book-detail text-center px-4\">\n                <div class=\"aside-header\">\n                    <img\n                        src=\"".concat(this.bookCover, "\"\n                        class=\"d-block mx-auto img-fluid mb-2\"\n                        alt=\"book-cover\"\n                    />\n                </div>\n                <div class=\"aside-description text-start mt-4 favorite-bar\">\n\n                </div>\n                <div class=\"aside-description text-start mt-4\">\n                    <a href=\"").concat(this.bookDetailUrl, "\" class=\"text-dark\"><h4 class=\"book-title\">").concat(this.bookName, "</h4></a>\n                    <p class=\"book-year\">").concat(this.bookYear, "</p>\n                    <h5 class=\"book-author\">").concat(this.bookAuthor, "</h5>\n                    <p class=\"book-publisher fw-bold\">").concat(this.bookPublisher, "</p>\n                    <p class=\"book-status\">\n                        <span>Status</span>\n                        ").concat(bookStatus, "\n                    </p>\n                </div>\n            </div>\n        ");
+      offCanvas.querySelector(".book").innerHTML = "\n\n            <div class=\"book-detail text-center px-4\">\n                <div class=\"aside-header\">\n                    <img\n                        src=\"".concat(this.bookCover, "\"\n                        class=\"d-block mx-auto img-fluid mb-2\"\n                        alt=\"book-cover\"\n                    />\n                </div>\n                <div class=\"aside-description text-start mt-4 favorite-bar\">\n\n                </div>\n                <div class=\"aside-description text-start mt-4\">\n                    <a href=\"").concat(this.bookDetailURL, "\" class=\"text-dark\"><h4 class=\"book-title\">").concat(this.bookName, "</h4></a>\n                    <p class=\"book-year\">").concat(this.bookYear, "</p>\n                    <h5 class=\"book-author\">").concat(this.bookAuthor, "</h5>\n                    <p class=\"book-publisher fw-bold\">").concat(this.bookPublisher, "</p>\n                    <p class=\"book-status\">\n                        <span>Status</span>\n                        ").concat(bookStatus, "\n                    </p>\n                </div>\n            </div>\n        ");
       document.querySelector(".favorite-bar").innerHTML = "\n                <span id=\"favorite\" class=\"bi bi-star favorite-icon\" style=\"font-size:1.5rem; color:#ffc107!important\"></span>\n          ";
     }
 
@@ -3357,7 +3357,7 @@ _defineProperty(BookCard, "properties", {
     type: String,
     reflect: true
   },
-  bookDetailUrl: {
+  bookDetailURL: {
     type: String,
     reflect: true
   },
@@ -3505,6 +3505,9 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (!this.hasAttribute("displayTo")) {
         throw new Error("Atribut \"displayTo\" harus diterapkan pada elemen ".concat(this.localName));
       }
+      if (!this.hasAttribute("displayMode")) {
+        throw new Error("Atribut \"displayMode\" harus diterapkan pada elemen ".concat(this.localName));
+      }
       if (!this.hasAttribute("token")) {
         throw new Error("Atribut \"token\" harus diterapkan pada elemen ".concat(this.localName));
       }
@@ -3515,12 +3518,25 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
       return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <form action=\"\" id=\"form-search\" @submit=", ">\n                <div class=\"input-group\">\n                    <input\n                        type=\"text\"\n                        class=\"form-control\"\n                        id=\"search-keyword\"\n                        name=\"search-keyword\"\n                        aria-label=\"Text input with 2 dropdown buttons\"\n                        placeholder=\"Pencarian ....\"\n                    />\n                    <button\n                        class=\"btn bg-secondary text-white\"\n                        type=\"submit\"\n                        id=\"search\"\n                    >\n                        <i class=\"bi bi-search\"></i>\n                    </button>\n                </div>\n            </form>\n        "])), this._search);
     }
   }, {
-    key: "_populateDataToBody",
-    value: function _populateDataToBody(data) {
+    key: "_populateDataToAdminBody",
+    value: function _populateDataToAdminBody(data) {
       var html = "";
       if (data.data != null) {
         html = data.data.map(function (d) {
-          return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookGenre=\"").concat(d.kategori, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"...\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='cover_images/").concat(d.cover, "'\n    \n                            >\n                            </book-card>\n                        </div>\n                        ");
+          return "\n                    <tr class=\"align-middle\">\n                        <td>\n                            <input type=\"checkbox\" name=\"\" id=\"\" />\n                        </td>\n                        <td>\n                            <img\n                                src=\"/storage/book_covers/".concat(d.lend_book_cover, "\"\n                                alt=\"Book cover\"\n                                style=\"width: 100px;\"\n                            />\n                        </td>\n                        <td>").concat(d.lend_book_code, "</td>\n                        <td>").concat(d.lend_book_title, "</td>\n                        <td>").concat(d.lend_user_name, "</td>\n                        <td>").concat(d.lend_date, "</td>\n                        <td>").concat(d.lend_status == "0" ? "dipinjam" : "dikembalikan", "</td>\n                        <td>\n                            <a\n                                href=\"#\"\n                                class=\"btn btn-success finish-lend\"\n                                id=\"").concat(d.lend_id, "\"\n                            >\n                                <i class=\"bi bi-check-square-fill\"></i>\n                            </a>\n                        </td>\n                    </tr>\n                ");
+        });
+      }
+      var displayTo = document.querySelector(this.displayTo);
+      displayTo.innerHTML = html;
+      resultMessageField.innerHTML = "<span>".concat(data.message, "</span>");
+    }
+  }, {
+    key: "_populateDataToUserBody",
+    value: function _populateDataToUserBody(data) {
+      var html = "";
+      if (data.data != null) {
+        html = data.data.map(function (d) {
+          return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookGenre=\"").concat(d.kategori, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n    \n                            >\n                            </book-card>\n                        </div>\n                        ");
         });
       }
       var displayTo = document.querySelector(this.displayTo);
@@ -3551,18 +3567,25 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
               });
             case 8:
               response = _context.sent;
-              this._populateDataToBody(response.data);
-              _context.next = 15;
+              if (!(this.displayMode == "user")) {
+                _context.next = 13;
+                break;
+              }
+              return _context.abrupt("return", this._populateDataToUserBody(response.data));
+            case 13:
+              return _context.abrupt("return", this._populateDataToAdminBody(response.data));
+            case 14:
+              _context.next = 19;
               break;
-            case 12:
-              _context.prev = 12;
+            case 16:
+              _context.prev = 16;
               _context.t0 = _context["catch"](4);
               resultMessageField.innerHTML = _context.t0.message;
-            case 15:
+            case 19:
             case "end":
               return _context.stop();
           }
-        }, _callee, this, [[4, 12]]);
+        }, _callee, this, [[4, 16]]);
       }));
       function _search(_x) {
         return _search2.apply(this, arguments);
@@ -3578,6 +3601,10 @@ _defineProperty(SearchForm, "properties", {
     reflect: true
   },
   displayTo: {
+    type: String,
+    reflect: true
+  },
+  displayMode: {
     type: String,
     reflect: true
   },

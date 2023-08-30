@@ -17,7 +17,6 @@ class LendBookController extends Controller
     public function index()
     {
         $lends = Lend::All();
-
         return view('admin.lendBooks.index', ['lends' => $lends]);
     }
 
@@ -177,6 +176,82 @@ class LendBookController extends Controller
             'data' => Lend::find($id)->book->id,
         ]);
         
+    }
+
+
+    public function search(Request $request) {
+        try{
+
+            $keyword = $request->keyword;
+
+            $lends = Lend::whereHas('book', function ($query) use ($keyword) {
+                $query->where('title', 'like', '%' . $keyword . '%');
+            })->with('user')->get();
+
+            $data = [];
+
+            foreach ($lends as $lend) {
+                $data[] = [
+                    'lend_id' => $lend->id,
+                    'lend_book_cover' => $lend->book->cover,
+                    'lend_book_code' => $lend->book->book_code,
+                    'lend_book_title' => $lend->book->title,
+                    'lend_user_name' => $lend->user->name,
+                    'lend_date' => $lend->lend_date,
+                    'lend_status' => $lend->lend_status,
+                ]; 
+            }
+
+            if(count($data) == 0) {
+                return response()->json(
+                    [
+                        'data' => null,
+                        'error' => 'false',
+                        'message' => 'Buku dengan keyword \'' . $keyword . '\' tidak ditemukan',
+                    ]
+                );
+            }
+
+            if(strlen($keyword) == 0) {
+                return response()->json(
+                    [
+                        'data' => $data,
+                        'error' => 'false',
+                        'message' => '',
+                    ]
+                );
+            }
+
+            
+            
+            if(strlen($keyword) > 0) {
+                if(count($data) > 0) {
+                    return response()->json(
+                        [
+                            'error'=>'false',
+                            'data'=> $data,
+                            'message' => count($data) . ' data buku dengan keyword "' . $keyword . '" berhasil dicari!' 
+                        ]
+                    );
+                }
+
+                return response()->json(
+                    [
+                        'error'=>'false',
+                        'data'=> $data,
+                        'message' => 'Tidak menemukan data buku dengan keyword "' . $keyword . '"'
+                    ]
+                );
+            }
+        }
+        catch(\Exception $e){
+            return response()->json(
+                [
+                    'error'=>'true',
+                    'message'=>$e->getMessage()
+                ]
+            );
+         }
     }
 
 }
