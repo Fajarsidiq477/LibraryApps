@@ -20,9 +20,8 @@
 @section('main')
     <div id="dataBody" data-source="LendBooksCreate1"></div>
 
-    <div class="container my-3">
         <form action="{{ route('lend-books.create.2') }}" method="POST" id="bookFormCode">
-
+        <div class="container my-3">
             <input type="hidden" name="id" id="id" value="{{ $id }}">
             {{ csrf_field() }}
             <div class="row justify-content-center" id="form-content"> 

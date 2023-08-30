@@ -37,7 +37,7 @@
                         </td>
                         <td>
                             <img
-                                src="{{ asset('cover_images/' . $lend->book->cover) }}"
+                                src="{{ asset('storage/book_covers/' . $lend->book->cover) }}"
                                 alt="Book cover"
                                 style="width: 100px;"
                             />

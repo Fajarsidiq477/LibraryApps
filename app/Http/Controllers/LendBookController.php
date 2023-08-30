@@ -45,17 +45,51 @@ class LendBookController extends Controller
     public function create2(Request $request) {
         // dd(Carbon::now->formatLocalized('%A %d %B %Y'););
 
-        $booksCode = [$request->bookCodeInput1, $request->bookCodeInput2, $request->bookCodeInput3, $request->bookCodeInput4, $request->bookCodeInput5 ];
-        $carbon = Carbon::class;
+        $books = Book::whereIn('book_code',
+                    [$request->bookCodeInput1,
+                    $request->bookCodeInput2,
+                    $request->bookCodeInput3,
+                    $request->bookCodeInput4,
+                    $request->bookCodeInput5 
+                    ])->get();
 
+        $booksCode = [$request->bookCodeInput1,
+                    $request->bookCodeInput2,
+                    $request->bookCodeInput3,
+                    $request->bookCodeInput4,
+                    $request->bookCodeInput5 ];
+
+        $carbon = Carbon::class;
         $user = User::find($request->id);
-        $books = Book::whereIn('book_code', [$request->bookCodeInput1, $request->bookCodeInput2, $request->bookCodeInput3, $request->bookCodeInput4, $request->bookCodeInput5 ])->get();
 
         if($books->count() != 0){
-            return view('admin.lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
+            for($i=0; $i < $books->count(); $i++){
+                //jika buku sedang dipinjam maka return error
+                if(Book::find($books[$i]->id)->lend->whereIn('lend_status', '0')->count() != 0){
+                
+                    return redirect('/admin/lend-books/create')
+                    ->with('error', ['message' => 'Buku dengan kode '.Book::find($books[$i]->id)->book_code.' sedang dipinjam user lain!']);
+                
+                }else{
+                    if($i == $books->count() - 1){
+                        //sort kode R
+                        if(Book::find($books[$i]->id)->type != 0){
+                        
+                            return view('lendBooks.create2', ['user' => $user, 'books' => $books, 'carbon' => $carbon, 'bookscode' => $booksCode]);
+                        
+                        } else{
+                            
+                            return redirect('/admin/lend-books/create')
+                            ->with('error', ['message' => 'Buku dengan kode '.Book::find($books[$i]->id)->book_code.' memiliki kode R! (Tidak dapat dipinjam)']);
+                        
+                        }
+                    }
+                }
+            }
         }else{
-            Alert::error('Haha Error', 'Tidak Ada Kode Buku Yang Valid');
-            return $this->create1($request , $request->id);
+            return redirect('/admin/lend-books/create')->with('error', ['message' => 'Seluruh kode buku tidak valid!']);
+            // Alert::error('Haha Error', 'Tidak Ada Kode Buku Yang Valid');
+            // return $this->create1($request , $request->id);
         }
     }
 

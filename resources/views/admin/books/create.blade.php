@@ -20,6 +20,17 @@
 @section('main')
 <div id="dataBody" data-source="adminAddBook"></div>
 
+    @if (session('success'))
+            <div class="alert alert-success mt-2">
+                {{ session('success.message') }}
+            </div>
+        @endif
+    @if (session('error'))
+        <div class="alert alert-danger mt-2">
+            {{ session('error.message') }}
+        </div>
+    @endif
+
     <div class="container mt-3">
         <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
