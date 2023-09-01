@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Lend;
+use App\Models\Fine;
 use App\Models\Favorite;
 use Alert;
 
@@ -134,24 +135,6 @@ class Controller extends BaseController
         return $lend;
     }
 
-    private function lateCheck($date){
-
-        // Mengubah tanggal dari string menjadi objek Carbon
-        $customDate = Carbon::createFromFormat('Y-m-d', $date);
-
-        // Mengambil tanggal hari ini dalam objek Carbon
-        $today = Carbon::now();
-
-        // Membandingkan tanggal hari ini dengan tanggal dari $date
-        if ($today->gt($customDate)) {
-            $lend_status = 3; // 3 = Telat. tidak ada di database, hanya ada di data yang akan dikirim ke view untuk digunakan saat switch case
-            return $lend_status;
-        } else {
-            $lend_status = 0;
-            return $lend_status;
-        }
-    }
-
     private function getDate($date){
 
         $customDate = Carbon::createFromFormat('Y-m-d', $date);
@@ -191,6 +174,69 @@ class Controller extends BaseController
         $tgl = $day.', '.$customDate->format('d').' '.$month.' '.$customDate->format('Y');
 
         return $tgl;
+
+    }
+
+    public function getFineData(){
+        
+        $lend = Lend::where('lend_status', '=', '0')->get();
+
+        for($i = 0 ; $i < $lend->count(); $i++){
+            
+            $lend[$i]->lend_status = app(Controller::class)->lateCheck($lend[$i]->return_date);
+
+            if($lend[$i]->lend_status != 0){
+                $fine_amount = app(Controller::class)->countFine($lend[$i]->return_date);
+                $fine = Fine::updateOrCreate(
+                    ['lend_id' => $lend[$i]->id],
+                    [
+                        'user_id'       => $lend[$i]->user_id,
+                        'book_id'       => $lend[$i]->book_id,
+                        'fine_amount'   => $fine_amount
+                    ]
+                );
+            }
+
+        }
+
+        return Fine::All();
+    }
+
+    public function lateCheck($date){
+
+        // Mengubah tanggal dari string menjadi objek Carbon
+        $customDate = Carbon::createFromFormat('Y-m-d', $date);
+
+        // Mengambil tanggal hari ini dalam objek Carbon
+        $today = Carbon::now();
+
+        // Membandingkan tanggal hari ini dengan tanggal dari $date
+        if ($today->gt($customDate)) {
+            $lend_status = 3; // 3 = Telat. tidak ada di database, hanya ada di data yang akan dikirim ke view untuk digunakan saat switch case
+            return $lend_status;
+        } else {
+            $lend_status = 0;
+            return $lend_status;
+        }
+    }
+
+    public function countFine($return_date){
+
+        $return     = Carbon::parse($return_date);
+        $today      = Carbon::today()->toDateString();
+
+        // Jumlah hari telat
+        $interval = $return->diffInDays($today);
+
+        // Jumlah hari libur (tidak dihitung denda)
+        $weekends = $return->diffInDaysFiltered(function (Carbon $date){
+            return !$date->isWeekday();
+        }, $today);
+
+        // Total denda
+        $fine_amount = ($interval - $weekends) * 1000;
+
+        return $fine_amount;
 
     }
 

@@ -33,6 +33,11 @@ class Book extends Model
         return $this->hasMany(Lend::class);
     }
 
+    public function Fine()
+    {
+        return $this->hasMany(Fine::class);
+    }
+
     public function Favorite()
     {
         return $this->hasMany(Favorite::class);

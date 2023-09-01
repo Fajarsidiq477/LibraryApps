@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $this->hasMany(Lend::class);
     }
 
+    public function Fine(): HasMany
+    {
+        return $this->hasMany(Fine::class);
+    }
+
     public function Favorite()
     {
         return $this->hasMany(Favorite::class);

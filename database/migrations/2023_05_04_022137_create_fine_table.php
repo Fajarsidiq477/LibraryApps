@@ -15,8 +15,10 @@ return new class extends Migration
         Schema::create('fine', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('lend_id');
+            $table->foreignId('user_id');
+            $table->foreignId('book_id');
             $table->float('fine_amount');
-            $table->float('paid_amount');
+            // $table->float('paid_amount');
             $table->enum('fine_status', [0, 1]); // 0 = Belum, 1 = Lunas
             $table->date('updated_at')->nullable();
             $table->date('created_at')->nullable();

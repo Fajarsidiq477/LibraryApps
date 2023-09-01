@@ -24,6 +24,11 @@
                         <i class="bi bi-clock-fill"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link px-md-4 p-3 {{ request()->is('admin/fines*') ? 'active' : ''}}" href="{{ route('fines.index') }}">
+                        <i class="bi bi-cash-stack"></i>
+                    </a>
+                </li>
             </ul>
 
         </div>

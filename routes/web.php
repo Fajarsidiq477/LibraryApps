@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FineController;
 use App\Http\Controllers\LendController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LendBookController;
@@ -53,6 +54,8 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/lend-books/create/2', [LendBookController::class, 'create2'])->name('lend-books.create.2'); 
             Route::post('/finish-lend', [LendBookController::class, 'finishLend'])->name('finishLend'); 
             Route::resources(['/lend-books'  => LendBookController::class]); 
+
+            Route::resources(['/fines'  => FineController::class]); 
         });
     });
 });
@@ -73,6 +76,8 @@ Route::get('/get-user',    [Controller::class,'getUserJson']);
 Route::get('/get-lend',  [Controller::class,'getLendJson']);
 
 Route::get('/get-lend-data',  [Controller::class,'getLendData']);
+
+Route::get('/get-fine-data',  [Controller::class,'getFineData']);
 
 // buku
 Route::post('/update-create-book', [BookController::class,'updateCreateBook']);
