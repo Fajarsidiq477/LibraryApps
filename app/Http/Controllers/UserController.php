@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
@@ -21,9 +22,11 @@ class UserController extends Controller
 {
     public function userIndex(){
         
-        $user_data = Auth::user();
 
-        return view('users/index', ['user_data' => $user_data]);
+        $user_data = Auth::user();
+        $genres = Genre::all();
+
+        return view('users/index', ['user_data' => $user_data, 'genres' => $genres]);
     }
 
     public function userActivity() {

@@ -40,5 +40,19 @@ class BookSeeder extends Seeder
             'type' => '0',
             'book_status' => '0'
         ]);
+
+        Book::create([
+            'book_code' => 'KDI347',
+            'title' => 'Pulang',
+            'author' => 'Tere Liye',
+            'language' => 'Indonesia',
+            'publisher' => 'Gramedia Pustaka Utama',
+            'publication_year'=> 2018,
+            'page' => 300,
+            'synopsis' => 'Kisah ini bermula ketika Bujang, seorang anak berusia 15 tahun yang memiliki kemampuan hebat dalam berburu babi hutan dapat membuat Teuke Muda terkesan dan akhirnya membawanya ke Kota untuk diasuh seperti layaknya anak angkat. Bujang yang merupakan sosok pendiam dan tidak bersekolah, sekarang tumbuh menjadi Bujang dewasa yang menjadi seorang pekerja professional dengan semua kebutuhan hidup dan pendidikannya dipenuhi oleh Teuke Muda. Karena hobinya dalam berkelahi, Bujang diberikan seorang guru terbaik yang dapat membantunya dalam mengasah kemampuan bela dirinya hingga ia dijadikan Bodyguard dari Teuke Muda.',
+            'cover' => 'pulang.jpg',
+            'type' => '0',
+            'book_status' => '1'
+        ]);
     }
 }

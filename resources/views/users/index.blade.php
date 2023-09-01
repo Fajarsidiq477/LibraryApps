@@ -38,7 +38,7 @@
 
                 <div
                     id="resultMessageField"
-                    class="ms-3 my-2 d-flex align-items-center"
+                    class="ms-3 my-2"
                 ></div>
 
                 <div
@@ -54,7 +54,12 @@
     <aside-canvas
             class="offcanvas offcanvas-end"
             tabindex="-1"
+            displayTo="#main-content"
             id="offcanvasRight"
+            genres="{{ $genres }}"
+            filterFrom="{{ route('filterBookData') }}"
+            token="{{ csrf_token() }}"
+
         ></aside-canvas>
 
         <script>
@@ -82,6 +87,7 @@
                             bookFavoriteUrl="..."
                             bookFavorite=false
                             bookCover={{ asset('storage/book_covers/${d.cover}') }}
+                            
             
                         >
                         </book-card>

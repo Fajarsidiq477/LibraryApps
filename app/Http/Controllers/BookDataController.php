@@ -65,6 +65,33 @@ class BookDataController extends Controller
 
     }
 
+    public function filter(Request $request) {
+        try {
+            $status = ['0', '1', '2']; 
+
+            if($request->filterStatus == true) {
+                $status = ['0']; // tersedia
+            } 
+
+            
+            $book = Book::whereIn('book_status', $status)->get();
+
+            return response()->json([
+                'data' => $book,
+                'error' => 'false',
+                'message' => count($book) . ' buku berhasil ditemukan',
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'error'=>'true',
+                    'message'=>$e->getMessage()
+                ]
+            );
+        }
+    }
+
     public function getBookByBookCode(Request $request) {
 
 

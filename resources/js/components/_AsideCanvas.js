@@ -1,9 +1,26 @@
 import { html } from "lit";
 import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
+import axios from "axios";
 
 class AsideCanvas extends LitWithoutShadowDom {
     static properties = {
         id: {
+            type: String,
+            reflect: true,
+        },
+        genres: {
+            type: String,
+            reflect: true,
+        },
+        filterFrom: {
+            type: String,
+            reflect: true,
+        },
+        token: {
+            type: String,
+            reflect: true,
+        },
+        displayTo: {
             type: String,
             reflect: true,
         },
@@ -26,20 +43,82 @@ class AsideCanvas extends LitWithoutShadowDom {
                     "";
             }, 300);
         });
+
+        this.addEventListener("show.bs.offcanvas", (e) => {
+            const genres = JSON.parse(this.genres);
+
+            let select = '<option selected value="">---</option>';
+
+            genres.forEach((genre) => {
+                select += `<option value="${genre.id}">${genre.name}</option>`;
+            });
+
+            e.target.querySelector("#filterCategory").innerHTML = select;
+        });
     }
 
-    _searchByFilter(e) {
+    _populateDataToBody(data) {
+        let html = "";
+
+        if (data.data != null) {
+            html = data.data.map((d) => {
+                return `
+                        <div class="col-12 col-md-5 d-block border-bottom border-3">
+                            <book-card
+                                bookId="${d.id}"
+                                bookName="${d.title}"
+                                bookYear="${d.publication_year}"
+                                bookGenre="${d.kategori}"
+                                bookAuthor="${d.author}"
+                                bookPublisher="${d.publisher}"
+                                bookStatus="${d.book_status}"
+                                bookDetailUrl="/book/${d.book_code}"
+                                bookFavoriteUrl="..."
+                                bookFavorite=false
+                                bookCover='storage/book_covers/${d.cover}'
+                            >
+                            </book-card>
+                        </div>
+                        `;
+            });
+        }
+
+        const displayTo = document.querySelector(this.displayTo);
+
+        displayTo.innerHTML = html;
+
+        const filterResultMessageField = document.querySelector(
+            "#resultMessageField"
+        );
+
+        let status = "";
+        const filterStatus = document.querySelector("#filterStatus").checked;
+        const filterCategory = document.querySelector("#filterCategory").value;
+        if (filterStatus) {
+            status = "Tersedia";
+        } else {
+            status = "Tidak Tersedia";
+        }
+
+        filterResultMessageField.innerHTML = `
+            
+            <p class="mb-0">
+                <span class="fw-bold">Filter aktif:</span> 
+                <span>
+                ${[...[status, filterCategory]]}
+                </span></p>
+
+            <p>${data.message}</p>`;
+    }
+
+    async _searchByFilter(e) {
         e.preventDefault();
 
         // form data
         let status = "";
         const filterStatus =
             e.srcElement.querySelector("#filterStatus").checked;
-        if (filterStatus) {
-            status = "Tersedia";
-        } else {
-            status = "Tidak Tersedia";
-        }
+
         const filterCategory =
             e.srcElement.querySelector("#filterCategory").value;
 
@@ -54,24 +133,28 @@ class AsideCanvas extends LitWithoutShadowDom {
             ".filterErrorMessageField"
         );
 
-        setTimeout(() => {
-            try {
-                true;
+        try {
+            const response = await axios.post(
+                `${this.filterFrom}`,
+                {
+                    filterStatus: filterStatus,
+                    filterCategory: filterCategory,
+                },
+                {
+                    headers: {
+                        "X-CSRF-TOKEN": `${this.token}`,
+                    },
+                }
+            );
 
-                const filterResultMessageField = document.querySelector(
-                    "#resultMessageField"
-                );
-                filterResultMessageField.innerHTML = `<span class="fw-bold">Filter aktif:</span> ${[
-                    ...[status, filterCategory],
-                ]}
-                `;
-                this.querySelector(".btn-close").click();
-                spinner.innerHTML = "";
-            } catch (err) {
-                filterErrorMessageField.innerHTML = err.message;
-                spinner.innerHTML = "";
-            }
-        }, 1000);
+            this._populateDataToBody(response.data);
+
+            this.querySelector(".btn-close").click();
+            spinner.innerHTML = "";
+        } catch (err) {
+            filterErrorMessageField.innerHTML = err.message;
+            spinner.innerHTML = "";
+        }
     }
 
     render() {
@@ -102,6 +185,7 @@ class AsideCanvas extends LitWithoutShadowDom {
                                     type="checkbox"
                                     id="filterStatus"
                                     class="filterCheck"
+                                    name="available"
                                 />
                             </div>
                             <div
@@ -111,12 +195,8 @@ class AsideCanvas extends LitWithoutShadowDom {
                                 <select
                                     class="form-select form-select-sm ms-2 bg-transparent"
                                     id="filterCategory"
-                                >
-                                    <option selected value="">---</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                                    name="genre"
+                                ></select>
                             </div>
                         </div>
                         <p class="filterErrorMessageField text-danger mt-2"></p>
