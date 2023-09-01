@@ -71,16 +71,31 @@ class BookDataController extends Controller
 
             if($request->filterStatus == true) {
                 $status = ['0']; // tersedia
-            } 
+            }
 
-            
             $book = Book::whereIn('book_status', $status)->get();
 
+            if($request->filterStatus == false && $request->filterCategory == '') {
+                return response()->json([
+                    'data' => $book,
+                    'error' => 'false',
+                    'message' => '',
+                ]);
+            }
+
+            if(count($book) > 0) {
+                return response()->json([
+                    'data' => $book,
+                    'error' => 'false',
+                    'message' => count($book) . ' buku berhasil ditemukan',
+                ]);
+            }
+
             return response()->json([
-                'data' => $book,
                 'error' => 'false',
                 'message' => count($book) . ' buku berhasil ditemukan',
             ]);
+
             
         } catch (\Exception $e) {
             return response()->json(

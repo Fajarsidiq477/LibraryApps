@@ -3166,7 +3166,7 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (filterStatus) {
         status = "Tersedia";
       } else {
-        status = "Tidak Tersedia";
+        status = "Semua Buku";
       }
       filterResultMessageField.innerHTML = "\n            \n            <p class=\"mb-0\">\n                <span class=\"fw-bold\">Filter aktif:</span> \n                <span>\n                ".concat([status, filterCategory].concat(), "\n                </span></p>\n\n            <p>").concat(data.message, "</p>");
     }
@@ -3174,21 +3174,20 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
     key: "_searchByFilter",
     value: function () {
       var _searchByFilter2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-        var status, filterStatus, filterCategory, spinner, filterErrorMessageField, response;
+        var filterStatus, filterCategory, spinner, filterErrorMessageField, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
 
               // form data
-              status = "";
               filterStatus = e.srcElement.querySelector("#filterStatus").checked;
               filterCategory = e.srcElement.querySelector("#filterCategory").value;
               spinner = e.srcElement.querySelector('button[type="submit"] .btn-spinner');
               spinner.innerHTML = "\n            <span class=\"spinner-border spinner-border-sm text-secondary ms-2\" role=\"status\">\n        ";
               filterErrorMessageField = e.srcElement.querySelector(".filterErrorMessageField");
-              _context.prev = 7;
-              _context.next = 10;
+              _context.prev = 6;
+              _context.next = 9;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("".concat(this.filterFrom), {
                 filterStatus: filterStatus,
                 filterCategory: filterCategory
@@ -3197,23 +3196,23 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
                   "X-CSRF-TOKEN": "".concat(this.token)
                 }
               });
-            case 10:
+            case 9:
               response = _context.sent;
               this._populateDataToBody(response.data);
               this.querySelector(".btn-close").click();
               spinner.innerHTML = "";
-              _context.next = 20;
+              _context.next = 19;
               break;
-            case 16:
-              _context.prev = 16;
-              _context.t0 = _context["catch"](7);
+            case 15:
+              _context.prev = 15;
+              _context.t0 = _context["catch"](6);
               filterErrorMessageField.innerHTML = _context.t0.message;
               spinner.innerHTML = "";
-            case 20:
+            case 19:
             case "end":
               return _context.stop();
           }
-        }, _callee, this, [[7, 16]]);
+        }, _callee, this, [[6, 15]]);
       }));
       function _searchByFilter(_x) {
         return _searchByFilter2.apply(this, arguments);

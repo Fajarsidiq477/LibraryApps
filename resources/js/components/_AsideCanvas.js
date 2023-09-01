@@ -97,7 +97,7 @@ class AsideCanvas extends LitWithoutShadowDom {
         if (filterStatus) {
             status = "Tersedia";
         } else {
-            status = "Tidak Tersedia";
+            status = "Semua Buku";
         }
 
         filterResultMessageField.innerHTML = `
@@ -115,7 +115,6 @@ class AsideCanvas extends LitWithoutShadowDom {
         e.preventDefault();
 
         // form data
-        let status = "";
         const filterStatus =
             e.srcElement.querySelector("#filterStatus").checked;
 
