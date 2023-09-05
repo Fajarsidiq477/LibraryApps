@@ -16,6 +16,7 @@ class BookSeeder extends Seeder
         Book::create([
             'book_code' => 'FKWI123',
             'title' => 'Negeri Para Bedebah',
+            'category' => 'Novel',
             'author' => 'Tere Liye',
             'language' => 'Indonesia',
             'publisher' => 'Gramedia Pustaka Utama',
@@ -30,6 +31,7 @@ class BookSeeder extends Seeder
         Book::create([
             'book_code' => 'SKD321',
             'title' => 'Negeri Di Ujung Tanduk',
+            'category' => 'Novel',
             'author' => 'Tere Liye',
             'language' => 'Indonesia',
             'publisher' => 'Gramedia Pustaka Utama',
@@ -44,6 +46,7 @@ class BookSeeder extends Seeder
         Book::create([
             'book_code' => 'KDI347',
             'title' => 'Pulang',
+            'category' => 'Novel',
             'author' => 'Tere Liye',
             'language' => 'Indonesia',
             'publisher' => 'Gramedia Pustaka Utama',

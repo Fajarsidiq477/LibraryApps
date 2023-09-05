@@ -130,7 +130,7 @@ class BookCard extends LitWithoutShadowDom {
 
         offCanvas.querySelector(".book").innerHTML = `
 
-            <div class="book-detail text-center px-4">
+            <div class="book-detail text-center px-4" style="width: 275px; margin: auto">
                 <div class="aside-header">
                     <img
                         src="${this.bookCover}"
@@ -138,9 +138,14 @@ class BookCard extends LitWithoutShadowDom {
                         alt="book-cover"
                     />
                 </div>
-                <div class="aside-description text-start mt-4 favorite-bar">
-
+                
+                <div class="aside-description mt-4">
+                    <button type="button" class="btn btn-secondary" style="text-transform: uppercase; margin:5px; color: whitesmoke; line-height: 15px; font-size: 0.75rem; font-weight: bold;">
+                    Ensiklopedia
+                    </button>
+                    <span id="favorite" class="bi bi-star favorite-icon" style="vertical-align: -.175em; margin:5px; font-size:1.5rem; color:#ffc107!important"></span>
                 </div>
+                
                 <div class="aside-description text-start mt-4">
                     <a href="${this.bookDetailURL}" class="text-dark"><h4 class="book-title">${this.bookName}</h4></a>
                     <p class="book-year">${this.bookYear}</p>

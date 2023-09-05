@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('book_code', 10)->unique();
             $table->string('title');
+            $table->string('category');
             $table->string('author');
             $table->integer('publication_year');
             $table->enum('type', [0, 1]); // 0 = R, 1 = Non R
