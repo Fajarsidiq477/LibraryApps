@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'id' => '2010031',
             'name' => 'admin ganteng pisan',
             'email' => 'admin@upi.edu',
-            'password' => bcrypt(123456),
+            'password' => bcrypt("123ipai12"),
             'phone' => '081910514970',
             'role' => '0' //super admin
         ]);
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'id' => '2082990',
             'name' => 'staff lumayan ganteng',
             'email' => 'staff@upi.edu',
-            'password' => bcrypt(123456),
+            'password' => bcrypt("123ipai12"),
             'phone' => '085222622254',
             'role' => '1' //admin / staff
         ]);
