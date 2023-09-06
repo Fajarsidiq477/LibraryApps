@@ -61,8 +61,9 @@ class AsideCanvas extends LitWithoutShadowDom {
         let html = "";
 
         if (data.data != null) {
-            html = data.data.map((d) => {
-                return `
+            html = data.data
+                .map((d) => {
+                    return `
                         <div class="col-12 col-md-5 d-block border-bottom border-3">
                             <book-card
                                 bookId="${d.id}"
@@ -80,7 +81,8 @@ class AsideCanvas extends LitWithoutShadowDom {
                             </book-card>
                         </div>
                         `;
-            });
+                })
+                .join(" ");
         }
 
         const displayTo = document.querySelector(this.displayTo);

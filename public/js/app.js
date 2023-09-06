@@ -3155,7 +3155,7 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (data.data != null) {
         html = data.data.map(function (d) {
           return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookGenre=\"").concat(d.kategori, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n                            >\n                            </book-card>\n                        </div>\n                        ");
-        });
+        }).join(" ");
       }
       var displayTo = document.querySelector(this.displayTo);
       displayTo.innerHTML = html;
@@ -3594,7 +3594,7 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (data.data != null) {
         html = data.data.map(function (d) {
           return "\n                    <tr class=\"align-middle\">\n                        <td>\n                            <input type=\"checkbox\" name=\"\" id=\"\" />\n                        </td>\n                        <td>\n                            <img\n                                src=\"/storage/book_covers/".concat(d.lend_book_cover, "\"\n                                alt=\"Book cover\"\n                                style=\"width: 100px;\"\n                            />\n                        </td>\n                        <td>").concat(d.lend_book_code, "</td>\n                        <td>").concat(d.lend_book_title, "</td>\n                        <td>").concat(d.lend_user_name, "</td>\n                        <td>").concat(d.lend_date, "</td>\n                        <td>").concat(d.lend_status == "0" ? "dipinjam" : "dikembalikan", "</td>\n                        <td>\n                            <a\n                                href=\"#\"\n                                class=\"btn btn-success finish-lend\"\n                                id=\"").concat(d.lend_id, "\"\n                            >\n                                <i class=\"bi bi-check-square-fill\"></i>\n                            </a>\n                        </td>\n                    </tr>\n                ");
-        });
+        }).join(" ");
       }
       var displayTo = document.querySelector(this.displayTo);
       displayTo.innerHTML = html;
@@ -3607,7 +3607,7 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (data.data != null) {
         html = data.data.map(function (d) {
           return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookGenre=\"").concat(d.kategori, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n    \n                            >\n                            </book-card>\n                        </div>\n                        ");
-        });
+        }).join(" ");
       }
       var displayTo = document.querySelector(this.displayTo);
       displayTo.innerHTML = html;
