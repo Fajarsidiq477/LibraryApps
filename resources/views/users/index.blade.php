@@ -79,7 +79,7 @@
                             bookId="${d.id}"
                             bookName="${d.title}"
                             bookYear="${d.publication_year}"
-                            bookGenre="Kategori"
+                            bookGenre="${d.category}"
                             bookAuthor="${d.author}"
                             bookPublisher="${d.publisher}"
                             bookStatus="${d.book_status}"

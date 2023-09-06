@@ -50,6 +50,7 @@ class BookController extends Controller
         $validate = $request->validate([
             'book_code' => 'required',
             'title' => 'required',
+            'category' => 'required',
             'author' => 'required',
             'publication_year' => 'required',
             'type' => 'required',
@@ -74,6 +75,7 @@ class BookController extends Controller
 
         $book->book_code = $request->book_code;
         $book->title = $request->title;
+        $book->category = $request->category;
         $book->author = $request->author;
         $book->publication_year = $request->publication_year;
         $book->type = $request->type;
@@ -123,6 +125,7 @@ class BookController extends Controller
             // 'book_code' => ['required', Rule::unique('book')->ignore($request->book_code)],
             'book_code' => 'required',
             'title' => 'required',
+            'category' => 'required',
             'author' => 'required',
             'publication_year' => 'required',
             'type' => 'required',
@@ -133,6 +136,7 @@ class BookController extends Controller
 
         $book->book_code = $request->book_code;
         $book->title = $request->title;
+        $book->category = $request->category;
         $book->author = $request->author;
         $book->publication_year = $request->publication_year;
         $book->type = $request->type;

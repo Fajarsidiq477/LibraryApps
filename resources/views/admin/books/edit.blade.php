@@ -51,6 +51,13 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
+                        <label for="judul" class="mb-2">Kategori</label>
+                        <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="category" id="category" required value="{{ old('category', $book->category) }}" maxlength="50"/>
+                        @error('title')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="penulis" class="mb-2">Penulis</label>
                         <input type="text" class="form-control custom-form-control @error('author') is-invalid @enderror" name="author" id="author" required value="{{ old('author', $book->author) }}" maxlength="30"/>
                         @error('author')

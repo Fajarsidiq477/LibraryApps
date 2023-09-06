@@ -130,7 +130,7 @@ class BookCard extends LitWithoutShadowDom {
 
         offCanvas.querySelector(".book").innerHTML = `
 
-            <div class="book-detail text-center px-4" style="width: 275px; margin: auto">
+            <div class="book-detail text-center px-4" style="width: 300px; margin: auto">
                 <div class="aside-header">
                     <img
                         src="${this.bookCover}"
@@ -141,7 +141,7 @@ class BookCard extends LitWithoutShadowDom {
                 
                 <div class="aside-description mt-4">
                     <button type="button" class="btn btn-secondary" style="text-transform: uppercase; margin:5px; color: whitesmoke; line-height: 15px; font-size: 0.75rem; font-weight: bold;">
-                    Ensiklopedia
+                    ${this.bookGenre}
                     </button>
                     <span id="favorite" class="bi bi-star favorite-icon" style="vertical-align: -.175em; margin:5px; font-size:1.5rem; color:#ffc107!important"></span>
                 </div>
