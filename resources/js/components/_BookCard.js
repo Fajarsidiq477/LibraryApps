@@ -130,11 +130,12 @@ class BookCard extends LitWithoutShadowDom {
 
         offCanvas.querySelector(".book").innerHTML = `
 
-            <div class="book-detail text-center px-4" style="width: 300px; margin: auto">
+            <div class="book-detail text-center px-4">
                 <div class="aside-header">
                     <img
                         src="${this.bookCover}"
                         class="d-block mx-auto img-fluid mb-2"
+                        style="width: 300px; height: 415px"
                         alt="book-cover"
                     />
                 </div>
@@ -217,7 +218,7 @@ class BookCard extends LitWithoutShadowDom {
                                 src="${this.bookCover}"
                                 alt="book cover"
                                 class="img-fluid mx-auto"
-                                style="width:100%; height: 100%"
+                                style="width:205px; height: 250px"
                             />
                         </div>
                     </div>

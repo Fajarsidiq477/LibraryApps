@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Pagination\Paginator;
 
 use Illuminate\Support\Facades\DB;
 
-
 use App\Models\User;
+use App\Models\Lend;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Hash;
@@ -20,19 +21,33 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-    public function userIndex(){
+    public function userIndex(Request $request){
         
 
         $user_data = Auth::user();
         $genres = Genre::all();
+
+        if ($request->ajax()) {
+            $perPage = 10; // Jumlah data per muatan tambahan
+            $page = $request->input('page', 1);
+            $offset = ($page - 1) * $perPage;
+        
+            $books = DB::table('book')
+                ->inRandomOrder()
+                ->skip($offset)
+                ->take($perPage)
+                ->get();
+        
+            return response()->json($books);
+        }
 
         return view('users/index', ['user_data' => $user_data, 'genres' => $genres]);
     }
 
     public function userActivity() {
 
-        $lends = User::find(Auth::user()->id)->lends->all();
-        $borrow = User::find(Auth::user()->id)->lends->where('lend_status', '0');
+        $lends = Lend::where('user_id', Auth::user()->id)->get();
+        $borrow = Lend::where('user_id', Auth::user()->id)->where('lend_status', '0')->get();
 
         return view('users/activity/index', [
             'lends' => $lends,
@@ -41,59 +56,27 @@ class UserController extends Controller
     }
 
     public function userBorrowed() {
-        
-        // $user_data = Auth::user();
 
-        // $lend = app(Controller::class)->getLendData();
-
-        // $collection = Collection::make($lend);
-
-        // $lend_data = $collection->filter(function ($item) use ($user_data) {
-        //     return $item['user_id'] == $user_data->id && $item['lend_status'] == 0 || $item['lend_status'] == 3;
-        // });
-
-        // return view('users/borrowed', ['user_data' => $user_data, 'lend_data' => $lend_data]);
-
-        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '0')->orWhere('lend_status', '=', '3')->get();
+        $lends = User::find(Auth::user()->id)->lends()->with('book')
+                    ->where('lend_status', '=', '0')
+                    ->orWhere('lend_status', '=', '3')->get();
 
         return view('users/activity/borrowed', ['lends' => $lends]);
 
     }
     public function userHistory() {
 
-        // $user_data = Auth::user();
-
-        // $lend = app(Controller::class)->getLendData();
-
-        // $collection = Collection::make($lend);
-
-        // $lend_data = $collection->filter(function ($item) use ($user_data) {
-        //     return $item['user_id'] == $user_data->id && $item['lend_status'] == 1 || $item['lend_status'] == 2;
-        // });
-        
-
-        // return view('users/history', ['user_data' => $user_data, 'lend_data' => $lend_data]);
-
-
-        $lends = User::find(Auth::user()->id)->lends()->where('lend_status', '=', '1')->orWhere('lend_status', '=', '2')->get();
+        $lends = User::find(Auth::user()->id)->lends()->with('book')
+                    ->where('lend_status', '=', '1')
+                    ->orWhere('lend_status', '=', '2')->paginate(5);
 
         return view('users/activity/history', ['lends' => $lends]);
 
     }
     public function userFavorite() {
-        
         $user_data = Auth::user();
-        // $simpan = app(Controller::class)->getDataSimpan();
-        
-        // $collection = Collection::make($simpan);
-        
-        // $data_simpan = $collection->filter(function ($item) use ($user_data) {
-        //     return $item['nim'] == $user_data->nim;
-        // });
 
-        // return view('users/favorite', ['user_data' => $user_data, 'data_simpan' => $data_simpan]);
         return view('users/favorite', ['user_data' => $user_data]);
-    
     }
 
     public function userBookDetail($bookCode = null){

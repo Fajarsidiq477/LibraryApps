@@ -75,24 +75,27 @@
                         @endif
                     @endforeach
                 </tbody>
-
             </table>
         </div>
+        {{ $fines->links() }}
     </div>
 @endsection
 
 @section('footer')
     <script>
         //delete confirmation
-            const deleteData = (id) => {
-                const confirm = window.confirm('Apakah benar orangnya sudah bayar?')
-                const formDelete = document.querySelector('#form-delete');
+        const deleteData = (id) => {
+            const confirm = window.confirm('Apakah benar orangnya sudah bayar?')
+            const formDelete = document.querySelector('#form-delete');
 
-                if(confirm) {
-                    formDelete.setAttribute('action', `/admin/fines/` + id);
-                    formDelete.submit();
-                    return;
-                }
-            };
+            if(confirm) {
+                formDelete.setAttribute('action', `/admin/fines/` + id);
+                formDelete.submit();
+                return;
+            }
+        };
+
+        $('.page-link')[0].innerHTML = "<";
+        $('.page-link')[1].innerHTML = ">";
     </script>
 @endsection

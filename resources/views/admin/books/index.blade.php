@@ -80,6 +80,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $books->links() }}
         </div>
     </div>
 @endsection
@@ -99,5 +100,9 @@
 
                 return alert('batal menghapus');
             };
+
+        $('.page-link')[0].innerHTML = "<";
+        $('.page-link')[1].innerHTML = ">";
+    
     </script>
 @endsection

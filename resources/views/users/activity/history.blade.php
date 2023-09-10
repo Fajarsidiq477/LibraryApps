@@ -57,9 +57,15 @@
             <hr class="mt-3" />
         </div>
         @endforeach
+
+        {{ $lends->links() }}
     </div>
 @endsection
 
 @section('footer')
     @include('partials.left-bar')
+    <script>
+        $('.page-link')[0].innerHTML = "<";
+        $('.page-link')[1].innerHTML = ">";
+    </script>
 @endsection

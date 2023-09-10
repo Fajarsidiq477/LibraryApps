@@ -21,9 +21,16 @@
             
             
             <a href="{{ route('lend-books.create') }}" class="btn btn-primary text-white">
-                <span>Tambah Pinjam Buku</span>
+                <span>Pinjam Buku</span>
                 <i class="bi bi-plus-square"></i>
             </a>
+
+            {{-- form delete hidden --}}
+            <form action="" method="POST" id="form-delete">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            </form>
+
         </div>
         <div
             id="resultMessageField"
@@ -75,14 +82,12 @@
                         <td>{{ $lend->lend_date }}</td>
                         <td>{{ ($lend->lend_status  == '0') ? 'dipinjam' : 'dikembalikan' }}</td>
                         <td>
-                            <form action="{{ route('lend-books.destroy', $lend->id)}}" method="POST">
-                                <input name="_method" type="hidden" value="DELETE">
-                                {{ csrf_field() }}
-
-                                <button type="submit" class="btn btn-success" id="{{$lend->id}}" >
-                                    <i class="bi bi-check-square-fill"></i>
-                                </button>
-                            </form>
+                            <a
+                                href="#"
+                                class="badge text-dark btn btn-success text-white"
+                                onclick="deleteData('{{ $lend->id }}')">
+                                <i class="bi bi-check-square-fill"></i>
+                            </a>
                         </td>
                     </tr>
                     @endif
@@ -90,11 +95,27 @@
                 </tbody>
             </table>
         </div>
-      
+        {{ $lends->links() }}
     </div>
 </div>
 @endsection
 
 @section('footer')
+    <script>
+
+        //delete confirmation
+        const deleteData = (id) => {
+            const confirm = window.confirm('Apakah benar bukunya udah dibalikin?')
+            const formDelete = document.querySelector('#form-delete');
+
+            if(confirm) {
+                formDelete.setAttribute('action', `/admin/lend-books/` + id);
+                formDelete.submit();
+                return;
+            }
+        };
+
+        $('.page-link')[0].innerHTML = "<";
+        $('.page-link')[1].innerHTML = ">";
     </script>
 @endsection

@@ -24,7 +24,7 @@ class BookController extends Controller
 
         // $book = app(Controller::class)->getBook();
 
-        $books = Book::all();
+        $books = Book::paginate(15);
         
         return view('admin.books.index', ['books' => $books]);
     }

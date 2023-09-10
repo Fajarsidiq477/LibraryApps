@@ -8,7 +8,7 @@
     <div class="container main-with-left-bar">
         <h3 class="text-center my-3">Buku Favorit</h3>
         <p style="text-align: center;">Fitur Masih Dalam Pengembangan</p>
-        <p style="text-align: center;"> Tolong semangati para developer :) </p>
+        <p style="text-align: center;"> Ketik 1 (satu) untuk menyemangati developer! </p>
 
         {{-- <p class="fw-bold">Jumlah buku: {{ $data_simpan->count() }}</p>
 

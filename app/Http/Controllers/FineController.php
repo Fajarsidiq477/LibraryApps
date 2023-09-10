@@ -14,7 +14,7 @@ class FineController extends Controller
      */
     public function index()
     {
-        $fines = Fine::All();
+        $fines = Fine::with(['user','book'])->paginate(10);
         
         return view('admin.fines.index', ['fines' => $fines]);
     }
@@ -97,7 +97,7 @@ class FineController extends Controller
     {
         $pay = Fine::where('id', $id)->update(['fine_status' => '1']);
         
-        $fines = Fine::All();
+        $fines = Fine::with(['user','book'])->paginate(10);
 
         return redirect('/admin/fines')->with('success', [
             'message'   => 'Alhamdulillah Lunas!',

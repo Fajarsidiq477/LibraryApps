@@ -1363,7 +1363,7 @@
                                 src="${this.bookCover}"
                                 alt="book cover"
                                 class="img-fluid mx-auto"
-                                style="width:100%; height: 100%"
+                                style="width:205px; height: 250px"
                             />
                             <a
                                 href="#"

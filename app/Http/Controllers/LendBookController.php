@@ -16,7 +16,7 @@ class LendBookController extends Controller
      */
     public function index()
     {
-        $lends = Lend::All();
+        $lends = Lend::with(['user','book'])->paginate(10);
 
         return view('admin.lendBooks.index', ['lends' => $lends]);
     }
@@ -166,7 +166,7 @@ class LendBookController extends Controller
                     ]);
         
         // return redirect()->action([LendBookController::class, 'index']);
-        $lends = Lend::All();
+        $lends = Lend::with(['user','book'])->paginate(10);
 
         return redirect('/admin/lend-books')->with('success', [
             'message' => 'Buku berhasil dikembalikan!',
@@ -175,25 +175,7 @@ class LendBookController extends Controller
     }
 
     public function finishLend(Request $request){
-        
-        // $id = $request->id;
-
-        // $lend = Lend::where('id', $id)
-        //             ->update([
-        //                 'lend_status' => '1'
-        //             ]);
-    
-        // $book = Book::where('id', Lend::find($id)->book->id)
-        //             ->update([
-        //                 'book_status' => '0'
-        //             ]);
-
-        // return response()->json([
-        //     'error' => false,
-        //     'message' => 'Buku Dikembalikan!',
-        //     'data' => Lend::find($id)->book->id,
-        // ]);
-        
+        //
     }
 
 
