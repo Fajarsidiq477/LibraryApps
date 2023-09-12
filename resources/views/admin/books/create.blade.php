@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="judul" class="mb-2">Judul Buku</label>
-                        <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="title" id="title" required value="{{ old('title') }}" maxlength="50"/>
+                        <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="title" id="title" required value="{{ old('title') }}" />
                         @error('title')
                             <div class="alert alert-danger mt-3" >{{ $message }}</div>
                         @enderror
@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="penulis" class="mb-2">Penulis</label>
-                        <input type="text" class="form-control custom-form-control @error('author') is-invalid @enderror" name="author" id="author" required value="{{ old('author') }}" maxlength="30"/>
+                        <input type="text" class="form-control custom-form-control @error('author') is-invalid @enderror" name="author" id="author" required value="{{ old('author') }}" />
                         @error('author')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
@@ -106,19 +106,19 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="penerbit" class="mb-2">Penerbit</label>
-                        <input type="text" class="form-control custom-form-control" name="publisher" id="publisher" value="{{ old('publisher') }}" maxlength="30" />
+                        <input type="text" class="form-control custom-form-control" name="publisher" id="publisher" value="{{ old('publisher') }}" />
                     </div>
                     <div class="form-group mb-3">
                         <label for="editor" class="mb-2">Editor</label>
-                        <input type="text" class="form-control custom-form-control" name="editor" id="editor" value="{{ old('editor') }}" maxlength="30"/>
+                        <input type="text" class="form-control custom-form-control" name="editor" id="editor" value="{{ old('editor') }}"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="penerjemah" class="mb-2">Penerjemah</label>
-                        <input type="text" class="form-control custom-form-control" name="translator" id="translator" value="{{ old('translator') }}" maxlength="30"/>
+                        <input type="text" class="form-control custom-form-control" name="translator" id="translator" value="{{ old('translator') }}"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="language" class="mb-2">Bahasa</label>
-                        <input type="text" class="form-control custom-form-control" name="language" id="language"  value="{{ old('language') }}" maxlength="30"/>
+                        <input type="text" class="form-control custom-form-control" name="language" id="language"  value="{{ old('language') }}"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="synopsis" class="mb-2">Sinopsis</label>
@@ -126,11 +126,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="jumlahHalaman" class="mb-2">Jumlah Halaman</label>
-                        <input type="number" class="form-control custom-form-control" name="page" id="page" value="{{ old('page') }}" max="1500"/>
+                        <input type="number" class="form-control custom-form-control" name="page" id="page" value="{{ old('page') }}"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="volume" class="mb-2">Volume</label>
-                        <input type="number" class="form-control custom-form-control" name="volume" id="volume"  value="{{ old('volume') }}" max="10"/>
+                        <input type="number" class="form-control custom-form-control" name="volume" id="volume"  value="{{ old('volume') }}"/>
                     </div>
                     
 
