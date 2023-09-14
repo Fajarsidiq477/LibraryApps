@@ -22,6 +22,9 @@
 
     <div class="container mt-3">
         <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
+            
+            <input type="hidden" name="url_page" id="url_page" value="{{ $url_page }}">
+            
             {{ csrf_field() }}
             @method('PUT')
 

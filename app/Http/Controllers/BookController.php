@@ -108,9 +108,20 @@ class BookController extends Controller
     public function edit(string $id)
     {
 
+        $url = url()->previous();
+
+        // Menggunakan parse_url untuk mendapatkan query string
+        $query = parse_url($url, PHP_URL_QUERY);
+
+        // Menggunakan parse_str untuk mengurai query string menjadi array
+        parse_str($query, $params);
+
+        // Mengambil angka "page" dari array $params
+        $url_page = isset($params['page']) ? $params['page'] : "1";
+
         $book = Book::find($id);
 
-        return view('admin.books.edit', ['book' => $book]);
+        return view('admin.books.edit', ['book' => $book, 'url_page' => $url_page]);
     }
 
     /**
@@ -169,7 +180,7 @@ class BookController extends Controller
 
         $book->update();
 
-        return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil diedit!']);
+        return redirect('/admin/books?page='.$request->url_page)->with('success', ['message' => 'Data buku berhasil diedit!']);
 
     }
 
