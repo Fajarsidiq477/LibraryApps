@@ -69,7 +69,7 @@ class AsideCanvas extends LitWithoutShadowDom {
                                 bookId="${d.id}"
                                 bookName="${d.title}"
                                 bookYear="${d.publication_year}"
-                                bookGenre="${d.kategori}"
+                                bookGenre="${d.category}"
                                 bookAuthor="${d.author}"
                                 bookPublisher="${d.publisher}"
                                 bookStatus="${d.book_status}"
@@ -161,12 +161,7 @@ class AsideCanvas extends LitWithoutShadowDom {
     render() {
         return html`
             <div class="offcanvas-header">
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Close"
-                ></button>
+               
             </div>
             <div class="offcanvas-body" id="offcanvas-content">
                 <div class="aside-form">
@@ -213,6 +208,16 @@ class AsideCanvas extends LitWithoutShadowDom {
                     </form>
                 </div>
                 <div class="book"></div>
+            </div>
+            <div class="offcanvas-header">
+                <button
+                    type="button"
+                    class="btn btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                    style="margin: auto;"
+                >
+                </button>
             </div>
         `;
     }

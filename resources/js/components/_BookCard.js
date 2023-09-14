@@ -239,7 +239,7 @@ class BookCard extends LitWithoutShadowDom {
                         </div>
                         <div class="col d-flex align-items-end">
                             <div>
-                                <p class="fw-bold mb-0">Genre</p>
+                                <p class="fw-bold mb-0">Kategori</p>
                                 <p class="genre">${this.bookGenre}</p>
                             </div>
                         </div>
