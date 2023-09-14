@@ -10811,10 +10811,6 @@ aside-canvas .btn-filter-submit {
   }
 }
 
-.book-field{
-  text-decoration: none;
-}
-
 .book-field:hover {
   cursor: pointer;
 }
@@ -10999,19 +10995,4 @@ aside-canvas .btn-filter-submit {
   position: absolute;
   right: -15px;
   bottom: -15px;
-}
-
-.table-animation{
-  opacity: 0; /* Mulai dengan elemen yang tidak terlihat */
-  animation: fadeIn 1s ease-in forwards; /* Animasi fade-in selama 1 detik */
-}
-
-
-@keyframes fadeIn {
-  from {
-      opacity: 0; /* Mulai dengan opasitas 0 (tidak terlihat) */
-  }
-  to {
-      opacity: 1; /* Akhiri dengan opasitas 1 (terlihat sepenuhnya) */
-  }
 }
