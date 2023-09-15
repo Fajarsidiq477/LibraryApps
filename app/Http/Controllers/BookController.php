@@ -164,7 +164,7 @@ class BookController extends Controller
  
             $extension = $request->cover->extension();
         
-            $filename = str_replace(' ', '_', $request->title) . '_' . uniqid() .'.' .  $extension;
+            $filename = $request->book_code .'.' .  $extension;
 
             // delete old cover
             if($book->cover !== 'cover_default.jpg') {
