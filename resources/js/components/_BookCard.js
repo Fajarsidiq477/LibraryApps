@@ -213,7 +213,7 @@ class BookCard extends LitWithoutShadowDom {
             <div>
                 <div class="row mb-2">
                     <div class="col col-md-5 text-center ">
-                        <div class="position-relative bg-dark">
+                        <div class="position-relative">
                             <img
                                 src="${this.bookCover}"
                                 alt="book cover"

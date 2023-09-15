@@ -1,24 +1,14 @@
-.bg-dark {
-    --bs-bg-opacity: 1;
-    background-color: transparent !important;
-}
-
-
-.book-field{
-    text-decoration: none;
-  }
-
 .table-animation{
     opacity: 0; /* Mulai dengan elemen yang tidak terlihat */
     animation: fadeIn 1s ease-in forwards; /* Animasi fade-in selama 1 detik */
-  }
+}
   
   
-  @keyframes fadeIn {
+@keyframes fadeIn {
     from {
         opacity: 0; /* Mulai dengan opasitas 0 (tidak terlihat) */
     }
     to {
         opacity: 1; /* Akhiri dengan opasitas 1 (terlihat sepenuhnya) */
     }
-  }
+}
