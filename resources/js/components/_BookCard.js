@@ -218,7 +218,7 @@ class BookCard extends LitWithoutShadowDom {
                                 src="${this.bookCover}"
                                 alt="book cover"
                                 class="img-fluid mx-auto"
-                                style="width:205px; height: 250px"
+                                style="width:185px; height: 250px"
                             />
                         </div>
                     </div>
