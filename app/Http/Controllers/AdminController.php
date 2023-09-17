@@ -18,7 +18,7 @@ class AdminController extends Controller
         $transactions = Lend::class;
         $carbon = Carbon::class;
 
-        $members = User::where('role', 2)->get();
+        $members = User::where('role', '2')->get();
 
         return view('admin/index', ['books' => $books, 'transactions' => $transactions, 'members' => $members, 'carbon' => $carbon]);
     }
