@@ -11,7 +11,7 @@
     <div class="container">
                 <div class="row mt-5 pb-5 profile-row">
                     <div class="col-12 col-md-6 left">
-                        <profile-card profilePictureWithUrl="{{ asset('storage/avatars/'. Auth::user()->profile_picture) }}"></profile-card>
+                        <profile-card id="{{ Auth::user()->id }}" name="{{ Auth::user()->name }}" profilePictureWithUrl="{{ asset('storage/avatars/'. Auth::user()->profile_picture) }}"></profile-card>
                     </div>
                     <div class="col-12 col-md-6 mt-3 mt-md-0 right">
                         <div class="card p-4 justify-content-center">

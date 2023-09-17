@@ -3,7 +3,15 @@ import { html } from "lit";
 
 class ProfileCard extends LitWithoutShadowDom {
     static properties = {
+        id: {
+            type: String,
+            reflect: true,
+        },
         profilePictureWithUrl: {
+            type: String,
+            reflect: true,
+        },
+        name: {
             type: String,
             reflect: true,
         },
@@ -55,8 +63,8 @@ class ProfileCard extends LitWithoutShadowDom {
                         <i class="bi bi-pencil"></i>
                     </button>
                 </div>
-                <h3 class="profile-name mt-3">Fajar Sidik Setiawan</h3>
-                <p class="profile-nim">2010031</p>
+                <h3 class="profile-name mt-3">${this.name}</h3>
+                <p class="profile-nim">${this.id}</p>
             </div>
             <div class="d-grid my-2 rounded ">
                 <button
