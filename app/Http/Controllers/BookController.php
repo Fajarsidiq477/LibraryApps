@@ -116,7 +116,7 @@ class BookController extends Controller
                                     'search'        => request('search'),
                                     'available'     => null,
                                     'category'      => null,
-                                    'books'         => $books->paginate(15)]);
+                                    'books'         => $books->paginate(16)]);
     }
 
     public function filter(){
@@ -143,7 +143,7 @@ class BookController extends Controller
                                     'search'        => null,
                                     'available'     => $available,
                                     'category'      => $category,
-                                    'books' => $books->paginate(15)]);
+                                    'books' => $books->paginate(16)]);
     }
 
     /**
