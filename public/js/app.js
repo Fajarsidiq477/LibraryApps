@@ -3132,21 +3132,24 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
   _createClass(AsideCanvas, [{
     key: "_initialListener",
     value: function _initialListener() {
-      var _this2 = this;
       this.addEventListener("hide.bs.offcanvas", function (e) {
         setTimeout(function () {
           e.target.querySelector("#offcanvas-content .aside-form").classList.remove("d-none");
           e.target.querySelector("#offcanvas-content .book").innerHTML = "";
         }, 300);
       });
-      this.addEventListener("show.bs.offcanvas", function (e) {
-        var genres = JSON.parse(_this2.genres);
-        var select = '<option selected value="">---</option>';
-        genres.forEach(function (genre) {
-          select += "<option value=\"".concat(genre.id, "\">").concat(genre.name, "</option>");
-        });
-        e.target.querySelector("#filterCategory").innerHTML = select;
-      });
+
+      // this.addEventListener("show.bs.offcanvas", (e) => {
+      //     const category = JSON.parse(this.category);
+
+      //     let select = '<option selected value="">---</option>';
+
+      //     category.forEach((category) => {
+      //         select += `<option value="${category.id}">${category.name}</option>`;
+      //     });
+
+      //     e.target.querySelector("#filterCategory").innerHTML = select;
+      // });
     }
   }, {
     key: "_populateDataToBody",
@@ -3154,7 +3157,7 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
       var html = "";
       if (data.data != null) {
         html = data.data.map(function (d) {
-          return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookGenre=\"").concat(d.category, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n                            >\n                            </book-card>\n                        </div>\n                        ");
+          return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookCategory=\"").concat(d.category, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n                            >\n                            </book-card>\n                        </div>\n                        ");
         }).join(" ");
       }
       var displayTo = document.querySelector(this.displayTo);
@@ -3222,7 +3225,7 @@ var AsideCanvas = /*#__PURE__*/function (_LitWithoutShadowDom) {
   }, {
     key: "render",
     value: function render() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <div class=\"offcanvas-header\">\n               \n            </div>\n            <div class=\"offcanvas-body\" id=\"offcanvas-content\">\n                <div class=\"aside-form\">\n                    <form id=\"offcanvas-form\" @submit=", ">\n                        <div\n                            class=\"d-flex justify-content-center pb-3\"\n                            style=\"border-bottom: 2px solid rgba(0, 0, 0, 0.7)\"\n                        >\n                            <span style=\"margin-right: 1rem\">Filter</span>\n                            <i class=\"bi bi-filter\"></i>\n                        </div>\n                        <div class=\"container mt-3\">\n                            <h5>Status</h5>\n                            <div class=\"d-flex justify-content-between mb-2\">\n                                <label for=\"filterStatus\">Tersedia</label>\n                                <input\n                                    type=\"checkbox\"\n                                    id=\"filterStatus\"\n                                    class=\"filterCheck\"\n                                    name=\"available\"\n                                />\n                            </div>\n                            <div\n                                class=\"d-flex justify-content-between align-items-center\"\n                            >\n                                <label for=\"kategori\">Kategori</label>\n                                <select\n                                    class=\"form-select form-select-sm ms-2 bg-transparent\"\n                                    id=\"filterCategory\"\n                                    name=\"genre\"\n                                ></select>\n                            </div>\n                        </div>\n                        <p class=\"filterErrorMessageField text-danger mt-2\"></p>\n                        <div class=\"d-flex justify-content-center mt-3\">\n                            <button\n                                class=\"btn bg-secondary text-white\"\n                                type=\"submit\"\n                            >\n                                <span>Terapkan</span>\n                                <span class=\"btn-spinner\"></span>\n                            </button>\n                        </div>\n                    </form>\n                </div>\n                <div class=\"book\"></div>\n            </div>\n            <div class=\"offcanvas-header\">\n                <button\n                    type=\"button\"\n                    class=\"btn btn-close\"\n                    data-bs-dismiss=\"offcanvas\"\n                    aria-label=\"Close\"\n                    style=\"margin: auto;\"\n                >\n                </button>\n            </div>\n        "])), this._searchByFilter);
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <div class=\"offcanvas-header\">\n               \n            </div>\n            <div class=\"offcanvas-body\" id=\"offcanvas-content\">\n                <div class=\"aside-form\">\n                    <form action=\"/filter\">\n                        <div\n                            class=\"d-flex justify-content-center pb-3\"\n                            style=\"border-bottom: 2px solid rgba(0, 0, 0, 0.7)\"\n                        >\n                            <span style=\"margin-right: 1rem\">Filter</span>\n                            <i class=\"bi bi-filter\"></i>\n                        </div>\n                        <div class=\"container mt-3\">\n                            <h5>Status</h5>\n                            <div class=\"d-flex justify-content-between mb-2\">\n                                <label for=\"filterStatus\">Tersedia</label>\n                                <input\n                                    type=\"checkbox\"\n                                    id=\"filterStatus\"\n                                    class=\"filterCheck\"\n                                    name=\"available\"\n                                />\n                            </div>\n                            <div\n                                class=\"d-flex justify-content-between align-items-center\"\n                            >\n                                <label for=\"kategori\">Kategori</label>\n                                <select\n                                    class=\"form-select form-select-sm ms-2 bg-transparent\"\n                                    id=\"filterCategory\"\n                                    name=\"category\"\n                                >\n                                <option selected value=\"\">---</option>\n                                <option value=\"Fikih\">Fikih</option>\n                                <option value=\"Umum\">Umum</option>\n                                </select>\n                            </div>\n                        </div>\n                        <p class=\"filterErrorMessageField text-danger mt-2\"></p>\n                        <div class=\"d-flex justify-content-center mt-3\">\n                            <button\n                                class=\"btn bg-secondary text-white\"\n                                type=\"submit\"\n                            >\n                                <span>Terapkan</span>\n                                <span class=\"btn-spinner\"></span>\n                            </button>\n                        </div>\n                    </form>\n                </div>\n                <div class=\"book\"></div>\n            </div>\n            <div class=\"offcanvas-header\">\n                <button\n                    type=\"button\"\n                    class=\"btn btn-close\"\n                    data-bs-dismiss=\"offcanvas\"\n                    aria-label=\"Close\"\n                    style=\"margin: auto;\"\n                >\n                </button>\n            </div>\n        "])));
     }
   }]);
   return AsideCanvas;
@@ -3232,10 +3235,10 @@ _defineProperty(AsideCanvas, "properties", {
     type: String,
     reflect: true
   },
-  genres: {
-    type: String,
-    reflect: true
-  },
+  // category: {
+  //     type: String,
+  //     reflect: true,
+  // },
   filterFrom: {
     type: String,
     reflect: true
@@ -3303,8 +3306,8 @@ var BookCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
       if (!this.hasAttribute("bookYear")) {
         throw new Error("Atribut \"bookYear\" harus diterapkan pada elemen ".concat(this.localName));
       }
-      if (!this.hasAttribute("bookGenre")) {
-        throw new Error("Atribut \"bookGenre\" harus diterapkan pada elemen ".concat(this.localName));
+      if (!this.hasAttribute("bookCategory")) {
+        throw new Error("Atribut \"bookCategory\" harus diterapkan pada elemen ".concat(this.localName));
       }
       if (!this.hasAttribute("bookAuthor")) {
         throw new Error("Atribut \"bookAuthor\" harus diterapkan pada elemen ".concat(this.localName));
@@ -3340,11 +3343,12 @@ var BookCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
           bookStatus = "<span class='badge text-white bg-dark p-1'>Hilang</span>";
           break;
       }
-      offCanvas.querySelector(".book").innerHTML = "\n\n            <div class=\"book-detail text-center px-4\">\n                <div class=\"aside-header\">\n                    <img\n                        src=\"".concat(this.bookCover, "\"\n                        class=\"d-block mx-auto img-fluid mb-2\"\n                        style=\"width: 300px; height: 415px\"\n                        alt=\"book-cover\"\n                    />\n                </div>\n                \n                <div class=\"aside-description mt-4\">\n                    <button type=\"button\" class=\"btn btn-secondary\" style=\"text-transform: uppercase; margin:5px; color: whitesmoke; line-height: 15px; font-size: 0.75rem; font-weight: bold;\">\n                    ").concat(this.bookGenre, "\n                    </button>\n                    <span id=\"favorite\" class=\"bi bi-star favorite-icon\" style=\"vertical-align: -.175em; margin:5px; font-size:1.5rem; color:#ffc107!important\"></span>\n                </div>\n                \n                <div class=\"aside-description text-start mt-4\">\n                    <a href=\"").concat(this.bookDetailURL, "\" class=\"text-dark\"><h4 class=\"book-title\">").concat(this.bookName, "</h4></a>\n                    <p class=\"book-year\">").concat(this.bookYear, "</p>\n                    <h5 class=\"book-author\">").concat(this.bookAuthor, "</h5>\n                    <p class=\"book-publisher fw-bold\">").concat(this.bookPublisher, "</p>\n                    <p class=\"book-status\">\n                        <span>Status</span>\n                        ").concat(bookStatus, "\n                    </p>\n                </div>\n            </div>\n        ");
+      offCanvas.querySelector(".book").innerHTML = "\n\n            <div class=\"book-detail text-center px-4\">\n                <div class=\"aside-header\">\n                    <img\n                        src=\"".concat(this.bookCover, "\"\n                        class=\"d-block mx-auto img-fluid mb-2\"\n                        style=\"width: 300px; height: 415px\"\n                        alt=\"book-cover\"\n                    />\n                </div>\n                \n                <div class=\"aside-description mt-4\">\n                    <button type=\"button\" class=\"btn btn-secondary\" style=\"text-transform: uppercase; margin:5px; color: whitesmoke; line-height: 15px; font-size: 0.75rem; font-weight: bold;\">\n                    ").concat(this.bookCategory, "\n                    </button>\n                </div>\n                \n                <div class=\"aside-description text-start mt-4\">\n                    <a href=\"").concat(this.bookDetailURL, "\" class=\"text-dark\"><h4 class=\"book-title\">").concat(this.bookName, "</h4></a>\n                    <p class=\"book-year\">").concat(this.bookYear, "</p>\n                    <h5 class=\"book-author\">").concat(this.bookAuthor, "</h5>\n                    <p class=\"book-publisher fw-bold\">").concat(this.bookPublisher, "</p>\n                    <p class=\"book-status\">\n                        <span>Status</span>\n                        ").concat(bookStatus, "\n                    </p>\n                </div>\n            </div>\n        ");
       document.querySelector(".favorite-bar").innerHTML = "\n                <span id=\"favorite\" class=\"bi bi-star favorite-icon\" style=\"font-size:1.5rem; color:#ffc107!important\"></span>\n          ";
     }
 
     // buat favorite icon
+    // <span id="favorite" class="bi bi-star favorite-icon" style="vertical-align: -.175em; margin:5px; font-size:1.5rem; color:#ffc107!important"></span>
     // <span id="boot-icon" class="bi bi-star" style="font-size:1.5rem; color:#ffc107!important"></span>
     // <span id="boot-icon" class="bi bi-star-fill" style="font-size:1.5rem; color:#ffc107!important"></span>
   }, {
@@ -3389,7 +3393,7 @@ var BookCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
       //                         ${favoriteButtonIcon}
       //                     </a>
 
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n            <div>\n                <div class=\"row mb-2\">\n                    <div class=\"col col-md-5 text-center \">\n                        <div class=\"position-relative\">\n                            <img\n                                src=\"", "\"\n                                alt=\"book cover\"\n                                class=\"img-fluid mx-auto\"\n                                style=\"width:185px; height: 250px\"\n                            />\n                        </div>\n                    </div>\n                    <div class=\"col col-md-7 pt-2 d-flex flex-column\">\n                        <div class=\"col\">\n                            <a\n                                @click=", "\n                                class=\"book-field text-dark\"\n                                data-bs-toggle=\"offcanvas\"\n                                data-bs-target=\"#offcanvasRight\"\n                                data-bs-source=\"bookDetail\"\n                            >\n                                <h4 class=\"book-title\">", "</h4>\n                            </a>\n\n                            <h5 class=\"book-author\">", "</h5>\n                            <p class=\"book-year\">", "</p>\n                        </div>\n                        <div class=\"col d-flex align-items-end\">\n                            <div>\n                                <p class=\"fw-bold mb-0\">Kategori</p>\n                                <p class=\"genre\">", "</p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        "])), this.bookCover, this._bookDetail, this.bookName, this.bookAuthor, this.bookYear, this.bookGenre);
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n            <div>\n                <div class=\"row mb-2\">\n                    <div class=\"col col-md-5 text-center \">\n                        <div class=\"position-relative\">\n                            <img\n                                src=\"", "\"\n                                alt=\"book cover\"\n                                class=\"img-fluid mx-auto\"\n                                style=\"width:185px; height: 250px\"\n                            />\n                        </div>\n                    </div>\n                    <div class=\"col col-md-7 pt-2 d-flex flex-column\">\n                        <div class=\"col\">\n                            <a\n                                @click=", "\n                                class=\"book-field text-dark\"\n                                data-bs-toggle=\"offcanvas\"\n                                data-bs-target=\"#offcanvasRight\"\n                                data-bs-source=\"bookDetail\"\n                            >\n                                <h4 class=\"book-title\">", "</h4>\n                            </a>\n\n                            <h5 class=\"book-author\">", "</h5>\n                            <p class=\"book-year\">", "</p>\n                        </div>\n                        <div class=\"col d-flex align-items-end\">\n                            <div>\n                                <p class=\"fw-bold mb-0\">Kategori</p>\n                                <p class=\"category\">", "</p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        "])), this.bookCover, this._bookDetail, this.bookName, this.bookAuthor, this.bookYear, this.bookCategory);
     }
   }]);
   return BookCard;
@@ -3411,7 +3415,7 @@ _defineProperty(BookCard, "properties", {
     type: String,
     reflect: true
   },
-  bookGenre: {
+  bookCategory: {
     type: String,
     reflect: true
   },
@@ -3508,21 +3512,21 @@ var ProfileCard = /*#__PURE__*/function (_LitWithoutShadowDom) {
   }, {
     key: "render",
     value: function render() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_1__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <div class=\"card p-4 text-center\">\n                <div class=\"profile-img\">\n                    <img\n                        src=\"", "\"\n                        alt=\"profile-img\"\n                    />\n                    <button class=\"btn bg-secondary text-white\">\n                        <i class=\"bi bi-pencil\"></i>\n                    </button>\n                </div>\n                <h3 class=\"profile-name mt-3\">", "</h3>\n                <p class=\"profile-nim\">", "</p>\n            </div>\n            <div class=\"d-grid my-2 rounded \">\n                <button\n                    class=\"btn border active\"\n                    id=\"btn-profile\"\n                    @click=\"", "\"\n                >\n                    Data Profil\n                </button>\n            </div>\n            <div class=\"d-grid rounded\">\n                <button\n                    class=\"btn border\"\n                    id=\"btn-password\"\n                    @click=\"", "\"\n                >\n                    Ubah Kata Sandi\n                </button>\n            </div>\n        "])), this.profilePictureWithUrl, this.name, this.id, this._profileTabChange, this._profileTabChange);
+      return (0,lit__WEBPACK_IMPORTED_MODULE_1__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n            <div class=\"card p-4 text-center\">\n                <div class=\"profile-img\">\n                    <img\n                        src=\"", "\"\n                        alt=\"profile-img\"\n                    />\n                    <button class=\"btn bg-secondary text-white\">\n                        <i class=\"bi bi-pencil\"></i>\n                    </button>\n                </div>\n                <h3 class=\"profile-name mt-3\">", "</h3>\n                <p class=\"profile-nim\">", "</p>\n            </div>\n            <div class=\"d-grid my-2 rounded \">\n                <button\n                    class=\"btn border active\"\n                    id=\"btn-profile\"\n                    @click=\"", "\"\n                >\n                    Data Profil\n                </button>\n            </div>\n            <div class=\"d-grid rounded\">\n                <button\n                    class=\"btn border\"\n                    id=\"btn-password\"\n                    @click=\"", "\"\n                >\n                    Ubah Kata Sandi\n                </button>\n            </div>\n        "])), this.profilePictureWithUrl, this.userName, this.userId, this._profileTabChange, this._profileTabChange);
     }
   }]);
   return ProfileCard;
 }(_base_LitWithoutShadowDom__WEBPACK_IMPORTED_MODULE_0__["default"]);
 _defineProperty(ProfileCard, "properties", {
-  id: {
+  userId: {
+    type: String,
+    reflect: true
+  },
+  userName: {
     type: String,
     reflect: true
   },
   profilePictureWithUrl: {
-    type: String,
-    reflect: true
-  },
-  name: {
     type: String,
     reflect: true
   }
@@ -3611,14 +3615,18 @@ var SearchForm = /*#__PURE__*/function (_LitWithoutShadowDom) {
   }, {
     key: "_populateDataToUserBody",
     value: function _populateDataToUserBody(data) {
-      var html = "";
+      var html = [];
       if (data.data != null) {
         html = data.data.map(function (d) {
-          return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookGenre=\"").concat(d.category, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n    \n                            >\n                            </book-card>\n                        </div>\n                        ");
+          return "\n                        <div class=\"col-12 col-md-5 d-block border-bottom border-3\">\n                            <book-card\n                                bookId=\"".concat(d.id, "\"\n                                bookName=\"").concat(d.title, "\"\n                                bookYear=\"").concat(d.publication_year, "\"\n                                bookCategory=\"").concat(d.category, "\"\n                                bookAuthor=\"").concat(d.author, "\"\n                                bookPublisher=\"").concat(d.publisher, "\"\n                                bookStatus=\"").concat(d.book_status, "\"\n                                bookDetailUrl=\"/book/").concat(d.book_code, "\"\n                                bookFavoriteUrl=\"...\"\n                                bookFavorite=false\n                                bookCover='storage/book_covers/").concat(d.cover, "'\n    \n                            >\n                            </book-card>\n                        </div>\n                        ");
         }).join(" ");
       }
       var displayTo = document.querySelector(this.displayTo);
-      displayTo.innerHTML = html;
+      filterSearch = true;
+      console.log(data);
+
+      // displayTo.innerHTML = html;
+
       resultMessageField.innerHTML = "<span>".concat(data.message, "</span>");
     }
   }, {

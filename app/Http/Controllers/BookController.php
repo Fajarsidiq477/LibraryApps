@@ -102,6 +102,50 @@ class BookController extends Controller
         //
     }
 
+    public function search(){
+        $user_data = Auth::user();
+        $books = Book::latest();
+
+        if(request('search')){
+            $books->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('author', 'like', '%' . request('search') . '%');
+        }
+
+        return view('users/index', ['user_data'     => $user_data,
+                                    'searchfilter'  => 'true',
+                                    'search'        => request('search'),
+                                    'available'     => null,
+                                    'category'      => null,
+                                    'books'         => $books->paginate(10)]);
+    }
+
+    public function filter(){
+
+        $user_data = Auth::user();
+        $books = Book::latest();
+
+        $category = request('category');
+        $available = request('available');
+
+        if($category && $available){
+            $books->where('category', $category)
+                  ->Where('book_status', '0');
+        }
+        else if(!$category && $available){
+            $books->Where('book_status', '0');
+        }
+        else if($category && !$available){
+            $books->where('category', $category);
+        }
+
+        return view('users/index', ['user_data' => $user_data,
+                                    'searchfilter' => 'true',
+                                    'search'        => null,
+                                    'available'     => $available,
+                                    'category'      => $category,
+                                    'books' => $books->paginate(10)]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

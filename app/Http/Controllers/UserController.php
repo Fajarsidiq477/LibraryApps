@@ -15,17 +15,14 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Lend;
 use App\Models\Book;
-use App\Models\Genre;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
     public function userIndex(Request $request){
-        
 
         $user_data = Auth::user();
-        $genres = Genre::all();
 
         if ($request->ajax()) {
             $perPage = 10; // Jumlah data per muatan tambahan
@@ -41,7 +38,23 @@ class UserController extends Controller
             return response()->json($books);
         }
 
-        return view('users/index', ['user_data' => $user_data, 'genres' => $genres]);
+        return view('users/index', ['user_data' => $user_data, 'searchfilter' => 'false']);
+    }
+
+    public function dump(){
+            // if ($request->ajax()) {
+            //     $perPage = 10; // Jumlah data per muatan tambahan
+            //     $page = $request->input('page', 1);
+            //     $offset = ($page - 1) * $perPage;
+            
+            //     $books = DB::table('book')
+            //         ->inRandomOrder()
+            //         ->skip($offset)
+            //         ->take($perPage)
+            //         ->get();
+            
+            //     return response()->json($books);
+            // }
     }
 
     public function userActivity() {

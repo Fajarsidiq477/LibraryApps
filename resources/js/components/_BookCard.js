@@ -19,7 +19,7 @@ class BookCard extends LitWithoutShadowDom {
             type: String,
             reflect: true,
         },
-        bookGenre: {
+        bookCategory: {
             type: String,
             reflect: true,
         },
@@ -67,9 +67,9 @@ class BookCard extends LitWithoutShadowDom {
                 `Atribut "bookYear" harus diterapkan pada elemen ${this.localName}`
             );
         }
-        if (!this.hasAttribute("bookGenre")) {
+        if (!this.hasAttribute("bookCategory")) {
             throw new Error(
-                `Atribut "bookGenre" harus diterapkan pada elemen ${this.localName}`
+                `Atribut "bookCategory" harus diterapkan pada elemen ${this.localName}`
             );
         }
         if (!this.hasAttribute("bookAuthor")) {
@@ -142,9 +142,8 @@ class BookCard extends LitWithoutShadowDom {
                 
                 <div class="aside-description mt-4">
                     <button type="button" class="btn btn-secondary" style="text-transform: uppercase; margin:5px; color: whitesmoke; line-height: 15px; font-size: 0.75rem; font-weight: bold;">
-                    ${this.bookGenre}
+                    ${this.bookCategory}
                     </button>
-                    <span id="favorite" class="bi bi-star favorite-icon" style="vertical-align: -.175em; margin:5px; font-size:1.5rem; color:#ffc107!important"></span>
                 </div>
                 
                 <div class="aside-description text-start mt-4">
@@ -166,6 +165,7 @@ class BookCard extends LitWithoutShadowDom {
     }
 
     // buat favorite icon
+    // <span id="favorite" class="bi bi-star favorite-icon" style="vertical-align: -.175em; margin:5px; font-size:1.5rem; color:#ffc107!important"></span>
     // <span id="boot-icon" class="bi bi-star" style="font-size:1.5rem; color:#ffc107!important"></span>
     // <span id="boot-icon" class="bi bi-star-fill" style="font-size:1.5rem; color:#ffc107!important"></span>
 
@@ -240,7 +240,7 @@ class BookCard extends LitWithoutShadowDom {
                         <div class="col d-flex align-items-end">
                             <div>
                                 <p class="fw-bold mb-0">Kategori</p>
-                                <p class="genre">${this.bookGenre}</p>
+                                <p class="category">${this.bookCategory}</p>
                             </div>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ class MyModal extends LitWithoutShadowDom {
                  bookCode : 'dummy' ;
                  bookTitle : 'dummy2' ;
                  bookAuthor : 'dummy3' ;
-                 bookGenre : 'dummy4' ;
+                 bookCategory : 'dummy4' ;
                  bookPublisher : 'dummy5' ;
                  bookEditor : 'dummy6' ;
                  bookTranslator : 'dummy7' ;
@@ -78,7 +78,7 @@ class MyModal extends LitWithoutShadowDom {
         const bookCode = this.querySelector("#bookCodeInput").value;
         const bookTitle = this.querySelector("#bookTitleInput").value;
         const bookAuthor = this.querySelector("#bookAuthorInput").value;
-        const bookGenre = this.querySelector("#bookGenreInput").value;
+        const bookCategory = this.querySelector("#bookCategoryInput").value;
         const bookPublisher = this.querySelector("#bookPublisherInput").value;
         const bookEditor = this.querySelector("#bookEditorInput").value;
         const bookTranslator = this.querySelector("#bookTranslatorInput").value;
@@ -103,7 +103,7 @@ class MyModal extends LitWithoutShadowDom {
             bookCode,
             bookTitle,
             bookAuthor,
-            bookGenre,
+            bookCategory,
             bookPublisher,
             bookEditor,
             bookTranslator,
@@ -214,7 +214,7 @@ class MyModal extends LitWithoutShadowDom {
                                     </div>
                                     <div class="form-group mb-3">
                                         <label
-                                            for="bookGenreInput"
+                                            for="bookCategoryInput"
                                             class="mb-2"
                                         >
                                             Kategori
@@ -222,7 +222,7 @@ class MyModal extends LitWithoutShadowDom {
                                         <input
                                             type="text"
                                             class="form-control custom-form-control"
-                                            id="bookGenreInput"
+                                            id="bookCategoryInput"
                                         />
                                     </div>
                                     <div class="form-group mb-3">
