@@ -60,6 +60,10 @@ Route::middleware(['auth'])->group(function() {
     });
 });
 
+//searchfilter
+Route::get('/search', [BookController::class,'search'])->name('search');
+Route::get('/filter', [BookController::class,'filter'])->name('filter');
+
 
 // user
 Route::get('/login',       [AuthController::class,'login'])->name('login');

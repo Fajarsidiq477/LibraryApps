@@ -122,7 +122,7 @@ class SearchForm extends LitWithoutShadowDom {
         resultMessageField.innerHTML = `<span>${data.message}</span>`;
     }
     _populateDataToUserBody(data) {
-        let html = "";
+        let html = [];
 
         if (data.data != null) {
             html = data.data
@@ -133,7 +133,7 @@ class SearchForm extends LitWithoutShadowDom {
                                 bookId="${d.id}"
                                 bookName="${d.title}"
                                 bookYear="${d.publication_year}"
-                                bookGenre="${d.category}"
+                                bookCategory="${d.category}"
                                 bookAuthor="${d.author}"
                                 bookPublisher="${d.publisher}"
                                 bookStatus="${d.book_status}"
@@ -152,7 +152,11 @@ class SearchForm extends LitWithoutShadowDom {
 
         const displayTo = document.querySelector(this.displayTo);
 
-        displayTo.innerHTML = html;
+        filterSearch = true;
+
+        console.log(data);
+
+        // displayTo.innerHTML = html;
 
         resultMessageField.innerHTML = `<span>${data.message}</span>`;
     }

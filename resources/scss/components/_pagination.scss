@@ -1,7 +1,23 @@
+.pagination{
+    margin: auto;
+    padding: 0px 10px 10px 10px;
+    font-weight: bolder;
+}
+
 .page-prev {
     padding-right: 2rem;
 }
 
 .page-next {
     padding-left: 2rem;
+}
+
+.page-item{
+    padding: 0px 10px;
+}
+
+.page-link{
+    font-size: 1.25rem;
+    padding: 7.5px 15px;
+    color: #f75e5d;
 }

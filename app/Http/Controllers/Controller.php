@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\User;
@@ -268,11 +269,11 @@ class Controller extends BaseController
     }
 
 
-    public function try(){
+    public function coba(){
 
-        $favorite = "Hanya Mencoba";
+        $user_data = Auth::user();
 
-        return $favorite;
+        return $user_data->id;
     
     }
 

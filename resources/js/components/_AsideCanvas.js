@@ -8,10 +8,10 @@ class AsideCanvas extends LitWithoutShadowDom {
             type: String,
             reflect: true,
         },
-        genres: {
-            type: String,
-            reflect: true,
-        },
+        // category: {
+        //     type: String,
+        //     reflect: true,
+        // },
         filterFrom: {
             type: String,
             reflect: true,
@@ -44,17 +44,17 @@ class AsideCanvas extends LitWithoutShadowDom {
             }, 300);
         });
 
-        this.addEventListener("show.bs.offcanvas", (e) => {
-            const genres = JSON.parse(this.genres);
+        // this.addEventListener("show.bs.offcanvas", (e) => {
+        //     const category = JSON.parse(this.category);
 
-            let select = '<option selected value="">---</option>';
+        //     let select = '<option selected value="">---</option>';
 
-            genres.forEach((genre) => {
-                select += `<option value="${genre.id}">${genre.name}</option>`;
-            });
+        //     category.forEach((category) => {
+        //         select += `<option value="${category.id}">${category.name}</option>`;
+        //     });
 
-            e.target.querySelector("#filterCategory").innerHTML = select;
-        });
+        //     e.target.querySelector("#filterCategory").innerHTML = select;
+        // });
     }
 
     _populateDataToBody(data) {
@@ -69,7 +69,7 @@ class AsideCanvas extends LitWithoutShadowDom {
                                 bookId="${d.id}"
                                 bookName="${d.title}"
                                 bookYear="${d.publication_year}"
-                                bookGenre="${d.category}"
+                                bookCategory="${d.category}"
                                 bookAuthor="${d.author}"
                                 bookPublisher="${d.publisher}"
                                 bookStatus="${d.book_status}"
@@ -165,7 +165,7 @@ class AsideCanvas extends LitWithoutShadowDom {
             </div>
             <div class="offcanvas-body" id="offcanvas-content">
                 <div class="aside-form">
-                    <form id="offcanvas-form" @submit=${this._searchByFilter}>
+                    <form action="/filter">
                         <div
                             class="d-flex justify-content-center pb-3"
                             style="border-bottom: 2px solid rgba(0, 0, 0, 0.7)"
@@ -191,8 +191,12 @@ class AsideCanvas extends LitWithoutShadowDom {
                                 <select
                                     class="form-select form-select-sm ms-2 bg-transparent"
                                     id="filterCategory"
-                                    name="genre"
-                                ></select>
+                                    name="category"
+                                >
+                                <option selected value="">---</option>
+                                <option value="Fikih">Fikih</option>
+                                <option value="Umum">Umum</option>
+                                </select>
                             </div>
                         </div>
                         <p class="filterErrorMessageField text-danger mt-2"></p>
