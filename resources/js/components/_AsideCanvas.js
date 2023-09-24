@@ -194,8 +194,25 @@ class AsideCanvas extends LitWithoutShadowDom {
                                     name="category"
                                 >
                                 <option selected value="">---</option>
+                                <option value="Al-Qur'an">Al-Qur'an</option>
+                                <option value="Tafsir">Tafsir</option>
                                 <option value="Fikih">Fikih</option>
+                                <option value="Sejarah">Sejarah</option>
                                 <option value="Umum">Umum</option>
+                                <option value="Pendidikan">Pendidikan</option>
+                                <option value="Penelitian">Penelitian</option>
+                                <option value="Hadits">Hadits</option>
+                                <option value="Kamus">Kamus</option>
+                                <option value="Tasawuf">Tasawuf</option>
+                                <option value="Aqidah">Aqidah</option>
+                                <option value="Pemikiran">Pemikiran</option>
+                                <option value="Motivasi">Motivasi</option>
+                                <option value="Ensiklopedia">Ensiklopedia</option>
+                                <option value="Novel">Novel</option>
+                                <option value="Skripsi">Skripsi</option>
+                                <option value="Tesis">Tesis</option>
+                                <option value="ILT">ILT</option>
+                                <option value="Filsafat">Filsafat</option>
                                 </select>
                             </div>
                         </div>

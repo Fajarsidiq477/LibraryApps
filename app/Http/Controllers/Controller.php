@@ -271,9 +271,9 @@ class Controller extends BaseController
 
     public function coba(){
 
-        $user_data = Auth::user();
+        $category = Book::select('category')->distinct()->get();
 
-        return $user_data->id;
+        return $category;
     
     }
 
