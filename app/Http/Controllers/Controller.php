@@ -235,7 +235,7 @@ class Controller extends BaseController
         }, $today);
 
         // Total denda
-        $fine_amount = ($interval - $weekends) * 1000;
+        $fine_amount = ($interval - $weekends) * 500;
 
         return $fine_amount;
 
