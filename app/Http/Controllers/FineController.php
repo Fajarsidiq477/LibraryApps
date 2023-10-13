@@ -32,7 +32,7 @@ class FineController extends Controller
             $lend[$i]->lend_status = app(Controller::class)->lateCheck($lend[$i]->return_date);
 
             if($lend[$i]->lend_status == 3){
-                $fine_amount = app(Controller::class)->countFine($lend[$i]->return_date);
+                $fine_amount = app(Controller::class)->countFine($lend[$i]->fine_amount);
                 
                 $fine = Fine::where('lend_id', $lend[$i]->id)->get();
                 
@@ -52,7 +52,7 @@ class FineController extends Controller
 
         }
 
-        $fines = Fine::All();
+        $fines = Fine::with(['user','book'])->where('fine_status', '0')->paginate(10);
 
         return redirect()->route('fines.index')->with([ 'fines' => $fines ]);
 
