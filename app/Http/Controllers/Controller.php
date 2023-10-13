@@ -212,7 +212,7 @@ class Controller extends BaseController
         $today = Carbon::now();
 
         // Membandingkan tanggal hari ini dengan tanggal dari $date
-        if ($today->gt($customDate)) {
+        if ($today->gt($customDate->addSecond(1))) {
             $lend_status = 3; // 3 = Telat. tidak ada di database, hanya ada di data yang akan dikirim ke view untuk digunakan saat switch case
             return $lend_status;
         } else {
@@ -271,9 +271,30 @@ class Controller extends BaseController
 
     public function coba(){
 
-        $category = Book::select('category')->distinct()->get();
+        $date = "2023-10-12";
 
-        return $category;
+        // Mengubah tanggal dari string menjadi objek Carbon
+        $customDate = Carbon::createFromFormat('Y-m-d', $date);
+
+        // Mengambil tanggal hari ini dalam objek Carbon
+        $today = Carbon::now();
+
+        // Membandingkan tanggal hari ini dengan tanggal dari $date
+        // if ($today->gt($customDate)) {
+        //     $lend_status = 3; // 3 = Telat. tidak ada di database, hanya ada di data yang akan dikirim ke view untuk digunakan saat switch case
+        //     return $lend_status;
+        // } else {
+        //     $lend_status = 0;
+        //     return $lend_status;
+        // }
+
+        // $return     = Carbon::parse("2023-10-12");
+        // $today      = Carbon::today()->toDateString();
+
+        // // Jumlah hari telat
+        // $interval = $return->diffInDays($today);
+
+        return $today->gt($customDate->addSecond(1));
     
     }
 

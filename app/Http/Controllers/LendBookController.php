@@ -16,7 +16,7 @@ class LendBookController extends Controller
      */
     public function index()
     {
-        $lends = Lend::with(['user','book'])->paginate(10);
+        $lends = Lend::with(['user','book'])->where('lend_status', '0')->paginate(10);
 
         return view('admin.lendBooks.index', ['lends' => $lends]);
     }

@@ -46,7 +46,6 @@
                 </thead>
                 <tbody>
                     @foreach ($fines as $fine)
-                        @if($fine->fine_status == '0')
                         <tr class="align-middle">
                             <td>
                                 <input type="checkbox" name="" id="" />
@@ -72,7 +71,6 @@
                                 </a>
                             </td>
                         </tr>
-                        @endif
                     @endforeach
                 </tbody>
             </table>

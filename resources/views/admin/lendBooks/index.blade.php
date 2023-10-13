@@ -64,7 +64,6 @@
                 </thead>
                 <tbody id="main-table">
                 @foreach ($lends as $lend)
-                    @if($lend->lend_status == '0' || $lend->lend_status == '3')
                     <tr class="align-middle">
                         <td>
                             <input type="checkbox" name="" id="" />
@@ -90,7 +89,6 @@
                             </a>
                         </td>
                     </tr>
-                    @endif
                 @endforeach
                 </tbody>
             </table>

@@ -14,7 +14,7 @@ class FineController extends Controller
      */
     public function index()
     {
-        $fines = Fine::with(['user','book'])->paginate(10);
+        $fines = Fine::with(['user','book'])->where('fine_status', '0')->paginate(10);
         
         return view('admin.fines.index', ['fines' => $fines]);
     }
