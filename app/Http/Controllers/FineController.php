@@ -39,6 +39,7 @@ class FineController extends Controller
                 if(isset($fine[0]) == true){
                     if($fine[0]->fine_status == '0'){
                         $fine[0]->fine_amount = $fine_amount;
+                        $fine[0]->save();
                     }
                 }else{
                     Fine::create([
