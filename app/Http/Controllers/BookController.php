@@ -108,7 +108,8 @@ class BookController extends Controller
 
         if(request('search')){
             $books->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('author', 'like', '%' . request('search') . '%');
+                ->orWhere('author', 'like', '%' . request('search') . '%')
+                ->orWhere('book_code', 'like', '%' . request('search') . '%');
         }
 
         return view('users/index', ['user_data'     => $user_data,
