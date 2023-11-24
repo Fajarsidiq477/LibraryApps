@@ -62,7 +62,29 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="judul" class="mb-2">Kategori</label>
-                        <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="category" id="category" required value="{{ old('category') }}" maxlength="50"/>
+                        <!-- <input type="text" class="form-control custom-form-control @error('title') is-invalid @enderror" name="category" id="category" required value="{{ old('category') }}" maxlength="50"/> -->
+                        <select name="category" id="category" class="form-select custom-form-control @error('type') is-invalid @enderror" required>
+                            <option selected disabled value="">---</option>
+                            <option value="Al-Qur'an">  Al-Qur'an</option>
+                            <option value="Tafsir">     Tafsir</option>
+                            <option value="Fikih">      Fikih</option>
+                            <option value="Sejarah">    Sejarah</option>
+                            <option value="Umum">       Umum</option>
+                            <option value="Pendidikan"> Pendidikan</option>
+                            <option value="Penelitian"> Penelitian</option>
+                            <option value="Hadits">     Hadits</option>
+                            <option value="Kamus">      Kamus</option>
+                            <option value="Tasawuf">    Tasawuf</option>
+                            <option value="Aqidah">     Aqidah</option>
+                            <option value="Pemikiran">  Pemikiran</option>
+                            <option value="Motivasi">   Motivasi</option>
+                            <option value="Ensiklopedia">Ensiklopedia</option>
+                            <option value="Novel">      Novel</option>
+                            <option value="Skripsi">    Skripsi</option>
+                            <option value="Tesis">      Tesis</option>
+                            <option value="ILT">        ILT</option>
+                            <option value="Filsafat">   Filsafat</option>
+                        </select>
                         @error('title')
                             <div class="alert alert-danger mt-3" >{{ $message }}</div>
                         @enderror
