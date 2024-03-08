@@ -58,7 +58,8 @@
                         <th class="py-4">Judul Buku</th>
                         <th class="py-4">Peminjam</th>
                         <th class="py-4">Tanggal dipinjam</th>
-                        <th class="py-4">Status</th>
+                        <th class="py-4">Deadline</th>
+                        <th class="py-4">No HP</th>
                         <th class="py-4">#</th>
                     </tr>
                 </thead>
@@ -79,7 +80,9 @@
                         <td>{{ $lend->book->title }}</td>
                         <td>{{ $lend->user->name }}</td>
                         <td>{{ $lend->lend_date }}</td>
-                        <td>{{ ($lend->lend_status  == '0') ? 'dipinjam' : 'dikembalikan' }}</td>
+                        <td>{{ $lend->return_date }}</td>
+                        <td>{{ $lend->user->phone }}</td>
+                        <!-- <td>{{ ($lend->lend_status  == '0') ? 'dipinjam' : 'dikembalikan' }}</td> -->
                         <td>
                             <a
                                 href="#"
