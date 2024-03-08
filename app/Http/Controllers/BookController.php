@@ -123,7 +123,7 @@ class BookController extends Controller
                                     'search'        => request('search'),
                                     'available'     => null,
                                     'category'      => null,
-                                    'books'         => $books->paginate(16)]);
+                                    'books'         => $books->paginate(50)]);
     }
 
     public function filter(){
@@ -150,7 +150,7 @@ class BookController extends Controller
                                     'search'        => null,
                                     'available'     => $available,
                                     'category'      => $category,
-                                    'books' => $books->paginate(16)]);
+                                    'books' => $books->paginate(50)]);
     }
 
     /**
@@ -170,9 +170,11 @@ class BookController extends Controller
         // Mengambil angka "page" dari array $params
         $url_page = isset($params['page']) ? $params['page'] : "1";
 
+        $url_search = isset($params['search']) ? $params['search'] : "1";
+
         $book = Book::find($id);
 
-        return view('admin.books.edit', ['book' => $book, 'url_page' => $url_page]);
+        return view('admin.books.edit', ['book' => $book, 'url_page' => $url_page, 'url_search' => $url_search]);
     }
 
     /**
@@ -238,7 +240,7 @@ class BookController extends Controller
 
         // dd($id, $request->book_id);
 
-        return redirect('/admin/books?page='.$request->url_page)->with('success', ['message' => 'Data buku berhasil diedit!']);
+        return redirect('/search-book-admin?search=' . $request->url_search . '&page=' . $request->url_page)->with('success', ['message' => 'Data buku berhasil diedit!']);
 
     }
 

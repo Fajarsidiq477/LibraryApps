@@ -134,7 +134,6 @@ class AdminController extends Controller
         if(request('search')){
             $books
                 ->where('category', 'like', '%' . request('search') . '%')
-                ->orWhere('id', 'like', '%' . request('search') . '%')
                 // ->orWhere('author', 'like', '%' . request('search') . '%')
                 ->orWhere('book_code', 'like', '%' . request('search') . '%');
         }

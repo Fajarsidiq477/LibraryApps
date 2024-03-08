@@ -24,6 +24,7 @@
         <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="url_page" id="url_page" value="{{ $url_page }}">
+            <input type="hidden" name="url_search" id="url_search" value="{{ $url_search }}">
             <input type="hidden" name="first_id" id="first_id" value="{{ old('book_id', $book->id) }}" />
             
             {{ csrf_field() }}
@@ -42,7 +43,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group mb-3">
                         <label for="id" class="mb-2">ID Buku</label>
-                        <input type="text" class="form-control custom-form-control @error('book_id') is-invalid @enderror" name="book_id" id="book_id" required value="{{ old('book_id', $book->id) }}" />
+                        <input type="number" class="form-control custom-form-control @error('book_id') is-invalid @enderror" name="book_id" id="book_id" required value="{{ old('book_id', $book->id) }}" />
                         @error('book_id')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
