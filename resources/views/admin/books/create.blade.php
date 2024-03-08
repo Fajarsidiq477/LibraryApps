@@ -47,6 +47,13 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group mb-3">
+                        <label for="id" class="mb-2">ID Buku</label>
+                        <input type="text" class="form-control custom-form-control @error('book_id') is-invalid @enderror" name="book_id" id="book_id" required value="{{ old('book_id') }}"/>
+                        @error('book_id')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="kode" class="mb-2">Kode Buku</label>
                         <input type="text" class="form-control custom-form-control @error('book_code') is-invalid @enderror" name="book_code" id="book_code" required value="{{ old('book_code') }}" maxlength="10"/>
                         @error('book_code')

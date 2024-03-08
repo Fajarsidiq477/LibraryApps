@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Lend;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
 use Carbon\Carbon;
@@ -124,5 +125,25 @@ class AdminController extends Controller
             );
         }
     
+    }
+
+    public function searchbookadmin(){
+        $user_data = Auth::user();
+        $books = Book::latest();
+
+        if(request('search')){
+            $books
+                ->where('category', 'like', '%' . request('search') . '%')
+                ->orWhere('id', 'like', '%' . request('search') . '%')
+                // ->orWhere('author', 'like', '%' . request('search') . '%')
+                ->orWhere('book_code', 'like', '%' . request('search') . '%');
+        }
+
+        return view('admin/books/index', ['user_data'     => $user_data,
+                                    'searchfilter'  => 'true',
+                                    'search'        => request('search'),
+                                    'available'     => null,
+                                    'category'      => null,
+                                    'books'         => $books->paginate(15)]);
     }
 }

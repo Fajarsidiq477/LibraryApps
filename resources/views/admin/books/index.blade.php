@@ -8,29 +8,26 @@
 @section('main')
     <div class="container mt-3">
     <div class="d-flex justify-content-between align-items-start my-2">
-            <div class="col-10 col-md-4">
-                <form action="/search">
+            <div class="col-7">
+                <a href="{{ route('books.create') }}" class="btn btn-primary text-white">
+                    <span>Tambah Buku</span>
+                    <i class="bi bi-plus-square"></i>
+                </a>
+            </div>
+            <div class="col">
+                <form action="/search-book-admin">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search..." name="search">
+                        @if ($searchfilter == 'true')
+                            <input type="text" class="form-control" value="{{$search}}" name="search">
+                        @else
+                            <input type="text" class="form-control" placeholder="Search..." name="search">
+                        @endif
                         <button class="btn btn-secondary" type="submit">Search</button>
                     </div>
                 </form>
-                <!-- <search-form searchFrom="{{ route('searchBookData') }}" displayTo="#main-content" displayMode="user"
-                    token="{{ csrf_token() }}">
-                </search-form> -->
-            </div>
-            <div class="col-2 d-flex justify-content-end">
-                <button class="btn bg-secondary text-white ms-auto" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight" data-source="filter" aria-controls="offcanvasRight">
-                    <i class="bi bi-filter"></i>
-                    <span class="d-none d-sm-inline-block">Filter</span>
-                </button>
             </div>
         </div>
-        <a href="{{ route('books.create') }}" class="btn btn-primary text-white">
-            <span>Tambah Buku</span>
-            <i class="bi bi-plus-square"></i>
-        </a>
+        
         {{-- form delete hidden --}}
         <form action="" method="POST" id="form-delete">
             <input type="hidden" name="_method" value="DELETE">
@@ -100,7 +97,12 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $books->links() }}
+
+            @if ($searchfilter == 'true')
+                {{$books->appends(['search' => $search, 'available' => $available, 'category' => $category])->links()}}
+            @else
+                {{ $books->links() }}
+            @endif
         </div>
     </div>
 @endsection

@@ -10,6 +10,7 @@ class Book extends Model
     protected $table = 'book';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'id',
         'book_code',
         'title',
         'author',
@@ -43,8 +44,8 @@ class Book extends Model
         return $this->hasMany(Favorite::class);
     }
 
-    public function Category()
-    {
-        return $this->belongsToMany(Category::class);
-    }
+    // public function Category()
+    // {
+    //     return $this->belongsToMany(Category::class);
+    // }
 }

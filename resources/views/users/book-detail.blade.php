@@ -30,6 +30,10 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>Kode Buku</td>
+                                    <td>: {{$book->book_code}}</td>
+                                </tr>
+                                <tr>
                                     <td style="width: 35%;">Penulis</td>
                                     <td>: {{$book->author}}</td>
                                 </tr>

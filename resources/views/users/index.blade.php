@@ -13,7 +13,11 @@
             <div class="col-10 col-md-4">
                 <form action="/search">
                     <div class="input-group mb-3">
+                    @if ($searchfilter == 'true')
+                        <input type="text" class="form-control" value="{{$search}}" name="search">
+                    @else
                         <input type="text" class="form-control" placeholder="Search..." name="search">
+                    @endif
                         <button class="btn btn-secondary" type="submit">Search</button>
                     </div>
                 </form>
@@ -38,18 +42,18 @@
                 @foreach($books as $book)
                     <div class="col-12 col-md-5 d-block border-bottom border-3">
                         <book-card
-                                bookId="{{$book->id}}"
-                                bookName="{{$book->title}}"
-                                bookYear="{{$book->publication_year}}"
-                                bookCategory="{{$book->category}}"
-                                bookAuthor="{{$book->author}}"
-                                bookPublisher="{{$book->publisher}}"
-                                bookStatus="{{$book->book_status}}"
-                                bookDetailURL="/book/{{$book->book_code}}"
-                                bookFavoriteUrl="..."
-                                bookFavorite=false
-                                bookCover="/storage/book_covers/{{$book->cover}}"
-                                ></book-card>
+                            bookId="{{$book->id}}"
+                            bookName="{{$book->title}}"
+                            bookYear="{{$book->publication_year}}"
+                            bookCategory="{{$book->category}}"
+                            bookAuthor="{{$book->author}}"
+                            bookPublisher="{{$book->publisher}}"
+                            bookStatus="{{$book->book_status}}"
+                            bookDetailURL="/book/{{$book->book_code}}"
+                            bookFavoriteUrl="..."
+                            bookFavorite=false
+                            bookCover="/storage/book_covers/{{$book->cover}}"
+                        ></book-card>
                     </div>
                 @endforeach
             @endif

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Book;
+use App\Models\Fine;
+use App\Models\Lend;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -26,7 +28,7 @@ class BookController extends Controller
 
         $books = Book::paginate(15);
         
-        return view('admin.books.index', ['books' => $books]);
+        return view('admin.books.index', ['books' => $books, 'searchfilter' => 'false']);
     }
 
     /**
@@ -47,8 +49,11 @@ class BookController extends Controller
         // 1. Book code must generated automatically based on something. Something still unknown
         // 2. Add a synopsis, but is not required
 
+        // dd($request);
+
         $validate = $request->validate([
-            'book_code' => 'required',
+            'book_id' => 'required',
+            // 'book_code' => 'required',
             'title' => 'required',
             'category' => 'required',
             'author' => 'required',
@@ -73,7 +78,8 @@ class BookController extends Controller
             return redirect('/admin/books/create')->with('error', ['message' => 'Gambar tidak boleh kosong!']);
         }
 
-        $book->book_code = $request->book_code;
+        $book->id = $request->book_id;
+        // $book->book_code = $request->book_code;
         $book->title = $request->title;
         $book->category = $request->category;
         $book->author = $request->author;
@@ -179,7 +185,8 @@ class BookController extends Controller
 
         $validate = $request->validate([
             // 'book_code' => ['required', Rule::unique('book')->ignore($request->book_code)],
-            'book_code' => 'required',
+            'book_id' => 'required',
+            // 'book_code' => 'required',
             'title' => 'required',
             'category' => 'required',
             'author' => 'required',
@@ -190,7 +197,8 @@ class BookController extends Controller
             'required' => ':attribute dibutuhkan',
         ]);
 
-        $book->book_code = $request->book_code;
+        $book->id = $request->book_id;
+        // $book->book_code = $request->book_code;
         $book->title = $request->title;
         $book->category = $request->category;
         $book->author = $request->author;
@@ -224,6 +232,11 @@ class BookController extends Controller
         }
 
         $book->update();
+
+        $fine = Fine::where('book_id', $id)->update(['book_id'=>$request->book_id]);
+        $lend = Lend::where('book_id', $id)->update(['book_id'=>$request->book_id]);
+
+        // dd($id, $request->book_id);
 
         return redirect('/admin/books?page='.$request->url_page)->with('success', ['message' => 'Data buku berhasil diedit!']);
 

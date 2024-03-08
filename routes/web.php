@@ -64,6 +64,8 @@ Route::middleware(['auth'])->group(function() {
 Route::get('/search', [BookController::class,'search'])->name('search');
 Route::get('/filter', [BookController::class,'filter'])->name('filter');
 
+Route::get('/search-book-admin', [AdminController::class,'searchbookadmin'])->name('searchbookadmin');
+
 
 // user
 Route::get('/login',       [AuthController::class,'login'])->name('login');
