@@ -47,10 +47,10 @@
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <!-- <th class="py-4">
+                        <th class="py-4">
                             <input type="checkbox" name="" id="" />
-                        </th> -->
-                        <th class="py-4">No</th>
+                        </th>
+                        <!-- <th class="py-4">No</th> -->
                         <th class="py-4">Gambar</th>
                         <th class="py-4">Kode Buku</th>
                         <th class="py-4">Judul Buku</th>
@@ -63,7 +63,7 @@
                     @foreach($books as $book)
                     <tr class="align-middle">
                         <td>
-                            {{ $loop->index + 1 }}
+                            <input type="checkbox" name="" id="" />
                         </td>
                         <td>
                             <img src="{{ asset('storage/book_covers/' . $book->cover) }}" alt="Book cover" width="100"/>
