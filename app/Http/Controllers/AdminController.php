@@ -143,6 +143,6 @@ class AdminController extends Controller
                                     'search'        => request('search'),
                                     'available'     => null,
                                     'category'      => null,
-                                    'books'         => $books->paginate(15)]);
+                                    'books'         => $books->paginate(50)]);
     }
 }
