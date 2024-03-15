@@ -55,7 +55,7 @@
                         <th class="py-4">Kode Buku</th>
                         <th class="py-4">Judul Buku</th>
                         <th class="py-4">Penulis</th>
-                        <th class="py-4">Status</th>
+                        <th class="py-4">Penerbit</th>
                         <th class="py-4">#</th>
                     </tr>
                 </thead>
@@ -71,19 +71,7 @@
                         <td>{{ $book->book_code }}</td>
                         <td>{{ $book->title }}</td>
                         <td>{{ $book->author }}</td>
-                        @switch($book->book_status)
-                            @case(0)
-                                <td>Tersedia</td>
-                                @break
-                            @case(1)
-                                <td>Dipinjam</td>
-                                @break
-                            @case(2)
-                                <td>Hilang</td>
-                                @break
-                            @default
-                                <span>Something went wrong, please try again</span>
-                        @endswitch
+                        <td>{{ $book->publisher }}</td>
                         <td>
                             <a href="{{ route('books.edit', $book->id) }}" class="btn btn-success">
                                 <i class="bi bi-pencil"></i>
