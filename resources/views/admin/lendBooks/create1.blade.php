@@ -36,6 +36,7 @@
                                     class="form-control mb-2 input-book bookCodeInputs"
                                     name="bookCodeInput1"
                                     id="bookCodeInput1"
+                                    autofocus
                                     required
                                 />
                         </div>

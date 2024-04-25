@@ -49,6 +49,7 @@
                                 type="number"
                                 class="form-control custom-form-control mb-2"
                                 name="id"
+                                autofocus
                                 required
                             />
                         </div>
