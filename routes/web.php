@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function() {
         // Fitur Pergantian ID
         Route::get('/idchange', [BookController::class,'idChangeIndex'])->name('idchange.index');
         Route::get('/idconfirm', [BookController::class,'idConfirm'])->name('id.confirm');
+        Route::get('/changeid', [BookController::class,'changeId'])->name('changeid');
     
     
     });

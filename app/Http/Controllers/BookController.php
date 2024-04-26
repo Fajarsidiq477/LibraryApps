@@ -344,23 +344,38 @@ class BookController extends Controller
 
             $b = Book::where('category', request()->category)->latest('id')->first();
 
-            $lastId = $b->id;
-            $newId  = $lastId + 1;
-
-            $lastCategory   = $b->category;
-            $newCategory    = request()->category;
+            // $lastId = $b->id;
+            $newId  = $b->id + 1;
 
             return view('admin.idchange.confirm', [
                 'book_code' => $a[0]->book_code,
                 'title' => $a[0]->title,
                 'firstId' => $a[0]->id,
                 'newId' => $newId,
-                'lastCategory' => $lastCategory,
-                'newCategory' => $newCategory,
+                'lastCategory' => $a[0]->category,
+                'newCategory' => request()->category,
             ]);
 
         } else {
             return redirect('/admin/books/create');
         }
+    }
+
+    public function changeId(Request $request){
+
+        $book = Book::find($request->first_id);
+
+        $book->id = $request->new_id;
+        $book->category = $request->category;
+
+        $book->update();
+
+        $fine = Fine::where('book_id', $request->first_id)->update(['book_id' => $request->new_id]);
+        $lend = Lend::where('book_id', $request->first_id)->update(['book_id' => $request->new_id]);
+
+        Alert::success('Done!', 'ID berhasil diedit');
+        return view('admin.idchange.index', ['category' => $request->category]);
+
+        // dd($request->category, $request->first_id, $request->new_id);
     }
 }
