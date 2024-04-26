@@ -29,6 +29,11 @@
                         <i class="bi bi-cash-stack"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link px-md-4 p-3 {{ request()->is('idchange*') ? 'active' : ''}}" href="{{ route('idchange.index') }}">
+                        <i class="bi bi-database-fill-gear"></i>
+                    </a>
+                </li>
             </ul>
 
         </div>

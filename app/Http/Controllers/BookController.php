@@ -27,7 +27,7 @@ class BookController extends Controller
         // $book = app(Controller::class)->getBook();
 
         $books = Book::paginate(15);
-        
+
         return view('admin.books.index', ['books' => $books, 'searchfilter' => 'false']);
     }
 
@@ -63,18 +63,18 @@ class BookController extends Controller
         ], [
             'required' => ':attribute dibutuhkan',
         ]);
-        
+
         $book = new Book();
-        
+
         if ($request->hasFile('cover')) {
             $extension = $request->cover->extension();
 
-            $filename = str_replace(' ', '_', $request->title) . '_' . uniqid() .'.' .  $extension;
+            $filename = str_replace(' ', '_', $request->title) . '_' . uniqid() . '.' .  $extension;
 
             $path = $request->cover->storeAs('book_covers', $filename);
 
             $book->cover = $filename;
-        }else{
+        } else {
             return redirect('/admin/books/create')->with('error', ['message' => 'Gambar tidak boleh kosong!']);
         }
 
@@ -97,7 +97,6 @@ class BookController extends Controller
         $book->save();
 
         return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil ditambahkan!']);
-
     }
 
     /**
@@ -108,25 +107,29 @@ class BookController extends Controller
         //
     }
 
-    public function search(){
+    public function search()
+    {
         $user_data = Auth::user();
         $books = Book::latest();
 
-        if(request('search')){
+        if (request('search')) {
             $books->where('title', 'like', '%' . request('search') . '%')
                 ->orWhere('author', 'like', '%' . request('search') . '%')
                 ->orWhere('book_code', 'like', '%' . request('search') . '%');
         }
 
-        return view('users/index', ['user_data'     => $user_data,
-                                    'searchfilter'  => 'true',
-                                    'search'        => request('search'),
-                                    'available'     => null,
-                                    'category'      => null,
-                                    'books'         => $books->paginate(50)]);
+        return view('users/index', [
+            'user_data'     => $user_data,
+            'searchfilter'  => 'true',
+            'search'        => request('search'),
+            'available'     => null,
+            'category'      => null,
+            'books'         => $books->paginate(50)
+        ]);
     }
 
-    public function filter(){
+    public function filter()
+    {
 
         $user_data = Auth::user();
         $books = Book::latest();
@@ -134,23 +137,23 @@ class BookController extends Controller
         $category = request('category');
         $available = request('available');
 
-        if($category && $available){
+        if ($category && $available) {
             $books->where('category', $category)
-                  ->Where('book_status', '0');
-        }
-        else if(!$category && $available){
+                ->Where('book_status', '0');
+        } else if (!$category && $available) {
             $books->Where('book_status', '0');
-        }
-        else if($category && !$available){
+        } else if ($category && !$available) {
             $books->where('category', $category);
         }
 
-        return view('users/index', ['user_data' => $user_data,
-                                    'searchfilter' => 'true',
-                                    'search'        => null,
-                                    'available'     => $available,
-                                    'category'      => $category,
-                                    'books' => $books->paginate(50)]);
+        return view('users/index', [
+            'user_data' => $user_data,
+            'searchfilter' => 'true',
+            'search'        => null,
+            'available'     => $available,
+            'category'      => $category,
+            'books' => $books->paginate(50)
+        ]);
     }
 
     /**
@@ -216,18 +219,20 @@ class BookController extends Controller
         $book->synopsis = $request->synopsis;
 
         if ($request->hasFile('cover')) {
- 
+
             $extension = $request->cover->extension();
-        
-            $filename = $request->book_code .'.' .  $extension;
+
+            $filename = $request->book_code . '.' .  $extension;
 
             // delete old cover
-            if($book->cover !== 'cover_default.jpg') {
-                Storage::delete('book_covers/'.$book->cover);
+            if ($book->cover !== 'cover_default.jpg') {
+                Storage::delete('book_covers/' . $book->cover);
             }
 
             $path = Storage::putFileAs(
-                'book_covers/', $request->file('cover'), $filename
+                'book_covers/',
+                $request->file('cover'),
+                $filename
             );
 
             $book->cover = $filename;
@@ -235,13 +240,30 @@ class BookController extends Controller
 
         $book->update();
 
-        $fine = Fine::where('book_id', $id)->update(['book_id'=>$request->book_id]);
-        $lend = Lend::where('book_id', $id)->update(['book_id'=>$request->book_id]);
+        $fine = Fine::where('book_id', $id)->update(['book_id' => $request->book_id]);
+        $lend = Lend::where('book_id', $id)->update(['book_id' => $request->book_id]);
 
         // dd($id, $request->book_id);
 
         return redirect('/search-book-admin?search=' . $request->url_search . '&page=' . $request->url_page)->with('success', ['message' => 'Data buku berhasil diedit!']);
+    }
 
+    public function daruratSearch()
+    {
+        $user_data = Auth::user();
+        $books = Book::latest();
+
+        if (request('search')) {
+            $a = $books->where('book_code', 'like', '%' . request('search') . '%')->get();
+        }
+
+        // dd($a->count());
+
+        if ($a->count() > 0) {
+            return redirect('/admin/books/' . $a[0]->id . '/edit');
+        } else {
+            return redirect('/admin/books/create');
+        }
     }
 
     /**
@@ -253,33 +275,34 @@ class BookController extends Controller
 
         return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil dihapus!']);
         $book = Book::find($id);
-        if($book->cover !== 'cover_default.jpg') {
-            Storage::delete('book_covers/'.$book->cover);
+        if ($book->cover !== 'cover_default.jpg') {
+            Storage::delete('book_covers/' . $book->cover);
         }
         $book->delete();
 
         return redirect('/admin/books')->with('success', ['message' => 'Data buku berhasil dihapus!']);
     }
 
-     public function addBook(Request $request){
-
+    public function addBook(Request $request)
+    {
     }
 
-    public function bookSave(Request $request){
-        
+    public function bookSave(Request $request)
+    {
+
         $user_id    = $request->user_id;
         $book_id    = $request->book_id;
-        
-        try{
 
-            if(Favorite::where('user_id', $user_id)->where('book_id', $book_id)->exists()){
+        try {
+
+            if (Favorite::where('user_id', $user_id)->where('book_id', $book_id)->exists()) {
                 return response()->json(
                     [
-                        'error'=>false,
-                        'message'=>'Buku ini telah anda tambahkan ke favorit :)'
+                        'error' => false,
+                        'message' => 'Buku ini telah anda tambahkan ke favorit :)'
                     ]
                 );
-            }else{
+            } else {
 
                 $query = Favorite::create([
                     'user_id' => $user_id,
@@ -288,24 +311,56 @@ class BookController extends Controller
 
                 return response()->json(
                     [
-                        'error'=>false,
-                        'message'=>'Buku telah ditambahkan ke favorit :D'
+                        'error' => false,
+                        'message' => 'Buku telah ditambahkan ke favorit :D'
                     ]
                 );
-
             }
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(
                 [
-                    'error'=>true,
-                    'message'=>'Gagal',
-                    'err_message'=>$e->getMessage(),
+                    'error' => true,
+                    'message' => 'Gagal',
+                    'err_message' => $e->getMessage(),
                 ]
             );
         }
     }
+
+    public function idChangeIndex()
+    {
+
+        return view('admin.idchange.index');
+    }
+
+    public function idConfirm()
+    {
+
+        $books = Book::latest();
+
+        $a = Book::where('book_code', 'like', '%' . request()->code . '%')->get();
+
+        if ($a->count() > 0) {
+
+            $b = Book::where('category', request()->category)->latest('id')->first();
+
+            $lastId = $b->id;
+            $newId  = $lastId + 1;
+
+            $lastCategory   = $b->category;
+            $newCategory    = request()->category;
+
+            return view('admin.idchange.confirm', [
+                'book_code' => $a[0]->book_code,
+                'title' => $a[0]->title,
+                'firstId' => $a[0]->id,
+                'newId' => $newId,
+                'lastCategory' => $lastCategory,
+                'newCategory' => $newCategory,
+            ]);
+
+        } else {
+            return redirect('/admin/books/create');
+        }
+    }
 }
-
-
-

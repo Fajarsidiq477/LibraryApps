@@ -57,6 +57,12 @@ Route::middleware(['auth'])->group(function() {
 
             Route::resources(['/fines'  => FineController::class]); 
         });
+
+        // Fitur Pergantian ID
+        Route::get('/idchange', [BookController::class,'idChangeIndex'])->name('idchange.index');
+        Route::get('/idconfirm', [BookController::class,'idConfirm'])->name('id.confirm');
+    
+    
     });
 });
 
@@ -65,6 +71,7 @@ Route::get('/search', [BookController::class,'search'])->name('search');
 Route::get('/filter', [BookController::class,'filter'])->name('filter');
 
 Route::get('/search-book-admin', [AdminController::class,'searchbookadmin'])->name('searchbookadmin');
+Route::get('/darurat-search', [BookController::class,'daruratSearch'])->name('daruratSearch');
 
 
 // user

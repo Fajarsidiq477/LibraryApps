@@ -15,12 +15,12 @@
                 </a>
             </div>
             <div class="col">
-                <form action="/search-book-admin">
+                <form action="/darurat-search">
                     <div class="input-group mb-3">
                         @if ($searchfilter == 'true')
-                            <input type="text" class="form-control" value="{{$search}}" name="search">
+                            <input type="text" class="form-control" autofocus name="search">
                         @else
-                            <input type="text" class="form-control" placeholder="Search..." name="search">
+                            <input type="text" class="form-control" autofocus placeholder="Search..." name="search">
                         @endif
                         <button class="btn btn-secondary" type="submit">Search</button>
                     </div>
